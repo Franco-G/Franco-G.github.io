@@ -34,6 +34,7 @@
       --danger-light: #fce8e6;
       --warning: #FBBC05;
       --warning-light: #fef7e0;
+      --accent-beam: #00e0ff;
 
       /* Tipografía */
       --ink: #202124;
@@ -65,7 +66,7 @@
     }
 
     .container {
-      max-width: 1120px;
+      max-width: 1140px;
       margin: 0 auto;
     }
 
@@ -256,6 +257,231 @@
       line-height: 1.4;
     }
 
+    /* ========================================================
+       MAGIC UI / 21ST.DEV: BORDER BEAM & SHINE BORDER
+       ======================================================== */
+    .border-beam-card {
+      position: relative;
+      background: var(--surface-card);
+      border: 1px solid transparent !important;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: var(--card-shadow);
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .border-beam-card::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 250%;
+      height: 250%;
+      transform: translate(-50%, -50%);
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 280deg,
+        var(--primary) 320deg,
+        var(--success) 345deg,
+        var(--accent-beam) 360deg
+      );
+      animation: border-beam-spin 5s linear infinite;
+      z-index: -2;
+    }
+
+    .border-beam-card::after {
+      content: '';
+      position: absolute;
+      inset: 1.5px;
+      background: var(--surface-card);
+      border-radius: calc(14px - 1.5px);
+      z-index: -1;
+    }
+
+    .metric-card.border-beam-kpi {
+      position: relative;
+      border: 1px solid transparent !important;
+      border-radius: 12px;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .metric-card.border-beam-kpi::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300%;
+      height: 300%;
+      transform: translate(-50%, -50%);
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 270deg,
+        var(--primary) 315deg,
+        var(--success) 345deg,
+        var(--accent-beam) 360deg
+      );
+      animation: border-beam-spin 4.5s linear infinite;
+      z-index: -2;
+    }
+
+    .metric-card.border-beam-kpi::after {
+      content: '';
+      position: absolute;
+      inset: 1.5px;
+      background: var(--surface-card);
+      border-radius: calc(12px - 1.5px);
+      z-index: -1;
+    }
+
+    @keyframes border-beam-spin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* ========================================================
+       SCROLLYTELLING: ESCENARIO FIJO Y TRANSICIÓN POR CAPAS
+       ======================================================== */
+    .scrolly-section {
+      position: relative;
+      margin-bottom: 5rem;
+    }
+
+    .scrolly-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 2.5rem;
+      align-items: start;
+      position: relative;
+    }
+
+    /* Columna de Narrativa (Capas de texto) */
+    .scrolly-narrative {
+      display: flex;
+      flex-direction: column;
+      gap: 14rem;
+      padding: 3rem 0 16rem 0;
+    }
+
+    .scrolly-step {
+      background: var(--surface-card);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.35s ease;
+      opacity: 0.35;
+      transform: translateY(12px) scale(0.98);
+      position: relative;
+    }
+
+    .scrolly-step.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      border-color: var(--primary);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .step-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .scrolly-step ul {
+      list-style: none;
+      margin-top: 0.85rem;
+    }
+
+    .scrolly-step ul li {
+      position: relative;
+      padding-left: 16px;
+      margin-bottom: 0.65rem;
+      color: var(--body);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .scrolly-step ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: var(--primary);
+    }
+
+    /* Columna Fija: El Proyector / Tablero Pegajoso */
+    .scrolly-stage-sticky {
+      position: sticky;
+      top: 92px;
+      z-index: 10;
+    }
+
+    /* Transición Crossfade en el Proyector Fijo */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Indicador Flotante de Progreso (Tres Puntos Luminosos) */
+    .scrolly-dots {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      padding: 12px 8px;
+      border-radius: 9999px;
+      border: 1px solid var(--hairline);
+      box-shadow: var(--card-shadow);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .scrolly-dots.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .scrolly-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #c4c7cc;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .scrolly-dot.active {
+      background: var(--primary);
+      transform: scale(1.5);
+      box-shadow: 0 0 8px rgba(66, 133, 244, 0.7);
+    }
+
     /* Gráficos Visuales de Atención */
     .chart-box {
       background: var(--canvas);
@@ -313,17 +539,9 @@
       transition: width 0.3s ease;
     }
 
-    .bar-fill.blue {
-      background: var(--primary);
-    }
-
-    .bar-fill.green {
-      background: var(--success);
-    }
-
-    .bar-fill.gray {
-      background: #9aa0a6;
-    }
+    .bar-fill.blue { background: var(--primary); }
+    .bar-fill.green { background: var(--success); }
+    .bar-fill.gray { background: #9aa0a6; }
 
     .bar-value {
       width: 48px;
@@ -333,24 +551,14 @@
       font-size: 11.5px;
     }
 
-    /* Tablero Interactivo de BI */
-    .bi-showcase {
-      background: var(--surface-card);
-      border: 1px solid var(--hairline);
-      border-radius: 14px;
-      padding: 24px;
-      box-shadow: var(--card-shadow);
-      margin-bottom: 4.5rem;
-    }
-
     .showcase-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.85rem;
       border-bottom: 1px solid var(--hairline);
     }
 
@@ -392,18 +600,10 @@
       border-color: var(--primary-pressed);
     }
 
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
     .bi-dashboard-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
       margin-top: 1rem;
     }
 
@@ -411,11 +611,11 @@
       background: var(--canvas);
       border: 1px solid var(--hairline);
       border-radius: 10px;
-      padding: 16px;
+      padding: 14px;
     }
 
     .bi-kpi-box .label {
-      font-size: 11.5px;
+      font-size: 11px;
       color: var(--mute);
       text-transform: uppercase;
       font-weight: 600;
@@ -423,7 +623,7 @@
     }
 
     .bi-kpi-box .value {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 700;
       color: var(--ink);
       margin: 4px 0;
@@ -432,29 +632,29 @@
 
     .bi-kpi-box .delta-positive {
       color: var(--success);
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 600;
     }
 
     .bi-kpi-box .delta-neutral {
       color: var(--primary);
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 600;
     }
 
     .formula-tag {
       font-family: 'JetBrains Mono', Consolas, monospace;
-      font-size: 11px;
+      font-size: 10.5px;
       background: #ffffff;
       border: 1px solid var(--hairline);
-      padding: 2px 7px;
+      padding: 2px 6px;
       border-radius: 4px;
       color: var(--body);
       display: inline-block;
       margin-top: 6px;
     }
 
-    /* Grilla Bento */
+    /* Grilla Bento para Casos Complementarios */
     section {
       margin-bottom: 4.5rem;
     }
@@ -466,6 +666,7 @@
     }
 
     .card {
+      position: relative;
       background: var(--surface-card);
       border: 1px solid var(--hairline);
       border-radius: 12px;
@@ -474,12 +675,52 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      transition: all 0.25s ease;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 250%;
+      height: 250%;
+      transform: translate(-50%, -50%);
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 285deg,
+        var(--primary) 325deg,
+        var(--success) 350deg,
+        var(--accent-beam) 360deg
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      animation: border-beam-spin 5s linear infinite;
+      z-index: -2;
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      background: var(--surface-card);
+      border-radius: calc(12px - 1px);
+      z-index: -1;
+      transition: inset 0.2s ease;
     }
 
     .card:hover {
-      border-color: #b0b5bd;
+      border-color: transparent !important;
       box-shadow: var(--card-shadow-hover);
+    }
+
+    .card:hover::before { opacity: 1; }
+    .card:hover::after {
+      inset: 1.5px;
+      border-radius: calc(12px - 1.5px);
     }
 
     .card-top {
@@ -531,7 +772,6 @@
       background-color: var(--primary);
     }
 
-    /* Visual Sparklines y Mini Gráficos en Tarjetas */
     .card-graphic {
       margin: 1rem 0 0.5rem 0;
       background: var(--canvas);
@@ -605,7 +845,43 @@
       color: var(--primary);
     }
 
+    /* Accesibilidad y Reducción de Movimiento */
+    @media (prefers-reduced-motion: reduce) {
+      .bi-showcase.border-beam-card::before,
+      .metric-card.border-beam-kpi::before,
+      .card::before {
+        animation: none !important;
+        display: none !important;
+      }
+      .scrolly-step {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
     /* Responsividad */
+    @media (max-width: 900px) {
+      .scrolly-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .scrolly-stage-sticky {
+        position: sticky;
+        top: 76px;
+        margin-bottom: 2rem;
+      }
+      .scrolly-narrative {
+        gap: 3.5rem;
+        padding: 1rem 0 3rem 0;
+      }
+      .scrolly-step {
+        opacity: 1;
+        transform: none;
+      }
+      .scrolly-dots {
+        display: none;
+      }
+    }
+
     @media (max-width: 680px) {
       h1 { font-size: 32px; }
       h2 { font-size: 22px; }
@@ -648,7 +924,7 @@
         Llevo la tesorería y los pagos de diez empresas en Kreston Perú. Cuando los cruces contables o los reportes en hojas de cálculo toman demasiado tiempo, armo consultas en Power Query para que los datos cuadren solos. Menos errores, menos horas perdidas y números listos para la gerencia.
       </p>
       <div class="btn-group">
-        <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
+        <a href="#experiencia" class="btn btn-primary">Ver experiencia</a>
         <a href="#contacto" class="btn btn-secondary">Contactar</a>
       </div>
     </header>
@@ -670,180 +946,250 @@
         <div class="metric-caption">Operación al mes</div>
         <div class="metric-sub">Bancos y detracciones sin multas.</div>
       </div>
-      <div class="metric-card">
+      <!-- Tarjeta con Border Beam de Magic UI -->
+      <div class="metric-card border-beam-kpi">
         <div class="metric-num">~25h</div>
         <div class="metric-caption">Ahorro mensual</div>
         <div class="metric-sub">Consultas automáticas con Power Query.</div>
       </div>
     </div>
 
-    <!-- Tablero de Demostración con Gráficos de Atención -->
-    <div class="bi-showcase">
-      <div class="showcase-header">
-        <div class="showcase-title-row">
-          <span class="live-dot"></span>
-          <h2>Tablero en vivo</h2>
-        </div>
-        <div class="tab-group">
-          <button class="tab-btn active" onclick="switchTab('quvo', this)">Consolidado QUVO</button>
-          <button class="tab-btn" onclick="switchTab('sunat', this)">Auditoría SUNAT</button>
-          <button class="tab-btn" onclick="switchTab('cxp', this)">Tesorería BCP</button>
-        </div>
-      </div>
-      <p class="section-subtitle">Métricas simuladas con datos reales.</p>
-
-      <!-- Vista 1: QUVO -->
-      <div id="tab-quvo" class="tab-content active">
-        <!-- Gráfico de Comparación de Horas -->
-        <div class="chart-box">
-          <div class="chart-header">
-            <span class="chart-label">Tiempo de consolidación mensual (8 empresas)</span>
-            <span class="chart-metric">87% reducción de tiempo</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-title">Antes (manual)</span>
-            <div class="bar-track">
-              <div class="bar-fill gray" style="width: 100%;"></div>
-            </div>
-            <span class="bar-value">32 horas</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-title">Con modelo</span>
-            <div class="bar-track">
-              <div class="bar-fill blue" style="width: 13%;"></div>
-            </div>
-            <span class="bar-value">4 horas</span>
-          </div>
-        </div>
-
-        <div class="bi-dashboard-grid">
-          <div class="bi-kpi-box">
-            <div class="label">Sociedades unificadas</div>
-            <div class="value">8 entidades</div>
-            <div class="delta-positive">Cierre mensual ordenado</div>
-            <div class="formula-tag">Cuentas 10 a 59</div>
-          </div>
-          <div class="bi-kpi-box">
-            <div class="label">Flujo de efectivo</div>
-            <div class="value">100% conciliado</div>
-            <div class="delta-positive">Fórmulas directas en Excel</div>
-            <div class="formula-tag">QUVO Multi-Entity</div>
-          </div>
-          <div class="bi-kpi-box">
-            <div class="label">Revisión gerencial</div>
-            <div class="value">Sin descuadres</div>
-            <div class="delta-neutral">Validado con socios</div>
-            <div class="formula-tag">Estados Financieros</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Vista 2: SUNAT vs ERP -->
-      <div id="tab-sunat" class="tab-content">
-        <!-- Gráfico de Cobertura de Auditoría -->
-        <div class="chart-box">
-          <div class="chart-header">
-            <span class="chart-label">Cruce fiscal: comprobantes declarados vs registros ERP</span>
-            <span class="chart-metric">100% auditado</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-title">Facturas SUNAT</span>
-            <div class="bar-track">
-              <div class="bar-fill blue" style="width: 100%;"></div>
-            </div>
-            <span class="bar-value">4,120 reg.</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-title">Cruzadas ERP</span>
-            <div class="bar-track">
-              <div class="bar-fill green" style="width: 100%;"></div>
-            </div>
-            <span class="bar-value">4,120 reg.</span>
-          </div>
-        </div>
-
-        <div class="bi-dashboard-grid">
-          <div class="bi-kpi-box">
-            <div class="label">Diferencias fiscales</div>
-            <div class="value">0 errores</div>
-            <div class="delta-positive">Revisión antes de declarar</div>
-            <div class="formula-tag">Cruce RUC y montos</div>
-          </div>
-          <div class="bi-kpi-box">
-            <div class="label">Cartera proveedores</div>
-            <div class="value">Saneada</div>
-            <div class="delta-positive">Sin facturas duplicadas</div>
-            <div class="formula-tag">Detalle por proveedor</div>
-          </div>
-          <div class="bi-kpi-box">
-            <div class="label">Módulo SIRE</div>
-            <div class="value">En pruebas</div>
-            <div class="delta-neutral">Descargas automáticas</div>
-            <div class="formula-tag">Suite comprobantes</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Vista 3: Tesorería BCP -->
-      <div id="tab-cxp" class="tab-content">
-        <!-- Gráfico de Dispersión Semanal -->
-        <div class="chart-box">
-          <div class="chart-header">
-            <span class="chart-label">Distribución de desembolsos por tipo de pago</span>
-            <span class="chart-metric">100% a tiempo</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-title">Proveedores</span>
-            <div class="bar-track">
-              <div class="bar-fill blue" style="width: 60%;"></div>
-            </div>
-            <span class="bar-value">60%</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-title">Planillas</span>
-            <div class="bar-track">
-              <div class="bar-fill green" style="width: 25%;"></div>
-            </div>
-            <span class="bar-value">25%</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-title">Detracciones</span>
-            <div class="bar-track">
-              <div class="bar-fill gray" style="width: 15%;"></div>
-            </div>
-            <span class="bar-value">15%</span>
-          </div>
-        </div>
-
-        <div class="bi-dashboard-grid">
-          <div class="bi-kpi-box">
-            <div class="label">Banca digital</div>
-            <div class="value">Telecrédito BCP</div>
-            <div class="delta-neutral">Lotes masivos de abono</div>
-            <div class="formula-tag">Telecrédito y BBVA</div>
-          </div>
-          <div class="bi-kpi-box">
-            <div class="label">Detracciones</div>
-            <div class="value">Al día</div>
-            <div class="delta-positive">Sin bloqueos de cuenta</div>
-            <div class="formula-tag">Cálculo en Excel</div>
-          </div>
-          <div class="bi-kpi-box">
-            <div class="label">Conciliación</div>
-            <div class="value">Cuadrada</div>
-            <div class="delta-positive">Apoyo directo a contadores</div>
-            <div class="formula-tag">Cuentas por pagar</div>
-          </div>
-        </div>
-      </div>
+    <!-- Indicador Flotante de Progreso del Scrollytelling (3 Puntos Luminosos) -->
+    <div class="scrolly-dots">
+      <span class="scrolly-dot active" data-act="1" title="Acto 1: Modelos y balances" onclick="scrollToStep(1)"></span>
+      <span class="scrolly-dot" data-act="2" title="Acto 2: Automatización y reportes" onclick="scrollToStep(2)"></span>
+      <span class="scrolly-dot" data-act="3" title="Acto 3: Tesorería y control" onclick="scrollToStep(3)"></span>
     </div>
 
-    <!-- Casos de Estudio -->
+    <!-- ========================================================
+         SECCIÓN DE SCROLLYTELLING: ESCENARIO FIJO Y CAPAS
+         ======================================================== -->
+    <section class="scrolly-section" id="experiencia">
+      <h2>Historias y datos</h2>
+      <p class="section-subtitle">Recorrido analítico en tres actos.</p>
+
+      <div class="scrolly-wrapper">
+        <!-- Columna Izquierda: Pasos de la Narrativa que avanzan con el scroll -->
+        <div class="scrolly-narrative">
+          <!-- Acto 1 -->
+          <div class="scrolly-step active" data-step="1">
+            <span class="step-tag">Acto 1</span>
+            <h3>Modelos y balances</h3>
+            <p class="section-subtitle">Cuentas claras para ocho empresas.</p>
+            <ul>
+              <li>Unifiqué el flujo de caja de ocho empresas en un solo archivo maestro.</li>
+              <li>Ordené notas contables de la cuenta 10 a la 59 para el balance mensual.</li>
+              <li>Fórmulas directas para que los socios revisen saldos sin esperar días.</li>
+            </ul>
+            <div class="tag-list">
+              <span class="tag">Excel avanzado</span>
+              <span class="tag">Flujo de caja</span>
+              <span class="tag">Cuentas 10 a 59</span>
+            </div>
+          </div>
+
+          <!-- Acto 2 -->
+          <div class="scrolly-step" data-step="2">
+            <span class="step-tag">Acto 2</span>
+            <h3>Automatización de reportes</h3>
+            <p class="section-subtitle">Menos horas en tareas repetitivas.</p>
+            <ul>
+              <li>Plantilla en Power Query que procesa compras y ventas automáticamente.</li>
+              <li>Cruce preventivo de 4,120 comprobantes SUNAT contra el ERP Flowdesk.</li>
+              <li>Ahorro de unas 25 horas al mes eliminando el tipeo manual de facturas.</li>
+            </ul>
+            <div class="tag-list">
+              <span class="tag">Power Query</span>
+              <span class="tag">Cruce SUNAT</span>
+              <span class="tag">Archivos TXT</span>
+            </div>
+          </div>
+
+          <!-- Acto 3 -->
+          <div class="scrolly-step" data-step="3">
+            <span class="step-tag">Acto 3</span>
+            <h3>Tesorería y control</h3>
+            <p class="section-subtitle">Cero retrasos en cuentas bancarias.</p>
+            <ul>
+              <li>Dispersión masiva en Telecrédito BCP para haberes y proveedores de 10 clientes.</li>
+              <li>Cálculo oportuno de detracciones sin observaciones fiscales ni bloqueos.</li>
+              <li>Manual operativo y flujogramas de autorización en tres pasos.</li>
+            </ul>
+            <div class="tag-list">
+              <span class="tag">Telecrédito BCP</span>
+              <span class="tag">Planillas</span>
+              <span class="tag">Control interno</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Escenario Fijo / Proyector Pegajoso con Border Beam -->
+        <div class="scrolly-stage-sticky">
+          <div class="bi-showcase border-beam-card">
+            <div class="showcase-header">
+              <div class="showcase-title-row">
+                <span class="live-dot"></span>
+                <h2>Tablero en vivo</h2>
+              </div>
+              <div class="tab-group">
+                <button class="tab-btn active" data-tab="quvo" onclick="manualSwitchTab('quvo', this)">Consolidado QUVO</button>
+                <button class="tab-btn" data-tab="sunat" onclick="manualSwitchTab('sunat', this)">Auditoría SUNAT</button>
+                <button class="tab-btn" data-tab="cxp" onclick="manualSwitchTab('cxp', this)">Tesorería BCP</button>
+              </div>
+            </div>
+            <p class="section-subtitle">Métricas simuladas con datos reales.</p>
+
+            <!-- Capa 1: QUVO (Acto 1) -->
+            <div id="tab-quvo" class="tab-content active">
+              <div class="chart-box">
+                <div class="chart-header">
+                  <span class="chart-label">Tiempo de consolidación mensual (8 empresas)</span>
+                  <span class="chart-metric">87% reducción de tiempo</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-title">Antes (manual)</span>
+                  <div class="bar-track">
+                    <div class="bar-fill gray" style="width: 100%;"></div>
+                  </div>
+                  <span class="bar-value">32 horas</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-title">Con modelo</span>
+                  <div class="bar-track">
+                    <div class="bar-fill blue" style="width: 13%;"></div>
+                  </div>
+                  <span class="bar-value">4 horas</span>
+                </div>
+              </div>
+
+              <div class="bi-dashboard-grid">
+                <div class="bi-kpi-box">
+                  <div class="label">Sociedades unificadas</div>
+                  <div class="value">8 entidades</div>
+                  <div class="delta-positive">Cierre mensual ordenado</div>
+                  <div class="formula-tag">Cuentas 10 a 59</div>
+                </div>
+                <div class="bi-kpi-box">
+                  <div class="label">Flujo de efectivo</div>
+                  <div class="value">100% conciliado</div>
+                  <div class="delta-positive">Fórmulas directas en Excel</div>
+                  <div class="formula-tag">QUVO Multi-Entity</div>
+                </div>
+                <div class="bi-kpi-box">
+                  <div class="label">Revisión gerencial</div>
+                  <div class="value">Sin descuadres</div>
+                  <div class="delta-neutral">Validado con socios</div>
+                  <div class="formula-tag">Estados Financieros</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Capa 2: SUNAT vs ERP (Acto 2) -->
+            <div id="tab-sunat" class="tab-content">
+              <div class="chart-box">
+                <div class="chart-header">
+                  <span class="chart-label">Cruce fiscal: compras declaradas vs registros ERP</span>
+                  <span class="chart-metric">100% auditado</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-title">Facturas SUNAT</span>
+                  <div class="bar-track">
+                    <div class="bar-fill blue" style="width: 100%;"></div>
+                  </div>
+                  <span class="bar-value">4,120 reg.</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-title">Cruzadas ERP</span>
+                  <div class="bar-track">
+                    <div class="bar-fill green" style="width: 100%;"></div>
+                  </div>
+                  <span class="bar-value">4,120 reg.</span>
+                </div>
+              </div>
+
+              <div class="bi-dashboard-grid">
+                <div class="bi-kpi-box">
+                  <div class="label">Diferencias fiscales</div>
+                  <div class="value">0 errores</div>
+                  <div class="delta-positive">Revisión antes de declarar</div>
+                  <div class="formula-tag">Cruce RUC y montos</div>
+                </div>
+                <div class="bi-kpi-box">
+                  <div class="label">Cartera proveedores</div>
+                  <div class="value">Saneada</div>
+                  <div class="delta-positive">Sin facturas duplicadas</div>
+                  <div class="formula-tag">Detalle por proveedor</div>
+                </div>
+                <div class="bi-kpi-box">
+                  <div class="label">Módulo SIRE</div>
+                  <div class="value">En pruebas</div>
+                  <div class="delta-neutral">Descargas automáticas</div>
+                  <div class="formula-tag">Suite comprobantes</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Capa 3: Tesorería BCP (Acto 3) -->
+            <div id="tab-cxp" class="tab-content">
+              <div class="chart-box">
+                <div class="chart-header">
+                  <span class="chart-label">Distribución de desembolsos por tipo de pago</span>
+                  <span class="chart-metric">100% a tiempo</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-title">Proveedores</span>
+                  <div class="bar-track">
+                    <div class="bar-fill blue" style="width: 60%;"></div>
+                  </div>
+                  <span class="bar-value">60%</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-title">Planillas</span>
+                  <div class="bar-track">
+                    <div class="bar-fill green" style="width: 25%;"></div>
+                  </div>
+                  <span class="bar-value">25%</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-title">Detracciones</span>
+                  <div class="bar-track">
+                    <div class="bar-fill gray" style="width: 15%;"></div>
+                  </div>
+                  <span class="bar-value">15%</span>
+                </div>
+              </div>
+
+              <div class="bi-dashboard-grid">
+                <div class="bi-kpi-box">
+                  <div class="label">Banca digital</div>
+                  <div class="value">Telecrédito BCP</div>
+                  <div class="delta-neutral">Lotes masivos de abono</div>
+                  <div class="formula-tag">Telecrédito y BBVA</div>
+                </div>
+                <div class="bi-kpi-box">
+                  <div class="label">Detracciones</div>
+                  <div class="value">Al día</div>
+                  <div class="delta-positive">Sin bloqueos de cuenta</div>
+                  <div class="formula-tag">Cálculo en Excel</div>
+                </div>
+                <div class="bi-kpi-box">
+                  <div class="label">Conciliación</div>
+                  <div class="value">Cuadrada</div>
+                  <div class="delta-positive">Apoyo directo a contadores</div>
+                  <div class="formula-tag">Cuentas por pagar</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Casos Complementarios con Gráficos Integrados -->
     <main id="proyectos">
-      <!-- Pilar 1 -->
       <section>
-        <h2>Modelos y balances</h2>
-        <p class="section-subtitle">Cuentas claras para ocho empresas.</p>
+        <h2>Entregables y proyectos</h2>
+        <p class="section-subtitle">Detalle técnico de los casos.</p>
         <div class="grid">
           <!-- Caso 1 -->
           <article class="card">
@@ -858,7 +1204,6 @@
                 <li>Ordené notas contables desde la cuenta 10 hasta la 59 para el balance mensual.</li>
                 <li>Dejé las fórmulas listas para que los socios revisen saldos sin esperar días.</li>
               </ul>
-              <!-- Mini gráfico de tendencia -->
               <div class="card-graphic">
                 <div class="card-graphic-title">
                   <span>Balance consolidado mensual</span>
@@ -890,7 +1235,6 @@
                 <li>Detecté a tiempo compras no registradas antes del cierre de impuestos.</li>
                 <li>Limpié la lista de proveedores para pagar solo compras reales y verificadas.</li>
               </ul>
-              <!-- Mini gráfico de auditoría -->
               <div class="card-graphic">
                 <div class="card-graphic-title">
                   <span>Facturas conciliadas sin error</span>
@@ -907,14 +1251,7 @@
               <span class="tag">Auditoría</span>
             </div>
           </article>
-        </div>
-      </section>
 
-      <!-- Pilar 2 -->
-      <section>
-        <h2>Automatización de reportes</h2>
-        <p class="section-subtitle">Menos horas en tareas repetitivas.</p>
-        <div class="grid">
           <!-- Caso 3 -->
           <article class="card">
             <div class="card-content">
@@ -928,7 +1265,6 @@
                 <li>El equipo pega los comprobantes y la consulta genera los archivos planos solos.</li>
                 <li>Ahorramos unas 25 horas al mes eliminando el tipeo manual de facturas.</li>
               </ul>
-              <!-- Mini gráfico de ahorro -->
               <div class="card-graphic">
                 <div class="card-graphic-title">
                   <span>Tiempo de armado de archivos TXT</span>
@@ -960,7 +1296,6 @@
                 <li>Conecta con la plataforma SIRE de SUNAT sin que la página se cuelgue.</li>
                 <li>Dejé accesos rápidos para consultar bancos y portales fiscales en un clic.</li>
               </ul>
-              <!-- Mini barra de progreso -->
               <div class="card-graphic">
                 <div class="card-graphic-title">
                   <span>Avance de módulos funcionales</span>
@@ -977,14 +1312,7 @@
               <span class="tag">Banca web</span>
             </div>
           </article>
-        </div>
-      </section>
 
-      <!-- Pilar 3 -->
-      <section>
-        <h2>Tesorería y control</h2>
-        <p class="section-subtitle">Cero retrasos en cuentas bancarias.</p>
-        <div class="grid">
           <!-- Caso 5 -->
           <article class="card">
             <div class="card-content">
@@ -998,7 +1326,6 @@
                 <li>Calculo detracciones masivas para cumplir con los plazos de ley.</li>
                 <li>Llevo el calendario de cuotas de préstamos y fraccionamientos bancarios.</li>
               </ul>
-              <!-- Mini gráfico de desembolsos -->
               <div class="card-graphic">
                 <div class="card-graphic-title">
                   <span>Cumplimiento de pagos programados</span>
@@ -1029,7 +1356,6 @@
                 <li>Dibujé flujogramas para mover firmas en papel hacia autorizaciones digitales.</li>
                 <li>Puse filtros de revisión previa para evitar pagar facturas sin sustento.</li>
               </ul>
-              <!-- Mini diagrama de pasos -->
               <div class="card-graphic">
                 <div class="card-graphic-title">
                   <span>Flujo de pago seguro</span>
@@ -1067,17 +1393,80 @@
     </footer>
   </div>
 
-  <!-- Script interactivo de pestañas -->
+  <!-- Controlador de Scrollytelling e Interactividad -->
   <script>
-    function switchTab(tabId, element) {
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-      
-      element.classList.add('active');
-      const targetContent = document.getElementById('tab-' + tabId);
-      if (targetContent) {
-        targetContent.classList.add('active');
+    // Mapeo entre número de paso de historia y pestaña del proyector
+    const stepToTab = {
+      '1': 'quvo',
+      '2': 'sunat',
+      '3': 'cxp'
+    };
+
+    function displayTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-tab') === tabId);
+      });
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.toggle('active', content.id === 'tab-' + tabId);
+      });
+    }
+
+    // Cambio manual al hacer clic en pestañas
+    function manualSwitchTab(tabId, element) {
+      displayTab(tabId);
+    }
+
+    // Scroll asistido al pulsar los puntos flotantes
+    function scrollToStep(stepNumber) {
+      const stepElement = document.querySelector(`.scrolly-step[data-step="${stepNumber}"]`);
+      if (stepElement) {
+        stepElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
+    }
+
+    // Observer de Scrollytelling
+    const scrollySteps = document.querySelectorAll('.scrolly-step');
+    const scrollyDots = document.querySelectorAll('.scrolly-dot');
+    const scrollyContainer = document.querySelector('.scrolly-section');
+    const scrollyDotsContainer = document.querySelector('.scrolly-dots');
+
+    const stepObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const stepNumber = entry.target.getAttribute('data-step');
+          
+          // Activar tarjeta de narrativa
+          scrollySteps.forEach(s => s.classList.remove('active'));
+          entry.target.classList.add('active');
+
+          // Proyectar la capa correspondiente en el tablero fijo
+          const targetTab = stepToTab[stepNumber];
+          if (targetTab) {
+            displayTab(targetTab);
+          }
+
+          // Actualizar indicador luminoso lateral
+          scrollyDots.forEach(dot => {
+            dot.classList.toggle('active', dot.getAttribute('data-act') === stepNumber);
+          });
+        }
+      });
+    }, {
+      threshold: 0.5,
+      rootMargin: '-10% 0px -20% 0px'
+    });
+
+    scrollySteps.forEach(step => stepObserver.observe(step));
+
+    // Visibilidad del indicador flotante solo dentro del recorrido
+    if (scrollyContainer && scrollyDotsContainer) {
+      const containerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          scrollyDotsContainer.classList.toggle('visible', entry.isIntersecting);
+        });
+      }, { threshold: 0.05 });
+
+      containerObserver.observe(scrollyContainer);
     }
   </script>
 </body>
