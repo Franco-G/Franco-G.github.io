@@ -3,87 +3,377 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Portafolio</title>
+  <title>Portafolio Profesional | Tesorería BPO & Business Intelligence</title>
   <style>
     :root {
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --text: #1e293b;
-      --muted: #64748b;
-      --primary: #2563eb;
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-hover: #273549;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --border: #334155;
+      --tag-bg: #0369a1;
+      --tag-text: #e0f2fe;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: system-ui, -apple-system, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding: 2rem 1rem;
+      padding: 2.5rem 1rem;
     }
-    .container { max-width: 800px; margin: 0 auto; }
-    header { margin-bottom: 3rem; text-align: center; }
-    header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
-    header p { color: var(--muted); font-size: 1.1rem; }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 3.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background-color: var(--tag-bg);
+      color: var(--tag-text);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      max-width: 750px;
+    }
+
+    section {
+      margin-bottom: 3.5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    /* Tarjetas de métricas */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .metric-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.25rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .metric-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .metric-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 0.25rem;
+    }
+
+    /* Grillas de contenido */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
     }
+
     .card {
-      background: var(--card-bg);
-      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 8px;
-      border: 1px solid #e2e8f0;
+      padding: 1.5rem;
+      transition: transform 0.2s, border-color 0.2s;
     }
-    .card h3 { margin-bottom: 0.5rem; }
-    .card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 1rem; }
-    .card a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
+
+    .card:hover {
+      border-color: var(--accent);
+      background-color: var(--surface-hover);
     }
-    .card a:hover { text-decoration: underline; }
+
+    .card h3 {
+      font-size: 1.15rem;
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+    }
+
+    .card ul {
+      list-style-type: disc;
+      padding-left: 1.2rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .card ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .tag-container {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      background: #0f172a;
+      border: 1px solid var(--border);
+      color: var(--accent);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
     footer {
-      text-align: center;
-      border-top: 1px solid #e2e8f0;
+      border-top: 1px solid var(--border);
       padding-top: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.95rem;
     }
-    footer a { color: var(--primary); text-decoration: none; margin: 0 0.5rem; }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      margin: 0 0.75rem;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>Tu Nombre</h1>
-      <p>Tu Rol o Especialidad (ej. Desarrollador Web / Diseñador)</p>
+      <div class="badge">Operaciones Financieras & BI</div>
+      <h1>Portafolio de Gestión de Tesorería, BPO y Automatización</h1>
+      <p>Administración integral del flujo de pagos, modelamiento financiero multientidad, estandarización de procesos y desarrollo de herramientas ETL para control tributario y analítica.</p>
     </header>
 
-    <main class="grid">
-      <article class="card">
-        <h3>Proyecto 1</h3>
-        <p>Breve descripción del proyecto, tecnologías empleadas y el objetivo resuelto.</p>
-        <a href="#" target="_blank">Ver Proyecto &rarr;</a>
-      </article>
+    <!-- Resumen de Métricas Operativas -->
+    <section>
+      <h2>Capacidad y Distribución Operativa</h2>
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-value">10+</div>
+          <div class="metric-label">Cuentas Corporativas Gestionadas</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">160 h</div>
+          <div class="metric-label">Carga Mensual Distribuida</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">100%</div>
+          <div class="metric-label">Cumplimiento Operativo y Tributario</div>
+        </div>
+      </div>
+    </section>
 
-      <article class="card">
-        <h3>Proyecto 2</h3>
-        <p>Breve descripción del proyecto, tecnologías empleadas y el objetivo resuelto.</p>
-        <a href="#" target="_blank">Ver Proyecto &rarr;</a>
-      </article>
+    <!-- Modelamiento Financiero y BI -->
+    <section>
+      <h2>Modelamiento Financiero y Analítica de Datos</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Modelo de Consolidación Multientidad (8 Sociedades)</h3>
+          <ul>
+            <li>Parametrización estructurada del flujo de caja corporativo y formulación financiera integral.</li>
+            <li>Construcción de notas de asientos contables completas (cuentas de balance 10 a 59).</li>
+            <li>Generación y actualización periódica de estados financieros clave.</li>
+          </ul>
+          <div class="tag-container">
+            <span class="tag">Flujo de Caja</span>
+            <span class="tag">Estados Financieros</span>
+            <span class="tag">Modelamiento Contable</span>
+          </div>
+        </div>
 
-      <article class="card">
-        <h3>Proyecto 3</h3>
-        <p>Breve descripción del proyecto, tecnologías empleadas y el objetivo resuelto.</p>
-        <a href="#" target="_blank">Ver Proyecto &rarr;</a>
-      </article>
-    </main>
+        <div class="card">
+          <h3>Auditoría y Control Tributario vs. ERP</h3>
+          <ul>
+            <li>Diseño de matrices de control comparativo entre reportes fiscales tributarios y registros del sistema ERP para mitigar inconsistencias de auditoría.</li>
+            <li>Depuración y saneamiento analítico de cuentas comerciales por pagar a proveedores.</li>
+            <li>Consolidación analítica de bases de datos para el seguimiento y comportamiento de ventas por cartera de clientes.</li>
+          </ul>
+          <div class="tag-container">
+            <span class="tag">Auditoría Fiscal</span>
+            <span class="tag">Sistemas ERP</span>
+            <span class="tag">Conciliaciones</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Pipelines ETL de Automatización Contable</h3>
+          <ul>
+            <li>Diseño y desarrollo de modelos automatizados con <strong>Power Query</strong> y <strong>Power Pivot</strong>.</li>
+            <li>Generación sistemática de archivos planos (.txt) para cargas masivas de registros de compras y ventas.</li>
+            <li>Eliminación de la digitación manual y reprocesos contables mediante actualización dinámica del origen de datos.</li>
+          </ul>
+          <div class="tag-container">
+            <span class="tag">Power Query</span>
+            <span class="tag">Power Pivot</span>
+            <span class="tag">ETL</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Automatización Interna -->
+    <section>
+      <h2>Desarrollo de Herramientas y Automatización</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Suite Integral de Automatización Tributaria y Contable</h3>
+          <ul>
+            <li>Módulo automatizado de extracción y descarga masiva de comprobantes electrónicos (facturas y boletas de compras y ventas).</li>
+            <li>Módulo de sincronización y descarga automatizada para plataformas fiscales integradas (SIRE).</li>
+            <li>Interfaz de usuario (UI) personalizada y arquitectura orientada a producto funcional (MVP).</li>
+          </ul>
+          <div class="tag-container">
+            <span class="tag">Automatización</span>
+            <span class="tag">Extracción de Datos</span>
+            <span class="tag">UI/UX Operativo</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Optimización de Accesos y Productividad Operativa</h3>
+          <ul>
+            <li>Desarrollo de módulos de accesos directos para portales financieros y tributarios de alta demanda transaccional.</li>
+            <li>Reducción significativa del tiempo de navegación en plataformas bancarias corporativas y portales fiscales.</li>
+          </ul>
+          <div class="tag-container">
+            <span class="tag">Productividad</span>
+            <span class="tag">Banca Electrónica</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Procesos y Riesgo Operativo -->
+    <section>
+      <h2>Estandarización de Procesos y Gestión de Riesgos</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Estructuración de Políticas y Manuales de Tesorería</h3>
+          <ul>
+            <li>Redacción y formalización de manuales técnicos para la estandarización del proceso de gestión y autorización de pagos.</li>
+            <li>Definición de lineamientos operativos aplicables tanto para firmas de consultoría como para cuentas cliente.</li>
+          </ul>
+          <div class="tag-container">
+            <span class="tag">SOP / Manuales</span>
+            <span class="tag">Gobernanza</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Diagnóstico de Riesgo y Digitalización Operativa</h3>
+          <ul>
+            <li>Levantamiento y diseño de flujogramas de procesos de aprobación para la digitalización de operaciones.</li>
+            <li>Elaboración de diagnósticos e informes técnicos de riesgo operativo orientados a la mitigación de errores humanos.</li>
+          </ul>
+          <div class="tag-container">
+            <span class="tag">Flujogramas</span>
+            <span class="tag">Riesgo Operativo</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Diseño de Protocolos de Verificación Documental</h3>
+          <ul>
+            <li>Estructuración de procesos de control previo y auditoría de comprobantes para operaciones comerciales de alto volumen.</li>
+            <li>Aseguramiento de la validez tributaria y consistencia física/digital de los expedientes de pago.</li>
+          </ul>
+          <div class="tag-container">
+            <span class="tag">Compliance</span>
+            <span class="tag">Control Documental</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gestión Operativa de Cuentas BPO -->
+    <section>
+      <h2>Gestión Operativa de Cartera BPO</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Cuentas de Alta Transaccionalidad</h3>
+          <ul>
+            <li>Operación directa en banca corporativa multi-empresa: dispersión de haberes, proveedores y transferencias locales/internacionales.</li>
+            <li>Gestión y programación de lotes de pago para compras comerciales y liquidación de nóminas.</li>
+            <li>Cálculo, validación y liquidación periódica de detracciones y retenciones tributarias.</li>
+            <li>Control estructurado de pasivos: cronogramas de fraccionamiento comercial/tributario, préstamos bancarios y amortizaciones.</li>
+          </ul>
+          <div class="tag-container">
+            <span class="tag">Banca Corporativa</span>
+            <span class="tag">Cuentas por Pagar (CxP)</span>
+            <span class="tag">Planillas</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Emisión de Reportes Financieros y Control de Caja</h3>
+          <ul>
+            <li>Elaboración periódica y estructuración del reporte ejecutivo de Cuentas por Pagar (CxP).</li>
+            <li>Consolidación analítica de reportes de rendición de gastos operativos y fondos fijos.</li>
+            <li>Soporte activo al área contable en la resolución de discrepancias en conciliaciones bancarias.</li>
+            <li>Emisión y trazabilidad documental de facturación comercial y guías logísticas.</li>
+          </ul>
+          <div class="tag-container">
+            <span class="tag">Reportes CxP</span>
+            <span class="tag">Conciliaciones</span>
+            <span class="tag">Facturación Electrónica</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <footer>
-      <p>Contacto:</p>
-      <a href="mailto:tuemail@ejemplo.com">Correo</a> •
-      <a href="https://linkedin.com/in/tu-perfil" target="_blank">LinkedIn</a> •
-      <a href="https://github.com/tu-usuario" target="_blank">GitHub</a>
+      <p>Portafolio Profesional de Tesorería, BPO & Business Intelligence</p>
+      <div style="margin-top: 0.5rem;">
+        <a href="mailto:tuemail@ejemplo.com">Contacto</a> •
+        <a href="https://linkedin.com/in/tu-perfil" target="_blank">LinkedIn</a> •
+        <a href="https://github.com/tu-usuario" target="_blank">GitHub</a>
+      </div>
     </footer>
   </div>
 </body>
