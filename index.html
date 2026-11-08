@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portafolio | Franco Guerrero</title>
+  
+  <!-- Favicon en la pestaña del navegador -->
+  <link rel="icon" type="image/png" href="Logo%20Blanco%201.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
@@ -58,24 +62,41 @@
     .nav-brand {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       text-decoration: none;
       color: var(--ink-black);
       font-weight: 500;
       font-size: 14px;
     }
 
-    .brand-mark {
-      width: 14px;
-      height: 14px;
-      background-color: var(--ink-black);
-      border-radius: 3px;
+    .nav-logo {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 1px solid var(--stone-border);
     }
 
     .nav-actions {
       display: flex;
       align-items: center;
       gap: 12px;
+    }
+
+    /* Foto de Perfil */
+    .avatar-wrapper {
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 1px solid var(--stone-border);
+      box-shadow: var(--card-shadow);
     }
 
     /* Tipografía y Títulos */
@@ -301,6 +322,7 @@
       body { padding: 0 1rem 3rem 1rem; }
       .metrics-row { grid-template-columns: 1fr; }
       .grid { grid-template-columns: 1fr; }
+      .btn-group { flex-direction: column; }
     }
   </style>
 </head>
@@ -308,7 +330,7 @@
   <div class="container">
     <nav>
       <a href="#" class="nav-brand">
-        <span class="brand-mark"></span>
+        <img src="Logo%20Blanco%201.png" alt="Logo FG" class="nav-logo">
         <span>Franco Guerrero · BI & Tesorería</span>
       </a>
       <div class="nav-actions">
@@ -317,8 +339,11 @@
       </div>
     </nav>
 
-    <!-- Hero -->
+    <!-- Hero con Foto de Perfil Circular -->
     <header>
+      <div class="avatar-wrapper">
+        <img src="foto_perfil_circular_1x1.jpeg" alt="Franco Guerrero" class="profile-photo">
+      </div>
       <h1>Operaciones de tesorería BPO y analítica financiera orientada a la <span class="highlight">automatización integral</span></h1>
       <p class="hero-lead">Control de dispersión de pagos multientidad, modelamiento contable en hojas de cálculo y pipelines ETL para mitigar inconsistencias de auditoría.</p>
       <div class="btn-group">
