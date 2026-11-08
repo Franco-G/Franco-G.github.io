@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Portafolio</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --primary: #2563eb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    header { margin-bottom: 3rem; text-align: center; }
+    header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    header p { color: var(--muted); font-size: 1.1rem; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+    .card h3 { margin-bottom: 0.5rem; }
+    .card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 1rem; }
+    .card a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .card a:hover { text-decoration: underline; }
+    footer {
+      text-align: center;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 2rem;
+    }
+    footer a { color: var(--primary); text-decoration: none; margin: 0 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tu Nombre</h1>
+      <p>Tu Rol o Especialidad (ej. Desarrollador Web / Diseñador)</p>
+    </header>
+
+    <main class="grid">
+      <article class="card">
+        <h3>Proyecto 1</h3>
+        <p>Breve descripción del proyecto, tecnologías empleadas y el objetivo resuelto.</p>
+        <a href="#" target="_blank">Ver Proyecto &rarr;</a>
+      </article>
+
+      <article class="card">
+        <h3>Proyecto 2</h3>
+        <p>Breve descripción del proyecto, tecnologías empleadas y el objetivo resuelto.</p>
+        <a href="#" target="_blank">Ver Proyecto &rarr;</a>
+      </article>
+
+      <article class="card">
+        <h3>Proyecto 3</h3>
+        <p>Breve descripción del proyecto, tecnologías empleadas y el objetivo resuelto.</p>
+        <a href="#" target="_blank">Ver Proyecto &rarr;</a>
+      </article>
+    </main>
+
+    <footer>
+      <p>Contacto:</p>
+      <a href="mailto:tuemail@ejemplo.com">Correo</a> •
+      <a href="https://linkedin.com/in/tu-perfil" target="_blank">LinkedIn</a> •
+      <a href="https://github.com/tu-usuario" target="_blank">GitHub</a>
+    </footer>
+  </div>
+</body>
+</html>
