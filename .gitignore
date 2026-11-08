@@ -1,0 +1,5 @@
+# Ignorar carpeta de referencias locales
+referencias/
+.agents/
+# Ignorar archivo maestro de diseno local
+design.md

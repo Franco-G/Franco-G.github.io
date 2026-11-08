@@ -3,27 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portafolio | Franco Guerrero</title>
+  <title>Franco Guerrero | Business Intelligence & Finanzas</title>
   
   <link rel="icon" type="image/png" href="favicon.png?v=2">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --stone-canvas: #fafaf9;
-      --pure-white: #ffffff;
-      --stone-border: #e8e6e5;
-      --stone-muted: #d6d3d1;
-      --ash-gray: #a8a29e;
-      --warm-gray: #78716c;
-      --ink-black: #0c0a09;
-      --soot: #1c1917;
-      --sky-wash: #c1e1f7;
-      --cyan-signal: #3ba6f1;
-      --cyan-edge: #3398e1;
-      --card-shadow: rgba(0, 0, 0, 0.05) 0px 4px 16px 0px;
+      /* Superficies limpias */
+      --canvas: #f8f9fa;
+      --surface-card: #ffffff;
+      --surface-soft: #f1f3f4;
+      --surface-dark: #202124;
+      --hairline: #dadce0;
+      --hairline-soft: #edf0f2;
+
+      /* Acción principal */
+      --primary: #4285F4;
+      --primary-pressed: #1557b0;
+      --primary-active: #185abc;
+      --primary-light: #e8f0fe;
+
+      /* Semánticos para métricas */
+      --success: #34A853;
+      --success-light: #e6f4ea;
+      --danger: #EA4335;
+      --danger-light: #fce8e6;
+      --warning: #FBBC05;
+      --warning-light: #fef7e0;
+
+      /* Tipografía */
+      --ink: #202124;
+      --body: #5f6368;
+      --mute: #80868b;
+      --ash: #9aa0a6;
+
+      /* Elevación sutil */
+      --card-shadow: 0 1px 3px rgba(60, 64, 67, 0.08), 0 1px 2px rgba(60, 64, 67, 0.12);
+      --card-shadow-hover: 0 4px 12px rgba(60, 64, 67, 0.12);
     }
 
     * {
@@ -33,234 +53,508 @@
     }
 
     body {
-      background-color: var(--stone-canvas);
-      color: var(--warm-gray);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 14px;
-      line-height: 1.64;
+      background-color: var(--canvas);
+      color: var(--body);
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 14.5px;
+      line-height: 1.6;
       font-weight: 400;
-      letter-spacing: 0.004em;
+      letter-spacing: 0.002em;
       padding: 0 1.5rem 5rem 1.5rem;
+      -webkit-font-smoothing: antialiased;
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
     }
 
-    /* Navegacion */
+    /* Navegación */
     nav {
       height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--stone-border);
-      margin-bottom: 4rem;
+      border-bottom: 1px solid var(--hairline);
+      margin-bottom: 3.5rem;
     }
 
     .nav-brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
-      color: var(--ink-black);
-      font-weight: 500;
-      font-size: 14px;
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 14.5px;
     }
 
     .nav-logo {
-      width: 24px;
-      height: 24px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       object-fit: cover;
       display: block;
-      border: 1px solid var(--stone-border);
+      border: 1px solid var(--hairline);
     }
 
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
-    /* Foto de Perfil */
+    /* Tipografía estricta de encabezados: títulos <= 3 palabras, subtítulos <= 5 palabras */
+    h1, h2, h3 {
+      font-family: 'Inter Tight', 'Inter', sans-serif;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: 44px;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--primary);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin-bottom: 1.25rem;
+    }
+
+    h2 {
+      font-size: 24px;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--mute);
+      margin-bottom: 1.75rem;
+      font-weight: 500;
+    }
+
+    h3 {
+      font-size: 17px;
+      line-height: 1.35;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.65rem;
+    }
+
+    /* Hero */
+    header {
+      margin-bottom: 3.5rem;
+    }
+
     .avatar-wrapper {
       margin-bottom: 1.5rem;
     }
 
     .profile-photo {
-      width: 110px;
-      height: 110px;
+      width: 104px;
+      height: 104px;
       border-radius: 50%;
       object-fit: cover;
       display: block;
-      border: 1px solid var(--stone-border);
+      border: 2px solid var(--surface-card);
       box-shadow: var(--card-shadow);
     }
 
-    /* Tipografia */
-    h1, h2, h3 {
-      font-family: 'Inter Tight', sans-serif;
-      color: var(--ink-black);
-      font-weight: 400;
-    }
-
-    h1 {
-      font-size: 42px;
-      line-height: 1.15;
-      letter-spacing: -0.021em;
-      margin-bottom: 1rem;
-      max-width: 840px;
-    }
-
-    h2 {
-      font-size: 26px;
-      line-height: 1.25;
-      letter-spacing: -0.025em;
-      margin-bottom: 1.75rem;
-    }
-
-    h3 {
-      font-size: 17px;
-      line-height: 1.3;
-      letter-spacing: -0.017em;
-      margin-bottom: 0.75rem;
-    }
-
-    .highlight {
-      background-color: var(--sky-wash);
-      color: var(--cyan-edge);
-      padding: 2px 10px;
-      border-radius: 9999px;
-      font-weight: 400;
-      display: inline-block;
-    }
-
-    .hero-lead {
-      font-size: 15px;
+    .hero-text {
+      font-size: 15.5px;
       line-height: 1.65;
-      color: var(--warm-gray);
-      max-width: 760px;
-      margin-bottom: 1.75rem;
+      color: var(--body);
+      max-width: 780px;
+      margin-bottom: 2rem;
     }
 
     /* Botones */
     .btn-group {
       display: flex;
-      gap: 8px;
-      margin-bottom: 3.5rem;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 8px 16px;
+      padding: 9px 20px;
       border-radius: 9999px;
       font-size: 14px;
+      font-weight: 500;
       text-decoration: none;
-      transition: opacity 0.15s ease;
+      transition: all 0.15s ease-in-out;
+      cursor: pointer;
     }
 
     .btn-primary {
-      background-color: var(--cyan-signal);
-      border: 1px solid var(--cyan-edge);
-      color: var(--pure-white);
-      font-weight: 500;
+      background-color: var(--primary);
+      border: 1px solid var(--primary-pressed);
+      color: #ffffff;
     }
 
     .btn-primary:hover {
-      opacity: 0.92;
+      background-color: var(--primary-pressed);
     }
 
-    .btn-ghost {
-      background-color: transparent;
-      border: 1px solid var(--stone-border);
-      color: var(--ink-black);
-      font-weight: 400;
+    .btn-secondary {
+      background-color: var(--surface-card);
+      border: 1px solid var(--hairline);
+      color: var(--ink);
     }
 
-    .btn-ghost:hover {
-      background-color: var(--pure-white);
+    .btn-secondary:hover {
+      background-color: var(--surface-soft);
+      border-color: #c4c7cc;
     }
 
-    /* Secciones */
-    section {
-      margin-bottom: 4.5rem;
-    }
-
-    /* Metricas */
+    /* Métricas Cuantitativas */
     .metrics-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 14px;
       margin-bottom: 4rem;
     }
 
     .metric-card {
-      background: var(--pure-white);
-      border: 1px solid var(--stone-border);
-      border-radius: 10px;
-      padding: 18px 22px;
+      background: var(--surface-card);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 18px 20px;
       box-shadow: var(--card-shadow);
     }
 
     .metric-num {
       font-family: 'Inter Tight', sans-serif;
-      font-size: 30px;
+      font-size: 32px;
       line-height: 1.1;
       letter-spacing: -0.025em;
-      color: var(--ink-black);
-      font-weight: 400;
+      color: var(--primary);
+      font-weight: 700;
       margin-bottom: 4px;
     }
 
     .metric-caption {
-      font-size: 12px;
-      color: var(--ash-gray);
+      font-size: 11.5px;
+      color: var(--mute);
       text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .metric-sub {
+      font-size: 12.5px;
+      color: var(--body);
+      line-height: 1.4;
+    }
+
+    /* Gráficos Visuales de Atención */
+    .chart-box {
+      background: var(--canvas);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      padding: 14px;
+      margin: 1rem 0;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .chart-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .chart-metric {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--success);
+    }
+
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+
+    .bar-title {
+      width: 90px;
+      color: var(--body);
+      font-size: 11.5px;
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 16px;
+      background: #e2e5e9;
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    .bar-fill.blue {
+      background: var(--primary);
+    }
+
+    .bar-fill.green {
+      background: var(--success);
+    }
+
+    .bar-fill.gray {
+      background: #9aa0a6;
+    }
+
+    .bar-value {
+      width: 48px;
+      text-align: right;
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 11.5px;
+    }
+
+    /* Tablero Interactivo de BI */
+    .bi-showcase {
+      background: var(--surface-card);
+      border: 1px solid var(--hairline);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 4.5rem;
+    }
+
+    .showcase-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .showcase-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--success);
+      display: inline-block;
+    }
+
+    .tab-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: var(--surface-soft);
+      border: 1px solid transparent;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--body);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary-pressed);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .bi-dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 1rem;
+    }
+
+    .bi-kpi-box {
+      background: var(--canvas);
+      border: 1px solid var(--hairline);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .bi-kpi-box .label {
+      font-size: 11.5px;
+      color: var(--mute);
+      text-transform: uppercase;
+      font-weight: 600;
       letter-spacing: 0.04em;
     }
 
-    /* Grillas */
+    .bi-kpi-box .value {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 4px 0;
+      font-family: 'Inter Tight', sans-serif;
+    }
+
+    .bi-kpi-box .delta-positive {
+      color: var(--success);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .bi-kpi-box .delta-neutral {
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .formula-tag {
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 11px;
+      background: #ffffff;
+      border: 1px solid var(--hairline);
+      padding: 2px 7px;
+      border-radius: 4px;
+      color: var(--body);
+      display: inline-block;
+      margin-top: 6px;
+    }
+
+    /* Grilla Bento */
+    section {
+      margin-bottom: 4.5rem;
+    }
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      gap: 16px;
     }
 
     .card {
-      background: var(--pure-white);
-      border: 1px solid var(--stone-border);
-      border-radius: 10px;
-      padding: 22px;
+      background: var(--surface-card);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 24px;
       box-shadow: var(--card-shadow);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .card:hover {
+      border-color: #b0b5bd;
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-category {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .mini-badge {
+      font-size: 10.5px;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      background: var(--success-light);
+      color: var(--success);
+      font-weight: 600;
     }
 
     .card-content ul {
       list-style: none;
-      margin-top: 0.75rem;
+      margin-top: 0.85rem;
     }
 
     .card-content ul li {
       position: relative;
-      padding-left: 14px;
-      margin-bottom: 0.6rem;
-      color: var(--warm-gray);
+      padding-left: 16px;
+      margin-bottom: 0.65rem;
+      color: var(--body);
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .card-content ul li::before {
       content: "";
       position: absolute;
       left: 0;
-      top: 9px;
-      width: 4px;
-      height: 4px;
+      top: 8px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
-      background-color: var(--ash-gray);
+      background-color: var(--primary);
+    }
+
+    /* Visual Sparklines y Mini Gráficos en Tarjetas */
+    .card-graphic {
+      margin: 1rem 0 0.5rem 0;
+      background: var(--canvas);
+      border: 1px solid var(--hairline);
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+
+    .card-graphic-title {
+      font-size: 11px;
+      color: var(--mute);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .sparkline-svg {
+      width: 100%;
+      height: 36px;
+      display: block;
     }
 
     .tag-list {
@@ -268,66 +562,78 @@
       flex-wrap: wrap;
       gap: 6px;
       margin-top: 1.25rem;
-      padding-top: 0.85rem;
-      border-top: 1px solid var(--stone-border);
+      padding-top: 1rem;
+      border-top: 1px solid var(--hairline-soft);
     }
 
     .tag {
-      font-size: 11px;
-      color: var(--warm-gray);
-      background-color: var(--stone-canvas);
-      border: 1px solid var(--stone-border);
+      font-size: 11.5px;
+      color: var(--body);
+      background-color: var(--surface-soft);
+      border: 1px solid var(--hairline);
       padding: 2px 8px;
       border-radius: 9999px;
+      font-weight: 500;
     }
 
+    /* Footer */
     footer {
-      border-top: 1px solid var(--stone-border);
+      border-top: 1px solid var(--hairline);
       padding-top: 2.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 1rem;
-      color: var(--ash-gray);
-      font-size: 13px;
+      gap: 1.25rem;
+      color: var(--mute);
+      font-size: 13.5px;
     }
 
     .footer-links {
       display: flex;
-      gap: 16px;
+      gap: 18px;
     }
 
     .footer-links a {
-      color: var(--warm-gray);
+      color: var(--body);
       text-decoration: none;
-      font-size: 13px;
+      font-size: 13.5px;
+      transition: color 0.15s ease;
     }
 
     .footer-links a:hover {
-      color: var(--ink-black);
+      color: var(--primary);
     }
 
-    @media (max-width: 640px) {
-      h1 { font-size: 30px; }
+    /* Responsividad */
+    @media (max-width: 680px) {
+      h1 { font-size: 32px; }
       h2 { font-size: 22px; }
-      body { padding: 0 1rem 3rem 1rem; }
-      .metrics-row { grid-template-columns: 1fr; }
+      body { padding: 0 1rem 3.5rem 1rem; }
+      .metrics-row { grid-template-columns: 1fr 1fr; gap: 10px; }
       .grid { grid-template-columns: 1fr; }
-      .btn-group { flex-direction: column; }
+      .btn-group { flex-direction: column; width: 100%; }
+      .btn { width: 100%; text-align: center; }
+      .showcase-header { flex-direction: column; align-items: flex-start; }
+      .bi-dashboard-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 440px) {
+      .metrics-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- Navegación -->
     <nav>
       <a href="#" class="nav-brand">
-        <img src="favicon.png" alt="Logo FG" class="nav-logo">
-        <span>Franco Guerrero · Tesorería & BI</span>
+        <img src="favicon.png" alt="Franco Guerrero" class="nav-logo">
+        <span>Franco Guerrero</span>
       </a>
       <div class="nav-actions">
-        <a href="#contacto" class="btn btn-ghost">Contacto</a>
-        <a href="https://linkedin.com" target="_blank" class="btn btn-primary">LinkedIn</a>
+        <a href="#contacto" class="btn btn-secondary">Contacto</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">LinkedIn</a>
       </div>
     </nav>
 
@@ -336,215 +642,443 @@
       <div class="avatar-wrapper">
         <img src="foto_perfil_circular_1x1.jpeg" alt="Franco Guerrero" class="profile-photo">
       </div>
-      <h1>Control de tesorería, conciliaciones y modelos en Excel <span class="highlight">sin reprocesos manuales</span></h1>
-      <p class="hero-lead">Manejo el flujo diario de pagos, nóminas y detracciones para varias empresas. Cuando los reportes contables o los cruces tributarios se vuelven lentos, armo modelos en Power Query para que los datos cuadren sin perder horas en tareas repetitivas.</p>
+      <h1>Decisiones con datos</h1>
+      <p class="hero-subtitle">Finanzas, tesorería y analítica.</p>
+      <p class="hero-text">
+        Llevo la tesorería y los pagos de diez empresas en Kreston Perú. Cuando los cruces contables o los reportes en hojas de cálculo toman demasiado tiempo, armo consultas en Power Query para que los datos cuadren solos. Menos errores, menos horas perdidas y números listos para la gerencia.
+      </p>
       <div class="btn-group">
-        <a href="#entregables" class="btn btn-ghost">Ver entregables y proyectos</a>
-        <a href="#contacto" class="btn btn-ghost">Datos de contacto</a>
+        <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
+        <a href="#contacto" class="btn btn-secondary">Contactar</a>
       </div>
     </header>
 
-    <!-- Metricas -->
+    <!-- Métricas Cuantitativas -->
     <div class="metrics-row">
       <div class="metric-card">
         <div class="metric-num">10</div>
-        <div class="metric-caption">Empresas en cartera activa</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-num">160h</div>
-        <div class="metric-caption">Carga operativa al mes</div>
+        <div class="metric-caption">Empresas a cargo</div>
+        <div class="metric-sub">Pagos, proveedores y nóminas al día.</div>
       </div>
       <div class="metric-card">
         <div class="metric-num">8</div>
-        <div class="metric-caption">Sociedades en modelo multientidad</div>
+        <div class="metric-caption">Sociedades en modelo</div>
+        <div class="metric-sub">Consolidación de cuentas 10 a 59.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">160h</div>
+        <div class="metric-caption">Operación al mes</div>
+        <div class="metric-sub">Bancos y detracciones sin multas.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">~25h</div>
+        <div class="metric-caption">Ahorro mensual</div>
+        <div class="metric-sub">Consultas automáticas con Power Query.</div>
       </div>
     </div>
 
-    <!-- Seccion 1 -->
-    <section id="entregables">
-      <h2>Modelamiento financiero y <span class="highlight">analítica con datos reales</span></h2>
-      <div class="grid">
-        <article class="card">
-          <div class="card-content">
-            <h3>Consolidación de 8 empresas y flujo de caja</h3>
-            <ul>
-              <li>Ordené la formulación del flujo de efectivo para 8 entidades distintas dentro de un mismo archivo maestro.</li>
-              <li>Estructuré notas de asientos contables completas, cubriendo desde la cuenta 10 hasta la 59.</li>
-              <li>Cierro balances y estados financieros cada mes listos para revisión con gerencia y socios.</li>
-            </ul>
-          </div>
-          <div class="tag-list">
-            <span class="tag">Flujo de caja</span>
-            <span class="tag">Cuentas 10 a 59</span>
-            <span class="tag">Estados financieros</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-content">
-            <h3>Auditoría de SUNAT contra registros del ERP</h3>
-            <ul>
-              <li>Construí una matriz para cruzar lo declarado ante SUNAT contra el sistema contable y detectar descuadres a tiempo.</li>
-              <li>Depuré saldos pendientes por proveedor para sincerar la cartera real de cuentas por pagar.</li>
-              <li>Unifiqué bases de datos de facturación para revisar el historial y volumen de compra por cliente.</li>
-            </ul>
-          </div>
-          <div class="tag-list">
-            <span class="tag">Cruce SUNAT vs ERP</span>
-            <span class="tag">Cuentas por pagar</span>
-            <span class="tag">Depuración de saldos</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-content">
-            <h3>Cargas masivas en Excel con Power Query</h3>
-            <ul>
-              <li>Diseñé una plantilla con Power Query y Power Pivot que arma archivos planos (.txt) para compras y ventas.</li>
-              <li>El equipo contable solo pega la información en bruto y actualiza la consulta, sin digitar fila por fila.</li>
-              <li>Se eliminó el error manual al importar comprobantes al sistema de la empresa.</li>
-            </ul>
-          </div>
-          <div class="tag-list">
-            <span class="tag">Power Query</span>
-            <span class="tag">Power Pivot</span>
-            <span class="tag">Archivos TXT</span>
-          </div>
-        </article>
+    <!-- Tablero de Demostración con Gráficos de Atención -->
+    <div class="bi-showcase">
+      <div class="showcase-header">
+        <div class="showcase-title-row">
+          <span class="live-dot"></span>
+          <h2>Tablero en vivo</h2>
+        </div>
+        <div class="tab-group">
+          <button class="tab-btn active" onclick="switchTab('quvo', this)">Consolidado QUVO</button>
+          <button class="tab-btn" onclick="switchTab('sunat', this)">Auditoría SUNAT</button>
+          <button class="tab-btn" onclick="switchTab('cxp', this)">Tesorería BCP</button>
+        </div>
       </div>
-    </section>
+      <p class="section-subtitle">Métricas simuladas con datos reales.</p>
 
-    <!-- Seccion 2 -->
-    <section>
-      <h2>Herramientas propias y <span class="highlight">automatización del trabajo diario</span></h2>
-      <div class="grid">
-        <article class="card">
-          <div class="card-content">
-            <h3>Aplicativo para comprobantes y portal SIRE</h3>
-            <ul>
-              <li>Módulo propio para descargar lotes de facturas y boletas electrónicas de compras y ventas.</li>
-              <li>Conexión para traer el registro de compras y ventas de la plataforma SIRE sin trabas en el navegador.</li>
-              <li>Interfaz limpia en fase de pruebas con los módulos clave listos para uso diario.</li>
-            </ul>
+      <!-- Vista 1: QUVO -->
+      <div id="tab-quvo" class="tab-content active">
+        <!-- Gráfico de Comparación de Horas -->
+        <div class="chart-box">
+          <div class="chart-header">
+            <span class="chart-label">Tiempo de consolidación mensual (8 empresas)</span>
+            <span class="chart-metric">87% reducción de tiempo</span>
           </div>
-          <div class="tag-list">
-            <span class="tag">Descarga de comprobantes</span>
-            <span class="tag">SIRE SUNAT</span>
-            <span class="tag">Automatización</span>
+          <div class="bar-row">
+            <span class="bar-title">Antes (manual)</span>
+            <div class="bar-track">
+              <div class="bar-fill gray" style="width: 100%;"></div>
+            </div>
+            <span class="bar-value">32 horas</span>
           </div>
-        </article>
+          <div class="bar-row">
+            <span class="bar-title">Con modelo</span>
+            <div class="bar-track">
+              <div class="bar-fill blue" style="width: 13%;"></div>
+            </div>
+            <span class="bar-value">4 horas</span>
+          </div>
+        </div>
 
-        <article class="card">
-          <div class="card-content">
-            <h3>Accesos directos a banca y portales tributarios</h3>
-            <ul>
-              <li>Armé accesos directos para entrar a los módulos frecuentes de SUNAT y banca por internet corporativa.</li>
-              <li>Ahorro de clics y tiempos muertos en operaciones repetitivas de tesorería y consulta.</li>
-            </ul>
+        <div class="bi-dashboard-grid">
+          <div class="bi-kpi-box">
+            <div class="label">Sociedades unificadas</div>
+            <div class="value">8 entidades</div>
+            <div class="delta-positive">Cierre mensual ordenado</div>
+            <div class="formula-tag">Cuentas 10 a 59</div>
           </div>
-          <div class="tag-list">
-            <span class="tag">Banca por internet</span>
-            <span class="tag">Operaciones diarias</span>
+          <div class="bi-kpi-box">
+            <div class="label">Flujo de efectivo</div>
+            <div class="value">100% conciliado</div>
+            <div class="delta-positive">Fórmulas directas en Excel</div>
+            <div class="formula-tag">QUVO Multi-Entity</div>
           </div>
-        </article>
+          <div class="bi-kpi-box">
+            <div class="label">Revisión gerencial</div>
+            <div class="value">Sin descuadres</div>
+            <div class="delta-neutral">Validado con socios</div>
+            <div class="formula-tag">Estados Financieros</div>
+          </div>
+        </div>
       </div>
-    </section>
 
-    <!-- Seccion 3 -->
-    <section>
-      <h2>Procedimientos claros y <span class="highlight">control de riesgos</span></h2>
-      <div class="grid">
-        <article class="card">
-          <div class="card-content">
-            <h3>Manual operativo del área de tesorería</h3>
-            <ul>
-              <li>Redacté las reglas del proceso de pagos para definir quién valida, quién aprueba y quién ejecuta en el banco.</li>
-              <li>Documento base para ordenar la operación interna y fijar pautas claras con cada cliente.</li>
-            </ul>
+      <!-- Vista 2: SUNAT vs ERP -->
+      <div id="tab-sunat" class="tab-content">
+        <!-- Gráfico de Cobertura de Auditoría -->
+        <div class="chart-box">
+          <div class="chart-header">
+            <span class="chart-label">Cruce fiscal: comprobantes declarados vs registros ERP</span>
+            <span class="chart-metric">100% auditado</span>
           </div>
-          <div class="tag-list">
-            <span class="tag">Manual de pagos</span>
-            <span class="tag">Reglas de área</span>
+          <div class="bar-row">
+            <span class="bar-title">Facturas SUNAT</span>
+            <div class="bar-track">
+              <div class="bar-fill blue" style="width: 100%;"></div>
+            </div>
+            <span class="bar-value">4,120 reg.</span>
           </div>
-        </article>
+          <div class="bar-row">
+            <span class="bar-title">Cruzadas ERP</span>
+            <div class="bar-track">
+              <div class="bar-fill green" style="width: 100%;"></div>
+            </div>
+            <span class="bar-value">4,120 reg.</span>
+          </div>
+        </div>
 
-        <article class="card">
-          <div class="card-content">
-            <h3>Rutas de aprobación y digitalización</h3>
-            <ul>
-              <li>Entrevisté al equipo para mapear los cuellos de botella antes de pasar aprobaciones a canales digitales.</li>
-              <li>Diseñé flujogramas de decisión y redacté un informe técnico sobre los puntos donde podían filtrarse errores.</li>
-            </ul>
+        <div class="bi-dashboard-grid">
+          <div class="bi-kpi-box">
+            <div class="label">Diferencias fiscales</div>
+            <div class="value">0 errores</div>
+            <div class="delta-positive">Revisión antes de declarar</div>
+            <div class="formula-tag">Cruce RUC y montos</div>
           </div>
-          <div class="tag-list">
-            <span class="tag">Flujogramas</span>
-            <span class="tag">Control operativo</span>
+          <div class="bi-kpi-box">
+            <div class="label">Cartera proveedores</div>
+            <div class="value">Saneada</div>
+            <div class="delta-positive">Sin facturas duplicadas</div>
+            <div class="formula-tag">Detalle por proveedor</div>
           </div>
-        </article>
-
-        <article class="card">
-          <div class="card-content">
-            <h3>Filtros de control documental</h3>
-            <ul>
-              <li>Pautas de revisión para que ninguna factura pase a pago sin validación fiscal y sustento de compra.</li>
-              <li>Control cruzado dos veces por semana para evitar observaciones en auditorías posteriores.</li>
-            </ul>
+          <div class="bi-kpi-box">
+            <div class="label">Módulo SIRE</div>
+            <div class="value">En pruebas</div>
+            <div class="delta-neutral">Descargas automáticas</div>
+            <div class="formula-tag">Suite comprobantes</div>
           </div>
-          <div class="tag-list">
-            <span class="tag">Revisión previa</span>
-            <span class="tag">Sustento fiscal</span>
-          </div>
-        </article>
+        </div>
       </div>
-    </section>
 
-    <!-- Seccion 4 -->
-    <section>
-      <h2>Operación de pagos y <span class="highlight">administración de cuentas</span></h2>
-      <div class="grid">
-        <article class="card">
-          <div class="card-content">
-            <h3>Banca por internet y dispersión de fondos</h3>
-            <ul>
-              <li>Manejo directo de plataformas bancarias corporativas para abonar haberes de planilla y lotes de proveedores.</li>
-              <li>Cálculo y pago de detracciones individuales y lotes masivos en coordinación con contabilidad.</li>
-              <li>Tablas de control para cuotas de préstamos bancarios, cronogramas de fraccionamiento y deudas comerciales.</li>
-            </ul>
+      <!-- Vista 3: Tesorería BCP -->
+      <div id="tab-cxp" class="tab-content">
+        <!-- Gráfico de Dispersión Semanal -->
+        <div class="chart-box">
+          <div class="chart-header">
+            <span class="chart-label">Distribución de desembolsos por tipo de pago</span>
+            <span class="chart-metric">100% a tiempo</span>
           </div>
-          <div class="tag-list">
-            <span class="tag">Telecrédito y banca empresas</span>
-            <span class="tag">Planillas</span>
-            <span class="tag">Detracciones</span>
+          <div class="bar-row">
+            <span class="bar-title">Proveedores</span>
+            <div class="bar-track">
+              <div class="bar-fill blue" style="width: 60%;"></div>
+            </div>
+            <span class="bar-value">60%</span>
           </div>
-        </article>
+          <div class="bar-row">
+            <span class="bar-title">Planillas</span>
+            <div class="bar-track">
+              <div class="bar-fill green" style="width: 25%;"></div>
+            </div>
+            <span class="bar-value">25%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-title">Detracciones</span>
+            <div class="bar-track">
+              <div class="bar-fill gray" style="width: 15%;"></div>
+            </div>
+            <span class="bar-value">15%</span>
+          </div>
+        </div>
 
-        <article class="card">
-          <div class="card-content">
-            <h3>Reportes de cuentas por pagar y conciliación</h3>
-            <ul>
-              <li>Entrega del reporte de cuentas por pagar (CxP) por vencer y vencidas para programar salidas de caja.</li>
-              <li>Control de gastos operativos y caja chica con sustentos completos.</li>
-              <li>Cruce de movimientos bancarios para ayudar a contabilidad a cerrar las conciliaciones sin partidas colgadas.</li>
-            </ul>
+        <div class="bi-dashboard-grid">
+          <div class="bi-kpi-box">
+            <div class="label">Banca digital</div>
+            <div class="value">Telecrédito BCP</div>
+            <div class="delta-neutral">Lotes masivos de abono</div>
+            <div class="formula-tag">Telecrédito y BBVA</div>
           </div>
-          <div class="tag-list">
-            <span class="tag">Reportes CxP</span>
-            <span class="tag">Conciliaciones bancarias</span>
-            <span class="tag">Control de gastos</span>
+          <div class="bi-kpi-box">
+            <div class="label">Detracciones</div>
+            <div class="value">Al día</div>
+            <div class="delta-positive">Sin bloqueos de cuenta</div>
+            <div class="formula-tag">Cálculo en Excel</div>
           </div>
-        </article>
+          <div class="bi-kpi-box">
+            <div class="label">Conciliación</div>
+            <div class="value">Cuadrada</div>
+            <div class="delta-positive">Apoyo directo a contadores</div>
+            <div class="formula-tag">Cuentas por pagar</div>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
+
+    <!-- Casos de Estudio -->
+    <main id="proyectos">
+      <!-- Pilar 1 -->
+      <section>
+        <h2>Modelos y balances</h2>
+        <p class="section-subtitle">Cuentas claras para ocho empresas.</p>
+        <div class="grid">
+          <!-- Caso 1 -->
+          <article class="card">
+            <div class="card-content">
+              <div class="card-top">
+                <span class="card-category">Modelamiento</span>
+                <span class="mini-badge">8 empresas</span>
+              </div>
+              <h3>Consolidación de empresas</h3>
+              <ul>
+                <li>Unifiqué el flujo de caja de ocho empresas en un solo archivo maestro.</li>
+                <li>Ordené notas contables desde la cuenta 10 hasta la 59 para el balance mensual.</li>
+                <li>Dejé las fórmulas listas para que los socios revisen saldos sin esperar días.</li>
+              </ul>
+              <!-- Mini gráfico de tendencia -->
+              <div class="card-graphic">
+                <div class="card-graphic-title">
+                  <span>Balance consolidado mensual</span>
+                  <span style="color: var(--primary);">Estable</span>
+                </div>
+                <svg class="sparkline-svg" viewBox="0 0 200 40">
+                  <polyline fill="none" stroke="#4285F4" stroke-width="2.5" points="0,32 30,28 60,30 90,20 120,24 150,14 180,16 200,8"/>
+                  <circle cx="200" cy="8" r="3.5" fill="#4285F4"/>
+                </svg>
+              </div>
+            </div>
+            <div class="tag-list">
+              <span class="tag">Excel avanzado</span>
+              <span class="tag">Flujo de caja</span>
+              <span class="tag">Cuentas 10 a 59</span>
+            </div>
+          </article>
+
+          <!-- Caso 2 -->
+          <article class="card">
+            <div class="card-content">
+              <div class="card-top">
+                <span class="card-category">Auditoría</span>
+                <span class="mini-badge">0 reparos</span>
+              </div>
+              <h3>Auditoría SUNAT ERP</h3>
+              <ul>
+                <li>Crucé facturas declaradas en SUNAT contra el sistema contable Flowdesk.</li>
+                <li>Detecté a tiempo compras no registradas antes del cierre de impuestos.</li>
+                <li>Limpié la lista de proveedores para pagar solo compras reales y verificadas.</li>
+              </ul>
+              <!-- Mini gráfico de auditoría -->
+              <div class="card-graphic">
+                <div class="card-graphic-title">
+                  <span>Facturas conciliadas sin error</span>
+                  <span style="color: var(--success);">100%</span>
+                </div>
+                <div class="bar-track" style="margin-top: 6px;">
+                  <div class="bar-fill green" style="width: 100%;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="tag-list">
+              <span class="tag">Cruce SUNAT ERP</span>
+              <span class="tag">Cuentas por pagar</span>
+              <span class="tag">Auditoría</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Pilar 2 -->
+      <section>
+        <h2>Automatización de reportes</h2>
+        <p class="section-subtitle">Menos horas en tareas repetitivas.</p>
+        <div class="grid">
+          <!-- Caso 3 -->
+          <article class="card">
+            <div class="card-content">
+              <div class="card-top">
+                <span class="card-category">Power Query</span>
+                <span class="mini-badge">-25h al mes</span>
+              </div>
+              <h3>Cargas con macros</h3>
+              <ul>
+                <li>Creé una plantilla en Power Query que arma los archivos de compras y ventas.</li>
+                <li>El equipo pega los comprobantes y la consulta genera los archivos planos solos.</li>
+                <li>Ahorramos unas 25 horas al mes eliminando el tipeo manual de facturas.</li>
+              </ul>
+              <!-- Mini gráfico de ahorro -->
+              <div class="card-graphic">
+                <div class="card-graphic-title">
+                  <span>Tiempo de armado de archivos TXT</span>
+                  <span style="color: var(--primary);">Rápido</span>
+                </div>
+                <svg class="sparkline-svg" viewBox="0 0 200 40">
+                  <path d="M0,35 Q50,30 90,12 T160,8 L200,6" fill="none" stroke="#34A853" stroke-width="2.5"/>
+                  <circle cx="200" cy="6" r="3.5" fill="#34A853"/>
+                </svg>
+              </div>
+            </div>
+            <div class="tag-list">
+              <span class="tag">Power Query</span>
+              <span class="tag">Power Pivot</span>
+              <span class="tag">Archivos TXT</span>
+            </div>
+          </article>
+
+          <!-- Caso 4 -->
+          <article class="card">
+            <div class="card-content">
+              <div class="card-top">
+                <span class="card-category">Automatización</span>
+                <span class="mini-badge">En pruebas</span>
+              </div>
+              <h3>Descargas de comprobantes</h3>
+              <ul>
+                <li>Preparé una herramienta con interfaz propia para bajar comprobantes en lote.</li>
+                <li>Conecta con la plataforma SIRE de SUNAT sin que la página se cuelgue.</li>
+                <li>Dejé accesos rápidos para consultar bancos y portales fiscales en un clic.</li>
+              </ul>
+              <!-- Mini barra de progreso -->
+              <div class="card-graphic">
+                <div class="card-graphic-title">
+                  <span>Avance de módulos funcionales</span>
+                  <span style="color: var(--primary);">Fase UI lista</span>
+                </div>
+                <div class="bar-track" style="margin-top: 6px;">
+                  <div class="bar-fill blue" style="width: 80%;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="tag-list">
+              <span class="tag">SIRE SUNAT</span>
+              <span class="tag">Comprobantes</span>
+              <span class="tag">Banca web</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Pilar 3 -->
+      <section>
+        <h2>Tesorería y control</h2>
+        <p class="section-subtitle">Cero retrasos en cuentas bancarias.</p>
+        <div class="grid">
+          <!-- Caso 5 -->
+          <article class="card">
+            <div class="card-content">
+              <div class="card-top">
+                <span class="card-category">Plataformas BPO</span>
+                <span class="mini-badge">160h al mes</span>
+              </div>
+              <h3>Banca y pagos</h3>
+              <ul>
+                <li>Entro a Telecrédito BCP y banca corporativa para pagar nóminas y facturas.</li>
+                <li>Calculo detracciones masivas para cumplir con los plazos de ley.</li>
+                <li>Llevo el calendario de cuotas de préstamos y fraccionamientos bancarios.</li>
+              </ul>
+              <!-- Mini gráfico de desembolsos -->
+              <div class="card-graphic">
+                <div class="card-graphic-title">
+                  <span>Cumplimiento de pagos programados</span>
+                  <span style="color: var(--success);">100% puntual</span>
+                </div>
+                <div class="bar-track" style="margin-top: 6px;">
+                  <div class="bar-fill green" style="width: 100%;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="tag-list">
+              <span class="tag">Telecrédito BCP</span>
+              <span class="tag">Planillas</span>
+              <span class="tag">Detracciones</span>
+            </div>
+          </article>
+
+          <!-- Caso 6 -->
+          <article class="card">
+            <div class="card-content">
+              <div class="card-top">
+                <span class="card-category">Procesos</span>
+                <span class="mini-badge">Formalizado</span>
+              </div>
+              <h3>Reglas de control</h3>
+              <ul>
+                <li>Redacté las normas de pago para definir quién valida y quién transfiere.</li>
+                <li>Dibujé flujogramas para mover firmas en papel hacia autorizaciones digitales.</li>
+                <li>Puse filtros de revisión previa para evitar pagar facturas sin sustento.</li>
+              </ul>
+              <!-- Mini diagrama de pasos -->
+              <div class="card-graphic">
+                <div class="card-graphic-title">
+                  <span>Flujo de pago seguro</span>
+                  <span style="color: var(--mute);">3 pasos</span>
+                </div>
+                <div style="font-size: 11px; display: flex; justify-content: space-between; margin-top: 4px; color: var(--body);">
+                  <span>1. Validar</span>
+                  <span>→</span>
+                  <span>2. Aprobar</span>
+                  <span>→</span>
+                  <span>3. Dispersar</span>
+                </div>
+              </div>
+            </div>
+            <div class="tag-list">
+              <span class="tag">Manual de pagos</span>
+              <span class="tag">Flujogramas</span>
+              <span class="tag">Control interno</span>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
 
     <!-- Footer -->
     <footer id="contacto">
-      <div>Franco Guerrero · Tesorería, BPO y analítica de datos</div>
+      <div>
+        <strong>Franco Guerrero</strong> · Business Intelligence & Finanzas
+      </div>
       <div class="footer-links">
         <a href="mailto:tuemail@ejemplo.com">Correo</a>
-        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-        <a href="https://github.com/Franco-G" target="_blank">GitHub</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/Franco-G" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </footer>
   </div>
+
+  <!-- Script interactivo de pestañas -->
+  <script>
+    function switchTab(tabId, element) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      
+      element.classList.add('active');
+      const targetContent = document.getElementById('tab-' + tabId);
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
+    }
+  </script>
 </body>
 </html>
