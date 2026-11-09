@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollytelling();
   initProjectsScrollytelling();
   initProjectFilters();
+  initNumberTicker();
 });
 
 /**
@@ -69,7 +70,7 @@ function scrollToChapter(chapterId) {
 }
 
 function initChapterNavigation() {
-  const chapters = ['inicio', 'experiencia', 'proyectos', 'contacto'];
+  const chapters = ['inicio', 'experiencia', 'dashboard-powerbi', 'proyectos', 'contacto'];
   const navDots = document.querySelectorAll('.scrolly-nav-dot');
 
   if (navDots.length === 0) return;
@@ -163,7 +164,7 @@ function initScrollytelling() {
 }
 
 /**
- * 4. Scrollytelling Capítulo 3: Visor Inspector de Entregables
+ * 4. Detalle y métricas del proyecto seleccionado
  * Información detallada sincronizada dinámicamente con las tarjetas al scrollear.
  */
 const projectsData = {
@@ -380,8 +381,8 @@ function initProjectsScrollytelling() {
 }
 
 /**
- * 5. Filtro Interactivo de Entregables
- * Segmentación dinámica con actualización sincronizada del visor inspector.
+ * 5. Filtro Interactivo de Proyectos
+ * Segmentación dinámica con actualización sincronizada del panel de detalle.
  */
 function filterProjects(category, buttonElement) {
   document.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
@@ -403,7 +404,7 @@ function filterProjects(category, buttonElement) {
     }
   });
 
-  // Sincronizar el visor con el primer proyecto visible tras filtrar
+  // Sincronizar el panel con el primer proyecto visible tras filtrar
   if (firstVisibleProject) {
     cards.forEach(c => c.classList.remove('active'));
     firstVisibleProject.classList.add('active');
@@ -417,4 +418,51 @@ function initProjectFilters() {
   if (defaultBtn) {
     defaultBtn.classList.add('active');
   }
+}
+
+/**
+ * 6. Magic UI & UI Pro Max: Number Ticker para Métricas
+ * Animación suave de conteo numérico al entrar en pantalla.
+ */
+function initNumberTicker() {
+  const metricElements = document.querySelectorAll('.metric-num[data-ticker-target]');
+  if (metricElements.length === 0) return;
+
+  let animated = false;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !animated) {
+        animated = true;
+        metricElements.forEach(el => {
+          const target = parseInt(el.getAttribute('data-ticker-target'), 10);
+          const prefix = el.getAttribute('data-ticker-prefix') || '';
+          const suffix = el.getAttribute('data-ticker-suffix') || '';
+          animateValue(el, 0, target, 1200, prefix, suffix);
+        });
+      }
+    });
+  }, { threshold: 0.25 });
+
+  const heroSection = document.getElementById('inicio');
+  if (heroSection) {
+    observer.observe(heroSection);
+  }
+}
+
+function animateValue(obj, start, end, duration, prefix, suffix) {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    // Ease-out cubic
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(ease * (end - start) + start);
+    obj.textContent = `${prefix}${current}${suffix}`;
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    } else {
+      obj.textContent = `${prefix}${end}${suffix}`;
+    }
+  };
+  window.requestAnimationFrame(step);
 }

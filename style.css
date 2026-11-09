@@ -45,6 +45,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
   overflow-x: hidden;
   max-width: 100vw;
 }
@@ -63,7 +64,7 @@ body {
   max-width: 100vw;
 }
 
-/* Escenario de fondo fijo estilo Chartipedia (Persistent Canvas Backdrop) */
+/* Escenario de fondo fijo estilo Chartipedia y Magic UI Dot Matrix */
 .scrolly-canvas-stage {
   position: fixed;
   inset: 0;
@@ -71,10 +72,12 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 0;
-  background: 
+  background-image: 
     radial-gradient(circle at 12% 18%, rgba(66, 133, 244, 0.045) 0%, transparent 42%),
     radial-gradient(circle at 88% 82%, rgba(52, 168, 83, 0.04) 0%, transparent 42%),
-    var(--canvas);
+    radial-gradient(#dadce0 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 24px 24px;
+  background-color: var(--canvas);
 }
 
 .container {
@@ -86,13 +89,15 @@ body {
 }
 
 /* ========================================================
-   ENCABEZADO SIEMPRE A LA VISTA (STICKY HEADER)
+   ENCABEZADO SIEMPRE A LA VISTA (FIXED HEADER INMUTABLE)
    ======================================================== */
 .sticky-header-bar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 1000;
-  background: rgba(248, 249, 250, 0.92);
+  background: rgba(248, 249, 250, 0.94);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--hairline);
@@ -177,18 +182,6 @@ body {
   transform: translateY(-1px);
 }
 
-.nav-social-btn.wsp-highlight {
-  background: #eafaf0;
-  border-color: #a8ebd0;
-  color: #128c7e;
-  font-weight: 600;
-}
-
-.nav-social-btn.wsp-highlight:hover {
-  background: #d4f5e2;
-  border-color: #79ddaa;
-  color: #0b6859;
-}
 
 /* Tipografía estricta de encabezados: títulos <= 3 palabras, subtítulos <= 5 palabras */
 h1, h2, h3 {
@@ -231,6 +224,19 @@ h3 {
   line-height: 1.35;
   letter-spacing: -0.015em;
   margin-bottom: 0.65rem;
+}
+
+/* Diapositivas Ejecutivas a Pantalla Completa (Scroll Snap Mandatory) */
+.slide-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100vh;
+  padding: 84px 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
 }
 
 /* Capítulo 1: Inicio Armónico y Balanceado */
@@ -426,6 +432,63 @@ header.hero-section {
   from { transform: translate(-50%, -50%) rotate(0deg); }
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
+
+/* ========================================================
+   VITRINA INTERACTIVA DE POWER BI (SLIDE COMPLETO)
+   ======================================================== */
+.powerbi-slide {
+  padding: 80px 0 2rem 0;
+}
+
+.powerbi-slide .slide-content-wrapper {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.powerbi-slide .slide-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.powerbi-slide .title-with-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.powerbi-slide .title-with-badge h2 {
+  margin-bottom: 0;
+}
+
+.powerbi-frame-card {
+  position: relative;
+  width: 100%;
+  border-radius: 14px;
+  padding: 10px;
+  background: var(--surface-card);
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.powerbi-frame-card iframe {
+  width: 100%;
+  height: calc(100vh - 210px);
+  min-height: 480px;
+  max-height: 640px;
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  background: #ffffff;
+  display: block;
+}
+
 
 /* ========================================================
    SCROLLYTELLING: ESCENARIO FIJO Y TRANSICIONES POR CAPAS
@@ -927,7 +990,7 @@ section {
   font-weight: 600;
 }
 
-/* Visor Inspector de Entregables Pegajoso */
+/* Panel Inspector de Proyectos con Border Beam */
 .project-inspector-card {
   padding: 20px 22px;
 }
@@ -1213,32 +1276,117 @@ section {
   box-shadow: 0 1px 3px rgba(66, 133, 244, 0.3);
 }
 
-/* Footer y Bloque de Contacto Directo (Capítulo 4) */
-footer {
-  border-top: 1px solid var(--hairline);
-  padding: 3.5rem 0 4.5rem 0;
+/* ========================================================
+   DIAPOSITIVA 5: CONTACTO DIRECTO Y CIERRE EJECUTIVO
+   ======================================================== */
+.contact-slide {
+  padding: 84px 0 2rem 0;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+}
+
+.contact-slide-wrapper {
+  width: 100%;
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.contact-card {
+  padding: 36px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.contact-header h2 {
+  font-size: 24px;
+  margin-bottom: 0.25rem;
+}
+
+.contact-header .contact-desc {
+  font-size: 14px;
+  color: var(--body);
+  margin-top: 0.5rem;
+}
+
+.contact-actions-row {
+  display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
-  color: var(--mute);
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.contact-actions-row .nav-social-btn {
+  padding: 8px 16px;
   font-size: 13.5px;
 }
 
-.footer-left {
-  max-width: 440px;
-}
-
-.footer-left h2 {
-  font-size: 20px;
-  margin-bottom: 4px;
-}
-
-.footer-links {
+.contact-footer-actions {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--hairline);
+  padding-top: 18px;
+  width: 100%;
+}
+
+.back-to-top-btn {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px 18px;
+  font-size: 13.5px;
+  border-radius: 9999px;
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  transition: all 0.2s ease;
+}
+
+.back-to-top-btn:hover {
+  background: var(--surface-soft);
+  border-color: #c4c7cc;
+  transform: translateY(-1px);
+}
+
+.copyright-note {
+  font-size: 12px;
+  color: var(--mute);
+}
+
+/* Magic UI: Shimmer Effect en Botones */
+.shimmer-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 80%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.shimmer-btn:hover::after {
+  transform: translateX(100%);
 }
 
 /* Accesibilidad y Reducción de Movimiento */
@@ -1367,7 +1515,7 @@ footer {
   }
   .nav-social-btn span { display: none; }
   .nav-social-btn { padding: 8px; }
-  footer { flex-direction: column; align-items: flex-start; }
+  .contact-actions-row { flex-direction: column; align-items: stretch; }
 }
 
 @media (max-width: 440px) {
