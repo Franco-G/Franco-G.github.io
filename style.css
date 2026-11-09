@@ -448,8 +448,8 @@ header.hero-section {
 .scrolly-narrative {
   display: flex;
   flex-direction: column;
-  gap: 4.5rem;
-  padding: 0.5rem 0 4rem 0;
+  gap: 6rem;
+  padding: 1rem 0 6rem 0;
 }
 
 .scrolly-step {
@@ -590,16 +590,16 @@ header.hero-section {
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   z-index: 999;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 12px 9px;
-  border-radius: 9999px;
-  border: 1px solid var(--hairline);
-  box-shadow: 0 4px 16px rgba(60, 64, 67, 0.12);
-  transition: opacity 0.3s ease;
+  background: rgba(32, 33, 36, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 12px 10px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+  transition: all 0.3s ease;
 }
 
 .scrolly-nav-dot {
@@ -607,7 +607,7 @@ header.hero-section {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #c4c7cc;
+  background: #80868b;
   border: none;
   padding: 0;
   cursor: pointer;
@@ -616,14 +616,14 @@ header.hero-section {
 }
 
 .scrolly-nav-dot:hover {
-  background: var(--primary);
+  background: #ffffff;
   transform: scale(1.3);
 }
 
 .scrolly-nav-dot.active {
   background: var(--primary);
-  transform: scale(1.5);
-  box-shadow: 0 0 10px rgba(66, 133, 244, 0.7);
+  transform: scale(1.4);
+  box-shadow: 0 0 10px rgba(66, 133, 244, 0.9);
 }
 
 .nav-dot-tooltip {
@@ -847,8 +847,8 @@ section {
 .projects-narrative {
   display: flex;
   flex-direction: column;
-  gap: 4rem;
-  padding: 0.5rem 0 3.5rem 0;
+  gap: 6rem;
+  padding: 1rem 0 6rem 0;
 }
 
 .project-step {

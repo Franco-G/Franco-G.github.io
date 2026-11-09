@@ -155,7 +155,7 @@ function initScrollytelling() {
       }
     });
   }, {
-    threshold: 0.45,
+    threshold: 0.35,
     rootMargin: '-10% 0px -20% 0px'
   });
 
