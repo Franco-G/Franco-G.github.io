@@ -43,49 +43,74 @@
       </a>
       <div class="nav-actions">
         <!-- Logo Oficial de WhatsApp Business -->
-        <a href="https://wa.me/51960748142" target="_blank" rel="noopener noreferrer" class="nav-social-btn" title="WhatsApp: +51 960 748 142">
-          <img src="whatsapp.png" width="18" height="18" alt="WhatsApp Business" class="contact-icon">
-          <span>+51 960 748 142</span>
+        <a href="https://wa.me/51960748142" target="_blank" rel="noopener noreferrer" class="nav-social-btn nav-icon-btn" title="WhatsApp: +51 960 748 142" aria-label="WhatsApp">
+          <img src="whatsapp.png" width="20" height="20" alt="WhatsApp Business" class="contact-icon">
         </a>
 
         <!-- Logo Oficial de LinkedIn -->
-        <a href="https://www.linkedin.com/in/francoguerreroav/" target="_blank" rel="noopener noreferrer" class="nav-social-btn" title="Perfil en LinkedIn">
-          <img src="linkedin.svg" width="18" height="18" alt="LinkedIn" class="contact-icon">
-          <span>Franco Guerrero</span>
+        <a href="https://www.linkedin.com/in/francoguerreroav/" target="_blank" rel="noopener noreferrer" class="nav-social-btn nav-icon-btn" title="LinkedIn: Franco Guerrero" aria-label="LinkedIn">
+          <img src="linkedin.svg" width="20" height="20" alt="LinkedIn" class="contact-icon">
         </a>
 
         <!-- Logo Oficial de Gmail -->
-        <a href="mailto:guerrerofranco1429@gmail.com" class="nav-social-btn" title="Enviar correo a guerrerofranco1429@gmail.com">
-          <img src="gmail.svg" width="18" height="18" alt="Correo" class="contact-icon">
-          <span>guerrerofranco1429@gmail.com</span>
+        <a href="mailto:guerrerofranco1429@gmail.com" class="nav-social-btn nav-icon-btn" title="Correo: guerrerofranco1429@gmail.com" aria-label="Correo">
+          <img src="gmail.svg" width="20" height="20" alt="Correo" class="contact-icon">
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Navegación Flotante Global de Diapositivas (Puntos Fijos en Pantalla) -->
+  <!-- Navegación Flotante Global de Diapositivas (10 Puntos Fijos en Pantalla) -->
   <nav class="scrolly-nav-dots" aria-label="Navegación de diapositivas">
-    <button class="scrolly-nav-dot active" data-chapter="inicio" title="Inicio" aria-label="Diapositiva 1: Inicio" onclick="goToSlide(0)">
+    <button class="scrolly-nav-dot active" data-chapter="inicio" data-slide-index="0" title="Inicio" aria-label="Diapositiva 1: Inicio" onclick="goToSlide(0)">
       <span class="nav-dot-tooltip">Inicio</span>
     </button>
-    <button class="scrolly-nav-dot" data-chapter="experiencia" title="Historias" aria-label="Diapositiva 2: Historias" onclick="goToSlide(1)">
-      <span class="nav-dot-tooltip">Historias</span>
+    <button class="scrolly-nav-dot" data-chapter="experiencia" data-slide-index="1" title="Experiencia" aria-label="Diapositiva 2: Experiencia" onclick="goToSlide(1)">
+      <span class="nav-dot-tooltip">Experiencia</span>
     </button>
-    <button class="scrolly-nav-dot" data-chapter="dashboard-powerbi" title="Power BI" aria-label="Diapositiva 3: Power BI" onclick="goToSlide(2)">
+    <button class="scrolly-nav-dot" data-chapter="dashboard-powerbi" data-slide-index="2" title="Power BI" aria-label="Diapositiva 3: Power BI" onclick="goToSlide(2)">
       <span class="nav-dot-tooltip">Power BI</span>
     </button>
-    <button class="scrolly-nav-dot" data-chapter="proyectos" title="Proyectos" aria-label="Diapositiva 4: Proyectos" onclick="goToSlide(3)">
-      <span class="nav-dot-tooltip">Proyectos</span>
+    <button class="scrolly-nav-dot" data-chapter="proyecto-1" data-slide-index="3" title="Consolidación" aria-label="Diapositiva 4: Consolidación" onclick="goToSlide(3)">
+      <span class="nav-dot-tooltip">Consolidación</span>
     </button>
-    <button class="scrolly-nav-dot" data-chapter="contacto" title="Contacto" aria-label="Diapositiva 5: Contacto" onclick="goToSlide(4)">
+    <button class="scrolly-nav-dot" data-chapter="proyecto-2" data-slide-index="4" title="Auditoría SUNAT" aria-label="Diapositiva 5: Auditoría SUNAT" onclick="goToSlide(4)">
+      <span class="nav-dot-tooltip">Auditoría SUNAT</span>
+    </button>
+    <button class="scrolly-nav-dot" data-chapter="proyecto-3" data-slide-index="5" title="Power Query" aria-label="Diapositiva 6: Power Query" onclick="goToSlide(5)">
+      <span class="nav-dot-tooltip">Power Query</span>
+    </button>
+    <button class="scrolly-nav-dot" data-chapter="proyecto-4" data-slide-index="6" title="Comprobantes" aria-label="Diapositiva 7: Comprobantes" onclick="goToSlide(6)">
+      <span class="nav-dot-tooltip">Comprobantes</span>
+    </button>
+    <button class="scrolly-nav-dot" data-chapter="proyecto-5" data-slide-index="7" title="Banca y pagos" aria-label="Diapositiva 8: Banca y pagos" onclick="goToSlide(7)">
+      <span class="nav-dot-tooltip">Banca y pagos</span>
+    </button>
+    <button class="scrolly-nav-dot" data-chapter="proyecto-6" data-slide-index="8" title="Control interno" aria-label="Diapositiva 9: Control interno" onclick="goToSlide(8)">
+      <span class="nav-dot-tooltip">Control interno</span>
+    </button>
+    <button class="scrolly-nav-dot" data-chapter="contacto" data-slide-index="9" title="Contacto" aria-label="Diapositiva 10: Contacto" onclick="goToSlide(9)">
       <span class="nav-dot-tooltip">Contacto</span>
     </button>
   </nav>
 
+  <!-- Controles Visibles Flotantes de Navegación de Diapositivas (Dock) -->
+  <div class="slide-deck-controls" id="slide-nav-dock" aria-label="Controles de navegación de diapositivas">
+    <button type="button" class="slide-deck-btn" id="slide-nav-prev" aria-label="Diapositiva anterior" title="Diapositiva anterior">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+    <div class="slide-deck-counter" id="slide-nav-counter">
+      <span class="slide-nav-current">01</span> / <span class="slide-nav-total">10</span>
+    </div>
+    <button type="button" class="slide-deck-btn" id="slide-nav-next" aria-label="Siguiente diapositiva" title="Siguiente diapositiva">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
+  </div>
+
   <!-- Contenedor Maestro de Diapositivas (Paginación por Pantallas 100vh) -->
   <main class="slides-wrapper" id="slides-wrapper">
     <!-- Diapositiva 1: Inicio y Métricas -->
-    <section id="inicio" class="slide-section hero-chapter">
+    <section id="inicio" class="slide-section hero-chapter" aria-label="Inicio y métricas">
       <div class="container slide-container">
         <header class="hero-section">
           <h1>Decisiones con datos</h1>
@@ -95,10 +120,6 @@
           </p>
           <div class="btn-group">
             <a href="#experiencia" class="btn btn-primary shimmer-btn" onclick="goToSlide(1); return false;">Ver experiencia</a>
-            <a href="https://wa.me/51960748142" target="_blank" rel="noopener noreferrer" class="btn btn-secondary shimmer-btn">
-              <img src="whatsapp.png" width="16" height="16" alt="WhatsApp Business" class="btn-icon">
-              Conversar por WhatsApp
-            </a>
           </div>
         </header>
 
@@ -128,230 +149,191 @@
       </div>
     </section>
 
-    <!-- Diapositiva 2: Historias de Experiencia con Tablero Interactivo -->
-    <section class="slide-section scrolly-section" id="experiencia" aria-label="Historias y casos de negocio">
+    <!-- Diapositiva 2: Experiencia con Tablero Interactivo -->
+    <section class="slide-section scrolly-section" id="experiencia" aria-label="Experiencia laboral y modelos">
       <div class="container slide-container">
         <div class="slide-header-row">
           <div>
-            <h2>Historias y datos</h2>
-            <p class="section-subtitle">Recorrido analítico en tres actos.</p>
-          </div>
-          <div class="tab-group act-nav-pills">
-            <button class="tab-btn active" data-act="1" onclick="switchAct(1, this)">Acto 1</button>
-            <button class="tab-btn" data-act="2" onclick="switchAct(2, this)">Acto 2</button>
-            <button class="tab-btn" data-act="3" onclick="switchAct(3, this)">Acto 3</button>
+            <h2>Experiencia laboral</h2>
+            <p class="section-subtitle">Consolidación contable y tesorería.</p>
           </div>
         </div>
 
         <div class="scrolly-wrapper">
-        <!-- Columna Izquierda: Pasos de la Narrativa que avanzan con el scroll -->
-        <div class="scrolly-narrative">
-          <!-- Acto 1 -->
-          <div class="scrolly-step active" data-step="1">
-            <span class="step-tag">Acto 1</span>
-            <h3>Modelos y balances</h3>
-            <p class="section-subtitle">Cuentas claras para ocho empresas.</p>
-            <ul>
-              <li>Unifiqué el flujo de caja de ocho empresas en un solo archivo maestro.</li>
-              <li>Ordené notas contables de la cuenta 10 a la 59 para el balance mensual.</li>
-              <li>Fórmulas directas para que los socios revisen saldos sin esperar días.</li>
-            </ul>
-            <div class="tag-list">
-              <span class="tag">Excel avanzado</span>
-              <span class="tag">Flujo de caja</span>
-              <span class="tag">Cuentas 10 a 59</span>
+          <!-- Columna Izquierda: Logros y alcance -->
+          <div class="scrolly-narrative">
+            <div class="scrolly-step active">
+              <h3>Modelos y balances</h3>
+              <p class="section-subtitle">Cuentas para ocho empresas.</p>
+              <ul>
+                <li>Unifiqué el flujo de caja de ocho empresas en un solo archivo maestro automatizado.</li>
+                <li>Crucé comprobantes SUNAT contra el ERP Flowdesk eliminando reparos fiscales.</li>
+                <li>Gestioné la dispersión masiva en Telecrédito BCP y pago puntual de detracciones.</li>
+              </ul>
+              <div class="tag-list">
+                <span class="tag">Excel avanzado</span>
+                <span class="tag">Power Query</span>
+                <span class="tag">Telecrédito BCP</span>
+                <span class="tag">Cuentas 10 a 59</span>
+              </div>
             </div>
           </div>
 
-          <!-- Acto 2 -->
-          <div class="scrolly-step" data-step="2">
-            <span class="step-tag">Acto 2</span>
-            <h3>Automatización de reportes</h3>
-            <p class="section-subtitle">Menos horas en tareas repetitivas.</p>
-            <ul>
-              <li>Plantilla en Power Query que procesa compras y ventas automáticamente.</li>
-              <li>Cruce preventivo de 4,120 comprobantes SUNAT contra el ERP Flowdesk.</li>
-              <li>Ahorro de unas 25 horas al mes eliminando el tipeo manual de facturas.</li>
-            </ul>
-            <div class="tag-list">
-              <span class="tag">Power Query</span>
-              <span class="tag">Cruce SUNAT</span>
-              <span class="tag">Archivos TXT</span>
-            </div>
-          </div>
-
-          <!-- Acto 3 -->
-          <div class="scrolly-step" data-step="3">
-            <span class="step-tag">Acto 3</span>
-            <h3>Tesorería y control</h3>
-            <p class="section-subtitle">Cero retrasos en cuentas bancarias.</p>
-            <ul>
-              <li>Dispersión masiva en Telecrédito BCP para haberes y proveedores de 10 clientes.</li>
-              <li>Cálculo oportuno de detracciones sin observaciones fiscales ni bloqueos.</li>
-              <li>Manual operativo y flujogramas de autorización en tres pasos.</li>
-            </ul>
-            <div class="tag-list">
-              <span class="tag">Telecrédito BCP</span>
-              <span class="tag">Planillas</span>
-              <span class="tag">Control interno</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Columna Derecha: Escenario Fijo / Proyector Pegajoso con Border Beam -->
-        <div class="scrolly-stage-sticky">
-          <div class="bi-showcase border-beam-card">
-            <div class="showcase-header">
-              <div class="showcase-title-row">
-                <span class="live-dot"></span>
-                <h2>Tablero en vivo</h2>
-              </div>
-              <div class="tab-group">
-                <button class="tab-btn active" data-tab="quvo" onclick="manualSwitchTab('quvo', this)">Consolidado QUVO</button>
-                <button class="tab-btn" data-tab="sunat" onclick="manualSwitchTab('sunat', this)">Auditoría SUNAT</button>
-                <button class="tab-btn" data-tab="cxp" onclick="manualSwitchTab('cxp', this)">Tesorería BCP</button>
-              </div>
-            </div>
-            <p class="section-subtitle">Métricas simuladas con datos reales.</p>
-
-            <!-- Capa 1: QUVO (Acto 1) -->
-            <div id="tab-quvo" class="tab-content active">
-              <div class="chart-box">
-                <div class="chart-header">
-                  <span class="chart-label">Tiempo de consolidación mensual (8 empresas)</span>
-                  <span class="chart-metric">87% reducción de tiempo</span>
+          <!-- Columna Derecha: Escenario Fijo con Border Beam -->
+          <div class="scrolly-stage-sticky">
+            <div class="bi-showcase border-beam-card">
+              <div class="showcase-header">
+                <div class="showcase-title-row">
+                  <span class="live-dot" aria-hidden="true"></span>
+                  <h3>Tablero en vivo</h3>
                 </div>
-                <div class="bar-row">
-                  <span class="bar-title">Antes (manual)</span>
-                  <div class="bar-track">
-                    <div class="bar-fill gray" style="width: 100%;"></div>
-                  </div>
-                  <span class="bar-value">32 horas</span>
+                <div class="tab-group">
+                  <button class="tab-btn active" data-tab="quvo" onclick="manualSwitchTab('quvo', this)">Consolidado QUVO</button>
+                  <button class="tab-btn" data-tab="sunat" onclick="manualSwitchTab('sunat', this)">Auditoría SUNAT</button>
+                  <button class="tab-btn" data-tab="cxp" onclick="manualSwitchTab('cxp', this)">Tesorería BCP</button>
                 </div>
-                <div class="bar-row">
-                  <span class="bar-title">Con modelo</span>
-                  <div class="bar-track">
-                    <div class="bar-fill blue" style="width: 13%;"></div>
+              </div>
+              <p class="section-subtitle">Métricas con datos reales.</p>
+
+              <!-- Capa 1: QUVO (Acto 1) -->
+              <div id="tab-quvo" class="tab-content active">
+                <div class="chart-box">
+                  <div class="chart-header">
+                    <span class="chart-label">Tiempo de consolidación mensual (8 empresas)</span>
+                    <span class="chart-metric">87% reducción de tiempo</span>
                   </div>
-                  <span class="bar-value">4 horas</span>
+                  <div class="bar-row">
+                    <span class="bar-title">Antes (manual)</span>
+                    <div class="bar-track">
+                      <div class="bar-fill gray" style="width: 100%;"></div>
+                    </div>
+                    <span class="bar-value">32 horas</span>
+                  </div>
+                  <div class="bar-row">
+                    <span class="bar-title">Con modelo</span>
+                    <div class="bar-track">
+                      <div class="bar-fill blue" style="width: 13%;"></div>
+                    </div>
+                    <span class="bar-value">4 horas</span>
+                  </div>
+                </div>
+
+                <div class="bi-dashboard-grid">
+                  <div class="bi-kpi-box">
+                    <div class="label">Sociedades unificadas</div>
+                    <div class="value">8 entidades</div>
+                    <div class="delta-positive">Cierre mensual ordenado</div>
+                    <div class="formula-tag">Cuentas 10 a 59</div>
+                  </div>
+                  <div class="bi-kpi-box">
+                    <div class="label">Flujo de efectivo</div>
+                    <div class="value">100% conciliado</div>
+                    <div class="delta-positive">Fórmulas directas en Excel</div>
+                    <div class="formula-tag">QUVO Multi-Entity</div>
+                  </div>
+                  <div class="bi-kpi-box">
+                    <div class="label">Revisión gerencial</div>
+                    <div class="value">Sin descuadres</div>
+                    <div class="delta-neutral">Validado con socios</div>
+                    <div class="formula-tag">Estados Financieros</div>
+                  </div>
                 </div>
               </div>
 
-              <div class="bi-dashboard-grid">
-                <div class="bi-kpi-box">
-                  <div class="label">Sociedades unificadas</div>
-                  <div class="value">8 entidades</div>
-                  <div class="delta-positive">Cierre mensual ordenado</div>
-                  <div class="formula-tag">Cuentas 10 a 59</div>
+              <!-- Capa 2: SUNAT vs ERP (Acto 2) -->
+              <div id="tab-sunat" class="tab-content">
+                <div class="chart-box">
+                  <div class="chart-header">
+                    <span class="chart-label">Cruce fiscal: compras declaradas vs registros ERP</span>
+                    <span class="chart-metric">100% auditado</span>
+                  </div>
+                  <div class="bar-row">
+                    <span class="bar-title">Facturas SUNAT</span>
+                    <div class="bar-track">
+                      <div class="bar-fill blue" style="width: 100%;"></div>
+                    </div>
+                    <span class="bar-value">4,120 reg.</span>
+                  </div>
+                  <div class="bar-row">
+                    <span class="bar-title">Cruzadas ERP</span>
+                    <div class="bar-track">
+                      <div class="bar-fill green" style="width: 100%;"></div>
+                    </div>
+                    <span class="bar-value">4,120 reg.</span>
+                  </div>
                 </div>
-                <div class="bi-kpi-box">
-                  <div class="label">Flujo de efectivo</div>
-                  <div class="value">100% conciliado</div>
-                  <div class="delta-positive">Fórmulas directas en Excel</div>
-                  <div class="formula-tag">QUVO Multi-Entity</div>
-                </div>
-                <div class="bi-kpi-box">
-                  <div class="label">Revisión gerencial</div>
-                  <div class="value">Sin descuadres</div>
-                  <div class="delta-neutral">Validado con socios</div>
-                  <div class="formula-tag">Estados Financieros</div>
-                </div>
-              </div>
-            </div>
 
-            <!-- Capa 2: SUNAT vs ERP (Acto 2) -->
-            <div id="tab-sunat" class="tab-content">
-              <div class="chart-box">
-                <div class="chart-header">
-                  <span class="chart-label">Cruce fiscal: compras declaradas vs registros ERP</span>
-                  <span class="chart-metric">100% auditado</span>
-                </div>
-                <div class="bar-row">
-                  <span class="bar-title">Facturas SUNAT</span>
-                  <div class="bar-track">
-                    <div class="bar-fill blue" style="width: 100%;"></div>
+                <div class="bi-dashboard-grid">
+                  <div class="bi-kpi-box">
+                    <div class="label">Diferencias fiscales</div>
+                    <div class="value">0 errores</div>
+                    <div class="delta-positive">Revisión antes de declarar</div>
+                    <div class="formula-tag">Cruce RUC y montos</div>
                   </div>
-                  <span class="bar-value">4,120 reg.</span>
-                </div>
-                <div class="bar-row">
-                  <span class="bar-title">Cruzadas ERP</span>
-                  <div class="bar-track">
-                    <div class="bar-fill green" style="width: 100%;"></div>
+                  <div class="bi-kpi-box">
+                    <div class="label">Cartera proveedores</div>
+                    <div class="value">Saneada</div>
+                    <div class="delta-positive">Sin facturas duplicadas</div>
+                    <div class="formula-tag">Detalle por proveedor</div>
                   </div>
-                  <span class="bar-value">4,120 reg.</span>
-                </div>
-              </div>
-
-              <div class="bi-dashboard-grid">
-                <div class="bi-kpi-box">
-                  <div class="label">Diferencias fiscales</div>
-                  <div class="value">0 errores</div>
-                  <div class="delta-positive">Revisión antes de declarar</div>
-                  <div class="formula-tag">Cruce RUC y montos</div>
-                </div>
-                <div class="bi-kpi-box">
-                  <div class="label">Cartera proveedores</div>
-                  <div class="value">Saneada</div>
-                  <div class="delta-positive">Sin facturas duplicadas</div>
-                  <div class="formula-tag">Detalle por proveedor</div>
-                </div>
-                <div class="bi-kpi-box">
-                  <div class="label">Módulo SIRE</div>
-                  <div class="value">En pruebas</div>
-                  <div class="delta-neutral">Descargas automáticas</div>
-                  <div class="formula-tag">Suite comprobantes</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Capa 3: Tesorería BCP (Acto 3) -->
-            <div id="tab-cxp" class="tab-content">
-              <div class="chart-box">
-                <div class="chart-header">
-                  <span class="chart-label">Distribución de desembolsos por tipo de pago</span>
-                  <span class="chart-metric">100% a tiempo</span>
-                </div>
-                <div class="bar-row">
-                  <span class="bar-title">Proveedores</span>
-                  <div class="bar-track">
-                    <div class="bar-fill blue" style="width: 60%;"></div>
+                  <div class="bi-kpi-box">
+                    <div class="label">Módulo SIRE</div>
+                    <div class="value">En pruebas</div>
+                    <div class="delta-neutral">Descargas automáticas</div>
+                    <div class="formula-tag">Suite comprobantes</div>
                   </div>
-                  <span class="bar-value">60%</span>
-                </div>
-                <div class="bar-row">
-                  <span class="bar-title">Planillas</span>
-                  <div class="bar-track">
-                    <div class="bar-fill green" style="width: 25%;"></div>
-                  </div>
-                  <span class="bar-value">25%</span>
-                </div>
-                <div class="bar-row">
-                  <span class="bar-title">Detracciones</span>
-                  <div class="bar-track">
-                    <div class="bar-fill gray" style="width: 15%;"></div>
-                  </div>
-                  <span class="bar-value">15%</span>
                 </div>
               </div>
 
-              <div class="bi-dashboard-grid">
-                <div class="bi-kpi-box">
-                  <div class="label">Banca digital</div>
-                  <div class="value">Telecrédito BCP</div>
-                  <div class="delta-neutral">Lotes masivos de abono</div>
-                  <div class="formula-tag">Telecrédito y BBVA</div>
+              <!-- Capa 3: Tesorería BCP (Acto 3) -->
+              <div id="tab-cxp" class="tab-content">
+                <div class="chart-box">
+                  <div class="chart-header">
+                    <span class="chart-label">Distribución de desembolsos por tipo de pago</span>
+                    <span class="chart-metric">100% a tiempo</span>
+                  </div>
+                  <div class="bar-row">
+                    <span class="bar-title">Proveedores</span>
+                    <div class="bar-track">
+                      <div class="bar-fill blue" style="width: 60%;"></div>
+                    </div>
+                    <span class="bar-value">60%</span>
+                  </div>
+                  <div class="bar-row">
+                    <span class="bar-title">Planillas</span>
+                    <div class="bar-track">
+                      <div class="bar-fill green" style="width: 25%;"></div>
+                    </div>
+                    <span class="bar-value">25%</span>
+                  </div>
+                  <div class="bar-row">
+                    <span class="bar-title">Detracciones</span>
+                    <div class="bar-track">
+                      <div class="bar-fill gray" style="width: 15%;"></div>
+                    </div>
+                    <span class="bar-value">15%</span>
+                  </div>
                 </div>
-                <div class="bi-kpi-box">
-                  <div class="label">Detracciones</div>
-                  <div class="value">Al día</div>
-                  <div class="delta-positive">Sin bloqueos de cuenta</div>
-                  <div class="formula-tag">Cálculo en Excel</div>
-                </div>
-                <div class="bi-kpi-box">
-                  <div class="label">Conciliación</div>
-                  <div class="value">Cuadrada</div>
-                  <div class="delta-positive">Apoyo directo a contadores</div>
-                  <div class="formula-tag">Cuentas por pagar</div>
+
+                <div class="bi-dashboard-grid">
+                  <div class="bi-kpi-box">
+                    <div class="label">Banca digital</div>
+                    <div class="value">Telecrédito BCP</div>
+                    <div class="delta-neutral">Lotes masivos de abono</div>
+                    <div class="formula-tag">Telecrédito y BBVA</div>
+                  </div>
+                  <div class="bi-kpi-box">
+                    <div class="label">Detracciones</div>
+                    <div class="value">Al día</div>
+                    <div class="delta-positive">Sin bloqueos de cuenta</div>
+                    <div class="formula-tag">Cálculo en Excel</div>
+                  </div>
+                  <div class="bi-kpi-box">
+                    <div class="label">Conciliación</div>
+                    <div class="value">Cuadrada</div>
+                    <div class="delta-positive">Apoyo directo a contadores</div>
+                    <div class="formula-tag">Cuentas por pagar</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -384,264 +366,81 @@
       </div>
     </section>
 
-    <!-- Diapositiva 4: Proyectos Destacados con Inspector -->
-    <section id="proyectos" class="slide-section scrolly-section" aria-label="Proyectos destacados y entregables">
+    <!-- Diapositiva 4: Proyecto 1 - Consolidación de empresas -->
+    <section id="proyecto-1" class="slide-section project-slide" aria-label="Proyecto 1: Consolidación de empresas">
       <div class="container slide-container">
         <div class="slide-header-row">
           <div>
-            <h2>Proyectos destacados</h2>
-            <p class="section-subtitle">Detalle técnico de casos.</p>
-          </div>
-          <!-- Filtro Dinámico de Proyectos -->
-          <div class="filter-group">
-            <button class="filter-pill active" data-filter="all" onclick="filterProjects('all', this)">Todos (6)</button>
-            <button class="filter-pill" data-filter="powerquery" onclick="filterProjects('powerquery', this)">Power Query</button>
-            <button class="filter-pill" data-filter="sunat" onclick="filterProjects('sunat', this)">SUNAT ERP</button>
-            <button class="filter-pill" data-filter="tesoreria" onclick="filterProjects('tesoreria', this)">Tesorería</button>
+            <span class="slide-badge">Caso 01 · Modelamiento</span>
+            <h2>Consolidación de empresas</h2>
+            <p class="section-subtitle">Unificación de flujos mensuales.</p>
           </div>
         </div>
 
-        <div class="projects-scrolly-wrapper">
-          <!-- Columna Izquierda: Tarjetas Narrativas de Proyectos con Scroll -->
-          <div class="projects-narrative">
-            <!-- Caso 1 -->
-            <article class="card project-step active" data-project="1" data-category="powerquery modelamiento">
-              <div class="card-content">
-                <div class="card-top">
-                  <span class="card-category">Modelamiento</span>
-                  <span class="mini-badge">8 empresas</span>
-                </div>
-                <h3>Consolidación de empresas</h3>
-                <ul>
-                  <li>Unifiqué el flujo de caja de ocho empresas en un solo archivo maestro.</li>
-                  <li>Ordené notas contables desde la cuenta 10 hasta la 59 para el balance mensual.</li>
-                  <li>Dejé las fórmulas listas para que los socios revisen saldos sin esperar días.</li>
-                </ul>
-                <div class="card-graphic">
-                  <div class="card-graphic-title">
-                    <span>Balance consolidado mensual</span>
-                    <span style="color: var(--primary);">Estable</span>
-                  </div>
-                  <svg class="sparkline-svg" viewBox="0 0 200 40">
-                    <polyline fill="none" stroke="#4285F4" stroke-width="2.5" points="0,32 30,28 60,30 90,20 120,24 150,14 180,16 200,8"/>
-                    <circle cx="200" cy="8" r="3.5" fill="#4285F4"/>
-                  </svg>
-                </div>
+        <div class="project-slide-grid">
+          <!-- Columna Izquierda: Tarjeta Narrativa -->
+          <article class="project-narrative-card card">
+            <div class="card-content">
+              <div class="card-top">
+                <span class="card-category">Modelamiento</span>
+                <span class="mini-badge">8 empresas</span>
               </div>
+              <h3>Cuentas y balances</h3>
+              <p class="project-context">Unificación integral de flujos de caja y notas contables para consolidación de estados financieros.</p>
+              <ul class="project-bullets">
+                <li>Unifiqué el flujo de caja de ocho empresas en un solo archivo maestro automatizado.</li>
+                <li>Ordené notas contables desde la cuenta 10 hasta la 59 para el balance mensual.</li>
+                <li>Dejé fórmulas directas para que los socios revisen saldos sin esperar días.</li>
+              </ul>
               <div class="tag-list">
                 <span class="tag">Excel avanzado</span>
                 <span class="tag">Flujo de caja</span>
                 <span class="tag">Cuentas 10 a 59</span>
               </div>
-            </article>
+            </div>
+          </article>
 
-            <!-- Caso 2 -->
-            <article class="card project-step" data-project="2" data-category="sunat auditoria">
-              <div class="card-content">
-                <div class="card-top">
-                  <span class="card-category">Auditoría</span>
-                  <span class="mini-badge">0 reparos</span>
-                </div>
-                <h3>Auditoría SUNAT ERP</h3>
-                <ul>
-                  <li>Crucé facturas declaradas en SUNAT contra el sistema contable Flowdesk.</li>
-                  <li>Detecté a tiempo compras no registradas antes del cierre de impuestos.</li>
-                  <li>Limpié la lista de proveedores para pagar solo compras reales y verificadas.</li>
-                </ul>
-                <div class="card-graphic">
-                  <div class="card-graphic-title">
-                    <span>Facturas conciliadas sin error</span>
-                    <span style="color: var(--success);">100%</span>
-                  </div>
-                  <div class="bar-track" style="margin-top: 6px;">
-                    <div class="bar-fill green" style="width: 100%;"></div>
-                  </div>
-                </div>
+          <!-- Columna Derecha: Tarjeta Visual con Border Beam -->
+          <div class="project-visual-card border-beam-card">
+            <div class="visual-header">
+              <div class="visual-title-row">
+                <span class="live-dot" aria-hidden="true"></span>
+                <h3>Indicador clave</h3>
               </div>
-              <div class="tag-list">
-                <span class="tag">Cruce SUNAT ERP</span>
-                <span class="tag">Cuentas por pagar</span>
-                <span class="tag">Auditoría</span>
+              <span class="mini-badge">87% reducción</span>
+            </div>
+            <div class="visual-body">
+              <div class="inspector-kpi-highlight">
+                <span class="inspector-kpi-title">Reducción de tiempo</span>
+                <div class="inspector-kpi-number">87% menos horas</div>
+                <div class="inspector-kpi-desc">Consolidación mensual de 8 entidades en un solo modelo automatizado.</div>
               </div>
-            </article>
 
-            <!-- Caso 3 -->
-            <article class="card project-step" data-project="3" data-category="powerquery automatizacion">
-              <div class="card-content">
-                <div class="card-top">
-                  <span class="card-category">Power Query</span>
-                  <span class="mini-badge">-25h al mes</span>
+              <div class="inspector-chart-box">
+                <div class="chart-header">
+                  <span class="chart-label">Tiempo de consolidación mensual</span>
+                  <span class="chart-metric">32h vs 4h</span>
                 </div>
-                <h3>Cargas con macros</h3>
-                <ul>
-                  <li>Creé una plantilla en Power Query que arma los archivos de compras y ventas.</li>
-                  <li>El equipo pega los comprobantes y la consulta genera los archivos planos solos.</li>
-                  <li>Ahorramos unas 25 horas al mes eliminando el tipeo manual de facturas.</li>
-                </ul>
-                <div class="card-graphic">
-                  <div class="card-graphic-title">
-                    <span>Tiempo de armado de archivos TXT</span>
-                    <span style="color: var(--primary);">Rápido</span>
-                  </div>
-                  <svg class="sparkline-svg" viewBox="0 0 200 40">
-                    <path d="M0,35 Q50,30 90,12 T160,8 L200,6" fill="none" stroke="#34A853" stroke-width="2.5"/>
-                    <circle cx="200" cy="6" r="3.5" fill="#34A853"/>
-                  </svg>
+                <div class="bar-row">
+                  <span class="bar-title">Antes (manual)</span>
+                  <div class="bar-track"><div class="bar-fill gray" style="width: 100%;"></div></div>
+                  <span class="bar-value">32h</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-title">Con modelo</span>
+                  <div class="bar-track"><div class="bar-fill blue" style="width: 13%;"></div></div>
+                  <span class="bar-value">4h</span>
                 </div>
               </div>
-              <div class="tag-list">
-                <span class="tag">Power Query</span>
-                <span class="tag">Power Pivot</span>
-                <span class="tag">Archivos TXT</span>
-              </div>
-            </article>
 
-            <!-- Caso 4 -->
-            <article class="card project-step" data-project="4" data-category="sunat automatizacion">
-              <div class="card-content">
-                <div class="card-top">
-                  <span class="card-category">Automatización</span>
-                  <span class="mini-badge">En pruebas</span>
+              <div class="inspector-meta-row">
+                <div class="inspector-meta-item">
+                  <span class="meta-label">Entorno</span>
+                  <span class="meta-val">Grupo QUVO</span>
                 </div>
-                <h3>Descargas de comprobantes</h3>
-                <ul>
-                  <li>Preparé una herramienta con interfaz propia para bajar comprobantes en lote.</li>
-                  <li>Conecta con la plataforma SIRE de SUNAT sin que la página se cuelgue.</li>
-                  <li>Dejé accesos rápidos para consultar bancos y portales fiscales en un clic.</li>
-                </ul>
-                <div class="card-graphic">
-                  <div class="card-graphic-title">
-                    <span>Avance de módulos funcionales</span>
-                    <span style="color: var(--primary);">Fase UI lista</span>
-                  </div>
-                  <div class="bar-track" style="margin-top: 6px;">
-                    <div class="bar-fill blue" style="width: 80%;"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="tag-list">
-                <span class="tag">SIRE SUNAT</span>
-                <span class="tag">Comprobantes</span>
-                <span class="tag">Banca web</span>
-              </div>
-            </article>
-
-            <!-- Caso 5 -->
-            <article class="card project-step" data-project="5" data-category="tesoreria bpo">
-              <div class="card-content">
-                <div class="card-top">
-                  <span class="card-category">Plataformas BPO</span>
-                  <span class="mini-badge">160h al mes</span>
-                </div>
-                <h3>Banca y pagos</h3>
-                <ul>
-                  <li>Entro a Telecrédito BCP y banca corporativa para pagar nóminas y facturas.</li>
-                  <li>Calculo detracciones masivas para cumplir con los plazos de ley.</li>
-                  <li>Llevo el calendario de cuotas de préstamos y fraccionamientos bancarios.</li>
-                </ul>
-                <div class="card-graphic">
-                  <div class="card-graphic-title">
-                    <span>Cumplimiento de pagos programados</span>
-                    <span style="color: var(--success);">100% puntual</span>
-                  </div>
-                  <div class="bar-track" style="margin-top: 6px;">
-                    <div class="bar-fill green" style="width: 100%;"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="tag-list">
-                <span class="tag">Telecrédito BCP</span>
-                <span class="tag">Planillas</span>
-                <span class="tag">Detracciones</span>
-              </div>
-            </article>
-
-            <!-- Caso 6 -->
-            <article class="card project-step" data-project="6" data-category="tesoreria bpo">
-              <div class="card-content">
-                <div class="card-top">
-                  <span class="card-category">Procesos</span>
-                  <span class="mini-badge">Formalizado</span>
-                </div>
-                <h3>Reglas de control</h3>
-                <ul>
-                  <li>Redacté las normas de pago para definir quién valida y quién transfiere.</li>
-                  <li>Dibujé flujogramas para mover firmas en papel hacia autorizaciones digitales.</li>
-                  <li>Puse filtros de revisión previa para evitar pagar facturas sin sustento.</li>
-                </ul>
-                <div class="card-graphic">
-                  <div class="card-graphic-title">
-                    <span>Flujo de pago seguro</span>
-                    <span style="color: var(--mute);">3 pasos</span>
-                  </div>
-                  <div style="font-size: 11px; display: flex; justify-content: space-between; margin-top: 4px; color: var(--body);">
-                    <span>1. Validar</span>
-                    <span>→</span>
-                    <span>2. Aprobar</span>
-                    <span>→</span>
-                    <span>3. Dispersar</span>
-                  </div>
-                </div>
-              </div>
-              <div class="tag-list">
-                <span class="tag">Manual de pagos</span>
-                <span class="tag">Flujogramas</span>
-                <span class="tag">Control interno</span>
-              </div>
-            </article>
-          </div>
-
-          <!-- Columna Derecha: Inspector con Border Beam de Magic UI -->
-          <div class="scrolly-stage-sticky">
-            <div class="bi-showcase border-beam-card project-inspector-card">
-              <div class="showcase-header">
-                <div class="showcase-title-row">
-                  <span class="live-dot"></span>
-                  <h3>Detalle del proyecto</h3>
-                </div>
-                <span class="mini-badge" id="inspector-badge">8 empresas</span>
-              </div>
-              <p class="section-subtitle" id="inspector-subtitle">Detalle analítico en tiempo real.</p>
-              
-              <div class="inspector-body">
-                <div class="inspector-kpi-highlight">
-                  <span class="inspector-kpi-title" id="inspector-kpi-title">Reducción de tiempo</span>
-                  <div class="inspector-kpi-number" id="inspector-kpi-value">87% menos horas</div>
-                  <div class="inspector-kpi-desc" id="inspector-kpi-desc">Consolidación de cuentas 10 a 59 en un solo modelo automatizado.</div>
-                </div>
-
-                <div class="inspector-chart-box" id="inspector-chart-container">
-                  <div class="chart-header">
-                    <span class="chart-label">Tiempo de consolidación mensual</span>
-                    <span class="chart-metric">87% reducción</span>
-                  </div>
-                  <div class="bar-row">
-                    <span class="bar-title">Antes (manual)</span>
-                    <div class="bar-track"><div class="bar-fill gray" style="width: 100%;"></div></div>
-                    <span class="bar-value">32h</span>
-                  </div>
-                  <div class="bar-row">
-                    <span class="bar-title">Con modelo</span>
-                    <div class="bar-track"><div class="bar-fill blue" style="width: 13%;"></div></div>
-                    <span class="bar-value">4h</span>
-                  </div>
-                </div>
-
-                <div class="inspector-tags" id="inspector-tags-container">
-                  <span class="tag">Excel avanzado</span>
-                  <span class="tag">Flujo de caja</span>
-                  <span class="tag">Cuentas 10 a 59</span>
-                </div>
-
-                <div class="inspector-meta-row">
-                  <div class="inspector-meta-item">
-                    <span class="meta-label">Entorno</span>
-                    <span class="meta-val" id="inspector-env">Grupo QUVO</span>
-                  </div>
-                  <div class="inspector-meta-item">
-                    <span class="meta-label">Estado</span>
-                    <span class="meta-val highlight" id="inspector-status">En producción</span>
-                  </div>
+                <div class="inspector-meta-item">
+                  <span class="meta-label">Estado</span>
+                  <span class="meta-val highlight">En producción</span>
                 </div>
               </div>
             </div>
@@ -650,7 +449,411 @@
       </div>
     </section>
 
-    <!-- Diapositiva 5: Contacto Directo y Cierre Ejecutivo a Pantalla Completa -->
+    <!-- Diapositiva 5: Proyecto 2 - Auditoría SUNAT ERP -->
+    <section id="proyecto-2" class="slide-section project-slide" aria-label="Proyecto 2: Auditoría SUNAT ERP">
+      <div class="container slide-container">
+        <div class="slide-header-row">
+          <div>
+            <span class="slide-badge">Caso 02 · Auditoría</span>
+            <h2>Auditoría SUNAT ERP</h2>
+            <p class="section-subtitle">Conciliación fiscal sin diferencias.</p>
+          </div>
+        </div>
+
+        <div class="project-slide-grid">
+          <!-- Columna Izquierda: Tarjeta Narrativa -->
+          <article class="project-narrative-card card">
+            <div class="card-content">
+              <div class="card-top">
+                <span class="card-category">Auditoría</span>
+                <span class="mini-badge">0 reparos</span>
+              </div>
+              <h3>Cruce de facturas</h3>
+              <p class="project-context">Conciliación preventiva entre registros de compras declarados en SUNAT y el sistema ERP corporativo.</p>
+              <ul class="project-bullets">
+                <li>Crucé facturas declaradas en SUNAT contra el sistema contable Flowdesk.</li>
+                <li>Detecté a tiempo compras no registradas antes del cierre de impuestos.</li>
+                <li>Limpié la lista de proveedores para pagar solo compras reales y verificadas.</li>
+              </ul>
+              <div class="tag-list">
+                <span class="tag">Cruce SUNAT ERP</span>
+                <span class="tag">Cuentas por pagar</span>
+                <span class="tag">Auditoría</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Columna Derecha: Tarjeta Visual con Border Beam -->
+          <div class="project-visual-card border-beam-card">
+            <div class="visual-header">
+              <div class="visual-title-row">
+                <span class="live-dot" aria-hidden="true"></span>
+                <h3>Indicador clave</h3>
+              </div>
+              <span class="mini-badge">100% auditado</span>
+            </div>
+            <div class="visual-body">
+              <div class="inspector-kpi-highlight">
+                <span class="inspector-kpi-title">Comprobantes auditados</span>
+                <div class="inspector-kpi-number">4,120 facturas</div>
+                <div class="inspector-kpi-desc">100% cotejadas contra el ERP Flowdesk sin contingencias tributarias.</div>
+              </div>
+
+              <div class="inspector-chart-box">
+                <div class="chart-header">
+                  <span class="chart-label">Cruce fiscal: compras vs registros ERP</span>
+                  <span class="chart-metric">4,120 reg.</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-title">Facturas SUNAT</span>
+                  <div class="bar-track"><div class="bar-fill blue" style="width: 100%;"></div></div>
+                  <span class="bar-value">4,120</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-title">Cruzadas ERP</span>
+                  <div class="bar-track"><div class="bar-fill green" style="width: 100%;"></div></div>
+                  <span class="bar-value">4,120</span>
+                </div>
+              </div>
+
+              <div class="inspector-meta-row">
+                <div class="inspector-meta-item">
+                  <span class="meta-label">Entorno</span>
+                  <span class="meta-val">Flowdesk ERP</span>
+                </div>
+                <div class="inspector-meta-item">
+                  <span class="meta-label">Estado</span>
+                  <span class="meta-val highlight">En producción</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 6: Proyecto 3 - Cargas con macros -->
+    <section id="proyecto-3" class="slide-section project-slide" aria-label="Proyecto 3: Cargas con macros">
+      <div class="container slide-container">
+        <div class="slide-header-row">
+          <div>
+            <span class="slide-badge">Caso 03 · Power Query</span>
+            <h2>Cargas con macros</h2>
+            <p class="section-subtitle">Automatización de compras mensuales.</p>
+          </div>
+        </div>
+
+        <div class="project-slide-grid">
+          <!-- Columna Izquierda: Tarjeta Narrativa -->
+          <article class="project-narrative-card card">
+            <div class="card-content">
+              <div class="card-top">
+                <span class="card-category">Power Query</span>
+                <span class="mini-badge">-25h al mes</span>
+              </div>
+              <h3>Consultas Power Query</h3>
+              <p class="project-context">Generación automatizada de estructuras de datos y archivos planos TXT para el sistema contable.</p>
+              <ul class="project-bullets">
+                <li>Creé una plantilla en Power Query que arma los archivos de compras y ventas.</li>
+                <li>El equipo pega los comprobantes y la consulta genera los archivos planos solos.</li>
+                <li>Ahorramos unas 25 horas al mes eliminando el tipeo manual de facturas.</li>
+              </ul>
+              <div class="tag-list">
+                <span class="tag">Power Query</span>
+                <span class="tag">Power Pivot</span>
+                <span class="tag">Archivos TXT</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Columna Derecha: Tarjeta Visual con Border Beam -->
+          <div class="project-visual-card border-beam-card">
+            <div class="visual-header">
+              <div class="visual-title-row">
+                <span class="live-dot" aria-hidden="true"></span>
+                <h3>Indicador clave</h3>
+              </div>
+              <span class="mini-badge">~25h ahorro</span>
+            </div>
+            <div class="visual-body">
+              <div class="inspector-kpi-highlight">
+                <span class="inspector-kpi-title">Ahorro mensual</span>
+                <div class="inspector-kpi-number">~25h de trabajo</div>
+                <div class="inspector-kpi-desc">Consultas en Power Query arman archivos planos TXT automáticamente.</div>
+              </div>
+
+              <div class="inspector-chart-box">
+                <div class="chart-header">
+                  <span class="chart-label">Curva de eficiencia en generación TXT</span>
+                  <span class="chart-metric" style="color: var(--success);">Rápido</span>
+                </div>
+                <svg class="sparkline-svg" viewBox="0 0 200 40" style="margin-top: 8px; width: 100%; height: 36px;" aria-label="Curva de eficiencia en generación TXT">
+                  <path d="M0,35 Q50,30 90,12 T160,8 L200,6" fill="none" stroke="#34A853" stroke-width="2.5"/>
+                  <circle cx="200" cy="6" r="3.5" fill="#34A853"/>
+                </svg>
+              </div>
+
+              <div class="inspector-meta-row">
+                <div class="inspector-meta-item">
+                  <span class="meta-label">Entorno</span>
+                  <span class="meta-val">Kreston Perú</span>
+                </div>
+                <div class="inspector-meta-item">
+                  <span class="meta-label">Estado</span>
+                  <span class="meta-val highlight">En producción</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 7: Proyecto 4 - Descargas de comprobantes -->
+    <section id="proyecto-4" class="slide-section project-slide" aria-label="Proyecto 4: Descargas de comprobantes">
+      <div class="container slide-container">
+        <div class="slide-header-row">
+          <div>
+            <span class="slide-badge">Caso 04 · Automatización</span>
+            <h2>Descargas de comprobantes</h2>
+            <p class="section-subtitle">Conexión con plataforma SIRE.</p>
+          </div>
+        </div>
+
+        <div class="project-slide-grid">
+          <!-- Columna Izquierda: Tarjeta Narrativa -->
+          <article class="project-narrative-card card">
+            <div class="card-content">
+              <div class="card-top">
+                <span class="card-category">Automatización</span>
+                <span class="mini-badge">En pruebas</span>
+              </div>
+              <h3>Automatización de descargas</h3>
+              <p class="project-context">Módulo con interfaz propia para descarga y procesamiento masivo de facturas desde el portal SIRE.</p>
+              <ul class="project-bullets">
+                <li>Preparé una herramienta con interfaz propia para bajar comprobantes en lote.</li>
+                <li>Conecta con la plataforma SIRE de SUNAT sin que la página se cuelgue.</li>
+                <li>Dejé accesos rápidos para consultar bancos y portales fiscales en un clic.</li>
+              </ul>
+              <div class="tag-list">
+                <span class="tag">SIRE SUNAT</span>
+                <span class="tag">Comprobantes</span>
+                <span class="tag">Banca web</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Columna Derecha: Tarjeta Visual con Border Beam -->
+          <div class="project-visual-card border-beam-card">
+            <div class="visual-header">
+              <div class="visual-title-row">
+                <span class="live-dot" aria-hidden="true"></span>
+                <h3>Indicador clave</h3>
+              </div>
+              <span class="mini-badge">Fase UI lista</span>
+            </div>
+            <div class="visual-body">
+              <div class="inspector-kpi-highlight">
+                <span class="inspector-kpi-title">Avance funcional</span>
+                <div class="inspector-kpi-number">80% completado</div>
+                <div class="inspector-kpi-desc">Descarga masiva de comprobantes sin caídas del portal fiscal.</div>
+              </div>
+
+              <div class="inspector-chart-box">
+                <div class="chart-header">
+                  <span class="chart-label">Avance de módulos funcionales</span>
+                  <span class="chart-metric">80% completado</span>
+                </div>
+                <div class="bar-track" style="margin-top: 10px;">
+                  <div class="bar-fill blue" style="width: 80%;"></div>
+                </div>
+              </div>
+
+              <div class="inspector-meta-row">
+                <div class="inspector-meta-item">
+                  <span class="meta-label">Entorno</span>
+                  <span class="meta-val">SUNAT SIRE</span>
+                </div>
+                <div class="inspector-meta-item">
+                  <span class="meta-label">Estado</span>
+                  <span class="meta-val highlight">En validación</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 8: Proyecto 5 - Banca y pagos -->
+    <section id="proyecto-5" class="slide-section project-slide" aria-label="Proyecto 5: Banca y pagos">
+      <div class="container slide-container">
+        <div class="slide-header-row">
+          <div>
+            <span class="slide-badge">Caso 05 · Plataformas BPO</span>
+            <h2>Banca y pagos</h2>
+            <p class="section-subtitle">Dispersión masiva de haberes.</p>
+          </div>
+        </div>
+
+        <div class="project-slide-grid">
+          <!-- Columna Izquierda: Tarjeta Narrativa -->
+          <article class="project-narrative-card card">
+            <div class="card-content">
+              <div class="card-top">
+                <span class="card-category">Plataformas BPO</span>
+                <span class="mini-badge">160h al mes</span>
+              </div>
+              <h3>Operaciones en Telecrédito</h3>
+              <p class="project-context">Gestión de dispersión masiva bancaria, cumplimiento de nóminas y pagos de detracciones SUNAT.</p>
+              <ul class="project-bullets">
+                <li>Entro a Telecrédito BCP y banca corporativa para pagar nóminas y facturas.</li>
+                <li>Calculo detracciones masivas para cumplir con los plazos de ley.</li>
+                <li>Llevo el calendario de cuotas de préstamos y fraccionamientos bancarios.</li>
+              </ul>
+              <div class="tag-list">
+                <span class="tag">Telecrédito BCP</span>
+                <span class="tag">Planillas</span>
+                <span class="tag">Detracciones</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Columna Derecha: Tarjeta Visual con Border Beam -->
+          <div class="project-visual-card border-beam-card">
+            <div class="visual-header">
+              <div class="visual-title-row">
+                <span class="live-dot" aria-hidden="true"></span>
+                <h3>Indicador clave</h3>
+              </div>
+              <span class="mini-badge">100% puntual</span>
+            </div>
+            <div class="visual-body">
+              <div class="inspector-kpi-highlight">
+                <span class="inspector-kpi-title">Puntualidad operativa</span>
+                <div class="inspector-kpi-number">100% a tiempo</div>
+                <div class="inspector-kpi-desc">Telecrédito BCP y detracciones pagadas sin multas ni observaciones.</div>
+              </div>
+
+              <div class="inspector-chart-box">
+                <div class="chart-header">
+                  <span class="chart-label">Distribución de desembolsos por tipo</span>
+                  <span class="chart-metric">100% al día</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-title">Proveedores</span>
+                  <div class="bar-track"><div class="bar-fill blue" style="width: 60%;"></div></div>
+                  <span class="bar-value">60%</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-title">Planillas</span>
+                  <div class="bar-track"><div class="bar-fill green" style="width: 25%;"></div></div>
+                  <span class="bar-value">25%</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-title">Detracciones</span>
+                  <div class="bar-track"><div class="bar-fill gray" style="width: 15%;"></div></div>
+                  <span class="bar-value">15%</span>
+                </div>
+              </div>
+
+              <div class="inspector-meta-row">
+                <div class="inspector-meta-item">
+                  <span class="meta-label">Entorno</span>
+                  <span class="meta-val">Telecrédito BCP</span>
+                </div>
+                <div class="inspector-meta-item">
+                  <span class="meta-label">Estado</span>
+                  <span class="meta-val highlight">En producción</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 9: Proyecto 6 - Reglas de control -->
+    <section id="proyecto-6" class="slide-section project-slide" aria-label="Proyecto 6: Reglas de control">
+      <div class="container slide-container">
+        <div class="slide-header-row">
+          <div>
+            <span class="slide-badge">Caso 06 · Procesos</span>
+            <h2>Reglas de control</h2>
+            <p class="section-subtitle">Protocolo de autorizaciones digitales.</p>
+          </div>
+        </div>
+
+        <div class="project-slide-grid">
+          <!-- Columna Izquierda: Tarjeta Narrativa -->
+          <article class="project-narrative-card card">
+            <div class="card-content">
+              <div class="card-top">
+                <span class="card-category">Procesos</span>
+                <span class="mini-badge">Formalizado</span>
+              </div>
+              <h3>Control interno empresarial</h3>
+              <p class="project-context">Diseño y formalización de políticas de pago, flujogramas de autorización y filtros antifraude.</p>
+              <ul class="project-bullets">
+                <li>Redacté las normas de pago para definir quién valida y quién transfiere.</li>
+                <li>Dibujé flujogramas para mover firmas en papel hacia autorizaciones digitales.</li>
+                <li>Puse filtros de revisión previa para evitar pagar facturas sin sustento.</li>
+              </ul>
+              <div class="tag-list">
+                <span class="tag">Manual de pagos</span>
+                <span class="tag">Flujogramas</span>
+                <span class="tag">Control interno</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Columna Derecha: Tarjeta Visual con Border Beam -->
+          <div class="project-visual-card border-beam-card">
+            <div class="visual-header">
+              <div class="visual-title-row">
+                <span class="live-dot" aria-hidden="true"></span>
+                <h3>Indicador clave</h3>
+              </div>
+              <span class="mini-badge">Formalizado</span>
+            </div>
+            <div class="visual-body">
+              <div class="inspector-kpi-highlight">
+                <span class="inspector-kpi-title">Control interno</span>
+                <div class="inspector-kpi-number">Flujo en 3 pasos</div>
+                <div class="inspector-kpi-desc">Validar, aprobar y transferir con filtros estrictos de revisión previa.</div>
+              </div>
+
+              <div class="inspector-chart-box">
+                <div class="chart-header">
+                  <span class="chart-label">Flujo de pago seguro</span>
+                  <span class="chart-metric" style="color: var(--mute);">3 pasos</span>
+                </div>
+                <div class="workflow-steps-row" style="font-size: 11.5px; display: flex; justify-content: space-between; align-items: center; margin-top: 10px; color: var(--body);">
+                  <span class="wf-step" style="background: var(--canvas); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--hairline); font-weight: 500;">1. Validar</span>
+                  <span style="color: var(--mute);">→</span>
+                  <span class="wf-step" style="background: var(--canvas); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--hairline); font-weight: 500;">2. Aprobar</span>
+                  <span style="color: var(--mute);">→</span>
+                  <span class="wf-step" style="background: var(--canvas); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--hairline); font-weight: 500;">3. Dispersar</span>
+                </div>
+              </div>
+
+              <div class="inspector-meta-row">
+                <div class="inspector-meta-item">
+                  <span class="meta-label">Entorno</span>
+                  <span class="meta-val">Auditoría interna</span>
+                </div>
+                <div class="inspector-meta-item">
+                  <span class="meta-label">Estado</span>
+                  <span class="meta-val highlight">Formalizado</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 10: Contacto Directo y Cierre Ejecutivo a Pantalla Completa -->
     <section id="contacto" class="slide-section contact-slide" aria-label="Canales directos de contacto">
       <div class="container slide-container contact-slide-wrapper">
         <div class="contact-card border-beam-card">
@@ -663,22 +866,19 @@
           </div>
 
           <div class="contact-actions-row">
-            <!-- WhatsApp Oficial (Sin redundancias ni paréntesis) -->
-            <a href="https://wa.me/51960748142" target="_blank" rel="noopener noreferrer" class="nav-social-btn" title="Escribir al +51 960 748 142">
-              <img src="whatsapp.png" width="18" height="18" alt="WhatsApp Business" class="contact-icon">
-              <span>+51 960 748 142</span>
+            <!-- WhatsApp Oficial -->
+            <a href="https://wa.me/51960748142" target="_blank" rel="noopener noreferrer" class="nav-social-btn nav-icon-btn" title="WhatsApp: +51 960 748 142" aria-label="WhatsApp">
+              <img src="whatsapp.png" width="22" height="22" alt="WhatsApp Business" class="contact-icon">
             </a>
 
             <!-- LinkedIn Oficial -->
-            <a href="https://www.linkedin.com/in/francoguerreroav/" target="_blank" rel="noopener noreferrer" class="nav-social-btn" title="Perfil en LinkedIn">
-              <img src="linkedin.svg" width="18" height="18" alt="LinkedIn" class="contact-icon">
-              <span>Franco Guerrero</span>
+            <a href="https://www.linkedin.com/in/francoguerreroav/" target="_blank" rel="noopener noreferrer" class="nav-social-btn nav-icon-btn" title="LinkedIn: Franco Guerrero" aria-label="LinkedIn">
+              <img src="linkedin.svg" width="22" height="22" alt="LinkedIn" class="contact-icon">
             </a>
 
             <!-- Gmail Oficial -->
-            <a href="mailto:guerrerofranco1429@gmail.com" class="nav-social-btn" title="Enviar correo a guerrerofranco1429@gmail.com">
-              <img src="gmail.svg" width="18" height="18" alt="Correo" class="contact-icon">
-              <span>guerrerofranco1429@gmail.com</span>
+            <a href="mailto:guerrerofranco1429@gmail.com" class="nav-social-btn nav-icon-btn" title="Correo: guerrerofranco1429@gmail.com" aria-label="Correo">
+              <img src="gmail.svg" width="22" height="22" alt="Correo" class="contact-icon">
             </a>
           </div>
 
