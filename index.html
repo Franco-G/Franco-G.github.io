@@ -157,9 +157,24 @@
       transition: all 0.15s ease;
     }
 
-    .nav-social-btn svg {
+    .nav-social-btn svg,
+    .nav-social-btn img,
+    .contact-icon {
       display: block;
       flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+    }
+
+    .btn img,
+    .btn-icon {
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
     }
 
     .nav-social-btn:hover {
@@ -176,13 +191,9 @@
     }
 
     .nav-social-btn.wsp-highlight:hover {
-      background: var(--whatsapp-green);
-      border-color: var(--whatsapp-green);
-      color: #ffffff;
-    }
-
-    .nav-social-btn.wsp-highlight:hover svg path {
-      fill: #ffffff;
+      background: #d4f5e2;
+      border-color: #79ddaa;
+      color: #0b6859;
     }
 
     /* Tipografía estricta de encabezados: títulos <= 3 palabras, subtítulos <= 5 palabras */
@@ -1076,31 +1087,21 @@
         <span>Franco Guerrero</span>
       </a>
       <div class="nav-actions">
-        <!-- Logo Oficial de WhatsApp -->
+        <!-- Logo Oficial de WhatsApp Business -->
         <a href="https://wa.me/51960748142" target="_blank" rel="noopener noreferrer" class="nav-social-btn wsp-highlight" title="Conversar por WhatsApp: +51 960 748 142">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.24-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.57.13.17 1.75 2.67 4.23 3.75.59.26 1.05.41 1.41.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.17-.48-.29z"/>
-          </svg>
+          <img src="whatsapp.svg" width="18" height="18" alt="WhatsApp Business" class="contact-icon">
           <span>WhatsApp</span>
         </a>
 
         <!-- Logo Oficial de LinkedIn -->
         <a href="https://www.linkedin.com/in/francoguerreroav/" target="_blank" rel="noopener noreferrer" class="nav-social-btn" title="Perfil en LinkedIn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-          </svg>
+          <img src="linkedin.svg" width="18" height="18" alt="LinkedIn" class="contact-icon">
           <span>LinkedIn</span>
         </a>
 
         <!-- Logo Oficial de Gmail -->
         <a href="mailto:guerrerofranco1429@gmail.com" class="nav-social-btn" title="Enviar correo a guerrerofranco1429@gmail.com">
-          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#4285F4" d="M2 7v10c0 1.1.9 2 2 2h3V9.5L2 6.5V7z"/>
-            <path fill="#34A853" d="M20 19c1.1 0 2-.9 2-2V7l-5 2.5V19h3z"/>
-            <path fill="#EA4335" d="M17 9.5V5c0-1.1-.9-2-2-2H9C7.9 3 7 3.9 7 5v4.5l5 3.8 5-3.8z"/>
-            <path fill="#FBBC05" d="M2 6.5L7 9.5V5L2 6.5z"/>
-            <path fill="#C5221F" d="M17 9.5l5-3V5l-5 4.5z"/>
-          </svg>
+          <img src="gmail.svg" width="18" height="18" alt="Correo" class="contact-icon">
           <span>Correo</span>
         </a>
       </div>
@@ -1121,9 +1122,7 @@
       <div class="btn-group">
         <a href="#experiencia" class="btn btn-primary">Ver experiencia</a>
         <a href="https://wa.me/51960748142" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.24-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.57.13.17 1.75 2.67 4.23 3.75.59.26 1.05.41 1.41.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.17-.48-.29z"/>
-          </svg>
+          <img src="whatsapp.svg" width="16" height="16" alt="WhatsApp Business" class="btn-icon">
           Escribir al WhatsApp
         </a>
       </div>
@@ -1601,29 +1600,19 @@
       <div class="footer-links">
         <!-- WhatsApp Oficial -->
         <a href="https://wa.me/51960748142" target="_blank" rel="noopener noreferrer" class="nav-social-btn wsp-highlight">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.24-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.57.13.17 1.75 2.67 4.23 3.75.59.26 1.05.41 1.41.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.17-.48-.29z"/>
-          </svg>
+          <img src="whatsapp.svg" width="18" height="18" alt="WhatsApp Business" class="contact-icon">
           <span>WhatsApp (+51 960 748 142)</span>
         </a>
 
         <!-- LinkedIn Oficial -->
         <a href="https://www.linkedin.com/in/francoguerreroav/" target="_blank" rel="noopener noreferrer" class="nav-social-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-          </svg>
+          <img src="linkedin.svg" width="18" height="18" alt="LinkedIn" class="contact-icon">
           <span>LinkedIn</span>
         </a>
 
         <!-- Gmail Oficial -->
         <a href="mailto:guerrerofranco1429@gmail.com" class="nav-social-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#4285F4" d="M2 7v10c0 1.1.9 2 2 2h3V9.5L2 6.5V7z"/>
-            <path fill="#34A853" d="M20 19c1.1 0 2-.9 2-2V7l-5 2.5V19h3z"/>
-            <path fill="#EA4335" d="M17 9.5V5c0-1.1-.9-2-2-2H9C7.9 3 7 3.9 7 5v4.5l5 3.8 5-3.8z"/>
-            <path fill="#FBBC05" d="M2 6.5L7 9.5V5L2 6.5z"/>
-            <path fill="#C5221F" d="M17 9.5l5-3V5l-5 4.5z"/>
-          </svg>
+          <img src="gmail.svg" width="18" height="18" alt="Correo" class="contact-icon">
           <span>guerrerofranco1429@gmail.com</span>
         </a>
       </div>
