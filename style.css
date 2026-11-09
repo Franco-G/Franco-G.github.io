@@ -235,13 +235,9 @@ h3 {
   margin-bottom: 0.65rem;
 }
 
-/* Capítulo 1: Inicio a Pantalla Completa (Full Viewport Stage) */
+/* Capítulo 1: Inicio Armónico y Balanceado */
 .hero-chapter {
-  min-height: calc(100vh - 68px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 3rem 0 4.5rem 0;
+  padding: 2.25rem 0 2.5rem 0;
   box-sizing: border-box;
 }
 
@@ -305,7 +301,7 @@ header.hero-section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 14px;
-  margin-bottom: 2rem;
+  margin-bottom: 3.5rem;
 }
 
 .metric-card {
@@ -438,14 +434,13 @@ header.hero-section {
    ======================================================== */
 .scrolly-section {
   position: relative;
-  min-height: 220vh;
-  margin-bottom: 7.5rem;
+  margin-bottom: 4.5rem;
 }
 
 .scrolly-wrapper {
   display: grid;
   grid-template-columns: 1fr 1.25fr;
-  gap: 3rem;
+  gap: 2.5rem;
   align-items: start;
   position: relative;
 }
@@ -453,8 +448,8 @@ header.hero-section {
 .scrolly-narrative {
   display: flex;
   flex-direction: column;
-  gap: 30vh;
-  padding: 8vh 0 30vh 0;
+  gap: 4.5rem;
+  padding: 0.5rem 0 4rem 0;
 }
 
 .scrolly-step {
@@ -462,13 +457,13 @@ header.hero-section {
   background: var(--surface-card);
   border: 1px solid transparent !important;
   border-radius: 12px;
-  padding: 26px;
+  padding: 24px;
   box-shadow: var(--card-shadow);
-  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  opacity: 0.22;
-  transform: translateY(14px) scale(0.97);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.45;
+  transform: scale(0.99);
   isolation: isolate;
   overflow: hidden;
 }
@@ -843,18 +838,17 @@ section {
 .projects-scrolly-wrapper {
   display: grid;
   grid-template-columns: 1.12fr 0.88fr;
-  gap: 2.5rem;
+  gap: 2rem;
   align-items: start;
   position: relative;
   margin-top: 1.5rem;
-  min-height: 280vh;
 }
 
 .projects-narrative {
   display: flex;
   flex-direction: column;
-  gap: 24vh;
-  padding: 6vh 0 24vh 0;
+  gap: 4rem;
+  padding: 0.5rem 0 3.5rem 0;
 }
 
 .project-step {
@@ -862,16 +856,16 @@ section {
   background: var(--surface-card);
   border: 1px solid transparent !important;
   border-radius: 12px;
-  padding: 26px;
+  padding: 24px;
   box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  opacity: 0.22;
-  transform: translateY(14px) scale(0.97);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.45;
+  transform: scale(0.99);
   isolation: isolate;
   overflow: hidden;
   cursor: pointer;
@@ -1224,13 +1218,12 @@ section {
 /* Footer y Bloque de Contacto Directo (Capítulo 4) */
 footer {
   border-top: 1px solid var(--hairline);
-  min-height: 50vh;
+  padding: 3.5rem 0 4.5rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 2rem;
-  padding: 4rem 0 6rem 0;
   color: var(--mute);
   font-size: 13.5px;
 }
