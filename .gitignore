@@ -3,3 +3,4 @@ referencias/
 .agents/
 # Ignorar archivo maestro de diseno local
 design.md
+.playwright-cli/
