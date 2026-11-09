@@ -1,6 +1,13 @@
-# Ignorar carpeta de referencias locales
+# 1. Carpetas de trabajo interno y soporte local
 referencias/
+pruebas/
 .agents/
-# Ignorar archivo maestro de diseno local
+
+# 2. Documentación maestra y reglas de agentes (locales)
 design.md
+AGENTS.md
+agents.md
+
+# 3. Herramientas de prueba y capturas temporales
 .playwright-cli/
+screenshot*.png
