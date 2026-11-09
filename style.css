@@ -430,22 +430,63 @@ header.hero-section {
 }
 
 .scrolly-step {
+  position: relative;
   background: var(--surface-card);
-  border: 1px solid var(--hairline);
+  border: 1px solid transparent !important;
   border-radius: 12px;
   padding: 24px;
   box-shadow: var(--card-shadow);
-  transition: all 0.35s ease;
-  opacity: 0.35;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.3;
   transform: translateY(12px) scale(0.98);
-  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Magic UI: Borde Luminoso activo en las historias de experiencia */
+.scrolly-step::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250%;
+  height: 250%;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 280deg,
+    var(--primary) 320deg,
+    var(--success) 345deg,
+    var(--accent-beam) 360deg
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: border-beam-spin 5.5s linear infinite;
+  z-index: -2;
+}
+
+.scrolly-step::after {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  background: var(--surface-card);
+  border-radius: calc(12px - 1.5px);
+  z-index: -1;
+}
+
+.scrolly-step:hover::before {
+  opacity: 0.6;
 }
 
 .scrolly-step.active {
   opacity: 1;
   transform: translateY(0) scale(1);
-  border-color: var(--primary);
-  box-shadow: var(--card-shadow-hover);
+  box-shadow: 0 4px 18px rgba(66, 133, 244, 0.16);
+}
+
+.scrolly-step.active::before {
+  opacity: 1;
 }
 
 .step-tag {
@@ -781,24 +822,78 @@ section {
 .projects-narrative {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 10rem;
+  padding: 2rem 0 14rem 0;
 }
 
 .project-step {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 1px solid var(--hairline);
+  position: relative;
+  background: var(--surface-card);
+  border: 1px solid transparent !important;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.3;
+  transform: translateY(12px) scale(0.98);
+  isolation: isolate;
+  overflow: hidden;
   cursor: pointer;
 }
 
+/* Magic UI: Borde Luminoso activo en los casos de entregables */
+.project-step::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250%;
+  height: 250%;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 285deg,
+    var(--primary) 325deg,
+    var(--success) 350deg,
+    var(--accent-beam) 360deg
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: border-beam-spin 6s linear infinite;
+  z-index: -2;
+}
+
+.project-step::after {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  background: var(--surface-card);
+  border-radius: calc(12px - 1.5px);
+  z-index: -1;
+}
+
 .project-step:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(0.99);
   box-shadow: var(--card-shadow-hover);
 }
 
+.project-step:hover::before {
+  opacity: 0.6;
+}
+
 .project-step.active {
-  border-color: var(--primary) !important;
-  box-shadow: 0 4px 18px rgba(66, 133, 244, 0.16);
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  box-shadow: 0 6px 20px rgba(66, 133, 244, 0.18);
   background: #ffffff;
+}
+
+.project-step.active::before {
+  opacity: 1;
 }
 
 .project-step.active .mini-badge {
@@ -1174,19 +1269,21 @@ footer {
   .scrolly-stage-sticky .bi-kpi-box .value {
     font-size: 16px;
   }
-  .scrolly-narrative {
-    gap: 7rem;
-    padding: 1rem 0 10rem 0;
+  .scrolly-narrative,
+  .projects-narrative {
+    gap: 4.5rem;
+    padding: 1rem 0 6rem 0;
   }
-  .scrolly-step {
+  .scrolly-step,
+  .project-step {
     opacity: 0.45;
     transform: translateY(8px);
     transition: all 0.3s ease;
   }
-  .scrolly-step.active {
+  .scrolly-step.active,
+  .project-step.active {
     opacity: 1;
     transform: translateY(0);
-    border-color: var(--primary);
   }
   .scrolly-dots {
     display: none;

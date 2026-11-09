@@ -80,34 +80,31 @@ function initChapterNavigation() {
     });
   }
 
-  const observerOptions = {
-    threshold: [0.05, 0.25],
-    rootMargin: '-5% 0px -10% 0px'
-  };
-
-  const chapterObserver = new IntersectionObserver((entries) => {
+  function updateActiveChapter() {
+    // Al final del documento, activar siempre Contacto
     if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 60) {
       setActiveDot('contacto');
       return;
     }
 
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        setActiveDot(entry.target.id);
+    const scrollPos = window.pageYOffset + 140; // Línea de lectura debajo de la cabecera
+    let currentChapter = 'inicio';
+
+    for (const id of chapters) {
+      const el = document.getElementById(id);
+      if (el) {
+        const top = el.offsetTop;
+        if (scrollPos >= top) {
+          currentChapter = id;
+        }
       }
-    });
-  }, observerOptions);
-
-  chapters.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) chapterObserver.observe(el);
-  });
-
-  window.addEventListener('scroll', () => {
-    if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 60) {
-      setActiveDot('contacto');
     }
-  }, { passive: true });
+
+    setActiveDot(currentChapter);
+  }
+
+  window.addEventListener('scroll', updateActiveChapter, { passive: true });
+  updateActiveChapter();
 }
 
 /**
