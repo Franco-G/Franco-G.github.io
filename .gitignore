@@ -2,6 +2,7 @@
 referencias/
 pruebas/
 .agents/
+docs/
 
 # 2. Documentación maestra y reglas de agentes (locales)
 design.md
@@ -11,3 +12,7 @@ agents.md
 # 3. Herramientas de prueba y capturas temporales
 .playwright-cli/
 screenshot*.png
+
+# 4. Graphify (archivos de análisis y grafos de conocimiento)
+graphify-out/
+.graphify*
