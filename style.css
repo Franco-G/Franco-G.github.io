@@ -239,6 +239,14 @@ body {
   transform: translateY(-1px);
 }
 
+/* ========================================================
+   BANNER DE SUGERENCIA DE ROTACIÓN (DESKTOP & HORIZONTAL: OCULTO)
+   ======================================================== */
+.rotation-tip-banner {
+  display: none !important;
+}
+
+
 
 /* Tipografía estricta de encabezados: títulos <= 3 palabras, subtítulos <= 5 palabras */
 h1, h2, h3 {
@@ -1681,3 +1689,132 @@ header.hero-section {
 @media (max-width: 440px) {
   .metrics-row { grid-template-columns: 1fr; }
 }
+
+/* ========================================================
+   MODO HÍBRIDO INTELIGENTE: CELULAR EN VERTICAL (PORTRAIT)
+   Desplazamiento vertical continuo, fluido y libre
+   ======================================================== */
+@media (max-width: 900px) and (orientation: portrait) {
+  html, body {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+    min-height: 100% !important;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .slides-wrapper {
+    height: auto !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
+
+  .slide-section {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    width: 100% !important;
+    overflow: visible !important;
+    align-items: stretch !important;
+    padding: 3.5rem 1rem 2.5rem 1rem !important;
+    display: block !important;
+  }
+
+  /* Diapositiva inicial con margen para la cabecera fija y banner */
+  .slide-section:first-of-type,
+  #inicio {
+    padding-top: 6.5rem !important;
+  }
+
+  .slide-container {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    padding: 0 0.5rem !important;
+    justify-content: flex-start !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Ocultar riel de navegación y dock de controles en celular vertical */
+  .slide-deck-controls,
+  .scrolly-nav-dots {
+    display: none !important;
+  }
+
+  /* Banner sutil y accesible en celular vertical */
+  .rotation-tip-banner {
+    display: block !important;
+    background: var(--primary-light);
+    border-top: 1px solid rgba(66, 133, 244, 0.18);
+    padding: 6px 1rem;
+    transition: all 0.25s ease;
+  }
+
+  .rotation-tip-banner.is-dismissed {
+    display: none !important;
+  }
+
+  .rotation-tip-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .rotation-tip-text {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .rotation-tip-icon {
+    width: 14px;
+    height: 14px;
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+
+  .rotation-tip-title {
+    font-weight: 600;
+    color: var(--primary-pressed);
+    white-space: nowrap;
+  }
+
+  .rotation-tip-desc {
+    color: var(--body);
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .rotation-tip-close {
+    background: transparent;
+    border: none;
+    color: var(--mute);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: color 0.2s ease, background 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .rotation-tip-close:hover {
+    color: var(--ink);
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
