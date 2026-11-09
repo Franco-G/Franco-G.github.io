@@ -1,124 +1,239 @@
 /**
  * Portafolio de Business Intelligence & Finanzas - Franco Guerrero
- * Lógica interactiva: Scrollytelling Total, Navegación de Capítulos, Magic UI y Desplazamiento Suave.
+ * Controlador de Diapositivas (Slide Deck Engine 100vh), Magic UI e Interactividad.
  */
 
+// 5 Diapositivas oficiales del portafolio (100vh por pantalla)
+const SLIDES = ['inicio', 'experiencia', 'dashboard-powerbi', 'proyectos', 'contacto'];
+let currentSlideIndex = 0;
+let currentAct = 1;
+let isAnimating = false;
+let wheelDeltaAccumulator = 0;
+let wheelCooldownTimeout = null;
+
 document.addEventListener('DOMContentLoaded', () => {
-  initSmoothScroll();
-  initChapterNavigation();
-  initScrollytelling();
-  initProjectsScrollytelling();
+  initSlideEngine();
+  initActNavigation();
+  initProjectInspector();
   initProjectFilters();
   initNumberTicker();
+  initAnchorIntercept();
 });
 
 /**
- * 1. Desplazamiento Suave y Leve (Gentle Smooth Scroll)
- * Garantiza una transición de cámara elegante sin saltos bruscos.
+ * 1. Slide Deck Engine (Navegación Magnética por Pantallas de 100vh)
+ * Garantiza transiciones exactas sin recortes ni paradas intermedias.
  */
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href');
-      if (targetId === '#' || !targetId) return;
+function goToSlide(targetIndex) {
+  if (targetIndex < 0 || targetIndex >= SLIDES.length) return;
+  if (isAnimating && targetIndex === currentSlideIndex) return;
 
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        e.preventDefault();
-        gentleScrollTo(targetElement, 700);
-      }
-    });
+  isAnimating = true;
+  currentSlideIndex = targetIndex;
+  const slideId = SLIDES[targetIndex];
+
+  // Desplazar el riel verticalmente
+  const wrapper = document.getElementById('slides-wrapper');
+  if (wrapper) {
+    wrapper.style.transform = `translateY(-${targetIndex * 100}vh)`;
+  }
+
+  // Sincronizar indicador lateral de puntos
+  document.querySelectorAll('.scrolly-nav-dot').forEach((dot, idx) => {
+    dot.classList.toggle('active', idx === targetIndex);
   });
-}
 
-function gentleScrollTo(element, duration = 700) {
-  const headerOffset = 76;
-  const targetPosition = element.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-  const startPosition = window.pageYOffset;
-  const distance = targetPosition - startPosition;
-  let startTime = null;
+  // Sincronizar diapositiva activa
+  document.querySelectorAll('.slide-section').forEach((sec, idx) => {
+    sec.classList.toggle('active', idx === targetIndex);
+  });
 
-  function animation(currentTime) {
-    if (startTime === null) startTime = currentTime;
-    const timeElapsed = currentTime - startTime;
-    const progress = Math.min(timeElapsed / duration, 1);
-    
-    // Función de desaceleración suave (ease-out-cubic)
-    const ease = 1 - Math.pow(1 - progress, 3);
-    window.scrollTo(0, startPosition + distance * ease);
-
-    if (timeElapsed < duration) {
-      requestAnimationFrame(animation);
-    }
+  // Actualizar URL sin saltos bruscos
+  if (window.history && window.history.replaceState) {
+    window.history.replaceState(null, '', '#' + slideId);
   }
 
-  requestAnimationFrame(animation);
+  // Si se regresa a inicio, reiniciar conteo de métricas
+  if (targetIndex === 0) {
+    triggerNumberTicker();
+  }
+
+  // Liberar bloqueo de animación tras la transición CSS (650ms)
+  setTimeout(() => {
+    isAnimating = false;
+  }, 680);
 }
 
-/**
- * 2. Navegador de Capítulos Global (Scrollytelling Total)
- * Observa las 4 secciones principales y actualiza los puntos de la barra lateral.
- */
+// Alias público para compatibilidad con botones inline
 function scrollToChapter(chapterId) {
-  const target = document.getElementById(chapterId);
-  if (target) {
-    document.querySelectorAll('.scrolly-nav-dot').forEach(dot => {
-      dot.classList.toggle('active', dot.getAttribute('data-chapter') === chapterId);
-    });
-    gentleScrollTo(target, 700);
+  const index = SLIDES.indexOf(chapterId);
+  if (index !== -1) {
+    goToSlide(index);
   }
 }
 
-function initChapterNavigation() {
-  const chapters = ['inicio', 'experiencia', 'dashboard-powerbi', 'proyectos', 'contacto'];
-  const navDots = document.querySelectorAll('.scrolly-nav-dot');
+function initSlideEngine() {
+  const wrapper = document.getElementById('slides-wrapper');
+  if (!wrapper) return;
 
-  if (navDots.length === 0) return;
-
-  function setActiveDot(chapterId) {
-    navDots.forEach(dot => {
-      dot.classList.toggle('active', dot.getAttribute('data-chapter') === chapterId);
-    });
-  }
-
-  function updateActiveChapter() {
-    // Al final del documento, activar siempre Contacto
-    if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 60) {
-      setActiveDot('contacto');
-      return;
+  // Interceptar la rueda del ratón (Wheel)
+  window.addEventListener('wheel', (e) => {
+    // Si el usuario está sobre la lista interna de proyectos (slide 4) y hace scroll
+    const projectsNarrative = document.querySelector('.projects-narrative');
+    if (currentSlideIndex === 3 && projectsNarrative && projectsNarrative.contains(e.target)) {
+      const isScrollingDown = e.deltaY > 0;
+      const canScrollDown = projectsNarrative.scrollTop + projectsNarrative.clientHeight < projectsNarrative.scrollHeight - 5;
+      const canScrollUp = projectsNarrative.scrollTop > 5;
+      if ((isScrollingDown && canScrollDown) || (!isScrollingDown && canScrollUp)) {
+        return; // Permitir scroll interno en la lista de proyectos
+      }
     }
 
-    const scrollPos = window.pageYOffset + 140; // Línea de lectura debajo de la cabecera
-    let currentChapter = 'inicio';
+    e.preventDefault();
 
-    for (const id of chapters) {
-      const el = document.getElementById(id);
-      if (el) {
-        const top = el.offsetTop;
-        if (scrollPos >= top) {
-          currentChapter = id;
+    if (isAnimating) return;
+
+    wheelDeltaAccumulator += e.deltaY;
+    clearTimeout(wheelCooldownTimeout);
+    wheelCooldownTimeout = setTimeout(() => {
+      wheelDeltaAccumulator = 0;
+    }, 180);
+
+    const THRESHOLD = 35;
+
+    if (wheelDeltaAccumulator > THRESHOLD) {
+      // Scroll hacia abajo
+      wheelDeltaAccumulator = 0;
+      if (currentSlideIndex === 1) {
+        // En la diapositiva de Experiencia: avanzar de acto sin mover la pantalla
+        if (currentAct < 3) {
+          switchAct(currentAct + 1);
+        } else {
+          goToSlide(2); // Pasar a Power BI
+        }
+      } else if (currentSlideIndex < SLIDES.length - 1) {
+        goToSlide(currentSlideIndex + 1);
+      }
+    } else if (wheelDeltaAccumulator < -THRESHOLD) {
+      // Scroll hacia arriba
+      wheelDeltaAccumulator = 0;
+      if (currentSlideIndex === 1) {
+        // En la diapositiva de Experiencia: retroceder de acto sin mover la pantalla
+        if (currentAct > 1) {
+          switchAct(currentAct - 1);
+        } else {
+          goToSlide(0); // Volver a Inicio
+        }
+      } else if (currentSlideIndex > 0) {
+        goToSlide(currentSlideIndex - 1);
+      }
+    }
+  }, { passive: false });
+
+  // Navegación por teclado (Flechas, RePág, AvPág, Inicio, Fin)
+  window.addEventListener('keydown', (e) => {
+    if (['ArrowDown', 'PageDown', ' '].includes(e.key)) {
+      e.preventDefault();
+      if (currentSlideIndex === 1 && currentAct < 3) {
+        switchAct(currentAct + 1);
+      } else if (currentSlideIndex < SLIDES.length - 1) {
+        goToSlide(currentSlideIndex + 1);
+      }
+    } else if (['ArrowUp', 'PageUp'].includes(e.key)) {
+      e.preventDefault();
+      if (currentSlideIndex === 1 && currentAct > 1) {
+        switchAct(currentAct - 1);
+      } else if (currentSlideIndex > 0) {
+        goToSlide(currentSlideIndex - 1);
+      }
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      goToSlide(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      goToSlide(SLIDES.length - 1);
+    }
+  });
+
+  // Soporte para gestos táctiles (Swipe en dispositivos móviles/tablets)
+  let touchStartY = 0;
+  window.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches.length > 0) {
+      touchStartY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', (e) => {
+    if (e.changedTouches && e.changedTouches.length > 0) {
+      const touchEndY = e.changedTouches[0].clientY;
+      const diffY = touchStartY - touchEndY;
+      if (Math.abs(diffY) > 50) {
+        if (diffY > 0) {
+          // Deslizar arriba (avanzar)
+          if (currentSlideIndex === 1 && currentAct < 3) {
+            switchAct(currentAct + 1);
+          } else if (currentSlideIndex < SLIDES.length - 1) {
+            goToSlide(currentSlideIndex + 1);
+          }
+        } else {
+          // Deslizar abajo (retroceder)
+          if (currentSlideIndex === 1 && currentAct > 1) {
+            switchAct(currentAct - 1);
+          } else if (currentSlideIndex > 0) {
+            goToSlide(currentSlideIndex - 1);
+          }
         }
       }
     }
+  }, { passive: true });
 
-    setActiveDot(currentChapter);
+  // Leer hash inicial al cargar
+  const initialHash = window.location.hash.replace('#', '');
+  const initialIdx = SLIDES.indexOf(initialHash);
+  if (initialIdx > 0) {
+    goToSlide(initialIdx);
+  } else {
+    goToSlide(0);
   }
-
-  window.addEventListener('scroll', updateActiveChapter, { passive: true });
-  updateActiveChapter();
 }
 
 /**
- * 3. Scrollytelling Capítulo 2: Tablero Interactivo en Tres Actos
+ * 2. Diapositiva 2: Historias en Tres Actos ("Que los objetos se muevan y la pantalla quede fija")
  */
-const stepToTab = {
-  '1': 'quvo',
-  '2': 'sunat',
-  '3': 'cxp'
+const ACT_TO_TAB = {
+  1: 'quvo',
+  2: 'sunat',
+  3: 'cxp'
 };
 
+function initActNavigation() {
+  switchAct(1);
+}
+
+function switchAct(actNum, clickedBtn) {
+  currentAct = actNum;
+
+  // Actualizar botones de pastilla superiores
+  document.querySelectorAll('.act-nav-pills .tab-btn').forEach(btn => {
+    const act = parseInt(btn.getAttribute('data-act'), 10);
+    btn.classList.toggle('active', act === actNum);
+  });
+
+  // Mostrar el paso narrativo correspondiente en la columna izquierda
+  document.querySelectorAll('.scrolly-narrative .scrolly-step').forEach(step => {
+    const stepNum = parseInt(step.getAttribute('data-step'), 10);
+    step.classList.toggle('active', stepNum === actNum);
+  });
+
+  // Actualizar la pestaña activa en el tablero derecho
+  const targetTab = ACT_TO_TAB[actNum];
+  if (targetTab) {
+    displayTab(targetTab);
+  }
+}
+
 function displayTab(tabId) {
-  document.querySelectorAll('.tab-btn').forEach(btn => {
+  document.querySelectorAll('.showcase-header .tab-btn').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-tab') === tabId);
   });
   document.querySelectorAll('.tab-content').forEach(content => {
@@ -127,45 +242,17 @@ function displayTab(tabId) {
 }
 
 function manualSwitchTab(tabId, element) {
-  displayTab(tabId);
-}
-
-function scrollToStep(stepNumber) {
-  const stepElement = document.querySelector(`.scrolly-step[data-step="${stepNumber}"]`);
-  if (stepElement) {
-    gentleScrollTo(stepElement, 600);
+  const tabToAct = { 'quvo': 1, 'sunat': 2, 'cxp': 3 };
+  const act = tabToAct[tabId];
+  if (act) {
+    switchAct(act);
+  } else {
+    displayTab(tabId);
   }
 }
 
-function initScrollytelling() {
-  const scrollySteps = document.querySelectorAll('.scrolly-step');
-  if (scrollySteps.length === 0) return;
-
-  const stepObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const stepNumber = entry.target.getAttribute('data-step');
-
-        scrollySteps.forEach(s => s.classList.remove('active'));
-        entry.target.classList.add('active');
-
-        const targetTab = stepToTab[stepNumber];
-        if (targetTab) {
-          displayTab(targetTab);
-        }
-      }
-    });
-  }, {
-    threshold: 0.35,
-    rootMargin: '-10% 0px -20% 0px'
-  });
-
-  scrollySteps.forEach(step => stepObserver.observe(step));
-}
-
 /**
- * 4. Detalle y métricas del proyecto seleccionado
- * Información detallada sincronizada dinámicamente con las tarjetas al scrollear.
+ * 3. Diapositiva 4: Inspector de Proyectos y Casos
  */
 const projectsData = {
   '1': {
@@ -310,8 +397,6 @@ const projectsData = {
   }
 };
 
-let isManualProjectSelecting = false;
-
 function updateProjectInspector(projectId) {
   const data = projectsData[projectId];
   if (!data) return;
@@ -339,54 +424,28 @@ function updateProjectInspector(projectId) {
   if (statusEl) statusEl.textContent = data.status;
 }
 
-function initProjectsScrollytelling() {
+function initProjectInspector() {
   const projectCards = document.querySelectorAll('.project-step');
   if (projectCards.length === 0) return;
 
-  const projectObserver = new IntersectionObserver((entries) => {
-    if (isManualProjectSelecting) return;
-
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const projectId = entry.target.getAttribute('data-project');
-        projectCards.forEach(c => c.classList.remove('active'));
-        entry.target.classList.add('active');
-        updateProjectInspector(projectId);
-      }
-    });
-  }, {
-    threshold: 0.25,
-    rootMargin: '-10% 0px -25% 0px'
-  });
-
   projectCards.forEach(card => {
-    projectObserver.observe(card);
-
-    // Permite al usuario hacer clic en cualquier tarjeta para seleccionarla suavemente
     card.addEventListener('click', () => {
-      isManualProjectSelecting = true;
       const projectId = card.getAttribute('data-project');
       projectCards.forEach(c => c.classList.remove('active'));
       card.classList.add('active');
       updateProjectInspector(projectId);
-      gentleScrollTo(card, 500);
-      setTimeout(() => {
-        isManualProjectSelecting = false;
-      }, 650);
     });
   });
 
-  // Inicializar con el primer proyecto
   updateProjectInspector('1');
 }
 
 /**
- * 5. Filtro Interactivo de Proyectos
- * Segmentación dinámica con actualización sincronizada del panel de detalle.
+ * 4. Filtro de Proyectos
  */
 function filterProjects(category, buttonElement) {
   document.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
-  buttonElement.classList.add('active');
+  if (buttonElement) buttonElement.classList.add('active');
 
   const cards = document.querySelectorAll('.project-step');
   let firstVisibleProject = null;
@@ -395,7 +454,7 @@ function filterProjects(category, buttonElement) {
     const itemCategories = card.getAttribute('data-category') || '';
     if (category === 'all' || itemCategories.includes(category)) {
       card.style.display = 'flex';
-      card.style.opacity = '1';
+      card.style.opacity = '0.7';
       if (!firstVisibleProject) {
         firstVisibleProject = card;
       }
@@ -404,7 +463,6 @@ function filterProjects(category, buttonElement) {
     }
   });
 
-  // Sincronizar el panel con el primer proyecto visible tras filtrar
   if (firstVisibleProject) {
     cards.forEach(c => c.classList.remove('active'));
     firstVisibleProject.classList.add('active');
@@ -421,32 +479,24 @@ function initProjectFilters() {
 }
 
 /**
- * 6. Magic UI & UI Pro Max: Number Ticker para Métricas
- * Animación suave de conteo numérico al entrar en pantalla.
+ * 5. Magic UI: Number Ticker para Métricas de Inicio
  */
+let tickerHasRun = false;
+
 function initNumberTicker() {
+  triggerNumberTicker();
+}
+
+function triggerNumberTicker() {
   const metricElements = document.querySelectorAll('.metric-num[data-ticker-target]');
   if (metricElements.length === 0) return;
 
-  let animated = false;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !animated) {
-        animated = true;
-        metricElements.forEach(el => {
-          const target = parseInt(el.getAttribute('data-ticker-target'), 10);
-          const prefix = el.getAttribute('data-ticker-prefix') || '';
-          const suffix = el.getAttribute('data-ticker-suffix') || '';
-          animateValue(el, 0, target, 1200, prefix, suffix);
-        });
-      }
-    });
-  }, { threshold: 0.25 });
-
-  const heroSection = document.getElementById('inicio');
-  if (heroSection) {
-    observer.observe(heroSection);
-  }
+  metricElements.forEach(el => {
+    const target = parseInt(el.getAttribute('data-ticker-target'), 10);
+    const prefix = el.getAttribute('data-ticker-prefix') || '';
+    const suffix = el.getAttribute('data-ticker-suffix') || '';
+    animateValue(el, 0, target, 1100, prefix, suffix);
+  });
 }
 
 function animateValue(obj, start, end, duration, prefix, suffix) {
@@ -454,7 +504,7 @@ function animateValue(obj, start, end, duration, prefix, suffix) {
   const step = (timestamp) => {
     if (!startTimestamp) startTimestamp = timestamp;
     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-    // Ease-out cubic
+    // Curva de desaceleración suave (ease-out-cubic)
     const ease = 1 - Math.pow(1 - progress, 3);
     const current = Math.floor(ease * (end - start) + start);
     obj.textContent = `${prefix}${current}${suffix}`;
@@ -465,4 +515,21 @@ function animateValue(obj, start, end, duration, prefix, suffix) {
     }
   };
   window.requestAnimationFrame(step);
+}
+
+/**
+ * 6. Interceptación de Enlaces de Ancla (#) para Navegación por Diapositivas
+ */
+function initAnchorIntercept() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href').replace('#', '');
+      if (!targetId) return;
+      const index = SLIDES.indexOf(targetId);
+      if (index !== -1) {
+        e.preventDefault();
+        goToSlide(index);
+      }
+    });
+  });
 }
