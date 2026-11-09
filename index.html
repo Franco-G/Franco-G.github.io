@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Franco Guerrero | Business Intelligence & Finanzas</title>
+  <meta name="description" content="Portafolio profesional de Business Intelligence, modelamiento financiero y automatización de tesorería en Kreston Perú.">
+  
+  <!-- Open Graph y Redes Sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://franco-g.github.io/">
+  <meta property="og:title" content="Franco Guerrero | Business Intelligence & Finanzas">
+  <meta property="og:description" content="Portafolio profesional de Business Intelligence, modelamiento financiero y automatización de tesorería en Kreston Perú.">
+  <meta property="og:image" content="https://franco-g.github.io/foto_perfil_circular_1x1.jpeg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://franco-g.github.io/">
+  <meta name="twitter:title" content="Franco Guerrero | Business Intelligence & Finanzas">
+  <meta name="twitter:description" content="Portafolio profesional de Business Intelligence, modelamiento financiero y automatización de tesorería en Kreston Perú.">
+  <meta name="twitter:image" content="https://franco-g.github.io/foto_perfil_circular_1x1.jpeg">
   
   <link rel="icon" type="image/png" href="favicon.png?v=2">
 
@@ -878,6 +893,41 @@
       font-weight: 500;
     }
 
+    /* Filtro Interactivo de Proyectos */
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .filter-pill {
+      background: var(--surface-card);
+      border: 1px solid var(--hairline);
+      color: var(--body);
+      padding: 7px 16px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .filter-pill:hover {
+      background: var(--surface-soft);
+      border-color: #c4c7cc;
+      color: var(--ink);
+    }
+
+    .filter-pill.active {
+      background: var(--primary);
+      border-color: var(--primary-pressed);
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(66, 133, 244, 0.3);
+    }
+
     /* Footer y Bloque de Contacto Directo */
     footer {
       border-top: 1px solid var(--hairline);
@@ -923,20 +973,49 @@
     /* Responsividad */
     @media (max-width: 900px) {
       .scrolly-wrapper {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
       }
       .scrolly-stage-sticky {
+        order: -1;
         position: sticky;
-        top: 76px;
+        top: 72px;
+        z-index: 50;
         margin-bottom: 2rem;
+        background: var(--canvas);
+        padding-top: 6px;
+      }
+      .scrolly-stage-sticky .bi-showcase {
+        padding: 18px;
+      }
+      .scrolly-stage-sticky .chart-box {
+        margin: 0.75rem 0;
+        padding: 12px;
+      }
+      .scrolly-stage-sticky .bi-dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-top: 0.75rem;
+      }
+      .scrolly-stage-sticky .bi-kpi-box {
+        padding: 10px 12px;
+      }
+      .scrolly-stage-sticky .bi-kpi-box .value {
+        font-size: 16px;
       }
       .scrolly-narrative {
-        gap: 3.5rem;
-        padding: 1rem 0 3rem 0;
+        gap: 7rem;
+        padding: 1rem 0 10rem 0;
       }
       .scrolly-step {
+        opacity: 0.45;
+        transform: translateY(8px);
+        transition: all 0.3s ease;
+      }
+      .scrolly-step.active {
         opacity: 1;
-        transform: none;
+        transform: translateY(0);
+        border-color: var(--primary);
       }
       .scrolly-dots {
         display: none;
@@ -950,8 +1029,31 @@
       .grid { grid-template-columns: 1fr; }
       .btn-group { flex-direction: column; width: 100%; }
       .btn { width: 100%; text-align: center; }
-      .showcase-header { flex-direction: column; align-items: flex-start; }
-      .bi-dashboard-grid { grid-template-columns: 1fr; }
+      .showcase-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .scrolly-stage-sticky .bi-dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+      }
+      .scrolly-stage-sticky .bi-kpi-box {
+        padding: 8px 6px;
+      }
+      .scrolly-stage-sticky .bi-kpi-box .label {
+        font-size: 9.5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .scrolly-stage-sticky .bi-kpi-box .value {
+        font-size: 13.5px;
+      }
+      .scrolly-stage-sticky .bi-kpi-box .delta-positive,
+      .scrolly-stage-sticky .bi-kpi-box .delta-neutral,
+      .scrolly-stage-sticky .bi-kpi-box .formula-tag {
+        display: none;
+      }
+      .scrolly-stage-sticky .section-subtitle {
+        display: none;
+      }
       .nav-social-btn span { display: none; }
       .nav-social-btn { padding: 8px; }
       footer { flex-direction: column; align-items: flex-start; }
@@ -1287,9 +1389,18 @@
       <section>
         <h2>Entregables y proyectos</h2>
         <p class="section-subtitle">Detalle técnico de los casos.</p>
+
+        <!-- Filtro Dinámico de Proyectos -->
+        <div class="filter-group">
+          <button class="filter-pill active" data-filter="all" onclick="filterProjects('all', this)">Todos (6)</button>
+          <button class="filter-pill" data-filter="powerquery" onclick="filterProjects('powerquery', this)">Power Query & Modelos</button>
+          <button class="filter-pill" data-filter="sunat" onclick="filterProjects('sunat', this)">Auditoría SUNAT</button>
+          <button class="filter-pill" data-filter="tesoreria" onclick="filterProjects('tesoreria', this)">Tesorería BPO</button>
+        </div>
+
         <div class="grid">
           <!-- Caso 1 -->
-          <article class="card">
+          <article class="card" data-category="powerquery modelamiento">
             <div class="card-content">
               <div class="card-top">
                 <span class="card-category">Modelamiento</span>
@@ -1320,7 +1431,7 @@
           </article>
 
           <!-- Caso 2 -->
-          <article class="card">
+          <article class="card" data-category="sunat auditoria">
             <div class="card-content">
               <div class="card-top">
                 <span class="card-category">Auditoría</span>
@@ -1350,7 +1461,7 @@
           </article>
 
           <!-- Caso 3 -->
-          <article class="card">
+          <article class="card" data-category="powerquery automatizacion">
             <div class="card-content">
               <div class="card-top">
                 <span class="card-category">Power Query</span>
@@ -1381,7 +1492,7 @@
           </article>
 
           <!-- Caso 4 -->
-          <article class="card">
+          <article class="card" data-category="sunat automatizacion">
             <div class="card-content">
               <div class="card-top">
                 <span class="card-category">Automatización</span>
@@ -1411,7 +1522,7 @@
           </article>
 
           <!-- Caso 5 -->
-          <article class="card">
+          <article class="card" data-category="tesoreria bpo">
             <div class="card-content">
               <div class="card-top">
                 <span class="card-category">Plataformas BPO</span>
@@ -1441,7 +1552,7 @@
           </article>
 
           <!-- Caso 6 -->
-          <article class="card">
+          <article class="card" data-category="tesoreria bpo">
             <div class="card-content">
               <div class="card-top">
                 <span class="card-category">Procesos</span>
@@ -1544,6 +1655,22 @@
       if (stepElement) {
         stepElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
+    }
+
+    function filterProjects(category, buttonElement) {
+      document.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
+      buttonElement.classList.add('active');
+
+      const cards = document.querySelectorAll('#proyectos .card');
+      cards.forEach(card => {
+        const itemCategories = card.getAttribute('data-category') || '';
+        if (category === 'all' || itemCategories.includes(category)) {
+          card.style.display = 'flex';
+          card.style.opacity = '1';
+        } else {
+          card.style.display = 'none';
+        }
+      });
     }
 
     const scrollySteps = document.querySelectorAll('.scrolly-step');
