@@ -568,19 +568,25 @@ header.hero-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.4rem;
   flex-wrap: wrap;
   gap: 8px;
 }
 
+.scrolly-section .slide-header-row h2 {
+  font-size: 24px;
+  margin-bottom: 0.15rem;
+}
+
 .scrolly-section .slide-header-row .section-subtitle {
+  font-size: 13.5px;
   margin-bottom: 0;
 }
 
 .scrolly-wrapper {
   display: grid;
   grid-template-columns: 1fr 1.25fr;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: center;
   position: relative;
   width: 100%;
@@ -599,7 +605,7 @@ header.hero-section {
   background: var(--surface-card);
   border: 1px solid transparent !important;
   border-radius: 12px;
-  padding: 24px;
+  padding: 16px 20px;
   box-shadow: var(--card-shadow);
   opacity: 0;
   transform: translateY(8px);
@@ -657,23 +663,24 @@ header.hero-section {
 
 .scrolly-step ul {
   list-style: none;
-  margin-top: 0.85rem;
+  margin-top: 0.45rem;
+  margin-bottom: 0.5rem;
 }
 
 .scrolly-step ul li {
   position: relative;
-  padding-left: 16px;
-  margin-bottom: 0.65rem;
+  padding-left: 14px;
+  margin-bottom: 0.4rem;
   color: var(--body);
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 .scrolly-step ul li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 8px;
+  top: 7px;
   width: 5px;
   height: 5px;
   border-radius: 50%;
@@ -696,6 +703,7 @@ header.hero-section {
   max-width: 100%;
   min-width: 0;
   box-sizing: border-box;
+  padding: 14px 18px !important;
 }
 
 .tab-content {
@@ -876,25 +884,25 @@ header.hero-section {
   background: var(--canvas);
   border: 1px solid var(--hairline);
   border-radius: 8px;
-  padding: 14px;
-  margin: 1rem 0;
+  padding: 8px 12px;
+  margin: 0.4rem 0;
 }
 
 .chart-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .chart-label {
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
   color: var(--ink);
 }
 
 .chart-metric {
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
   color: var(--success);
 }
@@ -903,19 +911,19 @@ header.hero-section {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 8px;
-  font-size: 12px;
+  margin-bottom: 5px;
+  font-size: 11.5px;
 }
 
 .bar-title {
   width: 90px;
   color: var(--body);
-  font-size: 11.5px;
+  font-size: 11px;
 }
 
 .bar-track {
   flex: 1;
-  height: 16px;
+  height: 12px;
   background: #e2e5e9;
   border-radius: 4px;
   overflow: hidden;
@@ -945,9 +953,9 @@ header.hero-section {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.85rem;
+  gap: 8px;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.4rem;
   border-bottom: 1px solid var(--hairline);
 }
 
@@ -974,9 +982,9 @@ header.hero-section {
 .tab-btn {
   background: var(--surface-soft);
   border: 1px solid transparent;
-  padding: 6px 14px;
+  padding: 4px 10px;
   border-radius: 9999px;
-  font-size: 12.5px;
+  font-size: 11.5px;
   font-weight: 500;
   color: var(--body);
   cursor: pointer;
@@ -991,56 +999,57 @@ header.hero-section {
 
 .bi-dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-  margin-top: 1rem;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 8px;
+  margin-top: 0.5rem;
 }
 
 .bi-kpi-box {
   background: var(--canvas);
   border: 1px solid var(--hairline);
-  border-radius: 10px;
-  padding: 14px;
+  border-radius: 8px;
+  padding: 8px 10px;
 }
 
 .bi-kpi-box .label {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--mute);
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.04em;
+  margin-bottom: 2px;
 }
 
 .bi-kpi-box .value {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--ink);
-  margin: 4px 0;
+  margin: 2px 0;
   font-family: 'Inter Tight', sans-serif;
 }
 
 .bi-kpi-box .delta-positive {
   color: var(--success);
-  font-size: 11.5px;
+  font-size: 10.5px;
   font-weight: 600;
 }
 
 .bi-kpi-box .delta-neutral {
   color: var(--primary);
-  font-size: 11.5px;
+  font-size: 10.5px;
   font-weight: 600;
 }
 
 .formula-tag {
   font-family: 'JetBrains Mono', Consolas, monospace;
-  font-size: 10.5px;
+  font-size: 9.5px;
   background: #ffffff;
   border: 1px solid var(--hairline);
-  padding: 2px 6px;
+  padding: 1px 5px;
   border-radius: 4px;
   color: var(--body);
   display: inline-block;
-  margin-top: 6px;
+  margin-top: 2px;
 }
 
 /* ========================================================
@@ -1657,6 +1666,9 @@ header.hero-section {
     width: 72px;
     font-size: 10.5px;
   }
+  .nav-actions { gap: 6px; }
+  .nav-icon-btn { width: 34px; height: 34px; min-width: 34px; min-height: 34px; }
+  .nav-icon-btn .contact-icon { width: 17px; height: 17px; }
   .nav-social-btn span { display: none; }
   .contact-actions-row { flex-direction: row; justify-content: center; gap: 14px; }
   .slide-deck-controls {
