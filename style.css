@@ -57,16 +57,32 @@ body {
   line-height: 1.6;
   font-weight: 400;
   letter-spacing: 0.002em;
-  padding: 0 0 5rem 0;
+  padding: 0;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   max-width: 100vw;
+}
+
+/* Escenario de fondo fijo estilo Chartipedia (Persistent Canvas Backdrop) */
+.scrolly-canvas-stage {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  background: 
+    radial-gradient(circle at 12% 18%, rgba(66, 133, 244, 0.045) 0%, transparent 42%),
+    radial-gradient(circle at 88% 82%, rgba(52, 168, 83, 0.04) 0%, transparent 42%),
+    var(--canvas);
 }
 
 .container {
   max-width: 1140px;
   margin: 0 auto;
   padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 /* ========================================================
@@ -76,11 +92,10 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(248, 249, 250, 0.94);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(248, 249, 250, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--hairline);
-  margin-bottom: 3.5rem;
   transition: all 0.2s ease;
 }
 
@@ -143,7 +158,8 @@ body {
   flex-shrink: 0;
   width: 18px;
   height: 18px;
-  object-fit: contain;
+  object-fit: cover;
+  border-radius: 3.5px;
 }
 
 .btn img,
@@ -153,7 +169,8 @@ body {
   flex-shrink: 0;
   width: 16px;
   height: 16px;
-  object-fit: contain;
+  object-fit: cover;
+  border-radius: 3px;
 }
 
 .nav-social-btn:hover {
@@ -218,9 +235,19 @@ h3 {
   margin-bottom: 0.65rem;
 }
 
+/* Capítulo 1: Inicio a Pantalla Completa (Full Viewport Stage) */
+.hero-chapter {
+  min-height: calc(100vh - 68px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 0 4.5rem 0;
+  box-sizing: border-box;
+}
+
 /* Hero */
 header.hero-section {
-  margin-bottom: 3.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .hero-text {
@@ -278,7 +305,7 @@ header.hero-section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 14px;
-  margin-bottom: 4.5rem;
+  margin-bottom: 2rem;
 }
 
 .metric-card {
@@ -411,13 +438,14 @@ header.hero-section {
    ======================================================== */
 .scrolly-section {
   position: relative;
-  margin-bottom: 5rem;
+  min-height: 220vh;
+  margin-bottom: 7.5rem;
 }
 
 .scrolly-wrapper {
   display: grid;
   grid-template-columns: 1fr 1.25fr;
-  gap: 2.5rem;
+  gap: 3rem;
   align-items: start;
   position: relative;
 }
@@ -425,8 +453,8 @@ header.hero-section {
 .scrolly-narrative {
   display: flex;
   flex-direction: column;
-  gap: 14rem;
-  padding: 3rem 0 16rem 0;
+  gap: 30vh;
+  padding: 8vh 0 30vh 0;
 }
 
 .scrolly-step {
@@ -434,11 +462,13 @@ header.hero-section {
   background: var(--surface-card);
   border: 1px solid transparent !important;
   border-radius: 12px;
-  padding: 24px;
+  padding: 26px;
   box-shadow: var(--card-shadow);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  opacity: 0.3;
-  transform: translateY(12px) scale(0.98);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.22;
+  transform: translateY(14px) scale(0.97);
   isolation: isolate;
   overflow: hidden;
 }
@@ -813,17 +843,18 @@ section {
 .projects-scrolly-wrapper {
   display: grid;
   grid-template-columns: 1.12fr 0.88fr;
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: start;
   position: relative;
   margin-top: 1.5rem;
+  min-height: 280vh;
 }
 
 .projects-narrative {
   display: flex;
   flex-direction: column;
-  gap: 10rem;
-  padding: 2rem 0 14rem 0;
+  gap: 24vh;
+  padding: 6vh 0 24vh 0;
 }
 
 .project-step {
@@ -831,14 +862,16 @@ section {
   background: var(--surface-card);
   border: 1px solid transparent !important;
   border-radius: 12px;
-  padding: 24px;
+  padding: 26px;
   box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  opacity: 0.3;
-  transform: translateY(12px) scale(0.98);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.22;
+  transform: translateY(14px) scale(0.97);
   isolation: isolate;
   overflow: hidden;
   cursor: pointer;
@@ -1188,15 +1221,16 @@ section {
   box-shadow: 0 1px 3px rgba(66, 133, 244, 0.3);
 }
 
-/* Footer y Bloque de Contacto Directo */
+/* Footer y Bloque de Contacto Directo (Capítulo 4) */
 footer {
   border-top: 1px solid var(--hairline);
-  padding-top: 3rem;
+  min-height: 50vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 2rem;
+  padding: 4rem 0 6rem 0;
   color: var(--mute);
   font-size: 13.5px;
 }
