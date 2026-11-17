@@ -293,15 +293,33 @@ function updateNavControlsState() {
 }
 
 /**
- * 4. Pestañas Interactivas en Diapositiva 2 (Experiencia)
+ * 4. Pestañas Interactivas en Diapositivas (Experiencia y Power BI)
  */
-function manualSwitchTab(tabId) {
-  document.querySelectorAll('.tab-group .tab-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-tab') === tabId);
+function manualSwitchTab(tabId, triggerBtn) {
+  const refBtn = triggerBtn || document.querySelector(`.tab-group .tab-btn[data-tab="${tabId}"]`);
+  const scope = (refBtn && refBtn.closest('.slide-section')) || document;
+
+  scope.querySelectorAll('.tab-group .tab-btn').forEach(btn => {
+    const isActive = btn.getAttribute('data-tab') === tabId;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
   });
-  document.querySelectorAll('.tab-content').forEach(content => {
+
+  scope.querySelectorAll('.tab-content').forEach(content => {
     content.classList.toggle('active', content.id === 'tab-' + tabId);
   });
+
+  if (refBtn) {
+    const nextSrc = refBtn.getAttribute('data-pbi-src');
+    const iframe = scope.querySelector('#powerbi-main-iframe');
+    if (nextSrc && iframe && iframe.getAttribute('src') !== nextSrc) {
+      iframe.setAttribute('src', nextSrc);
+      const nextTitle = refBtn.getAttribute('data-pbi-title');
+      if (nextTitle) {
+        iframe.setAttribute('title', nextTitle);
+      }
+    }
+  }
 }
 
 /**

@@ -524,7 +524,7 @@ header.hero-section {
 .powerbi-slide .slide-header-row {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   margin-bottom: 0.75rem;
   flex-wrap: wrap;
   gap: 8px;
@@ -540,6 +540,30 @@ header.hero-section {
   margin-bottom: 0;
 }
 
+.powerbi-project-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 1.25rem;
+  align-items: stretch;
+  width: 100%;
+}
+
+.powerbi-info-card {
+  padding: 18px 20px;
+}
+
+.powerbi-info-card .tab-content.active {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.powerbi-info-card .tag-list {
+  margin-top: auto;
+  padding-top: 10px;
+  gap: 6px;
+}
+
 .powerbi-frame-card {
   position: relative;
   width: 100%;
@@ -553,9 +577,7 @@ header.hero-section {
 
 .powerbi-frame-card iframe {
   width: 100%;
-  height: calc(100vh - 170px);
-  min-height: 380px;
-  max-height: 560px;
+  height: clamp(360px, calc(100vh - 300px), 530px);
   border: 1px solid var(--hairline);
   border-radius: 10px;
   background: #ffffff;
@@ -1588,10 +1610,14 @@ header.hero-section {
     justify-content: flex-start;
   }
   .scrolly-wrapper,
-  .project-slide-grid {
+  .project-slide-grid,
+  .powerbi-project-grid {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+  }
+  .powerbi-frame-card iframe {
+    height: 380px;
   }
   .project-narrative-card,
   .project-visual-card {
