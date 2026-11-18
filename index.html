@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="style.css?v=12.0">
+  <link rel="stylesheet" href="style.css?v=13.0">
 </head>
 <body>
   <!-- Escenario de fondo fijo limpio -->
@@ -48,7 +48,7 @@
         <a href="#soluciones" class="nav-menu-link" data-slide-index="2" onclick="goToSlide(2); return false;">Servicios</a>
         <a href="#dashboard-powerbi" class="nav-menu-link" data-slide-index="3" onclick="goToSlide(3); return false;">Power BI</a>
         <a href="#respaldo" class="nav-menu-link" data-slide-index="6" onclick="goToSlide(6); return false;">Experiencia</a>
-        <a href="#contacto" class="nav-menu-link" data-slide-index="7" onclick="goToSlide(7); return false;">Cotizar</a>
+        <a href="#contacto" class="nav-menu-link" data-slide-index="7" onclick="goToSlide(7); return false;">Contacto</a>
       </nav>
 
       <div class="nav-actions">
@@ -95,48 +95,15 @@
     </aside>
   </header>
 
-  <!-- Navegación Lateral de 8 Secciones -->
-  <nav class="scrolly-nav-dots" aria-label="Navegación de secciones">
-    <button class="scrolly-nav-dot active" data-chapter="inicio" data-slide-index="0" title="Inicio" aria-label="Sección 1: Inicio" onclick="goToSlide(0)">
-      <span class="nav-dot-tooltip">Inicio</span>
-    </button>
-    <button class="scrolly-nav-dot" data-chapter="experiencia" data-slide-index="1" title="Resultados" aria-label="Sección 2: Resultados en negocio" onclick="goToSlide(1)">
-      <span class="nav-dot-tooltip">Resultados</span>
-    </button>
-    <button class="scrolly-nav-dot" data-chapter="soluciones" data-slide-index="2" title="Servicios" aria-label="Sección 3: Servicios a medida" onclick="goToSlide(2)">
-      <span class="nav-dot-tooltip">Servicios</span>
-    </button>
-    <button class="scrolly-nav-dot" data-chapter="dashboard-powerbi" data-slide-index="3" title="BI: Divisas" aria-label="Sección 4: Monitor de divisas" onclick="goToSlide(3)">
-      <span class="nav-dot-tooltip">BI: Divisas</span>
-    </button>
-    <button class="scrolly-nav-dot" data-chapter="powerbi-ia" data-slide-index="4" title="BI: Modelos IA" aria-label="Sección 5: Modelos de IA" onclick="goToSlide(4)">
-      <span class="nav-dot-tooltip">BI: Modelos IA</span>
-    </button>
-    <button class="scrolly-nav-dot" data-chapter="powerbi-champions" data-slide-index="5" title="BI: Champions" aria-label="Sección 6: Champions League" onclick="goToSlide(5)">
-      <span class="nav-dot-tooltip">BI: Champions</span>
-    </button>
-    <button class="scrolly-nav-dot" data-chapter="respaldo" data-slide-index="6" title="Experiencia" aria-label="Sección 7: Experiencia en finanzas" onclick="goToSlide(6)">
-      <span class="nav-dot-tooltip">Experiencia</span>
-    </button>
-    <button class="scrolly-nav-dot" data-chapter="contacto" data-slide-index="7" title="Cotizar" aria-label="Sección 8: Clientes y cotización" onclick="goToSlide(7)">
-      <span class="nav-dot-tooltip">Cotizar</span>
-    </button>
-  </nav>
-
-  <!-- Controles Visibles Flotantes de Navegación (Dock) -->
-  <div class="slide-deck-controls" id="slide-nav-dock" aria-label="Controles de navegación">
-    <button type="button" class="slide-deck-btn" id="slide-nav-prev" aria-label="Sección anterior" title="Sección anterior">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
-    </button>
-    <div class="slide-deck-counter" id="slide-nav-counter">
-      <span class="slide-nav-current">01</span> / <span class="slide-nav-total">08</span>
+  <!-- Barra Lateral Derecha de Porcentaje de Avance (0% a 100%) -->
+  <aside class="scroll-progress-rail" id="scroll-progress-rail" aria-label="Porcentaje de avance en la página">
+    <span class="scroll-progress-pct" id="scroll-progress-pct">0%</span>
+    <div class="scroll-progress-track" id="scroll-progress-track" title="Haz clic para desplazarte">
+      <div class="scroll-progress-fill" id="scroll-progress-fill"></div>
     </div>
-    <button type="button" class="slide-deck-btn" id="slide-nav-next" aria-label="Siguiente sección" title="Siguiente sección">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </button>
-  </div>
+  </aside>
 
-  <!-- Contenedor Maestro de Landing Page (8 Secciones 100vh) -->
+  <!-- Contenedor Maestro de Landing Page (Desplazamiento Libre Continuo) -->
   <main class="slides-wrapper" id="slides-wrapper">
     <!-- Sección 1: Hero de Landing Page e Indicadores Clave -->
     <section id="inicio" class="slide-section hero-chapter" aria-label="Inicio y propuesta de valor">
@@ -148,7 +115,7 @@
             Llevo la tesorería y los pagos de diez empresas en una firma contable internacional. Fuera de mi horario laboral, ayudo como freelance a negocios y estudios contables a automatizar sus archivos: conecto Excel directo al sistema contable para que los estados financieros salgan solos, armo plantillas de carga rápida y diseño tableros en Power BI. Menos horas tipeando, cero multas y más de $9,500 USD ahorrados al año.
           </p>
           <div class="btn-group">
-            <a href="#contacto" class="btn btn-primary shimmer-btn" onclick="goToSlide(7); return false;">Cotizar mi proyecto</a>
+            <a href="#contacto" class="btn btn-primary shimmer-btn" onclick="goToSlide(7); return false;">Contactar ahora</a>
             <a href="#experiencia" class="btn btn-secondary shimmer-btn" onclick="goToSlide(1); return false;">Ver ahorro real</a>
           </div>
         </header>
@@ -295,7 +262,7 @@
                 <span class="tag">Balance y ERI</span>
                 <span class="tag">Cuentas 10 a 59</span>
               </div>
-              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Estados financieros automatizados')">Cotizar solución →</button>
+              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Estados financieros automatizados')">Consultar →</button>
             </div>
           </article>
 
@@ -317,7 +284,7 @@
                 <span class="tag">Macros Excel</span>
                 <span class="tag">Carga masiva</span>
               </div>
-              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Macros y plantillas en Excel')">Cotizar solución →</button>
+              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Macros y plantillas en Excel')">Consultar →</button>
             </div>
           </article>
 
@@ -339,7 +306,7 @@
                 <span class="tag">Cruce fiscal</span>
                 <span class="tag">Power BI</span>
               </div>
-              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Tableros en Power BI y Excel')">Cotizar solución →</button>
+              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Tableros en Power BI y Excel')">Consultar →</button>
             </div>
           </article>
         </div>
@@ -587,8 +554,8 @@
       <div class="container slide-container">
         <div class="slide-header-row">
           <div>
-            <h2>Cotizar un proyecto</h2>
-            <p class="section-subtitle">Clientes y contacto directo.</p>
+            <h2>Contacto directo</h2>
+            <p class="section-subtitle">Clientes y canales directos.</p>
           </div>
         </div>
 
@@ -685,7 +652,7 @@
             <div class="visual-header">
               <div class="visual-title-row">
                 <span class="live-dot" aria-hidden="true"></span>
-                <h3>Solicitar propuesta</h3>
+                <h3>Enviar mensaje</h3>
               </div>
               <span class="mini-badge">Respuesta rápida</span>
             </div>
@@ -756,6 +723,6 @@
   </main>
 
   <!-- Controlador de Navegación e Interactividad -->
-  <script src="app.js?v=12.0"></script>
+  <script src="app.js?v=13.0"></script>
 </body>
 </html>
