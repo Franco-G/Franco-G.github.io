@@ -311,7 +311,7 @@ function manualSwitchTab(tabId, triggerBtn) {
 }
 
 /**
- * 4B. Selección de Paquetes de Tarifas en USD y Envío de Cotización
+ * 4B. Selección de Paquetes Freelance y Envío de Cotización
  */
 function selectServiceTier(tierValue, triggerEl) {
   document.querySelectorAll('.pricing-tier-item').forEach(item => {
@@ -331,6 +331,16 @@ function selectServiceTier(tierValue, triggerEl) {
   } else if (goalInput) {
     goalInput.focus();
   }
+}
+
+function quoteSpecificService(tierValue) {
+  const contactIdx = slides.indexOf('contacto');
+  if (contactIdx !== -1) {
+    goToSlide(contactIdx);
+  }
+  setTimeout(() => {
+    selectServiceTier(tierValue, null);
+  }, SLIDE_TRANSITION_MS + 40);
 }
 
 function handleQuoteSubmit(channel) {
@@ -531,5 +541,6 @@ function initRotationBanner() {
 window.goToSlide = goToSlide;
 window.manualSwitchTab = manualSwitchTab;
 window.selectServiceTier = selectServiceTier;
+window.quoteSpecificService = quoteSpecificService;
 window.handleQuoteSubmit = handleQuoteSubmit;
 window.isDeckMode = isDeckMode;

@@ -1444,6 +1444,44 @@ header.hero-section {
   border-top: 1px solid var(--hairline-soft);
 }
 
+.card-footer-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--hairline-soft);
+}
+
+.tag-list-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.inline-quote-btn {
+  background: var(--primary-light);
+  color: var(--primary-pressed);
+  border: 1px solid rgba(66, 133, 244, 0.35);
+  border-radius: 9999px;
+  padding: 4px 11px;
+  font-size: 11.5px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.inline-quote-btn:hover {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
 .tag {
   font-size: 11.5px;
   color: var(--body);
