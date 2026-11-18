@@ -181,6 +181,7 @@ function goToSlide(targetIndex) {
     if (slides[targetIndex] === 'inicio') {
       triggerNumberTicker();
     }
+    syncHeaderMenuLinks(targetIndex);
     return;
   }
 
@@ -192,6 +193,7 @@ function goToSlide(targetIndex) {
     if (slides[targetIndex] === 'inicio') {
       triggerNumberTicker();
     }
+    syncHeaderMenuLinks(targetIndex);
     return;
   }
 
@@ -212,12 +214,13 @@ function goToSlide(targetIndex) {
     sec.setAttribute('aria-hidden', isActive ? 'false' : 'true');
   });
 
-  // Sincronizar indicador de puntos laterales
+  // Sincronizar indicador de puntos laterales y menú superior
   document.querySelectorAll('.scrolly-nav-dot').forEach((dot, idx) => {
     const isActive = idx === targetIndex;
     dot.classList.toggle('active', isActive);
     dot.setAttribute('aria-current', isActive ? 'true' : 'false');
   });
+  syncHeaderMenuLinks(targetIndex);
 
   // Sincronizar botones de control visible y contador
   updateNavControlsState();
@@ -293,20 +296,13 @@ function updateNavControlsState() {
 }
 
 /**
- * 4. Pestañas Interactivas en Diapositivas (Tablero de Impacto)
+ * 4. Sincronización de Enlaces del Menú Superior (Landing Page)
  */
-function manualSwitchTab(tabId, triggerBtn) {
-  const refBtn = triggerBtn || document.querySelector(`.tab-group .tab-btn[data-tab="${tabId}"]`);
-  const scope = (refBtn && refBtn.closest('.slide-section')) || document;
-
-  scope.querySelectorAll('.tab-group .tab-btn').forEach(btn => {
-    const isActive = btn.getAttribute('data-tab') === tabId;
-    btn.classList.toggle('active', isActive);
-    btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-  });
-
-  scope.querySelectorAll('.tab-content').forEach(content => {
-    content.classList.toggle('active', content.id === 'tab-' + tabId);
+function syncHeaderMenuLinks(targetIndex) {
+  const mappedIndex = (targetIndex >= 3 && targetIndex <= 5) ? 3 : targetIndex;
+  document.querySelectorAll('.nav-menu-link').forEach(link => {
+    const linkIdx = parseInt(link.getAttribute('data-slide-index'), 10);
+    link.classList.toggle('active', linkIdx === mappedIndex);
   });
 }
 
@@ -539,7 +535,6 @@ function initRotationBanner() {
 
 // Exportar funciones globales para llamadas inline en HTML y suite de pruebas
 window.goToSlide = goToSlide;
-window.manualSwitchTab = manualSwitchTab;
 window.selectServiceTier = selectServiceTier;
 window.quoteSpecificService = quoteSpecificService;
 window.handleQuoteSubmit = handleQuoteSubmit;

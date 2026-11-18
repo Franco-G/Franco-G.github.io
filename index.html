@@ -4,43 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Franco Guerrero | Finanzas, Reportes & Automatización</title>
-  <meta name="description" content="Portafolio de finanzas, tableros en Power BI y automatización de estados financieros y reportes en Excel con experiencia real en Kreston Perú.">
+  <meta name="description" content="Automatización de estados financieros, plantillas en Excel y tableros en Power BI con ahorro medible en tiempo y dólares.">
   
   <!-- Open Graph y Redes Sociales -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://franco-g.github.io/">
   <meta property="og:title" content="Franco Guerrero | Finanzas, Reportes & Automatización">
-  <meta property="og:description" content="Portafolio de finanzas, tableros en Power BI y automatización de estados financieros y reportes en Excel con experiencia real en Kreston Perú.">
+  <meta property="og:description" content="Automatización de estados financieros, plantillas en Excel y tableros en Power BI con ahorro medible en tiempo y dólares.">
   <meta property="og:image" content="https://franco-g.github.io/foto_perfil_circular_1x1.jpeg">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://franco-g.github.io/">
   <meta name="twitter:title" content="Franco Guerrero | Finanzas, Reportes & Automatización">
-  <meta name="twitter:description" content="Portafolio de finanzas, tableros en Power BI y automatización de estados financieros y reportes en Excel con experiencia real en Kreston Perú.">
+  <meta name="twitter:description" content="Automatización de estados financieros, plantillas en Excel y tableros en Power BI con ahorro medible en tiempo y dólares.">
   <meta name="twitter:image" content="https://franco-g.github.io/foto_perfil_circular_1x1.jpeg">
   
   <link rel="icon" type="image/png" href="favicon.png?v=7.0">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="style.css?v=11.0">
+  <link rel="stylesheet" href="style.css?v=12.0">
 </head>
 <body>
-  <!-- Escenario de fondo fijo estilo Chartipedia (Fixed Canvas Backdrop) -->
+  <!-- Escenario de fondo fijo limpio -->
   <div class="scrolly-canvas-stage" aria-hidden="true"></div>
 
   <!-- ========================================================
-       BARRA DE NAVEGACIÓN FIJA CON CANALES OFICIALES DE CONTACTO
+       BARRA SUPERIOR ESTILO LANDING PAGE + CANALES OFICIALES
        ======================================================== -->
   <header class="sticky-header-bar">
     <div class="nav-container">
-      <a href="#" class="nav-brand" onclick="goToSlide(0); return false;">
+      <a href="#inicio" class="nav-brand" onclick="goToSlide(0); return false;">
         <img src="foto_perfil_circular_1x1.jpeg" alt="Franco Guerrero" class="nav-logo">
         <span>Franco Guerrero</span>
       </a>
+
+      <nav class="nav-menu-links" aria-label="Menú principal">
+        <a href="#inicio" class="nav-menu-link active" data-slide-index="0" onclick="goToSlide(0); return false;">Inicio</a>
+        <a href="#experiencia" class="nav-menu-link" data-slide-index="1" onclick="goToSlide(1); return false;">Resultados</a>
+        <a href="#soluciones" class="nav-menu-link" data-slide-index="2" onclick="goToSlide(2); return false;">Servicios</a>
+        <a href="#dashboard-powerbi" class="nav-menu-link" data-slide-index="3" onclick="goToSlide(3); return false;">Power BI</a>
+        <a href="#respaldo" class="nav-menu-link" data-slide-index="6" onclick="goToSlide(6); return false;">Experiencia</a>
+        <a href="#contacto" class="nav-menu-link" data-slide-index="7" onclick="goToSlide(7); return false;">Cotizar</a>
+      </nav>
+
       <div class="nav-actions">
         <!-- WhatsApp Monocromático -->
         <a href="https://wa.me/51960748142" target="_blank" rel="noopener noreferrer" class="nav-social-btn nav-icon-btn" title="WhatsApp: +51 960 748 142" aria-label="WhatsApp">
@@ -85,77 +95,65 @@
     </aside>
   </header>
 
-  <!-- Navegación Flotante Global de Diapositivas (12 Puntos Fijos en Pantalla) -->
-  <nav class="scrolly-nav-dots" aria-label="Navegación de diapositivas">
-    <button class="scrolly-nav-dot active" data-chapter="inicio" data-slide-index="0" title="Inicio" aria-label="Diapositiva 1: Inicio" onclick="goToSlide(0)">
+  <!-- Navegación Lateral de 8 Secciones -->
+  <nav class="scrolly-nav-dots" aria-label="Navegación de secciones">
+    <button class="scrolly-nav-dot active" data-chapter="inicio" data-slide-index="0" title="Inicio" aria-label="Sección 1: Inicio" onclick="goToSlide(0)">
       <span class="nav-dot-tooltip">Inicio</span>
     </button>
-    <button class="scrolly-nav-dot" data-chapter="dashboard-powerbi" data-slide-index="1" title="BI: Divisas" aria-label="Diapositiva 2: Monitor de divisas" onclick="goToSlide(1)">
-      <span class="nav-dot-tooltip">BI: Divisas</span>
-    </button>
-    <button class="scrolly-nav-dot" data-chapter="powerbi-ia" data-slide-index="2" title="BI: Modelos IA" aria-label="Diapositiva 3: Modelos de IA" onclick="goToSlide(2)">
-      <span class="nav-dot-tooltip">BI: Modelos IA</span>
-    </button>
-    <button class="scrolly-nav-dot" data-chapter="powerbi-champions" data-slide-index="3" title="BI: Champions" aria-label="Diapositiva 4: Champions League" onclick="goToSlide(3)">
-      <span class="nav-dot-tooltip">BI: Champions</span>
-    </button>
-    <button class="scrolly-nav-dot" data-chapter="experiencia" data-slide-index="4" title="Resultados" aria-label="Diapositiva 5: Resultados en negocio" onclick="goToSlide(4)">
+    <button class="scrolly-nav-dot" data-chapter="experiencia" data-slide-index="1" title="Resultados" aria-label="Sección 2: Resultados en negocio" onclick="goToSlide(1)">
       <span class="nav-dot-tooltip">Resultados</span>
     </button>
-    <button class="scrolly-nav-dot" data-chapter="proyecto-1" data-slide-index="5" title="Balances automáticos" aria-label="Diapositiva 6: Estados financieros automáticos" onclick="goToSlide(5)">
-      <span class="nav-dot-tooltip">Balances automáticos</span>
+    <button class="scrolly-nav-dot" data-chapter="soluciones" data-slide-index="2" title="Servicios" aria-label="Sección 3: Servicios a medida" onclick="goToSlide(2)">
+      <span class="nav-dot-tooltip">Servicios</span>
     </button>
-    <button class="scrolly-nav-dot" data-chapter="proyecto-3" data-slide-index="6" title="Cargas en Excel" aria-label="Diapositiva 7: Cargas sin tipeo" onclick="goToSlide(6)">
-      <span class="nav-dot-tooltip">Cargas en Excel</span>
+    <button class="scrolly-nav-dot" data-chapter="dashboard-powerbi" data-slide-index="3" title="BI: Divisas" aria-label="Sección 4: Monitor de divisas" onclick="goToSlide(3)">
+      <span class="nav-dot-tooltip">BI: Divisas</span>
     </button>
-    <button class="scrolly-nav-dot" data-chapter="proyecto-2" data-slide-index="7" title="Cruce SUNAT" aria-label="Diapositiva 8: Cruce de facturas" onclick="goToSlide(7)">
-      <span class="nav-dot-tooltip">Cruce SUNAT</span>
+    <button class="scrolly-nav-dot" data-chapter="powerbi-ia" data-slide-index="4" title="BI: Modelos IA" aria-label="Sección 5: Modelos de IA" onclick="goToSlide(4)">
+      <span class="nav-dot-tooltip">BI: Modelos IA</span>
     </button>
-    <button class="scrolly-nav-dot" data-chapter="proyecto-5" data-slide-index="8" title="Exp: Tesorería" aria-label="Diapositiva 9: Banca y pagos" onclick="goToSlide(8)">
-      <span class="nav-dot-tooltip">Exp: Tesorería</span>
+    <button class="scrolly-nav-dot" data-chapter="powerbi-champions" data-slide-index="5" title="BI: Champions" aria-label="Sección 6: Champions League" onclick="goToSlide(5)">
+      <span class="nav-dot-tooltip">BI: Champions</span>
     </button>
-    <button class="scrolly-nav-dot" data-chapter="proyecto-6" data-slide-index="9" title="Exp: Control" aria-label="Diapositiva 10: Orden en pagos" onclick="goToSlide(9)">
-      <span class="nav-dot-tooltip">Exp: Control</span>
+    <button class="scrolly-nav-dot" data-chapter="respaldo" data-slide-index="6" title="Experiencia" aria-label="Sección 7: Experiencia en finanzas" onclick="goToSlide(6)">
+      <span class="nav-dot-tooltip">Experiencia</span>
     </button>
-    <button class="scrolly-nav-dot" data-chapter="proyecto-4" data-slide-index="10" title="En pruebas" aria-label="Diapositiva 11: Descarga de facturas" onclick="goToSlide(10)">
-      <span class="nav-dot-tooltip">En pruebas</span>
-    </button>
-    <button class="scrolly-nav-dot" data-chapter="contacto" data-slide-index="11" title="Cotizar servicio" aria-label="Diapositiva 12: Cotizar un proyecto" onclick="goToSlide(11)">
-      <span class="nav-dot-tooltip">Cotizar servicio</span>
+    <button class="scrolly-nav-dot" data-chapter="contacto" data-slide-index="7" title="Cotizar" aria-label="Sección 8: Clientes y cotización" onclick="goToSlide(7)">
+      <span class="nav-dot-tooltip">Cotizar</span>
     </button>
   </nav>
 
-  <!-- Controles Visibles Flotantes de Navegación de Diapositivas (Dock) -->
-  <div class="slide-deck-controls" id="slide-nav-dock" aria-label="Controles de navegación de diapositivas">
-    <button type="button" class="slide-deck-btn" id="slide-nav-prev" aria-label="Diapositiva anterior" title="Diapositiva anterior">
+  <!-- Controles Visibles Flotantes de Navegación (Dock) -->
+  <div class="slide-deck-controls" id="slide-nav-dock" aria-label="Controles de navegación">
+    <button type="button" class="slide-deck-btn" id="slide-nav-prev" aria-label="Sección anterior" title="Sección anterior">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
     </button>
     <div class="slide-deck-counter" id="slide-nav-counter">
-      <span class="slide-nav-current">01</span> / <span class="slide-nav-total">12</span>
+      <span class="slide-nav-current">01</span> / <span class="slide-nav-total">08</span>
     </div>
-    <button type="button" class="slide-deck-btn" id="slide-nav-next" aria-label="Siguiente diapositiva" title="Siguiente diapositiva">
+    <button type="button" class="slide-deck-btn" id="slide-nav-next" aria-label="Siguiente sección" title="Siguiente sección">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </button>
   </div>
 
-  <!-- Contenedor Maestro de Diapositivas (Paginación por Pantallas 100vh) -->
+  <!-- Contenedor Maestro de Landing Page (8 Secciones 100vh) -->
   <main class="slides-wrapper" id="slides-wrapper">
-    <!-- Diapositiva 1: Portada, Propuesta de Valor y Ahorro en Tiempo y Dólares -->
+    <!-- Sección 1: Hero de Landing Page e Indicadores Clave -->
     <section id="inicio" class="slide-section hero-chapter" aria-label="Inicio y propuesta de valor">
       <div class="container slide-container">
         <header class="hero-section">
           <h1>Decisiones con datos</h1>
           <p class="hero-subtitle">Finanzas, reportes y automatización.</p>
           <p class="hero-text">
-            Llevo la tesorería y los pagos de diez empresas en Kreston Perú. Fuera de mi horario laboral, ayudo como freelance a empresas y estudios contables a automatizar sus archivos: conecto Excel directo al sistema contable para que los estados financieros salgan solos, armo macros de carga rápida y diseño tableros en Power BI. Menos horas tipeando, cero multas y más de $9,500 USD ahorrados al año en tiempo de trabajo.
+            Llevo la tesorería y los pagos de diez empresas en una firma contable internacional. Fuera de mi horario laboral, ayudo como freelance a negocios y estudios contables a automatizar sus archivos: conecto Excel directo al sistema contable para que los estados financieros salgan solos, armo plantillas de carga rápida y diseño tableros en Power BI. Menos horas tipeando, cero multas y más de $9,500 USD ahorrados al año.
           </p>
           <div class="btn-group">
-            <a href="#contacto" class="btn btn-primary shimmer-btn" onclick="goToSlide(11); return false;">Cotizar mi proyecto</a>
-            <a href="#dashboard-powerbi" class="btn btn-secondary shimmer-btn" onclick="goToSlide(1); return false;">Ver muestras Power BI</a>
+            <a href="#contacto" class="btn btn-primary shimmer-btn" onclick="goToSlide(7); return false;">Cotizar mi proyecto</a>
+            <a href="#experiencia" class="btn btn-secondary shimmer-btn" onclick="goToSlide(1); return false;">Ver ahorro real</a>
           </div>
         </header>
 
-        <!-- Métricas Cuantitativas en Tiempo y Dólares (USD) -->
+        <!-- 4 Métricas de Impacto en Tiempo y Dólares -->
         <div class="metrics-row">
           <div class="metric-card border-beam-kpi">
             <div class="metric-num" data-ticker-target="9500" data-ticker-prefix="+$">+$9500</div>
@@ -181,7 +179,174 @@
       </div>
     </section>
 
-    <!-- Diapositiva 2: Muestra Práctica Power BI 01 - Monitor de divisas -->
+    <!-- Sección 2: Resultados en Negocio (Comparativo Directo Antes vs. Después a la Vista) -->
+    <section id="experiencia" class="slide-section" aria-label="Resultados en negocio">
+      <div class="container slide-container">
+        <div class="slide-header-row">
+          <div>
+            <h2>Resultados en negocio</h2>
+            <p class="section-subtitle">Tiempo y dinero ahorrados.</p>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm-pill" onclick="goToSlide(2)">Ver servicios →</button>
+        </div>
+
+        <div class="results-comparison-grid">
+          <!-- Comparativo 1: Estados Financieros -->
+          <article class="card result-compare-card">
+            <div class="card-top">
+              <span class="card-category">Cierre Contable</span>
+              <span class="mini-badge">87% menos tiempo</span>
+            </div>
+            <h3>Estados financieros</h3>
+            <div class="result-roi-big">$5,040 USD / año</div>
+            <p class="result-roi-sub">336 horas libres al año en ocho empresas.</p>
+
+            <div class="compare-stack">
+              <div class="compare-box before">
+                <span class="compare-tag">Antes (Manual)</span>
+                <p><strong>32 horas al mes</strong> copiando saldos y cuadrando cuentas a mano ($480 USD/mes).</p>
+              </div>
+              <div class="compare-box after">
+                <span class="compare-tag">Después (Automatizado)</span>
+                <p><strong>4 horas al mes</strong> sacando datos directo del sistema contable ($60 USD/mes).</p>
+              </div>
+            </div>
+
+            <p class="result-summary">Balance general, resultados, patrimonio, ratios y notas 10 a 59 listos en el día.</p>
+          </article>
+
+          <!-- Comparativo 2: Cargas en Excel -->
+          <article class="card result-compare-card">
+            <div class="card-top">
+              <span class="card-category">Compras y Ventas</span>
+              <span class="mini-badge">300h/año libres</span>
+            </div>
+            <h3>Cargas en Excel</h3>
+            <div class="result-roi-big">$4,500 USD / año</div>
+            <p class="result-roi-sub">25 horas ahorradas cada mes sin digitación.</p>
+
+            <div class="compare-stack">
+              <div class="compare-box before">
+                <span class="compare-tag">Antes (Manual)</span>
+                <p><strong>25 horas al mes</strong> digitando facturas de compras y ventas una por una ($375 USD/mes).</p>
+              </div>
+              <div class="compare-box after">
+                <span class="compare-tag">Después (Automatizado)</span>
+                <p><strong>Un clic en Excel</strong> que arma los archivos de carga masiva para el sistema.</p>
+              </div>
+            </div>
+
+            <p class="result-summary">Cero errores de tipeo en montos, fechas o comprobantes al cerrar el mes.</p>
+          </article>
+
+          <!-- Comparativo 3: Cruce de Impuestos -->
+          <article class="card result-compare-card">
+            <div class="card-top">
+              <span class="card-category">Control Tributario</span>
+              <span class="mini-badge">$0 en multas</span>
+            </div>
+            <h3>Cruce de impuestos</h3>
+            <div class="result-roi-big">+$3,600 USD / año</div>
+            <p class="result-roi-sub">240 horas ahorradas revisando facturas.</p>
+
+            <div class="compare-stack">
+              <div class="compare-box before">
+                <span class="compare-tag">Antes (Manual)</span>
+                <p><strong>20 horas al mes</strong> revisando a ojo miles de facturas frente al sistema ($300 USD/mes).</p>
+              </div>
+              <div class="compare-box after">
+                <span class="compare-tag">Después (Automatizado)</span>
+                <p><strong>Cruce en segundos</strong> de más de 4,120 comprobantes antes de declarar.</p>
+              </div>
+            </div>
+
+            <p class="result-summary">Detecta a tiempo facturas duplicadas o compras omitidas para evitar multas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección 3: Servicios a Medida (Grilla de 3 Columnas para Freelance) -->
+    <section id="soluciones" class="slide-section" aria-label="Servicios freelance a medida">
+      <div class="container slide-container">
+        <div class="slide-header-row">
+          <div>
+            <h2>Servicios a medida</h2>
+            <p class="section-subtitle">Soluciones freelance por proyecto.</p>
+          </div>
+        </div>
+
+        <div class="services-bento-grid">
+          <!-- Servicio 1: Estados Financieros Automáticos -->
+          <article class="card service-bento-card">
+            <div class="card-top">
+              <span class="card-category">Servicio 01</span>
+              <span class="mini-badge">Ahorra $5,040 USD/año</span>
+            </div>
+            <h3>Balances sin digitación</h3>
+            <p class="project-context">Conecto tu Excel o hoja de cálculo directo a los datos web de tu sistema contable para que los reportes salgan solos.</p>
+            <ul class="project-bullets">
+              <li>Limpia y ordena los saldos automáticamente en una tabla dinámica de cuentas por periodo.</li>
+              <li>Calcula balance general (ESF), ganancias y pérdidas (ERI) y patrimonio (ECPG), mensual y anual.</li>
+              <li>Incluye razones financieras y notas automáticas de las cuentas 10 a la 59.</li>
+            </ul>
+            <div class="card-footer-cta">
+              <div class="tag-list-inline">
+                <span class="tag">Balance y ERI</span>
+                <span class="tag">Cuentas 10 a 59</span>
+              </div>
+              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Estados financieros automatizados')">Cotizar solución →</button>
+            </div>
+          </article>
+
+          <!-- Servicio 2: Macros y Plantillas en Excel -->
+          <article class="card service-bento-card">
+            <div class="card-top">
+              <span class="card-category">Servicio 02</span>
+              <span class="mini-badge">Ahorra $4,500 USD/año</span>
+            </div>
+            <h3>Plantillas en Excel</h3>
+            <p class="project-context">Armo macros y plantillas a medida para que tu equipo deje de copiar y digitar comprobantes a mano.</p>
+            <ul class="project-bullets">
+              <li>Pegas tus comprobantes, presionas actualizar y genera sola los archivos de carga masiva.</li>
+              <li>Elimina errores humanos en montos, fechas y números de factura en cada cierre.</li>
+              <li>Ahorra hasta 25 horas al mes en compras, ventas, planillas o reportes de gastos.</li>
+            </ul>
+            <div class="card-footer-cta">
+              <div class="tag-list-inline">
+                <span class="tag">Macros Excel</span>
+                <span class="tag">Carga masiva</span>
+              </div>
+              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Macros y plantillas en Excel')">Cotizar solución →</button>
+            </div>
+          </article>
+
+          <!-- Servicio 3: Cruces SUNAT y Tableros -->
+          <article class="card service-bento-card">
+            <div class="card-top">
+              <span class="card-category">Servicio 03</span>
+              <span class="mini-badge">+$3,600 USD/año</span>
+            </div>
+            <h3>Revisión y tableros</h3>
+            <p class="project-context">Creo cuadros automáticos para revisar impuestos y tableros gerenciales en Power BI conectados a tus ventas y gastos.</p>
+            <ul class="project-bullets">
+              <li>Cruza lo declarado ante el ente tributario contra tu contabilidad en segundos.</li>
+              <li>Advierte compras no registradas o facturas duplicadas antes de pagar a proveedores.</li>
+              <li>Entrega gráficos claros en Power BI para ver caja, cobranzas y márgenes al día.</li>
+            </ul>
+            <div class="card-footer-cta">
+              <div class="tag-list-inline">
+                <span class="tag">Cruce fiscal</span>
+                <span class="tag">Power BI</span>
+              </div>
+              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Tableros en Power BI y Excel')">Cotizar solución →</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección 4: Muestra Práctica Power BI 01 - Monitor de divisas -->
     <section id="dashboard-powerbi" class="slide-section powerbi-slide" aria-label="Muestra Power BI 1: Monitor de divisas">
       <div class="container slide-container">
         <div class="slide-header-row">
@@ -194,15 +359,15 @@
             <p class="section-subtitle">Datos web en vivo.</p>
           </div>
           <div class="pbi-quick-jump" aria-label="Cambiar entre muestras de Power BI">
-            <button type="button" class="tab-btn active" onclick="goToSlide(1)">01. Divisas</button>
-            <button type="button" class="tab-btn" onclick="goToSlide(2)">02. Modelos IA</button>
-            <button type="button" class="tab-btn" onclick="goToSlide(3)">03. Champions</button>
+            <button type="button" class="tab-btn active" onclick="goToSlide(3)">01. Divisas</button>
+            <button type="button" class="tab-btn" onclick="goToSlide(4)">02. Modelos IA</button>
+            <button type="button" class="tab-btn" onclick="goToSlide(5)">03. Champions</button>
           </div>
         </div>
 
         <div class="powerbi-project-grid">
           <article class="card powerbi-info-card">
-            <div class="tab-content active">
+            <div class="powerbi-card-inner">
               <div class="card-top">
                 <span class="card-category">Finanzas · Datos web</span>
                 <span class="mini-badge">Serie 2026</span>
@@ -235,7 +400,7 @@
       </div>
     </section>
 
-    <!-- Diapositiva 3: Muestra Práctica Power BI 02 - Modelos de IA -->
+    <!-- Sección 5: Muestra Práctica Power BI 02 - Modelos de IA -->
     <section id="powerbi-ia" class="slide-section powerbi-slide" aria-label="Muestra Power BI 2: Modelos de IA">
       <div class="container slide-container">
         <div class="slide-header-row">
@@ -248,21 +413,21 @@
             <p class="section-subtitle">Calidad frente a precio.</p>
           </div>
           <div class="pbi-quick-jump" aria-label="Cambiar entre muestras de Power BI">
-            <button type="button" class="tab-btn" onclick="goToSlide(1)">01. Divisas</button>
-            <button type="button" class="tab-btn active" onclick="goToSlide(2)">02. Modelos IA</button>
-            <button type="button" class="tab-btn" onclick="goToSlide(3)">03. Champions</button>
+            <button type="button" class="tab-btn" onclick="goToSlide(3)">01. Divisas</button>
+            <button type="button" class="tab-btn active" onclick="goToSlide(4)">02. Modelos IA</button>
+            <button type="button" class="tab-btn" onclick="goToSlide(5)">03. Champions</button>
           </div>
         </div>
 
         <div class="powerbi-project-grid">
           <article class="card powerbi-info-card">
-            <div class="tab-content active">
+            <div class="powerbi-card-inner">
               <div class="card-top">
                 <span class="card-category">Tecnología · Datos web</span>
                 <span class="mini-badge">88 modelos</span>
               </div>
               <h3>Comparativo de precios</h3>
-              <p class="project-context">Cuando toca elegir un modelo para trabajar o pagar una suscripción, el precio pesa tanto como el rendimiento. Conecté el catálogo web de TensorFeed para comparar 88 opciones.</p>
+              <p class="project-context">Cuando toca elegir un modelo para trabajar o pagar una suscripción, el precio pesa tanto como el rendimiento. Conecté un catálogo público en línea para comparar 88 opciones.</p>
               <ul class="project-bullets">
                 <li>Indicadores rápidos con el líder en rendimiento, promedio del mercado y calidad frente a precio.</li>
                 <li>Gráfico que cruza el costo de uso frente al puntaje obtenido, separado por gama (alta, media y económica).</li>
@@ -289,7 +454,7 @@
       </div>
     </section>
 
-    <!-- Diapositiva 4: Muestra Práctica Power BI 03 - Champions League -->
+    <!-- Sección 6: Muestra Práctica Power BI 03 - Champions League -->
     <section id="powerbi-champions" class="slide-section powerbi-slide" aria-label="Muestra Power BI 3: Champions League">
       <div class="container slide-container">
         <div class="slide-header-row">
@@ -302,21 +467,21 @@
             <p class="section-subtitle">Tabla y goles actualizados.</p>
           </div>
           <div class="pbi-quick-jump" aria-label="Cambiar entre muestras de Power BI">
-            <button type="button" class="tab-btn" onclick="goToSlide(1)">01. Divisas</button>
-            <button type="button" class="tab-btn" onclick="goToSlide(2)">02. Modelos IA</button>
-            <button type="button" class="tab-btn active" onclick="goToSlide(3)">03. Champions</button>
+            <button type="button" class="tab-btn" onclick="goToSlide(3)">01. Divisas</button>
+            <button type="button" class="tab-btn" onclick="goToSlide(4)">02. Modelos IA</button>
+            <button type="button" class="tab-btn active" onclick="goToSlide(5)">03. Champions</button>
           </div>
         </div>
 
         <div class="powerbi-project-grid">
           <article class="card powerbi-info-card">
-            <div class="tab-content active">
+            <div class="powerbi-card-inner">
               <div class="card-top">
                 <span class="card-category">Deporte · Datos web</span>
                 <span class="mini-badge">36 clubes</span>
               </div>
               <h3>Estadísticas del torneo</h3>
-              <p class="project-context">Quería ver qué tan parejo está el nuevo formato de liga sin quedarme en la tabla común. Conecté los datos web de OpenLigaDB para traer los 36 clubes, sus puntos y goles.</p>
+              <p class="project-context">Quería ver qué tan parejo está el nuevo formato de liga sin quedarme en la tabla común. Conecté una base deportiva en línea para traer los 36 clubes, sus puntos y goles.</p>
               <ul class="project-bullets">
                 <li>Tabla de posiciones con diferencia de goles y efectividad por club.</li>
                 <li>Gráfico que cruza goles a favor y en contra para distinguir ataque y defensa.</li>
@@ -343,721 +508,147 @@
       </div>
     </section>
 
-    <!-- Diapositiva 5: Resultados en Negocio con Tablero Comparativo -->
-    <section class="slide-section scrolly-section" id="experiencia" aria-label="Resultados en tiempo y dinero">
+    <!-- Sección 7: Experiencia en Finanzas (Grilla Consolidada de 3 Columnas sin nombres propios) -->
+    <section id="respaldo" class="slide-section" aria-label="Experiencia en finanzas">
       <div class="container slide-container">
         <div class="slide-header-row">
           <div>
-            <h2>Resultados en negocio</h2>
-            <p class="section-subtitle">Tiempo y dinero ahorrados.</p>
+            <h2>Experiencia en finanzas</h2>
+            <p class="section-subtitle">Respaldo real en operación.</p>
           </div>
         </div>
 
-        <div class="scrolly-wrapper">
-          <!-- Columna Izquierda: Diferenciación entre soluciones freelance y experiencia -->
-          <div class="scrolly-narrative">
-            <div class="scrolly-step active">
-              <h3>Criterio y práctica</h3>
-              <p class="section-subtitle">Soluciones reales en empresas.</p>
-              <ul>
-                <li>Armo plantillas que sacan información directo del sistema contable y calculan estados financieros, razones y notas sin copiar datos a mano.</li>
-                <li>Preparo macros y consultas en Excel para cargar compras, ventas y revisar facturas contra SUNAT ahorrando más de 50 horas al mes.</li>
-                <li>Mi trabajo diario llevando los pagos y bancos de diez empresas en Kreston Perú respalda el criterio financiero de cada archivo que entrego.</li>
-              </ul>
-              <div class="tag-list">
-                <span class="tag">Estados financieros</span>
-                <span class="tag">Plantillas Excel</span>
-                <span class="tag">Power BI</span>
-                <span class="tag">Tesorería Kreston</span>
-              </div>
+        <div class="services-bento-grid">
+          <!-- Columna 1: Banca y Pagos -->
+          <article class="card service-bento-card">
+            <div class="card-top">
+              <span class="card-category">Trabajo Actual · 160h/mes</span>
+              <span class="mini-badge">$0 en moras</span>
             </div>
-          </div>
-
-          <!-- Columna Derecha: Escenario Fijo con Border Beam -->
-          <div class="scrolly-stage-sticky">
-            <div class="bi-showcase border-beam-card">
-              <div class="showcase-header">
-                <div class="showcase-title-row">
-                  <span class="live-dot" aria-hidden="true"></span>
-                  <h3>Resumen de ahorro</h3>
-                </div>
-                <div class="tab-group">
-                  <button class="tab-btn active" data-tab="eeff" onclick="manualSwitchTab('eeff', this)">Balances automáticos</button>
-                  <button class="tab-btn" data-tab="sunat" onclick="manualSwitchTab('sunat', this)">Excel y SUNAT</button>
-                  <button class="tab-btn" data-tab="cxp" onclick="manualSwitchTab('cxp', this)">Experiencia Kreston</button>
-                </div>
-              </div>
-              <p class="section-subtitle">Horas y costos reducidos.</p>
-
-              <!-- Capa 1: Estados Financieros Automáticos -->
-              <div id="tab-eeff" class="tab-content active">
-                <div class="chart-box">
-                  <div class="chart-header">
-                    <span class="chart-label">Tiempo para armar estados financieros de 8 empresas</span>
-                    <span class="chart-metric">$5,040 USD / año ahorrados</span>
-                  </div>
-                  <div class="bar-row">
-                    <span class="bar-title">Antes (manual)</span>
-                    <div class="bar-track">
-                      <div class="bar-fill gray" style="width: 100%;"></div>
-                    </div>
-                    <span class="bar-value">32h ($480)</span>
-                  </div>
-                  <div class="bar-row">
-                    <span class="bar-title">Automatizado</span>
-                    <div class="bar-track">
-                      <div class="bar-fill blue" style="width: 13%;"></div>
-                    </div>
-                    <span class="bar-value">4h ($60)</span>
-                  </div>
-                </div>
-
-                <div class="bi-dashboard-grid">
-                  <div class="bi-kpi-box">
-                    <div class="label">Ahorro anual</div>
-                    <div class="value">$5,040 USD</div>
-                    <div class="delta-positive">336 horas libres al año</div>
-                    <div class="formula-tag">Conexión a Flowdesk</div>
-                  </div>
-                  <div class="bi-kpi-box">
-                    <div class="label">Reportes listos</div>
-                    <div class="value">Mensual y anual</div>
-                    <div class="delta-positive">Balance y resultados</div>
-                    <div class="formula-tag">Tabla dinámica</div>
-                  </div>
-                  <div class="bi-kpi-box">
-                    <div class="label">Detalle contable</div>
-                    <div class="value">Ratios y notas</div>
-                    <div class="delta-neutral">Cuentas 10 a la 59</div>
-                    <div class="formula-tag">Solución freelance</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Capa 2: Plantillas Excel y Cruce SUNAT -->
-              <div id="tab-sunat" class="tab-content">
-                <div class="chart-box">
-                  <div class="chart-header">
-                    <span class="chart-label">Cargas masivas de compras y cruce contra SUNAT</span>
-                    <span class="chart-metric">$4,500 USD / año en cargas</span>
-                  </div>
-                  <div class="bar-row">
-                    <span class="bar-title">Facturas SUNAT</span>
-                    <div class="bar-track">
-                      <div class="bar-fill blue" style="width: 100%;"></div>
-                    </div>
-                    <span class="bar-value">4,120 reg.</span>
-                  </div>
-                  <div class="bar-row">
-                    <span class="bar-title">En sistema</span>
-                    <div class="bar-track">
-                      <div class="bar-fill green" style="width: 100%;"></div>
-                    </div>
-                    <span class="bar-value">100% igual</span>
-                  </div>
-                </div>
-
-                <div class="bi-dashboard-grid">
-                  <div class="bi-kpi-box">
-                    <div class="label">Cargas en Excel</div>
-                    <div class="value">$4,500 USD</div>
-                    <div class="delta-positive">300 horas libres al año</div>
-                    <div class="formula-tag">Cero tipeo manual</div>
-                  </div>
-                  <div class="bi-kpi-box">
-                    <div class="label">Impuestos</div>
-                    <div class="value">$0 multas</div>
-                    <div class="delta-positive">+$3,600 USD/año en revisión</div>
-                    <div class="formula-tag">Cruce de facturas</div>
-                  </div>
-                  <div class="bi-kpi-box">
-                    <div class="label">Entrega</div>
-                    <div class="value">Lista para usar</div>
-                    <div class="delta-neutral">Con un solo clic</div>
-                    <div class="formula-tag">Solución freelance</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Capa 3: Experiencia en Kreston Perú -->
-              <div id="tab-cxp" class="tab-content">
-                <div class="chart-box">
-                  <div class="chart-header">
-                    <span class="chart-label">Mi trabajo actual en Kreston Perú (10 empresas)</span>
-                    <span class="chart-metric">160h al mes · 0 atrasos</span>
-                  </div>
-                  <div class="bar-row">
-                    <span class="bar-title">Proveedores</span>
-                    <div class="bar-track">
-                      <div class="bar-fill blue" style="width: 55%;"></div>
-                    </div>
-                    <span class="bar-value">55%</span>
-                  </div>
-                  <div class="bar-row">
-                    <span class="bar-title">Planillas y CTS</span>
-                    <div class="bar-track">
-                      <div class="bar-fill green" style="width: 30%;"></div>
-                    </div>
-                    <span class="bar-value">30%</span>
-                  </div>
-                  <div class="bar-row">
-                    <span class="bar-title">Detracciones</span>
-                    <div class="bar-track">
-                      <div class="bar-fill gray" style="width: 15%;"></div>
-                    </div>
-                    <span class="bar-value">15%</span>
-                  </div>
-                </div>
-
-                <div class="bi-dashboard-grid">
-                  <div class="bi-kpi-box">
-                    <div class="label">Bancos</div>
-                    <div class="value">BCP y BBVA</div>
-                    <div class="delta-positive">Sueldos, CTS y facturas</div>
-                    <div class="formula-tag">Telecrédito y Net Cash</div>
-                  </div>
-                  <div class="bi-kpi-box">
-                    <div class="label">Tipo de cambio</div>
-                    <div class="value">Revisado</div>
-                    <div class="delta-positive">Reclamo formal en BBVA</div>
-                    <div class="formula-tag">Planilla S/ 11,000</div>
-                  </div>
-                  <div class="bi-kpi-box">
-                    <div class="label">Respaldo</div>
-                    <div class="value">Empleo actual</div>
-                    <div class="delta-neutral">Criterio financiero real</div>
-                    <div class="formula-tag">10 empresas activas</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Diapositiva 6: Solución Freelance 01 - Estados financieros automáticos -->
-    <section id="proyecto-1" class="slide-section project-slide" aria-label="Solución Freelance 1: Estados financieros automáticos">
-      <div class="container slide-container">
-        <div class="slide-header-row">
-          <div>
-            <span class="slide-badge">Solución Freelance 01 · Estados Financieros</span>
-            <h2>Estados financieros automáticos</h2>
-            <p class="section-subtitle">Balances listos en horas.</p>
-          </div>
-        </div>
-
-        <div class="project-slide-grid">
-          <!-- Columna Izquierda: Tarjeta Narrativa -->
-          <article class="project-narrative-card card">
-            <div class="card-content">
-              <div class="card-top">
-                <span class="card-category">Servicio Freelance</span>
-                <span class="mini-badge">Ahorra $5,040 USD/año</span>
-              </div>
-              <h3>Balances sin digitación</h3>
-              <p class="project-context">Armo tu archivo financiero conectado directo a los datos web de tu sistema contable (como Flowdesk) para que no tengas que descargar ni copiar reportes a mano.</p>
-              <ul class="project-bullets">
-                <li>El archivo limpia y ordena los saldos automáticamente hasta armar una tabla dinámica con todas las cuentas contables por periodo.</li>
-                <li>Con fórmulas listas saca el balance general (ESF), el estado de resultados (ERI) y los cambios en el patrimonio (ECPG), tanto anual como mensual.</li>
-                <li>Calcula las razones financieras y arma las notas de las cuentas 10 a la 59, bajando el cierre mensual de 32 horas a solo 4 horas.</li>
-              </ul>
-              <div class="card-footer-cta">
-                <div class="tag-list-inline">
-                  <span class="tag">Balance y Resultados</span>
-                  <span class="tag">Ratios</span>
-                  <span class="tag">Cuentas 10 a 59</span>
-                </div>
-                <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Estados financieros automatizados')">Cotizar solución →</button>
-              </div>
+            <h3>Banca y pagos</h3>
+            <p class="project-context">Llevo la tesorería y los bancos de diez empresas en una firma contable internacional. Esa práctica diaria respalda cada herramienta que entrego.</p>
+            <ul class="project-bullets">
+              <li>Cargo pagos masivos de proveedores, sueldos de planilla, depósitos de CTS y detracciones.</li>
+              <li>Envío alertas cada viernes y controlo tablas de préstamos, cuotas y fraccionamientos.</li>
+              <li>Reviso el tipo de cambio bancario y presento reclamos formales ante diferencias.</li>
+            </ul>
+            <div class="tag-list">
+              <span class="tag">Banca corporativa</span>
+              <span class="tag">Planillas y CTS</span>
+              <span class="tag">10 empresas</span>
             </div>
           </article>
 
-          <!-- Columna Derecha: Tarjeta Visual con Border Beam -->
-          <div class="project-visual-card border-beam-card">
-            <div class="visual-header">
-              <div class="visual-title-row">
-                <span class="live-dot" aria-hidden="true"></span>
-                <h3>Ahorro anual directo</h3>
-              </div>
-              <span class="mini-badge">87% menos tiempo</span>
-            </div>
-            <div class="visual-body">
-              <div class="inspector-kpi-highlight">
-                <span class="inspector-kpi-title">Ahorro en tiempo de cierre contable</span>
-                <div class="inspector-kpi-number">$5,040 USD / año</div>
-                <div class="inspector-kpi-desc">336 horas libres al año (28h cada mes) al automatizar balances, resultados, ratios y notas 10-59.</div>
-              </div>
-
-              <div class="inspector-chart-box">
-                <div class="chart-header">
-                  <span class="chart-label">Tiempo y costo de cierre mensual</span>
-                  <span class="chart-metric">32h vs 4h</span>
-                </div>
-                <div class="bar-row">
-                  <span class="bar-title">Antes (manual)</span>
-                  <div class="bar-track"><div class="bar-fill gray" style="width: 100%;"></div></div>
-                  <span class="bar-value">32h ($480)</span>
-                </div>
-                <div class="bar-row">
-                  <span class="bar-title">Con plantilla</span>
-                  <div class="bar-track"><div class="bar-fill blue" style="width: 13%;"></div></div>
-                  <span class="bar-value">4h ($60)</span>
-                </div>
-              </div>
-
-              <div class="inspector-meta-row">
-                <div class="inspector-meta-item">
-                  <span class="meta-label">Probado en</span>
-                  <span class="meta-val">8 empresas con Flowdesk</span>
-                </div>
-                <div class="inspector-meta-item">
-                  <span class="meta-label">Modalidad</span>
-                  <span class="meta-val highlight">Adaptable a tu empresa</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Diapositiva 7: Solución Freelance 02 - Cargas sin tipeo en Excel -->
-    <section id="proyecto-3" class="slide-section project-slide" aria-label="Solución Freelance 2: Cargas sin tipeo">
-      <div class="container slide-container">
-        <div class="slide-header-row">
-          <div>
-            <span class="slide-badge">Solución Freelance 02 · Macros y Plantillas en Excel</span>
-            <h2>Cargas sin tipeo</h2>
-            <p class="section-subtitle">Compras y ventas listas.</p>
-          </div>
-        </div>
-
-        <div class="project-slide-grid">
-          <!-- Columna Izquierda: Tarjeta Narrativa -->
-          <article class="project-narrative-card card">
-            <div class="card-content">
-              <div class="card-top">
-                <span class="card-category">Servicio Freelance</span>
-                <span class="mini-badge">Ahorra $4,500 USD/año</span>
-              </div>
-              <h3>Plantillas en Excel</h3>
-              <p class="project-context">Preparo macros y plantillas en Excel para que tu equipo deje de digitar comprobantes uno por uno al cargar compras, ventas o pagos.</p>
-              <ul class="project-bullets">
-                <li>Pegas tus comprobantes en el Excel, presionas actualizar y la plantilla genera sola los archivos de texto para subir al sistema contable.</li>
-                <li>Evita errores de digitación en montos, fechas o números de factura durante los cierres de mes.</li>
-                <li>Libera unas 25 horas de trabajo al mes (300 horas al año), lo que representa $4,500 USD anuales ahorrados en horas operativas.</li>
-              </ul>
-              <div class="card-footer-cta">
-                <div class="tag-list-inline">
-                  <span class="tag">Macros Excel</span>
-                  <span class="tag">Power Query</span>
-                  <span class="tag">Carga masiva</span>
-                </div>
-                <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Macros y plantillas en Excel')">Cotizar solución →</button>
-              </div>
-            </div>
-          </article>
-
-          <!-- Columna Derecha: Tarjeta Visual con Border Beam -->
-          <div class="project-visual-card border-beam-card">
-            <div class="visual-header">
-              <div class="visual-title-row">
-                <span class="live-dot" aria-hidden="true"></span>
-                <h3>Tiempo libre mensual</h3>
-              </div>
-              <span class="mini-badge">300h/año libres</span>
-            </div>
-            <div class="visual-body">
-              <div class="inspector-kpi-highlight">
-                <span class="inspector-kpi-title">Ahorro anual por eliminar digitación</span>
-                <div class="inspector-kpi-number">$4,500 USD / año</div>
-                <div class="inspector-kpi-desc">25 horas ahorradas cada mes al armar automáticamente los archivos de carga masiva de compras y ventas.</div>
-              </div>
-
-              <div class="inspector-chart-box">
-                <div class="chart-header">
-                  <span class="chart-label">Ritmo de ahorro mensual (25 horas/mes)</span>
-                  <span class="chart-metric" style="color: var(--success);">+$375 USD/mes</span>
-                </div>
-                <svg class="sparkline-svg" viewBox="0 0 200 40" style="margin-top: 8px; width: 100%; height: 36px;" aria-label="Curva de ahorro en horas de trabajo">
-                  <path d="M0,35 Q50,30 90,12 T160,8 L200,6" fill="none" stroke="#34A853" stroke-width="2.5"/>
-                  <circle cx="200" cy="6" r="3.5" fill="#34A853"/>
-                </svg>
-              </div>
-
-              <div class="inspector-meta-row">
-                <div class="inspector-meta-item">
-                  <span class="meta-label">Entregable</span>
-                  <span class="meta-val">Archivo Excel automatizado</span>
-                </div>
-                <div class="inspector-meta-item">
-                  <span class="meta-label">Modalidad</span>
-                  <span class="meta-val highlight">Listo para usar</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Diapositiva 8: Solución Freelance 03 - Cruce de facturas SUNAT -->
-    <section id="proyecto-2" class="slide-section project-slide" aria-label="Solución Freelance 3: Cruce de facturas">
-      <div class="container slide-container">
-        <div class="slide-header-row">
-          <div>
-            <span class="slide-badge">Solución Freelance 03 · Control de Compras e Impuestos</span>
-            <h2>Cruce de facturas</h2>
-            <p class="section-subtitle">Impuestos revisados a tiempo.</p>
-          </div>
-        </div>
-
-        <div class="project-slide-grid">
-          <!-- Columna Izquierda: Tarjeta Narrativa -->
-          <article class="project-narrative-card card">
-            <div class="card-content">
-              <div class="card-top">
-                <span class="card-category">Servicio Freelance</span>
-                <span class="mini-badge">+$3,600 USD/año</span>
-              </div>
-              <h3>Revisión de compras</h3>
-              <p class="project-context">Diseño cuadros automáticos en Excel que comparan las facturas que figuran en SUNAT contra lo registrado en tu contabilidad antes de declarar.</p>
-              <ul class="project-bullets">
-                <li>Cruza en segundos miles de comprobantes de SUNAT frente a tu sistema contable (probado con 4,120 facturas en Flowdesk).</li>
-                <li>Te avisa al instante si falta registrar una compra o si hay una factura duplicada para evitar multas y pagos dobles a proveedores.</li>
-                <li>Ahorra unas 20 horas mensuales de revisión visual equivalentes a $3,600 USD al año en tiempo del equipo contable.</li>
-              </ul>
-              <div class="card-footer-cta">
-                <div class="tag-list-inline">
-                  <span class="tag">Cruce SUNAT</span>
-                  <span class="tag">Proveedores</span>
-                </div>
-                <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Macros y plantillas en Excel')">Cotizar solución →</button>
-              </div>
-            </div>
-          </article>
-
-          <!-- Columna Derecha: Tarjeta Visual con Border Beam -->
-          <div class="project-visual-card border-beam-card">
-            <div class="visual-header">
-              <div class="visual-title-row">
-                <span class="live-dot" aria-hidden="true"></span>
-                <h3>Impacto fiscal anual</h3>
-              </div>
-              <span class="mini-badge">100% cuadrado</span>
-            </div>
-            <div class="visual-body">
-              <div class="inspector-kpi-highlight">
-                <span class="inspector-kpi-title">Ahorro en revisión y cero multas</span>
-                <div class="inspector-kpi-number">+$3,600 USD / año</div>
-                <div class="inspector-kpi-desc">4,120 facturas comparadas contra el sistema contable con $0 USD en multas ni pagos duplicados.</div>
-              </div>
-
-              <div class="inspector-chart-box">
-                <div class="chart-header">
-                  <span class="chart-label">Compras en SUNAT vs registradas en sistema</span>
-                  <span class="chart-metric">4,120 facturas</span>
-                </div>
-                <div class="bar-row">
-                  <span class="bar-title">En SUNAT</span>
-                  <div class="bar-track"><div class="bar-fill blue" style="width: 100%;"></div></div>
-                  <span class="bar-value">4,120</span>
-                </div>
-                <div class="bar-row">
-                  <span class="bar-title">En sistema</span>
-                  <div class="bar-track"><div class="bar-fill green" style="width: 100%;"></div></div>
-                  <span class="bar-value">4,120</span>
-                </div>
-              </div>
-
-              <div class="inspector-meta-row">
-                <div class="inspector-meta-item">
-                  <span class="meta-label">Probado con</span>
-                  <span class="meta-val">SUNAT y Flowdesk</span>
-                </div>
-                <div class="inspector-meta-item">
-                  <span class="meta-label">Modalidad</span>
-                  <span class="meta-val highlight">Adaptable a tu negocio</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Diapositiva 9: Experiencia Corporativa 01 - Banca y pagos en Kreston Perú -->
-    <section id="proyecto-5" class="slide-section project-slide" aria-label="Experiencia Corporativa 1: Banca y pagos">
-      <div class="container slide-container">
-        <div class="slide-header-row">
-          <div>
-            <span class="slide-badge">Experiencia Laboral Actual · Kreston Perú</span>
-            <h2>Banca y pagos</h2>
-            <p class="section-subtitle">Experiencia en diez empresas.</p>
-          </div>
-        </div>
-
-        <div class="project-slide-grid">
-          <!-- Columna Izquierda: Tarjeta Narrativa -->
-          <article class="project-narrative-card card">
-            <div class="card-content">
-              <div class="card-top">
-                <span class="card-category">Trabajo Actual · 160h/mes</span>
-                <span class="mini-badge">10 empresas</span>
-              </div>
-              <h3>Operaciones en Telecrédito</h3>
-              <p class="project-context">En mi puesto actual en Kreston Perú llevo la tesorería y los pagos de diez empresas. Ese trabajo diario me da el criterio práctico para armar herramientas que sí sirven en la oficina.</p>
-              <ul class="project-bullets">
-                <li>Entro a Telecrédito BCP y BBVA Net Cash para cargar pagos masivos a proveedores, sueldos de planilla, depósitos de CTS y detracciones.</li>
-                <li>Envío alertas de pagos pendientes todos los viernes y llevo el cuadro de préstamos, cuotas bancarias y fraccionamientos.</li>
-                <li>Reviso el tipo de cambio que aplican los bancos y presento reclamos formales cuando hay diferencias (como en un abono de planilla en BBVA).</li>
-              </ul>
-              <div class="tag-list">
-                <span class="tag">Telecrédito BCP</span>
-                <span class="tag">BBVA Net Cash</span>
-                <span class="tag">Planillas y CTS</span>
-                <span class="tag">Experiencia Kreston</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Columna Derecha: Tarjeta Visual con Border Beam -->
-          <div class="project-visual-card border-beam-card">
-            <div class="visual-header">
-              <div class="visual-title-row">
-                <span class="live-dot" aria-hidden="true"></span>
-                <h3>Respaldo de experiencia</h3>
-              </div>
-              <span class="mini-badge">100% puntual</span>
-            </div>
-            <div class="visual-body">
-              <div class="inspector-kpi-highlight">
-                <span class="inspector-kpi-title">Responsabilidad diaria en firma contable</span>
-                <div class="inspector-kpi-number">$0 USD en moras</div>
-                <div class="inspector-kpi-desc">160 horas al mes gestionando bancos, sueldos, CTS, detracciones y conciliaciones de 10 clientes.</div>
-              </div>
-
-              <div class="inspector-chart-box">
-                <div class="chart-header">
-                  <span class="chart-label">Distribución de pagos que opero cada mes</span>
-                  <span class="chart-metric">100% al día</span>
-                </div>
-                <div class="bar-row">
-                  <span class="bar-title">Proveedores</span>
-                  <div class="bar-track"><div class="bar-fill blue" style="width: 55%;"></div></div>
-                  <span class="bar-value">55%</span>
-                </div>
-                <div class="bar-row">
-                  <span class="bar-title">Sueldos y CTS</span>
-                  <div class="bar-track"><div class="bar-fill green" style="width: 30%;"></div></div>
-                  <span class="bar-value">30%</span>
-                </div>
-                <div class="bar-row">
-                  <span class="bar-title">Detracciones</span>
-                  <div class="bar-track"><div class="bar-fill gray" style="width: 15%;"></div></div>
-                  <span class="bar-value">15%</span>
-                </div>
-              </div>
-
-              <div class="inspector-meta-row">
-                <div class="inspector-meta-item">
-                  <span class="meta-label">Firma</span>
-                  <span class="meta-val">Kreston Perú</span>
-                </div>
-                <div class="inspector-meta-item">
-                  <span class="meta-label">Vínculo</span>
-                  <span class="meta-val highlight">Trabajo fijo actual</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Diapositiva 10: Experiencia Corporativa 02 - Orden en pagos -->
-    <section id="proyecto-6" class="slide-section project-slide" aria-label="Experiencia Corporativa 2: Orden en pagos">
-      <div class="container slide-container">
-        <div class="slide-header-row">
-          <div>
-            <span class="slide-badge">Experiencia Laboral Actual · Procesos en Kreston Perú</span>
-            <h2>Orden en pagos</h2>
-            <p class="section-subtitle">Reglas claras de aprobación.</p>
-          </div>
-        </div>
-
-        <div class="project-slide-grid">
-          <!-- Columna Izquierda: Tarjeta Narrativa -->
-          <article class="project-narrative-card card">
-            <div class="card-content">
-              <div class="card-top">
-                <span class="card-category">Gestión Interna</span>
-                <span class="mini-badge">0 pagos sin sustento</span>
-              </div>
-              <h3>Control interno empresarial</h3>
-              <p class="project-context">Participé en la organización del Área de Tesorería de Kreston Perú, armando el manual de pagos y los flujos de aprobación para clientes.</p>
-              <ul class="project-bullets">
-                <li>Redacté el Manual del Proceso de Gestión de Pagos para dejar claro quién revisa la factura, quién autoriza y quién transfiere en el banco.</li>
-                <li>Me reuní con los equipos operativos y dibujé 3 flujogramas para pasar de firmas en papel a autorizaciones digitales (caso SIM).</li>
-                <li>Reviso dos veces por semana los documentos comerciales y tributarios en clientes (Kinacox) para pagar solo operaciones verificadas.</li>
-              </ul>
-              <div class="tag-list">
-                <span class="tag">Manual de pagos</span>
-                <span class="tag">Control de riesgos</span>
-                <span class="tag">3 flujogramas</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Columna Derecha: Tarjeta Visual con Border Beam -->
-          <div class="project-visual-card border-beam-card">
-            <div class="visual-header">
-              <div class="visual-title-row">
-                <span class="live-dot" aria-hidden="true"></span>
-                <h3>Seguridad en pagos</h3>
-              </div>
+          <!-- Columna 2: Orden en Pagos -->
+          <article class="card service-bento-card">
+            <div class="card-top">
+              <span class="card-category">Control Interno</span>
               <span class="mini-badge">Formalizado</span>
             </div>
-            <div class="visual-body">
-              <div class="inspector-kpi-highlight">
-                <span class="inspector-kpi-title">Cuidado del dinero de la empresa</span>
-                <div class="inspector-kpi-number">100% verificado</div>
-                <div class="inspector-kpi-desc">Cada pago pasa por revisión de factura, detracción y autorización antes de entrar al banco.</div>
-              </div>
-
-              <div class="inspector-chart-box">
-                <div class="chart-header">
-                  <span class="chart-label">Pasos para autorizar un desembolso</span>
-                  <span class="chart-metric" style="color: var(--mute);">3 pasos</span>
-                </div>
-                <div class="workflow-steps-row" style="font-size: 11.5px; display: flex; justify-content: space-between; align-items: center; margin-top: 10px; color: var(--body);">
-                  <span class="wf-step" style="background: var(--canvas); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--hairline); font-weight: 500;">1. Revisar</span>
-                  <span style="color: var(--mute);">→</span>
-                  <span class="wf-step" style="background: var(--canvas); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--hairline); font-weight: 500;">2. Aprobar</span>
-                  <span style="color: var(--mute);">→</span>
-                  <span class="wf-step" style="background: var(--canvas); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--hairline); font-weight: 500;">3. Pagar</span>
-                </div>
-              </div>
-
-              <div class="inspector-meta-row">
-                <div class="inspector-meta-item">
-                  <span class="meta-label">Aplicado en</span>
-                  <span class="meta-val">Kreston, SIM y Kinacox</span>
-                </div>
-                <div class="inspector-meta-item">
-                  <span class="meta-label">Estado</span>
-                  <span class="meta-val highlight">En uso diario</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Diapositiva 11: Proyecto Interno en Pruebas - Descarga de facturas -->
-    <section id="proyecto-4" class="slide-section project-slide" aria-label="Proyecto en pruebas: Descarga de facturas">
-      <div class="container slide-container">
-        <div class="slide-header-row">
-          <div>
-            <span class="slide-badge">Desarrollo Interno · En Fase de Pruebas</span>
-            <h2>Descarga de facturas</h2>
-            <p class="section-subtitle">Herramienta interna en pruebas.</p>
-          </div>
-        </div>
-
-        <div class="project-slide-grid">
-          <!-- Columna Izquierda: Tarjeta Narrativa -->
-          <article class="project-narrative-card card">
-            <div class="card-content">
-              <div class="card-top">
-                <span class="card-category">Automatización</span>
-                <span class="mini-badge">En pruebas</span>
-              </div>
-              <h3>Descargas en lote</h3>
-              <p class="project-context">Estoy armando una herramienta propia para bajar facturas de compras y ventas desde el portal de SUNAT sin hacerlo una por una.</p>
-              <ul class="project-bullets">
-                <li>Incluye un panel de botones rápidos que ya uso a diario para abrir directo los portales de SUNAT y la banca BBVA Net Cash.</li>
-                <li>La pantalla principal para descargar comprobantes y registros de compras y ventas ya está armada al 80%.</li>
-                <li>Actualmente estoy probando y ajustando los botones para que funcione sin errores antes de su lanzamiento.</li>
-              </ul>
-              <div class="tag-list">
-                <span class="tag">Portal SUNAT</span>
-                <span class="tag">Accesos rápidos</span>
-                <span class="tag">En pruebas</span>
-              </div>
+            <h3>Orden en pagos</h3>
+            <p class="project-context">Participé en la creación del área de tesorería, redactando el manual de pagos y los flujos digitales de aprobación.</p>
+            <ul class="project-bullets">
+              <li>Definí reglas claras de quién revisa la factura, quién autoriza y quién transfiere.</li>
+              <li>Diseñé tres flujogramas para pasar de firmas en papel a aprobaciones digitales.</li>
+              <li>Verifico documentos comerciales y tributarios dos veces por semana antes de pagar.</li>
+            </ul>
+            <div class="tag-list">
+              <span class="tag">Manual de pagos</span>
+              <span class="tag">3 flujogramas</span>
+              <span class="tag">Control de riesgos</span>
             </div>
           </article>
 
-          <!-- Columna Derecha: Tarjeta Visual con Border Beam -->
-          <div class="project-visual-card border-beam-card">
-            <div class="visual-header">
-              <div class="visual-title-row">
-                <span class="live-dot" aria-hidden="true"></span>
-                <h3>Estado del avance</h3>
-              </div>
-              <span class="mini-badge">Pantalla lista</span>
+          <!-- Columna 3: Descargas en Lote (En pruebas) -->
+          <article class="card service-bento-card">
+            <div class="card-top">
+              <span class="card-category">Desarrollo Interno</span>
+              <span class="mini-badge">En pruebas · 80%</span>
             </div>
-            <div class="visual-body">
-              <div class="inspector-kpi-highlight">
-                <span class="inspector-kpi-title">Avance de la herramienta</span>
-                <div class="inspector-kpi-number">80% completado</div>
-                <div class="inspector-kpi-desc">Accesos rápidos a bancos activos y módulo de descarga de facturas en etapa de pruebas.</div>
-              </div>
-
-              <div class="inspector-chart-box">
-                <div class="chart-header">
-                  <span class="chart-label">Avance de pruebas antes de usarla</span>
-                  <span class="chart-metric">80% avanzado</span>
-                </div>
-                <div class="bar-track" style="margin-top: 10px;">
-                  <div class="bar-fill blue" style="width: 80%;"></div>
-                </div>
-              </div>
-
-              <div class="inspector-meta-row">
-                <div class="inspector-meta-item">
-                  <span class="meta-label">Entorno</span>
-                  <span class="meta-val">SUNAT y BBVA</span>
-                </div>
-                <div class="inspector-meta-item">
-                  <span class="meta-label">Estado</span>
-                  <span class="meta-val highlight">En pruebas internas</span>
-                </div>
-              </div>
+            <h3>Descargas en lote</h3>
+            <p class="project-context">Estoy armando una herramienta propia para bajar facturas de compras y ventas desde el portal tributario sin hacerlo una por una.</p>
+            <ul class="project-bullets">
+              <li>Incluye un panel de botones rápidos activo para entrar en un clic a portales y bancos.</li>
+              <li>La pantalla para descargar comprobantes y registros mensuales avanza al 80%.</li>
+              <li>Actualmente en etapa de pruebas y ajuste funcional antes de su lanzamiento.</li>
+            </ul>
+            <div class="tag-list">
+              <span class="tag">Accesos rápidos</span>
+              <span class="tag">Portal tributario</span>
+              <span class="tag">En validación</span>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Diapositiva 12: Catálogo de Servicios Freelance ("Cotización según alcance") y Formulario de Contacto -->
-    <section id="contacto" class="slide-section contact-slide" aria-label="Servicios freelance y contacto directo">
+    <!-- Sección 8: Franja de Logos de Mis Clientes + Catálogo Freelance + Formulario -->
+    <section id="contacto" class="slide-section contact-slide" aria-label="Clientes, servicios y contacto">
       <div class="container slide-container">
         <div class="slide-header-row">
           <div>
-            <span class="slide-badge">Servicios Freelance por Entregable</span>
             <h2>Cotizar un proyecto</h2>
-            <p class="section-subtitle">Servicios freelance a medida.</p>
+            <p class="section-subtitle">Clientes y contacto directo.</p>
+          </div>
+        </div>
+
+        <!-- Franja de Logos de Clientes y Experiencia -->
+        <div class="client-logos-strip" aria-label="Empresas con las que he trabajado">
+          <span class="logos-strip-label">Empresas con las que he trabajado</span>
+          <div class="logos-row">
+            <div class="client-logo-badge" title="Kreston Perú">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>
+              <span>KRESTON PERÚ</span>
+            </div>
+            <div class="client-logo-badge" title="Tecnovax">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/></svg>
+              <span>TECNOVAX</span>
+            </div>
+            <div class="client-logo-badge" title="Valente">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 5l8 14L20 5"/></svg>
+              <span>VALENTE</span>
+            </div>
+            <div class="client-logo-badge" title="RPC">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 10h8M8 14h5"/></svg>
+              <span>RPC</span>
+            </div>
+            <div class="client-logo-badge" title="Zinzino">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 6h14L5 18h14"/></svg>
+              <span>ZINZINO</span>
+            </div>
+            <div class="client-logo-badge" title="Kinacox">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 4v16M18 4l-9 8 9 8"/></svg>
+              <span>KINACOX</span>
+            </div>
+            <div class="client-logo-badge" title="SIM">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>
+              <span>SIM</span>
+            </div>
+            <div class="client-logo-badge" title="Quna">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg>
+              <span>QUNA</span>
+            </div>
+            <div class="client-logo-badge" title="Casa Suárez">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 11l9-7 9 7v9H3z"/></svg>
+              <span>CASA SUÁREZ</span>
+            </div>
           </div>
         </div>
 
         <div class="contact-sales-grid">
-          <!-- Columna Izquierda: 3 Servicios Freelance en Lenguaje Sencillo -->
+          <!-- Columna Izquierda: 3 Servicios Freelance bajo Cotización según alcance -->
           <article class="card pricing-reference-card">
             <div class="card-top">
               <span class="card-category">Mis servicios freelance</span>
               <span class="mini-badge">Pago por proyecto</span>
             </div>
             <h3>Soluciones y alcance</h3>
-            <p class="project-context">Elige el servicio que te interesa para cargarlo en el formulario. Te doy un presupuesto según lo que necesites automatizar.</p>
 
             <div class="pricing-tier-list" role="listbox" aria-label="Servicios freelance disponibles">
               <button type="button" class="pricing-tier-item active" data-tier="Macros y plantillas en Excel" onclick="selectServiceTier('Macros y plantillas en Excel', this)">
                 <div class="tier-main">
                   <span class="tier-name">Macros y plantillas en Excel</span>
-                  <span class="tier-desc">Archivos automáticos para cargar compras y ventas o cruzar facturas con SUNAT.</span>
+                  <span class="tier-desc">Archivos automáticos para cargar compras, ventas o cruzar facturas.</span>
                 </div>
                 <div class="tier-price-col">
                   <span class="tier-price">Cotización según alcance</span>
@@ -1068,7 +659,7 @@
               <button type="button" class="pricing-tier-item" data-tier="Tableros en Power BI y Excel" onclick="selectServiceTier('Tableros en Power BI y Excel', this)">
                 <div class="tier-main">
                   <span class="tier-name">Tableros en Power BI y Excel</span>
-                  <span class="tier-desc">Gráficos claros de ventas, gastos, cobranzas o tipos de cambio conectados a tus datos.</span>
+                  <span class="tier-desc">Gráficos de ventas, gastos, cobranzas o divisas conectados a tus datos.</span>
                 </div>
                 <div class="tier-price-col">
                   <span class="tier-price">Cotización según alcance</span>
@@ -1079,7 +670,7 @@
               <button type="button" class="pricing-tier-item" data-tier="Estados financieros automatizados" onclick="selectServiceTier('Estados financieros automatizados', this)">
                 <div class="tier-main">
                   <span class="tier-name">Estados financieros automatizados</span>
-                  <span class="tier-desc">Conexión a tu sistema contable para sacar balance, resultados, ratios y notas 10-59.</span>
+                  <span class="tier-desc">Conexión a tu sistema contable para balance, resultados, ratios y notas.</span>
                 </div>
                 <div class="tier-price-col">
                   <span class="tier-price">Cotización según alcance</span>
@@ -1118,7 +709,7 @@
 
               <div class="form-field">
                 <label for="quote-goal">Cuéntame en breve qué tarea quieres agilizar</label>
-                <input type="text" id="quote-goal" name="goal" placeholder="Ej. Quiero que mis estados financieros o cargas de compras se armen sin tipear a mano">
+                <input type="text" id="quote-goal" name="goal" placeholder="Ej. Quiero que mis balances o cargas de compras se armen sin tipear a mano">
               </div>
 
               <div class="quote-submit-row">
@@ -1150,7 +741,7 @@
                 </a>
               </div>
 
-              <button type="button" class="btn btn-secondary back-to-top-btn shimmer-btn" onclick="goToSlide(0)" title="Volver a la primera diapositiva">
+              <button type="button" class="btn btn-secondary back-to-top-btn shimmer-btn" onclick="goToSlide(0)" title="Volver a la primera sección">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 5px;">
                   <line x1="12" y1="19" x2="12" y2="5"></line>
                   <polyline points="5 12 12 5 19 12"></polyline>
@@ -1164,7 +755,7 @@
     </section>
   </main>
 
-  <!-- Controlador de Scrollytelling e Interactividad -->
-  <script src="app.js?v=11.0"></script>
+  <!-- Controlador de Navegación e Interactividad -->
+  <script src="app.js?v=12.0"></script>
 </body>
 </html>
