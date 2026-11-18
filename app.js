@@ -178,7 +178,7 @@ function goToSlide(targetIndex) {
       sec.setAttribute('aria-hidden', isActive ? 'false' : 'true');
     });
 
-    if (targetIndex === 0) {
+    if (slides[targetIndex] === 'inicio') {
       triggerNumberTicker();
     }
     return;
@@ -189,7 +189,7 @@ function goToSlide(targetIndex) {
 
   const wrapper = document.getElementById('slides-wrapper');
   if (targetIndex === currentSlideIndex && wrapper && wrapper.style.transform) {
-    if (targetIndex === 0) {
+    if (slides[targetIndex] === 'inicio') {
       triggerNumberTicker();
     }
     return;
@@ -228,7 +228,7 @@ function goToSlide(targetIndex) {
   }
 
   // Disparar animación de métricas en diapositiva de inicio
-  if (targetIndex === 0) {
+  if (slides[targetIndex] === 'inicio') {
     triggerNumberTicker();
   }
 

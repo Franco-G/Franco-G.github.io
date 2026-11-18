@@ -1751,8 +1751,7 @@ header.hero-section {
   }
 
   /* Diapositiva inicial con margen para la cabecera fija y banner */
-  .slide-section:first-of-type,
-  #inicio {
+  .slide-section:first-of-type {
     padding-top: 6.5rem !important;
   }
 

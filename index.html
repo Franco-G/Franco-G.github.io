@@ -87,14 +87,14 @@
 
   <!-- Navegación Flotante Global de Diapositivas (10 Puntos Fijos en Pantalla) -->
   <nav class="scrolly-nav-dots" aria-label="Navegación de diapositivas">
-    <button class="scrolly-nav-dot active" data-chapter="inicio" data-slide-index="0" title="Inicio" aria-label="Diapositiva 1: Inicio" onclick="goToSlide(0)">
+    <button class="scrolly-nav-dot active" data-chapter="dashboard-powerbi" data-slide-index="0" title="Power BI" aria-label="Diapositiva 1: Power BI" onclick="goToSlide(0)">
+      <span class="nav-dot-tooltip">Power BI</span>
+    </button>
+    <button class="scrolly-nav-dot" data-chapter="inicio" data-slide-index="1" title="Inicio" aria-label="Diapositiva 2: Inicio" onclick="goToSlide(1)">
       <span class="nav-dot-tooltip">Inicio</span>
     </button>
-    <button class="scrolly-nav-dot" data-chapter="experiencia" data-slide-index="1" title="Experiencia" aria-label="Diapositiva 2: Experiencia" onclick="goToSlide(1)">
+    <button class="scrolly-nav-dot" data-chapter="experiencia" data-slide-index="2" title="Experiencia" aria-label="Diapositiva 3: Experiencia" onclick="goToSlide(2)">
       <span class="nav-dot-tooltip">Experiencia</span>
-    </button>
-    <button class="scrolly-nav-dot" data-chapter="dashboard-powerbi" data-slide-index="2" title="Power BI" aria-label="Diapositiva 3: Power BI" onclick="goToSlide(2)">
-      <span class="nav-dot-tooltip">Power BI</span>
     </button>
     <button class="scrolly-nav-dot" data-chapter="proyecto-1" data-slide-index="3" title="Consolidación" aria-label="Diapositiva 4: Consolidación" onclick="goToSlide(3)">
       <span class="nav-dot-tooltip">Consolidación</span>
@@ -134,7 +134,103 @@
 
   <!-- Contenedor Maestro de Diapositivas (Paginación por Pantallas 100vh) -->
   <main class="slides-wrapper" id="slides-wrapper">
-    <!-- Diapositiva 1: Inicio y Métricas -->
+    <!-- Diapositiva 1: Portafolio de Tableros Power BI Conectados a APIs -->
+    <section id="dashboard-powerbi" class="slide-section powerbi-slide" aria-label="Tableros interactivos de Power BI">
+      <div class="container slide-container">
+        <div class="slide-header-row">
+          <div>
+            <div class="title-with-badge">
+              <span class="live-dot" aria-hidden="true"></span>
+              <h2>Tableros Power BI</h2>
+            </div>
+            <p class="section-subtitle">APIs públicas en vivo.</p>
+          </div>
+          <div class="tab-group" role="tablist" aria-label="Proyectos Power BI">
+            <button type="button" class="tab-btn active" role="tab" aria-selected="true" data-tab="pbi-divisas" data-pbi-src="https://app.powerbi.com/view?r=eyJrIjoiNDcwOTNiMjEtNTNmYy00NjhkLTk3ZjQtOGE0NjE1NzA1ZDk3IiwidCI6ImM0YTY2YzM0LTJiYjctNDUxZi04YmUxLWIyYzI2YTQzMDE1OCIsImMiOjR9" data-pbi-title="Monitor_Divisas_Globales" onclick="manualSwitchTab('pbi-divisas', this)">Monitor de divisas</button>
+            <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="pbi-ia" data-pbi-src="https://app.powerbi.com/view?r=eyJrIjoiYTJmZWM3NTItN2VhZC00MzBiLTgxODgtZmY5ZDk1OTUxZGU1IiwidCI6ImM0YTY2YzM0LTJiYjctNDUxZi04YmUxLWIyYzI2YTQzMDE1OCIsImMiOjR9" data-pbi-title="Modelos_IA_Frontera" onclick="manualSwitchTab('pbi-ia', this)">Modelos de IA</button>
+            <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="pbi-champions" data-pbi-src="https://app.powerbi.com/view?r=eyJrIjoiYjA5OTdkOGItY2VkOS00YzM4LTk2YjYtOWVmZTgzYmE0YjkxIiwidCI6ImM0YTY2YzM0LTJiYjctNDUxZi04YmUxLWIyYzI2YTQzMDE1OCIsImMiOjR9" data-pbi-title="Champions_League_2026" onclick="manualSwitchTab('pbi-champions', this)">Champions League</button>
+          </div>
+        </div>
+
+        <div class="powerbi-project-grid">
+          <!-- Columna Izquierda: Ficha de cada proyecto -->
+          <article class="card powerbi-info-card">
+            <!-- Proyecto 1: Monitor de divisas globales y Latinoamérica -->
+            <div id="tab-pbi-divisas" class="tab-content active" role="tabpanel">
+              <div class="card-top">
+                <span class="card-category">Finanzas · API</span>
+                <span class="mini-badge">Serie 2026</span>
+              </div>
+              <h3>Monitor de divisas</h3>
+              <p class="project-context">Armado para quienes manejan presupuestos, compras o ingresos en dólares desde Latinoamérica. Combina la serie diaria 2026 de Frankfurter (BCE) con cotizaciones del día.</p>
+              <ul class="project-bullets">
+                <li>Cuatro tarjetas con el tipo de cambio vigente frente al dólar en Perú, Colombia, Chile y Argentina.</li>
+                <li>Evolución diaria de 2026 por moneda y barras de variación acumulada en el año.</li>
+                <li>Tabla resumen con tasa actual, variación acumulada y volatilidad para medir estabilidad.</li>
+              </ul>
+              <div class="tag-list">
+                <span class="tag">Frankfurter BCE</span>
+                <span class="tag">Divisas Latam</span>
+                <span class="tag">Volatilidad</span>
+              </div>
+            </div>
+
+            <!-- Proyecto 2: Modelos frontera de IA -->
+            <div id="tab-pbi-ia" class="tab-content" role="tabpanel">
+              <div class="card-top">
+                <span class="card-category">Tecnología · API</span>
+                <span class="mini-badge">88 modelos</span>
+              </div>
+              <h3>Modelos de IA</h3>
+              <p class="project-context">Cuando toca elegir un modelo para trabajar o pagar una suscripción, el precio pesa tanto como el rendimiento. Conecté el catálogo de TensorFeed para comparar 88 modelos.</p>
+              <ul class="project-bullets">
+                <li>Indicadores rápidos con el líder en inteligencia (TFII), promedio del mercado y calidad frente a precio.</li>
+                <li>Dispersión entre costo por millón de tokens y puntaje, separada por gama (flagship, mid y budget).</li>
+                <li>Comparativo por tarea en código, agentes y ciencia, más tabla para ordenar prioridades.</li>
+              </ul>
+              <div class="tag-list">
+                <span class="tag">TensorFeed API</span>
+                <span class="tag">88 modelos</span>
+                <span class="tag">Calidad y precio</span>
+              </div>
+            </div>
+
+            <!-- Proyecto 3: Champions League 2026/27 -->
+            <div id="tab-pbi-champions" class="tab-content" role="tabpanel">
+              <div class="card-top">
+                <span class="card-category">Deporte · API</span>
+                <span class="mini-badge">36 clubes</span>
+              </div>
+              <h3>Champions League 2026/27</h3>
+              <p class="project-context">Quería ver qué tan parejo está el nuevo formato de liga sin quedarme en la tabla común. Conecté la API abierta de OpenLigaDB para traer los 36 clubes, sus puntos y goles.</p>
+              <ul class="project-bullets">
+                <li>Tabla de posiciones con diferencia de goles y efectividad por club.</li>
+                <li>Gráfico de dispersión entre goles a favor y en contra para distinguir ataque y defensa.</li>
+                <li>Ranking de goleadores para ver quién sostiene el peso ofensivo de cada equipo.</li>
+              </ul>
+              <div class="tag-list">
+                <span class="tag">OpenLigaDB API</span>
+                <span class="tag">Power BI</span>
+                <span class="tag">Datos en vivo</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Columna Derecha: Visor interactivo Power BI con Border Beam -->
+          <div class="powerbi-frame-card border-beam-card">
+            <iframe
+              id="powerbi-main-iframe"
+              title="Monitor_Divisas_Globales"
+              src="https://app.powerbi.com/view?r=eyJrIjoiNDcwOTNiMjEtNTNmYy00NjhkLTk3ZjQtOGE0NjE1NzA1ZDk3IiwidCI6ImM0YTY2YzM0LTJiYjctNDUxZi04YmUxLWIyYzI2YTQzMDE1OCIsImMiOjR9"
+              frameborder="0"
+              allowFullScreen="true">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 2: Inicio y Métricas -->
     <section id="inicio" class="slide-section hero-chapter" aria-label="Inicio y métricas">
       <div class="container slide-container">
         <header class="hero-section">
@@ -144,7 +240,7 @@
             Llevo la tesorería y los pagos de diez empresas en Kreston Perú. Cuando los cruces contables o los reportes en hojas de cálculo toman demasiado tiempo, armo consultas en Power Query para que los datos cuadren solos. Menos errores, menos horas perdidas y números listos para la gerencia.
           </p>
           <div class="btn-group">
-            <a href="#experiencia" class="btn btn-primary shimmer-btn" onclick="goToSlide(1); return false;">Ver experiencia</a>
+            <a href="#experiencia" class="btn btn-primary shimmer-btn" onclick="goToSlide(2); return false;">Ver experiencia</a>
           </div>
         </header>
 
@@ -174,7 +270,7 @@
       </div>
     </section>
 
-    <!-- Diapositiva 2: Experiencia con Tablero Interactivo -->
+    <!-- Diapositiva 3: Experiencia con Tablero Interactivo -->
     <section class="slide-section scrolly-section" id="experiencia" aria-label="Experiencia laboral y modelos">
       <div class="container slide-container">
         <div class="slide-header-row">
@@ -362,103 +458,6 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Diapositiva 3: Portafolio de Tableros Power BI Conectados a APIs -->
-    <section id="dashboard-powerbi" class="slide-section powerbi-slide" aria-label="Tableros interactivos de Power BI">
-      <div class="container slide-container">
-        <div class="slide-header-row">
-          <div>
-            <div class="title-with-badge">
-              <span class="live-dot" aria-hidden="true"></span>
-              <h2>Tableros Power BI</h2>
-            </div>
-            <p class="section-subtitle">APIs públicas en vivo.</p>
-          </div>
-          <div class="tab-group" role="tablist" aria-label="Proyectos Power BI">
-            <button type="button" class="tab-btn active" role="tab" aria-selected="true" data-tab="pbi-champions" data-pbi-src="https://app.powerbi.com/view?r=eyJrIjoiYjA5OTdkOGItY2VkOS00YzM4LTk2YjYtOWVmZTgzYmE0YjkxIiwidCI6ImM0YTY2YzM0LTJiYjctNDUxZi04YmUxLWIyYzI2YTQzMDE1OCIsImMiOjR9" data-pbi-title="Champions_League_2026" onclick="manualSwitchTab('pbi-champions', this)">Champions League</button>
-            <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="pbi-ia" data-pbi-src="https://app.powerbi.com/view?r=eyJrIjoiYTJmZWM3NTItN2VhZC00MzBiLTgxODgtZmY5ZDk1OTUxZGU1IiwidCI6ImM0YTY2YzM0LTJiYjctNDUxZi04YmUxLWIyYzI2YTQzMDE1OCIsImMiOjR9" data-pbi-title="Modelos_IA_Frontera" onclick="manualSwitchTab('pbi-ia', this)">Modelos de IA</button>
-            <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="pbi-divisas" data-pbi-src="https://app.powerbi.com/view?r=eyJrIjoiNDcwOTNiMjEtNTNmYy00NjhkLTk3ZjQtOGE0NjE1NzA1ZDk3IiwidCI6ImM0YTY2YzM0LTJiYjctNDUxZi04YmUxLWIyYzI2YTQzMDE1OCIsImMiOjR9" data-pbi-title="Monitor_Divisas_Globales" onclick="manualSwitchTab('pbi-divisas', this)">Monitor de divisas</button>
-          </div>
-        </div>
-
-        <div class="powerbi-project-grid">
-          <!-- Columna Izquierda: Ficha de cada proyecto -->
-          <article class="card powerbi-info-card">
-            <!-- Proyecto 1: Champions League 2026/27 -->
-            <div id="tab-pbi-champions" class="tab-content active" role="tabpanel">
-              <div class="card-top">
-                <span class="card-category">Deporte · API</span>
-                <span class="mini-badge">36 clubes</span>
-              </div>
-              <h3>Champions League 2026/27</h3>
-              <p class="project-context">Quería ver qué tan parejo está el nuevo formato de liga sin quedarme en la tabla común. Conecté la API abierta de OpenLigaDB para traer los 36 clubes, sus puntos y goles.</p>
-              <ul class="project-bullets">
-                <li>Tabla de posiciones con diferencia de goles y efectividad por club.</li>
-                <li>Gráfico de dispersión entre goles a favor y en contra para distinguir ataque y defensa.</li>
-                <li>Ranking de goleadores para ver quién sostiene el peso ofensivo de cada equipo.</li>
-              </ul>
-              <div class="tag-list">
-                <span class="tag">OpenLigaDB API</span>
-                <span class="tag">Power BI</span>
-                <span class="tag">Datos en vivo</span>
-              </div>
-            </div>
-
-            <!-- Proyecto 2: Modelos frontera de IA -->
-            <div id="tab-pbi-ia" class="tab-content" role="tabpanel">
-              <div class="card-top">
-                <span class="card-category">Tecnología · API</span>
-                <span class="mini-badge">88 modelos</span>
-              </div>
-              <h3>Modelos de IA</h3>
-              <p class="project-context">Cuando toca elegir un modelo para trabajar o pagar una suscripción, el precio pesa tanto como el rendimiento. Conecté el catálogo de TensorFeed para comparar 88 modelos.</p>
-              <ul class="project-bullets">
-                <li>Indicadores rápidos con el líder en inteligencia (TFII), promedio del mercado y calidad frente a precio.</li>
-                <li>Dispersión entre costo por millón de tokens y puntaje, separada por gama (flagship, mid y budget).</li>
-                <li>Comparativo por tarea en código, agentes y ciencia, más tabla para ordenar prioridades.</li>
-              </ul>
-              <div class="tag-list">
-                <span class="tag">TensorFeed API</span>
-                <span class="tag">88 modelos</span>
-                <span class="tag">Calidad y precio</span>
-              </div>
-            </div>
-
-            <!-- Proyecto 3: Monitor de divisas globales y Latinoamérica -->
-            <div id="tab-pbi-divisas" class="tab-content" role="tabpanel">
-              <div class="card-top">
-                <span class="card-category">Finanzas · API</span>
-                <span class="mini-badge">Serie 2026</span>
-              </div>
-              <h3>Monitor de divisas</h3>
-              <p class="project-context">Armado para quienes manejan presupuestos, compras o ingresos en dólares desde Latinoamérica. Combina la serie diaria 2026 de Frankfurter (BCE) con cotizaciones del día.</p>
-              <ul class="project-bullets">
-                <li>Cuatro tarjetas con el tipo de cambio vigente frente al dólar en Perú, Colombia, Chile y Argentina.</li>
-                <li>Evolución diaria de 2026 por moneda y barras de variación acumulada en el año.</li>
-                <li>Tabla resumen con tasa actual, variación acumulada y volatilidad para medir estabilidad.</li>
-              </ul>
-              <div class="tag-list">
-                <span class="tag">Frankfurter BCE</span>
-                <span class="tag">Divisas Latam</span>
-                <span class="tag">Volatilidad</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Columna Derecha: Visor interactivo Power BI con Border Beam -->
-          <div class="powerbi-frame-card border-beam-card">
-            <iframe
-              id="powerbi-main-iframe"
-              title="Champions_League_2026"
-              src="https://app.powerbi.com/view?r=eyJrIjoiYjA5OTdkOGItY2VkOS00YzM4LTk2YjYtOWVmZTgzYmE0YjkxIiwidCI6ImM0YTY2YzM0LTJiYjctNDUxZi04YmUxLWIyYzI2YTQzMDE1OCIsImMiOjR9"
-              frameborder="0"
-              allowFullScreen="true"
-              loading="lazy">
-            </iframe>
           </div>
         </div>
       </div>
