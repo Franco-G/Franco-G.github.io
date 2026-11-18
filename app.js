@@ -293,7 +293,7 @@ function updateNavControlsState() {
 }
 
 /**
- * 4. Pestañas Interactivas en Diapositivas (Experiencia y Power BI)
+ * 4. Pestañas Interactivas en Diapositivas (Tablero de Impacto)
  */
 function manualSwitchTab(tabId, triggerBtn) {
   const refBtn = triggerBtn || document.querySelector(`.tab-group .tab-btn[data-tab="${tabId}"]`);
@@ -308,18 +308,53 @@ function manualSwitchTab(tabId, triggerBtn) {
   scope.querySelectorAll('.tab-content').forEach(content => {
     content.classList.toggle('active', content.id === 'tab-' + tabId);
   });
+}
 
-  if (refBtn) {
-    const nextSrc = refBtn.getAttribute('data-pbi-src');
-    const iframe = scope.querySelector('#powerbi-main-iframe');
-    if (nextSrc && iframe && iframe.getAttribute('src') !== nextSrc) {
-      iframe.setAttribute('src', nextSrc);
-      const nextTitle = refBtn.getAttribute('data-pbi-title');
-      if (nextTitle) {
-        iframe.setAttribute('title', nextTitle);
-      }
-    }
+/**
+ * 4B. Selección de Paquetes de Tarifas en USD y Envío de Cotización
+ */
+function selectServiceTier(tierValue, triggerEl) {
+  document.querySelectorAll('.pricing-tier-item').forEach(item => {
+    const isSelected = triggerEl ? item === triggerEl : item.getAttribute('data-tier') === tierValue;
+    item.classList.toggle('active', isSelected);
+  });
+
+  const serviceSelect = document.getElementById('quote-service');
+  if (serviceSelect && tierValue) {
+    serviceSelect.value = tierValue;
   }
+
+  const nameInput = document.getElementById('quote-name');
+  const goalInput = document.getElementById('quote-goal');
+  if (nameInput && !nameInput.value.trim()) {
+    nameInput.focus();
+  } else if (goalInput) {
+    goalInput.focus();
+  }
+}
+
+function handleQuoteSubmit(channel) {
+  const nameInput = document.getElementById('quote-name');
+  const serviceSelect = document.getElementById('quote-service');
+  const goalInput = document.getElementById('quote-goal');
+
+  const name = (nameInput && nameInput.value.trim()) ? nameInput.value.trim() : 'Cliente interesado';
+  const service = (serviceSelect && serviceSelect.value) ? serviceSelect.value : 'Automatización Financiera & BI';
+  const goal = (goalInput && goalInput.value.trim()) ? goalInput.value.trim() : 'Me gustaría conversar sobre este servicio y conocer una cotización exacta.';
+
+  if (channel === 'email') {
+    const subject = encodeURIComponent(`Consulta de Proyecto: ${service} - ${name}`);
+    const body = encodeURIComponent(
+      `Hola Franco,\n\nSoy ${name}.\n\nEstoy interesado en: ${service}.\nDetalle o proceso a resolver: ${goal}\n\nQuedo atento para coordinar una breve reunión.`
+    );
+    window.location.href = `mailto:guerrerofranco1429@gmail.com?subject=${subject}&body=${body}`;
+    return;
+  }
+
+  const waMessage = encodeURIComponent(
+    `Hola Franco, soy *${name}*. Vi tu portafolio y me interesa cotizar: *${service}*.\n\nProceso o consulta: ${goal}`
+  );
+  window.open(`https://wa.me/51960748142?text=${waMessage}`, '_blank', 'noopener,noreferrer');
 }
 
 /**
@@ -495,4 +530,6 @@ function initRotationBanner() {
 // Exportar funciones globales para llamadas inline en HTML y suite de pruebas
 window.goToSlide = goToSlide;
 window.manualSwitchTab = manualSwitchTab;
+window.selectServiceTier = selectServiceTier;
+window.handleQuoteSubmit = handleQuoteSubmit;
 window.isDeckMode = isDeckMode;
