@@ -83,6 +83,11 @@ function initProgressRailClick() {
   });
 }
 
+function getHeaderOffset() {
+  const headerEl = document.querySelector('.sticky-header-bar');
+  return headerEl ? headerEl.offsetHeight : HEADER_HEIGHT;
+}
+
 function updateActiveMenuFromScroll() {
   if (sections.length === 0) return;
 
@@ -93,7 +98,7 @@ function updateActiveMenuFromScroll() {
   if (maxScroll > 0 && scrollTop >= maxScroll - 20) {
     activeIndex = sections.length - 1;
   } else {
-    const focusY = scrollTop + HEADER_HEIGHT + window.innerHeight * 0.35;
+    const focusY = scrollTop + getHeaderOffset() + window.innerHeight * 0.35;
     sections.forEach((sec, idx) => {
       if (sec.offsetTop <= focusY) {
         activeIndex = idx;
@@ -105,7 +110,7 @@ function updateActiveMenuFromScroll() {
 }
 
 function syncHeaderMenuLinks(targetIndex) {
-  const mappedIndex = (targetIndex >= 3 && targetIndex <= 5) ? 3 : targetIndex;
+  const mappedIndex = (targetIndex >= 3 && targetIndex <= 4) ? 3 : targetIndex;
   document.querySelectorAll('.nav-menu-link').forEach(link => {
     const linkIdx = parseInt(link.getAttribute('data-slide-index'), 10);
     link.classList.toggle('active', linkIdx === mappedIndex);
@@ -122,7 +127,8 @@ function goToSlide(targetIndex) {
   if (targetIndex < 0 || targetIndex >= sections.length) return;
 
   const targetEl = sections[targetIndex];
-  const targetTop = targetIndex === 0 ? 0 : Math.max(0, targetEl.offsetTop - HEADER_HEIGHT);
+  const headerOffset = getHeaderOffset();
+  const targetTop = targetIndex === 0 ? 0 : Math.max(0, targetEl.offsetTop - headerOffset);
 
   window.scrollTo({
     top: targetTop,

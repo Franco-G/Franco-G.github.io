@@ -80,6 +80,7 @@ body {
 .slide-container {
   max-width: 1140px;
   width: 100%;
+  min-width: 0;
   margin: 0 auto;
   padding: 0.5rem 1.5rem;
   box-sizing: border-box;
@@ -514,6 +515,7 @@ h3 {
 
 .card {
   position: relative;
+  min-width: 0;
   background: var(--surface-card);
   border: 1px solid transparent !important;
   border-radius: 12px;
@@ -574,6 +576,8 @@ h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
   margin-bottom: 0.45rem;
 }
 
@@ -866,6 +870,7 @@ h3 {
 .powerbi-frame-card {
   position: relative;
   width: 100%;
+  min-width: 0;
   border-radius: 14px;
   padding: 10px;
   background: var(--surface-card);
@@ -981,27 +986,31 @@ h3 {
 }
 
 .logos-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
 }
 
 .client-logo-badge {
   display: inline-flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 6px;
-  padding: 4px 10px;
+  min-width: 0;
+  padding: 5px 8px;
   border-radius: 6px;
   background: var(--canvas);
   border: 1px solid var(--hairline-soft);
   color: var(--ink);
   font-family: 'Inter Tight', sans-serif;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: 0.03em;
-  white-space: nowrap;
+  letter-spacing: 0.015em;
+  line-height: 1.25;
+}
+
+.client-logo-badge span {
+  min-width: 0;
 }
 
 .client-logo-badge svg {
@@ -1018,11 +1027,27 @@ h3 {
 }
 
 .pricing-reference-card {
+  min-width: 0;
   padding: 16px 18px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 6px;
+}
+
+.pricing-custom-note {
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--body);
+  background: var(--surface-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 7px;
+  padding: 6px 10px;
+  margin-top: 2px;
+}
+
+.pricing-custom-note strong {
+  color: var(--ink);
 }
 
 .pricing-tier-list {
@@ -1105,6 +1130,7 @@ h3 {
 
 .contact-card {
   width: 100%;
+  min-width: 0;
   padding: 16px 18px;
   display: flex;
   flex-direction: column;
@@ -1116,6 +1142,8 @@ h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .visual-title-row {
@@ -1304,7 +1332,10 @@ h3 {
     padding-top: 5.5rem;
   }
   .slide-container {
-    padding: 0 3.25rem 0 1.25rem;
+    padding: 0 4.5rem 0 1.25rem;
+  }
+  .logos-row {
+    grid-template-columns: repeat(2, 1fr);
   }
   .results-comparison-grid,
   .services-bento-grid,
@@ -1327,7 +1358,9 @@ h3 {
 
 @media (max-width: 680px) {
   .container { padding: 0 1rem; }
-  .slide-container { padding: 0 2.75rem 0 1rem; }
+  .slide-container { padding: 0 1rem; }
+  .logos-row { grid-template-columns: 1fr; }
+  .client-logo-badge { white-space: normal; line-height: 1.3; }
   h1 { font-size: 30px; }
   h2 { font-size: 22px; }
   .metrics-row { grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -1336,29 +1369,62 @@ h3 {
   .nav-actions { gap: 6px; }
   .nav-icon-btn { width: 34px; height: 34px; min-width: 34px; min-height: 34px; }
   .nav-icon-btn .contact-icon { width: 17px; height: 17px; }
-  .contact-actions-row { justify-content: center; gap: 12px; }
-  .scroll-progress-rail {
-    right: 6px;
-    padding: 7px 4px;
+  .pricing-tier-item {
+    flex-direction: column;
+    align-items: flex-start;
     gap: 6px;
+  }
+  .tier-price-col {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tier-price,
+  .tier-roi {
+    white-space: normal;
+  }
+  .quote-submit-row { flex-direction: column; }
+  .contact-footer-bar {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .contact-actions-row { justify-content: center; gap: 12px; }
+  .powerbi-frame-card { padding: 6px; }
+  .powerbi-frame-card iframe { height: 290px; }
+  .scroll-progress-rail {
+    top: auto;
+    bottom: 12px;
+    right: 10px;
+    transform: none;
+    padding: 6px 4px;
+    gap: 4px;
+    opacity: 0.9;
   }
   .scroll-progress-pct {
     font-size: 9.5px;
     min-width: 26px;
   }
   .scroll-progress-track {
-    height: 110px;
+    height: 44px;
     width: 4px;
   }
 }
 
 @media (max-width: 440px) {
   .metrics-row { grid-template-columns: 1fr; }
+  .nav-container { padding: 0 0.85rem; gap: 6px; }
+  .nav-brand { font-size: 13.5px; gap: 7px; }
+  .nav-logo { width: 28px; height: 28px; }
+  .nav-icon-btn { width: 32px; height: 32px; min-width: 32px; min-height: 32px; }
 }
 
 @media (max-width: 900px) and (orientation: portrait) {
   .slide-section:first-of-type {
-    padding-top: 6.5rem;
+    padding-top: 7.25rem;
   }
 
   .rotation-tip-banner {
