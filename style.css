@@ -3,27 +3,31 @@
   --canvas: #f8f9fa;
   --surface-card: #ffffff;
   --surface-soft: #f1f3f4;
-  --surface-dark: #202124;
   --hairline: #dadce0;
   --hairline-soft: #edf0f2;
 
   /* Acción principal */
   --primary: #4285F4;
+  --primary-btn: #1a73e8;
   --primary-pressed: #1557b0;
   --primary-light: #e8f0fe;
 
   /* Semánticos para métricas */
   --success: #34A853;
+  --success-text: #137333;
   --success-light: #e6f4ea;
   --danger: #EA4335;
+  --danger-text: #b3261e;
   --danger-light: #fce8e6;
   --accent-beam: #00e0ff;
 
-  /* Tipografía */
+  /* Tipografía (WCAG >= 4.5:1 en texto normal) */
   --ink: #202124;
   --body: #5f6368;
-  --mute: #80868b;
-  --ash: #9aa0a6;
+  --mute: #5f6368;
+
+  /* Altura dinámica del encabezado fijo (actualizada por JS) */
+  --header-height: 56px;
 
   /* Elevación sutil */
   --card-shadow: 0 1px 3px rgba(60, 64, 67, 0.08), 0 1px 2px rgba(60, 64, 67, 0.12);
@@ -63,6 +67,7 @@ body {
 .slide-section {
   width: 100%;
   min-height: calc(100vh - 56px);
+  scroll-margin-top: var(--header-height, 56px);
   box-sizing: border-box;
   margin: 0;
   padding: 3.25rem 0;
@@ -126,7 +131,21 @@ body {
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--hairline);
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease;
+}
+
+.sticky-header-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: 0 4px 16px rgba(60, 64, 67, 0.1);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.sticky-header-bar.is-scrolled::after {
+  opacity: 1;
 }
 
 .nav-container {
@@ -168,19 +187,34 @@ body {
 }
 
 .nav-menu-link {
+  position: relative;
   text-decoration: none;
   font-size: 13px;
   font-weight: 500;
   color: var(--body);
   padding: 5px 11px;
   border-radius: 9999px;
-  transition: all 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease;
   white-space: nowrap;
 }
 
-.nav-menu-link:hover {
-  color: var(--ink);
-  background: var(--surface-soft);
+.nav-menu-link::after {
+  content: '';
+  position: absolute;
+  left: 11px;
+  right: 11px;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--primary);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.nav-menu-link:focus-visible::after {
+  transform: scaleX(1);
 }
 
 .nav-menu-link.active {
@@ -195,39 +229,25 @@ body {
   gap: 8px;
 }
 
-/* Botones de Contacto con Logos Oficiales (Solo Iconos) */
-.nav-social-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  background: var(--surface-card);
-  border: 1px solid var(--hairline);
-  color: var(--ink);
-  text-decoration: none;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
+/* Botones de Contacto con Logos Oficiales (Solo Iconos, Monocromáticos) */
 .nav-icon-btn {
-  display: inline-flex !important;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 38px;
   height: 38px;
   min-width: 38px;
   min-height: 38px;
-  padding: 0 !important;
-  border-radius: 50% !important;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  text-decoration: none;
   box-shadow: 0 1px 3px rgba(60, 64, 67, 0.08);
   flex-shrink: 0;
   overflow: hidden;
-}
-
-.nav-icon-btn:hover {
-  background: var(--surface-soft);
-  border-color: #b0b4b9;
-  transform: translateY(-2px);
-  box-shadow: 0 3px 8px rgba(60, 64, 67, 0.12);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .nav-icon-btn:focus-visible {
@@ -246,7 +266,54 @@ body {
 
 /* Banner de rotación oculto en escritorio */
 .rotation-tip-banner {
-  display: none !important;
+  display: none;
+}
+
+/* Franja móvil de avance oculta en escritorio (> 900px) */
+.header-scroll-progress {
+  display: none;
+}
+
+.header-scroll-track {
+  position: relative;
+  flex: 1;
+  height: 4px;
+  background: var(--hairline);
+  border-radius: 9999px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.header-scroll-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--primary);
+  border-radius: 9999px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 0.08s linear, background-color 0.2s ease;
+}
+
+.header-scroll-pct {
+  font-family: 'Inter Tight', 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  min-width: 34px;
+  text-align: right;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.header-scroll-progress.is-complete .header-scroll-fill {
+  background: var(--success);
+}
+
+.header-scroll-progress.is-complete .header-scroll-pct {
+  color: var(--success-text);
 }
 
 /* Tipografía estricta de encabezados: títulos <= 3 palabras, subtítulos <= 5 palabras */
@@ -265,7 +332,7 @@ h1 {
 
 .hero-subtitle {
   font-size: 16.5px;
-  color: var(--primary);
+  color: var(--primary-pressed);
   font-weight: 600;
   letter-spacing: -0.015em;
   margin-bottom: 0.75rem;
@@ -329,7 +396,7 @@ h3 {
   font-weight: 500;
   font-family: inherit;
   text-decoration: none;
-  transition: all 0.15s ease-in-out;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   cursor: pointer;
 }
 
@@ -339,13 +406,9 @@ h3 {
 }
 
 .btn-primary {
-  background-color: var(--primary);
+  background-color: var(--primary-btn);
   border: 1px solid var(--primary-pressed);
   color: #ffffff;
-}
-
-.btn-primary:hover {
-  background-color: var(--primary-pressed);
 }
 
 .btn-secondary {
@@ -354,9 +417,14 @@ h3 {
   color: var(--ink);
 }
 
-.btn-secondary:hover {
-  background-color: var(--surface-soft);
-  border-color: #c4c7cc;
+.btn-arrow,
+.btn-arrow-up {
+  display: inline-block;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-arrow-up {
+  flex-shrink: 0;
 }
 
 /* Métricas Cuantitativas */
@@ -369,18 +437,13 @@ h3 {
 .metric-card {
   position: relative;
   background: var(--surface-card);
-  border: 1px solid transparent !important;
+  border: 1px solid transparent;
   border-radius: 12px;
   padding: 18px 20px;
   box-shadow: var(--card-shadow);
   isolation: isolate;
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.metric-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--card-shadow-hover);
 }
 
 .metric-card::before {
@@ -406,8 +469,7 @@ h3 {
 .metric-card:nth-child(1) { --beam-duration: 4.8s; }
 .metric-card:nth-child(2) { --beam-duration: 5.4s; }
 .metric-card:nth-child(3) { --beam-duration: 4.2s; }
-.metric-card:nth-child(4),
-.border-beam-kpi { --beam-duration: 4.5s; }
+.metric-card:nth-child(4) { --beam-duration: 4.5s; }
 
 .metric-card::after {
   content: '';
@@ -423,8 +485,9 @@ h3 {
   font-size: 32px;
   line-height: 1.1;
   letter-spacing: -0.025em;
-  color: var(--primary);
+  color: var(--primary-pressed);
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
   margin-bottom: 4px;
 }
 
@@ -443,13 +506,39 @@ h3 {
   line-height: 1.4;
 }
 
+/* R3-1: Indicador en vivo separado para ritmo demostrativo */
+.demo-pace-badge {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 100%;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary-pressed);
+  background: var(--primary-light);
+  border: 1px solid rgba(66, 133, 244, 0.25);
+  border-radius: 9999px;
+  padding: 2px 9px;
+  line-height: 1.35;
+}
+
+.demo-pace-num {
+  font-variant-numeric: tabular-nums;
+  display: inline-block;
+  min-width: 3ch;
+  text-align: right;
+  font-weight: 700;
+}
+
 /* ========================================================
    MAGIC UI: BORDER BEAM EN TARJETAS Y VISORES
    ======================================================== */
 .border-beam-card {
   position: relative;
   background: var(--surface-card);
-  border: 1px solid transparent !important;
+  border: 1px solid transparent;
   border-radius: 14px;
   padding: 20px;
   box-shadow: var(--card-shadow);
@@ -509,7 +598,7 @@ h3 {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--primary);
+  color: var(--primary-pressed);
   margin-bottom: 2px;
 }
 
@@ -517,14 +606,14 @@ h3 {
   position: relative;
   min-width: 0;
   background: var(--surface-card);
-  border: 1px solid transparent !important;
+  border: 1px solid transparent;
   border-radius: 12px;
   padding: 20px;
   box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: all 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   isolation: isolate;
   overflow: hidden;
 }
@@ -563,13 +652,25 @@ h3 {
   z-index: -1;
 }
 
-.card:hover {
-  box-shadow: var(--card-shadow-hover);
-  transform: translateY(-2px);
+/* R3-10: Pausa automática fuera de pantalla y pestaña oculta */
+html.js .metric-card::before,
+html.js .border-beam-card::before,
+html.js .card::before {
+  animation-play-state: paused;
 }
 
-.card:hover::before {
-  opacity: 1;
+html.js .metric-card.is-in-view::before,
+html.js .border-beam-card.is-in-view::before,
+html.js .card.is-in-view::before {
+  animation-play-state: running;
+}
+
+body.is-tab-hidden .metric-card::before,
+body.is-tab-hidden .border-beam-card::before,
+body.is-tab-hidden .card::before,
+body.is-tab-hidden .powerbi-slide .live-dot::after,
+body.is-tab-hidden .pbi-skeleton::after {
+  animation-play-state: paused !important;
 }
 
 .card-top {
@@ -586,7 +687,7 @@ h3 {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 600;
-  color: var(--primary);
+  color: var(--primary-pressed);
 }
 
 .mini-badge {
@@ -594,7 +695,7 @@ h3 {
   padding: 2px 8px;
   border-radius: 9999px;
   background: var(--success-light);
-  color: var(--success);
+  color: var(--success-text);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -621,6 +722,7 @@ h3 {
   font-size: 12.5px;
   line-height: 1.42;
   color: var(--body);
+  transition: color 0.16s ease;
 }
 
 .project-bullets li::before {
@@ -632,6 +734,7 @@ h3 {
   height: 5px;
   border-radius: 50%;
   background-color: var(--primary);
+  transition: transform 0.16s ease, background-color 0.16s ease;
 }
 
 .tag-list {
@@ -681,14 +784,7 @@ h3 {
   font-family: inherit;
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.2s ease;
-}
-
-.inline-quote-btn:hover {
-  background: var(--primary);
-  color: #ffffff;
-  border-color: var(--primary);
-  transform: translateY(-1px);
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.18s ease;
 }
 
 /* ========================================================
@@ -711,7 +807,7 @@ h3 {
   font-family: 'Inter Tight', sans-serif;
   font-size: 26px;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--primary-pressed);
   line-height: 1.15;
   letter-spacing: -0.02em;
 }
@@ -720,7 +816,7 @@ h3 {
   font-size: 12px;
   color: var(--mute);
   font-weight: 500;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .compare-stack {
@@ -731,9 +827,17 @@ h3 {
 }
 
 .compare-box {
+  position: relative;
   border-radius: 8px;
   padding: 9px 11px;
   border: 1px solid var(--hairline);
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+}
+
+.compare-box:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 .compare-box.before {
@@ -756,11 +860,37 @@ h3 {
 }
 
 .compare-box.before .compare-tag {
-  color: #b3261e;
+  color: var(--danger-text);
+}
+
+.compare-box.before .compare-tag::before {
+  content: "! ";
+  font-weight: 800;
 }
 
 .compare-box.after .compare-tag {
-  color: #137333;
+  color: var(--success-text);
+}
+
+.compare-box.after .compare-tag::before {
+  content: "✓ ";
+  font-weight: 800;
+}
+
+.compare-box.before.is-highlighted {
+  background: var(--danger-light);
+  border-color: var(--danger);
+  box-shadow: inset 3px 0 0 var(--danger);
+}
+
+.compare-box.after.is-highlighted {
+  background: var(--success-light);
+  border-color: var(--success);
+  box-shadow: inset 3px 0 0 var(--success);
+}
+
+.compare-box.is-dimmed {
+  opacity: 0.85;
 }
 
 .compare-box p {
@@ -768,6 +898,38 @@ h3 {
   line-height: 1.4;
   color: var(--ink);
   margin: 0;
+}
+
+/* R3-4: Mini barra comparativa de tiempo */
+.compare-meter {
+  margin-top: 6px;
+  width: 100%;
+  height: 4px;
+  border-radius: 9999px;
+  background: rgba(32, 33, 36, 0.08);
+  overflow: hidden;
+}
+
+.compare-meter-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  transform-origin: left center;
+  transform: scaleX(var(--meter-scale, 1));
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.compare-box.before .compare-meter-fill {
+  background: var(--danger);
+}
+
+.compare-box.after .compare-meter-fill {
+  background: var(--success);
+}
+
+html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
+  transform: scaleX(0);
 }
 
 .result-summary {
@@ -780,7 +942,7 @@ h3 {
 }
 
 /* ========================================================
-   SECCIONES 3 Y 7: GRILLAS BENTO DE 3 COLUMNAS
+   SECCIONES 3 Y 6: GRILLAS BENTO DE 3 COLUMNAS
    ======================================================== */
 .services-bento-grid {
   display: grid;
@@ -792,11 +954,40 @@ h3 {
 
 .service-bento-card {
   padding: 20px;
-  min-height: 330px;
+  min-height: 310px;
+}
+
+/* R3-5: Medidor animado al 80% en Descargas en lote */
+.progress-meter-wrap {
+  margin: 0 0 9px 0;
+}
+
+.progress-meter-track {
+  width: 100%;
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--surface-soft);
+  border: 1px solid var(--hairline-soft);
+  overflow: hidden;
+}
+
+.progress-meter-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--success) 100%);
+  transform-origin: left center;
+  transform: scaleX(0.8);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.js .service-bento-card:not(.is-revealed) .progress-meter-fill {
+  transform: scaleX(0);
 }
 
 /* ========================================================
-   SECCIONES 4, 5 Y 6: MUESTRAS POWER BI INDEPENDIENTES
+   SECCIONES 4 Y 5: MUESTRAS POWER BI INDEPENDIENTES
    ======================================================== */
 .powerbi-slide {
   margin: 0;
@@ -817,11 +1008,45 @@ h3 {
 }
 
 .live-dot {
+  position: relative;
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background-color: var(--success);
   display: inline-block;
+  flex-shrink: 0;
+}
+
+/* R3-6: Pulso vivo EXCLUSIVO para Power BI (.powerbi-slide), NO en #contacto */
+.powerbi-slide .live-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: var(--success);
+  opacity: 0;
+  animation: live-dot-pulse 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  animation-play-state: paused;
+  pointer-events: none;
+}
+
+.powerbi-slide.is-in-view .live-dot::after {
+  animation-play-state: running;
+}
+
+@keyframes live-dot-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  70% {
+    transform: scale(2.35);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.35);
+    opacity: 0;
+  }
 }
 
 .pbi-quick-jump {
@@ -840,11 +1065,11 @@ h3 {
   font-family: inherit;
   color: var(--body);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 .tab-btn.active {
-  background: var(--primary);
+  background: var(--primary-btn);
   color: #ffffff;
   border-color: var(--primary-pressed);
 }
@@ -859,6 +1084,20 @@ h3 {
 
 .powerbi-info-card {
   padding: 18px 20px;
+}
+
+/* R3-9: Destello suave al alternar entre 01. Divisas y 02. Modelos IA */
+.powerbi-info-card.is-arriving {
+  animation: pbi-arrive-flash 0.65s ease;
+}
+
+@keyframes pbi-arrive-flash {
+  0% {
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.4), var(--card-shadow-hover);
+  }
+  100% {
+    box-shadow: var(--card-shadow);
+  }
 }
 
 .powerbi-card-inner {
@@ -888,8 +1127,50 @@ h3 {
   display: block;
 }
 
+/* R3-7: Skeleton suave mientras carga el iframe Power BI (solo bajo html.js) */
+.pbi-skeleton {
+  display: none;
+}
+
+html.js .pbi-skeleton {
+  display: block;
+  position: absolute;
+  inset: 11px;
+  border-radius: 9px;
+  background: #f1f3f4;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+html.js .pbi-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.72) 50%, transparent 100%);
+  transform: translateX(-100%);
+  animation: pbi-skeleton-shimmer 1.4s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+html.js .powerbi-frame-card.is-in-view:not(.is-loaded) .pbi-skeleton::after {
+  animation-play-state: running;
+}
+
+html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@keyframes pbi-skeleton-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
 /* ========================================================
-   BARRA LATERAL DERECHA DE PORCENTAJE DE AVANCE (0% A 100%)
+   BARRA LATERAL DERECHA DE PORCENTAJE EN ESCRITORIO (0% A 100%)
    ======================================================== */
 .scroll-progress-rail {
   position: fixed;
@@ -932,15 +1213,17 @@ h3 {
   cursor: pointer;
 }
 
+/* R3-11: Progreso continuo por compositor GPU (scaleY en escritorio) */
 .scroll-progress-fill {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
-  height: 0%;
+  height: 100%;
   background: var(--primary);
   border-radius: 9999px;
-  transition: height 0.08s linear, background-color 0.2s ease;
+  transform-origin: top center;
+  transform: scaleY(0);
+  transition: transform 0.08s linear, background-color 0.2s ease;
 }
 
 .scroll-progress-rail.is-complete .scroll-progress-fill {
@@ -952,7 +1235,7 @@ h3 {
 }
 
 /* ========================================================
-   SECCIÓN 8: FRANJA DE LOGOS DE CLIENTES + CONTACTO
+   SECCIÓN 7: FRANJA DE RUBROS + CATÁLOGO + CONTACTO
    ======================================================== */
 .contact-slide {
   margin: 0;
@@ -1007,6 +1290,7 @@ h3 {
   font-weight: 700;
   letter-spacing: 0.015em;
   line-height: 1.25;
+  transition: border-color 0.18s ease, background-color 0.18s ease;
 }
 
 .client-logo-badge span {
@@ -1016,6 +1300,7 @@ h3 {
 .client-logo-badge svg {
   color: var(--primary);
   flex-shrink: 0;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .contact-sales-grid {
@@ -1046,10 +1331,6 @@ h3 {
   margin-top: 2px;
 }
 
-.pricing-custom-note strong {
-  color: var(--ink);
-}
-
 .pricing-tier-list {
   display: flex;
   flex-direction: column;
@@ -1068,19 +1349,15 @@ h3 {
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.15s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
   font-family: inherit;
 }
 
-.pricing-tier-item:hover {
-  border-color: var(--primary);
-  background: #f4f8ff;
-}
-
+/* R3-8: Barra lateral izquierda en opción activa */
 .pricing-tier-item.active {
   border-color: var(--primary);
   background: var(--primary-light);
-  box-shadow: 0 1px 4px rgba(66, 133, 244, 0.15);
+  box-shadow: inset 3px 0 0 var(--primary), 0 1px 4px rgba(66, 133, 244, 0.15);
 }
 
 .tier-main {
@@ -1121,7 +1398,7 @@ h3 {
 .tier-roi {
   font-size: 10px;
   font-weight: 600;
-  color: var(--success);
+  color: var(--success-text);
   background: var(--success-light);
   padding: 1px 7px;
   border-radius: 9999px;
@@ -1193,7 +1470,7 @@ h3 {
   border: 1px solid var(--hairline);
   border-radius: 6px;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .form-field input:focus,
@@ -1201,6 +1478,24 @@ h3 {
   border-color: var(--primary);
   background: #ffffff;
   box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.15);
+}
+
+/* R3-8: Destello azul breve de confirmación en el select */
+.form-field select.is-flashing {
+  animation: select-confirm-flash 0.7s ease;
+}
+
+@keyframes select-confirm-flash {
+  0% {
+    border-color: var(--primary);
+    background-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.28);
+  }
+  100% {
+    border-color: var(--hairline);
+    background-color: var(--canvas);
+    box-shadow: none;
+  }
 }
 
 .quote-submit-row {
@@ -1238,8 +1533,6 @@ h3 {
   height: 48px;
   min-width: 48px;
   min-height: 48px;
-  padding: 0 !important;
-  border-radius: 50% !important;
 }
 
 .contact-actions-row .contact-icon {
@@ -1250,6 +1543,7 @@ h3 {
 .back-to-top-btn {
   display: inline-flex;
   align-items: center;
+  gap: 5px;
   cursor: pointer;
   padding: 7px 14px;
   font-size: 12.5px;
@@ -1257,13 +1551,7 @@ h3 {
   background: var(--surface-card);
   border: 1px solid var(--hairline);
   color: var(--ink);
-  transition: all 0.2s ease;
-}
-
-.back-to-top-btn:hover {
-  background: var(--surface-soft);
-  border-color: #c4c7cc;
-  transform: translateY(-1px);
+  transition: transform 0.18s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
 /* Magic UI: Shimmer Effect en Botones */
@@ -1290,16 +1578,273 @@ h3 {
   pointer-events: none;
 }
 
-.shimmer-btn:hover::after {
-  transform: translateX(100%);
+/* R3-15: Hundimiento táctil breve al presionar botones */
+.btn:active,
+.inline-quote-btn:active,
+.tab-btn:active,
+.pricing-tier-item:active,
+.nav-icon-btn:active {
+  transform: scale(0.97);
 }
 
+/* ========================================================
+   ANIMACIONES DE ENTRADA (R3-17 Y R3-18)
+   ======================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  html.js:not(.hero-ready) #inicio h1,
+  html.js:not(.hero-ready) #inicio .hero-subtitle,
+  html.js:not(.hero-ready) #inicio .hero-text,
+  html.js:not(.hero-ready) #inicio .btn-group,
+  html.js:not(.hero-ready) #inicio .metric-card {
+    animation: hero-fade-up 0.34s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  html.js:not(.hero-ready) #inicio h1 { animation-delay: 0ms; animation-duration: 0.32s; }
+  html.js:not(.hero-ready) #inicio .hero-subtitle { animation-delay: 60ms; animation-duration: 0.32s; }
+  html.js:not(.hero-ready) #inicio .hero-text { animation-delay: 120ms; }
+  html.js:not(.hero-ready) #inicio .btn-group { animation-delay: 180ms; }
+  html.js:not(.hero-ready) #inicio .metric-card:nth-child(1) { animation-delay: 220ms; animation-duration: 0.36s; }
+  html.js:not(.hero-ready) #inicio .metric-card:nth-child(2) { animation-delay: 270ms; animation-duration: 0.36s; }
+  html.js:not(.hero-ready) #inicio .metric-card:nth-child(3) { animation-delay: 320ms; animation-duration: 0.36s; }
+  html.js:not(.hero-ready) #inicio .metric-card:nth-child(4) { animation-delay: 370ms; animation-duration: 0.36s; }
+
+  @keyframes hero-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  html.js .result-compare-card {
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  }
+
+  html.js .result-compare-card:not(.is-revealed) {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  html.js .result-compare-card:nth-child(2) { transition-delay: 70ms; }
+  html.js .result-compare-card:nth-child(3) { transition-delay: 140ms; }
+  html.js .result-compare-card.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================================
+   INTERACCIONES EXCLUSIVAS DE PUNTERO FINO (R1 + R3-2, R3-13..R3-20)
+   ======================================================== */
+@media (hover: hover) and (pointer: fine) {
+  .nav-menu-link:hover {
+    color: var(--ink);
+    background: var(--surface-soft);
+  }
+
+  .nav-menu-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .nav-icon-btn:hover {
+    background: var(--surface-soft);
+    border-color: #b0b4b9;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(60, 64, 67, 0.12);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--primary-pressed);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--surface-soft);
+    border-color: #c4c7cc;
+  }
+
+  .metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .card:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-2px);
+  }
+
+  .card:hover::before {
+    opacity: 1;
+  }
+
+  .inline-quote-btn:hover {
+    background: var(--primary-pressed);
+    color: #ffffff;
+    border-color: var(--primary-pressed);
+    transform: translateY(-1px);
+  }
+
+  .pricing-tier-item:hover {
+    border-color: var(--primary);
+    background: #f4f8ff;
+  }
+
+  .back-to-top-btn:hover {
+    background: var(--surface-soft);
+    border-color: #c4c7cc;
+    transform: translateY(-1px);
+  }
+
+  .shimmer-btn:hover::after {
+    transform: translateX(100%);
+  }
+
+  /* R3-14: Avance sutil de flechas */
+  .btn:hover .btn-arrow,
+  .btn:focus-visible .btn-arrow,
+  .inline-quote-btn:hover .btn-arrow,
+  .inline-quote-btn:focus-visible .btn-arrow {
+    transform: translateX(3px);
+  }
+
+  .back-to-top-btn:hover .btn-arrow-up,
+  .back-to-top-btn:focus-visible .btn-arrow-up {
+    transform: translateY(-2px);
+  }
+
+  /* R3-2: Cursor analítico 30px solo en cifras y resultados en escritorio no táctil */
+  html:not(.is-touch) .metrics-row .metric-card,
+  html:not(.is-touch) .results-comparison-grid .result-compare-card {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www%2Ew3%2Eorg/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Ccircle cx='15' cy='15' r='11' fill='rgba(66,133,244,0.10)' stroke='%234285F4' stroke-width='1.5'/%3E%3Cpath d='M15 3v7M15 20v7M3 15h7M20 15h7' stroke='%23202124' stroke-width='1.6' stroke-linecap='round'/%3E%3Ccircle cx='15' cy='15' r='2' fill='%234285F4'/%3E%3C/svg%3E") 15 15, crosshair;
+  }
+
+  html:not(.is-touch) .metrics-row .metric-card a,
+  html:not(.is-touch) .metrics-row .metric-card button,
+  html:not(.is-touch) .results-comparison-grid .result-compare-card a,
+  html:not(.is-touch) .results-comparison-grid .result-compare-card button,
+  html:not(.is-touch) .results-comparison-grid .result-compare-card .compare-box {
+    cursor: pointer;
+  }
+
+  /* R3-3: Resalte Antes/Después con puntero fino */
+  .compare-box.before:hover {
+    background: var(--danger-light);
+    border-color: var(--danger);
+    box-shadow: inset 3px 0 0 var(--danger);
+  }
+
+  .compare-box.after:hover {
+    background: var(--success-light);
+    border-color: var(--success);
+    box-shadow: inset 3px 0 0 var(--success);
+  }
+
+  .compare-stack:has(.compare-box.before:hover) .compare-box.after:not(:hover),
+  .compare-stack:has(.compare-box.after:hover) .compare-box.before:not(:hover) {
+    opacity: 0.85;
+  }
+
+  /* R3-19: Resalte de lectura en viñetas de Experiencia (#respaldo) */
+  #respaldo .project-bullets li:hover {
+    color: var(--ink);
+  }
+
+  #respaldo .project-bullets li:hover::before {
+    transform: scale(1.35);
+    background-color: var(--primary-pressed);
+  }
+
+  /* R3-20: Acento suave en ícono de cada rubro en Contacto */
+  .client-logo-badge:hover {
+    border-color: rgba(66, 133, 244, 0.45);
+    background-color: #f4f8ff;
+  }
+
+  .client-logo-badge:hover svg {
+    transform: scale(1.12);
+  }
+}
+
+/* ========================================================
+   PREFERS-REDUCED-MOTION (ACCESIBILIDAD COMPLETA)
+   ======================================================== */
 @media (prefers-reduced-motion: reduce) {
+  html,
+  body {
+    scroll-behavior: auto !important;
+  }
+
   .border-beam-card::before,
   .metric-card::before,
-  .card::before {
+  .card::before,
+  .powerbi-slide .live-dot::after {
     animation: none !important;
     display: none !important;
+  }
+
+  .shimmer-btn::after,
+  .pbi-skeleton::after,
+  .form-field select.is-flashing,
+  .powerbi-info-card.is-arriving {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .sticky-header-bar,
+  .sticky-header-bar::after,
+  .nav-menu-link,
+  .nav-menu-link::after,
+  .nav-icon-btn,
+  .btn,
+  .btn-arrow,
+  .btn-arrow-up,
+  .metric-card,
+  .card,
+  .inline-quote-btn,
+  .compare-box,
+  .compare-meter-fill,
+  .progress-meter-fill,
+  .result-compare-card,
+  .tab-btn,
+  .pbi-skeleton,
+  .scroll-progress-fill,
+  .scroll-progress-pct,
+  .header-scroll-fill,
+  .header-scroll-pct,
+  .client-logo-badge,
+  .client-logo-badge svg,
+  .pricing-tier-item,
+  .back-to-top-btn {
+    transition: none !important;
+  }
+
+  html.js .result-compare-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  html.js .compare-meter-fill {
+    transform: scaleX(var(--meter-scale, 1)) !important;
+  }
+
+  html.js .progress-meter-fill {
+    transform: scaleX(0.8) !important;
+  }
+
+  .btn:active,
+  .inline-quote-btn:active,
+  .tab-btn:active,
+  .pricing-tier-item:active,
+  .nav-icon-btn:active,
+  .metric-card:hover,
+  .card:hover,
+  .nav-icon-btn:hover,
+  .inline-quote-btn:hover,
+  .back-to-top-btn:hover,
+  .client-logo-badge:hover svg {
+    transform: none !important;
   }
 }
 
@@ -1323,20 +1868,39 @@ h3 {
   .nav-menu-links {
     display: none;
   }
+
+  /* Ocultar pastilla lateral en <= 900px y activar franja integrada en encabezado */
+  .scroll-progress-rail {
+    display: none;
+  }
+
+  .header-scroll-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 1.25rem 6px;
+    border-top: 1px solid var(--hairline-soft);
+    background: rgba(248, 249, 250, 0.96);
+  }
+
   .slide-section {
     min-height: auto;
     padding: 2.5rem 0;
   }
+
   .slide-section:first-of-type {
     min-height: auto;
-    padding-top: 5.5rem;
+    padding-top: calc(var(--header-height, 84px) + 1.5rem);
   }
+
   .slide-container {
-    padding: 0 4.5rem 0 1.25rem;
+    padding: 0 1.25rem;
   }
+
   .logos-row {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .results-comparison-grid,
   .services-bento-grid,
   .powerbi-project-grid,
@@ -1345,12 +1909,15 @@ h3 {
     flex-direction: column;
     gap: 1rem;
   }
+
   .powerbi-frame-card iframe {
     height: 380px;
   }
+
   .service-bento-card {
     min-height: auto;
   }
+
   .form-row-two {
     grid-template-columns: 1fr;
   }
@@ -1359,6 +1926,7 @@ h3 {
 @media (max-width: 680px) {
   .container { padding: 0 1rem; }
   .slide-container { padding: 0 1rem; }
+  .header-scroll-progress { padding: 4px 1rem 6px; }
   .logos-row { grid-template-columns: 1fr; }
   .client-logo-badge { white-space: normal; line-height: 1.3; }
   h1 { font-size: 30px; }
@@ -1395,28 +1963,18 @@ h3 {
   .contact-actions-row { justify-content: center; gap: 12px; }
   .powerbi-frame-card { padding: 6px; }
   .powerbi-frame-card iframe { height: 290px; }
-  .scroll-progress-rail {
-    top: auto;
-    bottom: 12px;
-    right: 10px;
-    transform: none;
-    padding: 6px 4px;
-    gap: 4px;
-    opacity: 0.9;
-  }
-  .scroll-progress-pct {
-    font-size: 9.5px;
-    min-width: 26px;
-  }
-  .scroll-progress-track {
-    height: 44px;
-    width: 4px;
-  }
 }
 
 @media (max-width: 440px) {
-  .metrics-row { grid-template-columns: 1fr; }
+  /* Mantener grilla compacta 2x2 en celulares (360px - 440px) */
+  .metrics-row { gap: 8px; }
+  .metric-card { padding: 12px 10px; }
+  .metric-num { font-size: 23px; }
+  .metric-caption { font-size: 10px; letter-spacing: 0.03em; }
+  .metric-sub { font-size: 11px; line-height: 1.35; }
+  .demo-pace-badge { font-size: 9.5px; padding: 2px 6px; margin-top: 6px; }
   .nav-container { padding: 0 0.85rem; gap: 6px; }
+  .header-scroll-progress { padding: 4px 0.85rem 6px; }
   .nav-brand { font-size: 13.5px; gap: 7px; }
   .nav-logo { width: 28px; height: 28px; }
   .nav-icon-btn { width: 32px; height: 32px; min-width: 32px; min-height: 32px; }
@@ -1424,19 +1982,18 @@ h3 {
 
 @media (max-width: 900px) and (orientation: portrait) {
   .slide-section:first-of-type {
-    padding-top: 7.25rem;
+    padding-top: calc(var(--header-height, 118px) + 1.5rem);
   }
 
   .rotation-tip-banner {
-    display: block !important;
+    display: block;
     background: var(--primary-light);
     border-top: 1px solid rgba(66, 133, 244, 0.18);
     padding: 6px 1rem;
-    transition: all 0.25s ease;
   }
 
   .rotation-tip-banner.is-dismissed {
-    display: none !important;
+    display: none;
   }
 
   .rotation-tip-inner {

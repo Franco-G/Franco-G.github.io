@@ -26,7 +26,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="style.css?v=14.0">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="style.css?v=15.0">
 </head>
 <body>
   <!-- Escenario de fondo fijo limpio -->
@@ -53,22 +54,22 @@
 
       <div class="nav-actions">
         <!-- WhatsApp Monocromático -->
-        <a href="https://wa.me/51960748142" target="_blank" rel="noopener noreferrer" class="nav-social-btn nav-icon-btn" title="WhatsApp: +51 960 748 142" aria-label="WhatsApp">
+        <a href="https://wa.me/51960748142" target="_blank" rel="noopener noreferrer" class="nav-icon-btn" title="WhatsApp: +51 960 748 142" aria-label="WhatsApp">
           <img src="whatsapp.svg" width="20" height="20" alt="WhatsApp" class="contact-icon">
         </a>
 
         <!-- LinkedIn Monocromático -->
-        <a href="https://www.linkedin.com/in/francoguerreroav/" target="_blank" rel="noopener noreferrer" class="nav-social-btn nav-icon-btn" title="LinkedIn: Franco Guerrero" aria-label="LinkedIn">
+        <a href="https://www.linkedin.com/in/francoguerreroav/" target="_blank" rel="noopener noreferrer" class="nav-icon-btn" title="LinkedIn: Franco Guerrero" aria-label="LinkedIn">
           <img src="linkedin.svg" width="20" height="20" alt="LinkedIn" class="contact-icon">
         </a>
 
         <!-- GitHub Monocromático -->
-        <a href="https://github.com/Franco-G" target="_blank" rel="noopener noreferrer" class="nav-social-btn nav-icon-btn" title="GitHub: Franco-G" aria-label="GitHub">
+        <a href="https://github.com/Franco-G" target="_blank" rel="noopener noreferrer" class="nav-icon-btn" title="GitHub: Franco-G" aria-label="GitHub">
           <img src="github.svg" width="20" height="20" alt="GitHub" class="contact-icon">
         </a>
 
         <!-- Correo Monocromático -->
-        <a href="mailto:guerrerofranco1429@gmail.com" class="nav-social-btn nav-icon-btn" title="Correo: guerrerofranco1429@gmail.com" aria-label="Correo">
+        <a href="mailto:guerrerofranco1429@gmail.com" class="nav-icon-btn" title="Correo: guerrerofranco1429@gmail.com" aria-label="Correo">
           <img src="gmail.svg" width="20" height="20" alt="Correo" class="contact-icon">
         </a>
       </div>
@@ -93,9 +94,17 @@
         </button>
       </div>
     </aside>
+
+    <!-- Franja de porcentaje integrada en la base del encabezado móvil (<= 900px) -->
+    <div class="header-scroll-progress" id="header-scroll-progress" aria-label="Porcentaje de avance en la página">
+      <div class="header-scroll-track" id="mobile-scroll-progress-track" title="Haz clic para desplazarte">
+        <div class="header-scroll-fill" id="mobile-scroll-progress-fill"></div>
+      </div>
+      <span class="header-scroll-pct" id="mobile-scroll-progress-pct">0%</span>
+    </div>
   </header>
 
-  <!-- Barra Lateral Derecha de Porcentaje de Avance (0% a 100%) -->
+  <!-- Barra Lateral Derecha de Porcentaje de Avance en Escritorio (0% a 100%) -->
   <aside class="scroll-progress-rail" id="scroll-progress-rail" aria-label="Porcentaje de avance en la página">
     <span class="scroll-progress-pct" id="scroll-progress-pct">0%</span>
     <div class="scroll-progress-track" id="scroll-progress-track" title="Haz clic para desplazarte">
@@ -112,7 +121,7 @@
           <h1>Decisiones con datos</h1>
           <p class="hero-subtitle">Finanzas, reportes y automatización.</p>
           <p class="hero-text">
-            Soy Analista de datos y responsable de tesorería en una firma contable en Perú. Además, ayudo a negocios con análisis de datos, reportes y automatizaciones: aprovecho la información que exporta su sistema para diseñar desde cero estados financieros actualizables sin tocar su software, macros y plantillas en Excel y tableros en Power BI. Menos trabajo manual, control preventivo y más de 73 horas ahorradas al mes.
+            Soy Analista de datos y responsable de tesorería en una firma contable en Perú, a cargo de pagos y conciliaciones bancarias. Para tu negocio diseño desde cero estados financieros actualizables, macros en Excel y tableros en Power BI con lo que exporta tu sistema, ahorrando más de 73 horas al mes.
           </p>
           <div class="btn-group">
             <a href="#contacto" class="btn btn-primary shimmer-btn" onclick="goToSlide(6); return false;">Contactar ahora</a>
@@ -122,25 +131,28 @@
 
         <!-- 4 Métricas de Impacto en Horas y Control -->
         <div class="metrics-row">
-          <div class="metric-card border-beam-kpi">
+          <div class="metric-card">
             <div class="metric-num" data-ticker-target="73" data-ticker-prefix="+">+73</div>
             <div class="metric-caption">Horas ahorradas al mes</div>
-            <div class="metric-sub">Menos trabajo manual en cierres, cargas y cruces.</div>
+            <div class="metric-sub">Menos carga manual en cierres y cruces.</div>
           </div>
           <div class="metric-card">
             <div class="metric-num" data-ticker-target="87" data-ticker-suffix="%">87%</div>
             <div class="metric-caption">Menos tiempo en cierres</div>
-            <div class="metric-sub">Balances listos en 4 horas al mes en vez de 32.</div>
+            <div class="metric-sub">Balances listos en 4 horas, antes 32.</div>
           </div>
           <div class="metric-card">
             <div class="metric-num" data-ticker-target="4120" data-ticker-prefix="+">+4120</div>
-            <div class="metric-caption">Facturas validadas</div>
-            <div class="metric-sub">Cruce preventivo antes de cada declaración mensual.</div>
+            <div class="metric-caption">Comprobantes cotejados</div>
+            <div class="metric-sub">Cruce preventivo antes de declarar.</div>
+            <div class="demo-pace-badge" aria-live="off" aria-label="Ritmo demostrativo de cruce automatizado">
+              Ritmo demo de cruce: <span class="demo-pace-num" id="demo-pace-counter">001</span> reg/seg
+            </div>
           </div>
           <div class="metric-card">
             <div class="metric-num" data-ticker-target="1" data-ticker-suffix=" clic">1 clic</div>
             <div class="metric-caption">Balances actualizables</div>
-            <div class="metric-sub">Detecta cuentas sin destino e inconsistencias.</div>
+            <div class="metric-sub">Detecta cuentas sin destino y descuadres.</div>
           </div>
         </div>
       </div>
@@ -154,7 +166,7 @@
             <h2>Resultados en negocio</h2>
             <p class="section-subtitle">Horas operativas ahorradas cada mes.</p>
           </div>
-          <button type="button" class="btn btn-secondary btn-sm-pill" onclick="goToSlide(2)">Ver servicios →</button>
+          <button type="button" class="btn btn-secondary btn-sm-pill" onclick="goToSlide(2)">Ver servicios <span class="btn-arrow" aria-hidden="true">→</span></button>
         </div>
 
         <div class="results-comparison-grid">
@@ -166,20 +178,22 @@
             </div>
             <h3>Estados financieros</h3>
             <div class="result-roi-big">28 horas / mes</div>
-            <p class="result-roi-sub">Tiempo ahorrado cada mes en cierres contables.</p>
+            <p class="result-roi-sub">Ahorro en cierres contables.</p>
 
             <div class="compare-stack">
-              <div class="compare-box before">
+              <div class="compare-box before" tabindex="0" role="button" aria-pressed="false">
                 <span class="compare-tag">Antes (Manual)</span>
-                <p><strong>32 horas al mes</strong> copiando saldos, armando notas y cuadrando cuentas a mano.</p>
+                <p><strong>32 horas</strong> copiando saldos, notas y cuadres a mano.</p>
+                <div class="compare-meter" aria-hidden="true"><span class="compare-meter-fill" style="--meter-scale: 1;"></span></div>
               </div>
-              <div class="compare-box after">
+              <div class="compare-box after" tabindex="0" role="button" aria-pressed="false">
                 <span class="compare-tag">Después (Automatizado)</span>
-                <p><strong>4 horas al mes</strong> actualizando los reportes que exporta el sistema contable.</p>
+                <p><strong>4 horas</strong> actualizando lo que exporta tu sistema.</p>
+                <div class="compare-meter" aria-hidden="true"><span class="compare-meter-fill" style="--meter-scale: 0.125;"></span></div>
               </div>
             </div>
 
-            <p class="result-summary">Balance de comprobación y estado de resultados actualizables para hallar cuentas sin destino e inconsistencias.</p>
+            <p class="result-summary">Encuentra cuentas sin destino y descuadres al instante.</p>
           </article>
 
           <!-- Comparativo 2: Cargas en Excel -->
@@ -190,20 +204,22 @@
             </div>
             <h3>Cargas en Excel</h3>
             <div class="result-roi-big">25 horas / mes</div>
-            <p class="result-roi-sub">Tiempo ahorrado cada mes sin digitación.</p>
+            <p class="result-roi-sub">Ahorro al dejar de digitar.</p>
 
             <div class="compare-stack">
-              <div class="compare-box before">
+              <div class="compare-box before" tabindex="0" role="button" aria-pressed="false">
                 <span class="compare-tag">Antes (Manual)</span>
-                <p><strong>25 horas al mes</strong> digitando facturas de compras y ventas una por una.</p>
+                <p><strong>25 horas</strong> digitando facturas de compras y ventas.</p>
+                <div class="compare-meter" aria-hidden="true"><span class="compare-meter-fill" style="--meter-scale: 1;"></span></div>
               </div>
-              <div class="compare-box after">
+              <div class="compare-box after" tabindex="0" role="button" aria-pressed="false">
                 <span class="compare-tag">Después (Automatizado)</span>
-                <p><strong>Un clic en Excel</strong> que estructura los archivos de carga masiva para el sistema.</p>
+                <p><strong>Un clic en Excel</strong> arma el archivo de carga.</p>
+                <div class="compare-meter" aria-hidden="true"><span class="compare-meter-fill" style="--meter-scale: 0.06;"></span></div>
               </div>
             </div>
 
-            <p class="result-summary">Evita errores de tipeo en montos, fechas o comprobantes al cerrar el mes.</p>
+            <p class="result-summary">Evita errores de tipeo en montos, fechas y comprobantes.</p>
           </article>
 
           <!-- Comparativo 3: Cruce de Impuestos -->
@@ -214,20 +230,22 @@
             </div>
             <h3>Cruce de impuestos</h3>
             <div class="result-roi-big">20 horas / mes</div>
-            <p class="result-roi-sub">Tiempo ahorrado cada mes validando comprobantes.</p>
+            <p class="result-roi-sub">Ahorro al validar comprobantes.</p>
 
             <div class="compare-stack">
-              <div class="compare-box before">
+              <div class="compare-box before" tabindex="0" role="button" aria-pressed="false">
                 <span class="compare-tag">Antes (Manual)</span>
-                <p><strong>20 horas al mes</strong> revisando a ojo miles de facturas frente al registro contable.</p>
+                <p><strong>20 horas</strong> revisando facturas a ojo contra tu contabilidad.</p>
+                <div class="compare-meter" aria-hidden="true"><span class="compare-meter-fill" style="--meter-scale: 1;"></span></div>
               </div>
-              <div class="compare-box after">
+              <div class="compare-box after" tabindex="0" role="button" aria-pressed="false">
                 <span class="compare-tag">Después (Automatizado)</span>
-                <p><strong>Cruce en segundos</strong> de más de 4,120 comprobantes antes de declarar.</p>
+                <p><strong>Cruce en segundos</strong> de más de 4,120 comprobantes.</p>
+                <div class="compare-meter" aria-hidden="true"><span class="compare-meter-fill" style="--meter-scale: 0.05;"></span></div>
               </div>
             </div>
 
-            <p class="result-summary">Detecta a tiempo facturas duplicadas, diferencias o compras omitidas ante revisiones.</p>
+            <p class="result-summary">Detecta duplicados, diferencias o compras omitidas antes de declarar.</p>
           </article>
         </div>
       </div>
@@ -251,18 +269,18 @@
               <span class="mini-badge">Ahorra 28h al mes</span>
             </div>
             <h3>Balances sin digitación</h3>
-            <p class="project-context">A partir de los reportes que exporta tu sistema contable, diseño una herramienta desde cero para que tus reportes financieros se actualicen sin digitar ni tocar tu software.</p>
+            <p class="project-context">Con lo que exporta tu sistema, armo balances actualizables sin digitar ni cambiar de software.</p>
             <ul class="project-bullets">
-              <li>Genera balance de comprobación y estado de resultados actualizable por periodo.</li>
-              <li>Permite hallar cuentas sin destino e inconsistencias en partidas de resultados.</li>
-              <li>Incluye balance general, patrimonio, ratios y notas 10 a 59 para presentar EE. FF.</li>
+              <li>Balance de comprobación y resultados por periodo.</li>
+              <li>Detecta cuentas sin destino y descuadres.</li>
+              <li>Incluye balance general, patrimonio, ratios y notas 10 a 59.</li>
             </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
                 <span class="tag">Balance y ERI</span>
                 <span class="tag">Cuentas 10 a 59</span>
               </div>
-              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Estados financieros automatizados')">Consultar →</button>
+              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Estados financieros automatizados')">Consultar <span class="btn-arrow" aria-hidden="true">→</span></button>
             </div>
           </article>
 
@@ -273,40 +291,40 @@
               <span class="mini-badge">Ahorra 25h al mes</span>
             </div>
             <h3>Plantillas en Excel</h3>
-            <p class="project-context">Creo macros y plantillas desde cero según la forma de trabajar de tu empresa, para dejar de copiar y digitar comprobantes a mano.</p>
+            <p class="project-context">Diseño macros y plantillas según tus archivos para dejar de digitar a mano.</p>
             <ul class="project-bullets">
-              <li>Pegas tus comprobantes, presionas actualizar y genera sola los archivos de carga masiva.</li>
-              <li>Elimina errores humanos en montos, fechas y números de factura en cada cierre.</li>
-              <li>Ahorra hasta 25 horas al mes en compras, ventas, planillas o reportes de gastos.</li>
+              <li>Pegas tus datos y generas la carga masiva en un clic.</li>
+              <li>Evita errores en montos, fechas y comprobantes.</li>
+              <li>Ahorra hasta 25 horas al mes en compras, ventas o planillas.</li>
             </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
                 <span class="tag">Macros Excel</span>
                 <span class="tag">Carga masiva</span>
               </div>
-              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Macros y plantillas en Excel')">Consultar →</button>
+              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Macros y plantillas en Excel')">Consultar <span class="btn-arrow" aria-hidden="true">→</span></button>
             </div>
           </article>
 
-          <!-- Servicio 3: Cruces SUNAT y Tableros -->
+          <!-- Servicio 3: Conciliaciones, Cruces SUNAT y Tableros -->
           <article class="card service-bento-card">
             <div class="card-top">
               <span class="card-category">Servicio 03</span>
               <span class="mini-badge">Ahorra 20h al mes</span>
             </div>
             <h3>Revisión y tableros</h3>
-            <p class="project-context">Diseño cuadros de cruce tributario y tableros en Power BI adaptados a las ventas, caja y gastos de tu negocio.</p>
+            <p class="project-context">Cruzo bancos y declaraciones contra tu contabilidad, con tableros claros en Power BI.</p>
             <ul class="project-bullets">
-              <li>Cruza lo declarado ante el ente tributario contra tu contabilidad en segundos.</li>
-              <li>Detecta compras omitidas, diferencias o facturas duplicadas antes de declarar o pagar.</li>
-              <li>Entrega gráficos claros en Power BI para ver caja, cobranzas y márgenes al día.</li>
+              <li>Concilia movimientos bancarios y cruza declaraciones en segundos.</li>
+              <li>Detecta partidas pendientes, compras omitidas y duplicados.</li>
+              <li>Visualiza caja, cobranzas y márgenes al día en Power BI.</li>
             </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
-                <span class="tag">Cruce fiscal</span>
+                <span class="tag">Conciliación y SUNAT</span>
                 <span class="tag">Power BI</span>
               </div>
-              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Tableros en Power BI y Excel')">Consultar →</button>
+              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Tableros en Power BI y Excel')">Consultar <span class="btn-arrow" aria-hidden="true">→</span></button>
             </div>
           </article>
         </div>
@@ -339,11 +357,11 @@
                 <span class="mini-badge">Serie 2026</span>
               </div>
               <h3>Monedas de Latinoamérica</h3>
-              <p class="project-context">Armado para quienes manejan presupuestos, compras o ingresos en dólares desde Latinoamérica. Trae los datos web del Banco Central Europeo con las cotizaciones del día.</p>
+              <p class="project-context">Pensado para presupuestos y compras en dólares. Toma las cotizaciones diarias del Banco Central Europeo.</p>
               <ul class="project-bullets">
-                <li>Cuatro tarjetas con el tipo de cambio vigente frente al dólar en Perú, Colombia, Chile y Argentina.</li>
-                <li>Evolución diaria de 2026 por moneda y barras de variación acumulada en el año.</li>
-                <li>Tabla resumen con tasa actual, variación acumulada y estabilidad de cada moneda.</li>
+                <li>Tipo de cambio vigente frente al dólar en 4 países: Perú, Colombia, Chile y Argentina.</li>
+                <li>Evolución diaria 2026 y variación acumulada por moneda.</li>
+                <li>Tabla con tasa actual, variación y estabilidad.</li>
               </ul>
               <div class="tag-list">
                 <span class="tag">Datos Banco Europeo</span>
@@ -354,6 +372,7 @@
           </article>
 
           <div class="powerbi-frame-card border-beam-card">
+            <div class="pbi-skeleton" aria-hidden="true"></div>
             <iframe
               id="powerbi-iframe-divisas"
               title="Monitor_Divisas_Globales"
@@ -392,11 +411,11 @@
                 <span class="mini-badge">88 modelos</span>
               </div>
               <h3>Comparativo de precios</h3>
-              <p class="project-context">Cuando toca elegir un modelo para trabajar o pagar una suscripción, el precio pesa tanto como el rendimiento. Conecté un catálogo público en línea para comparar 88 opciones.</p>
+              <p class="project-context">Para elegir qué modelo usar o pagar según su costo real. Compara 88 opciones desde un catálogo público en línea.</p>
               <ul class="project-bullets">
-                <li>Indicadores rápidos con el líder en rendimiento, promedio del mercado y calidad frente a precio.</li>
-                <li>Gráfico que cruza el costo de uso frente al puntaje obtenido, separado por gama (alta, media y económica).</li>
-                <li>Comparativo por tarea en análisis, lógica y ciencia, más tabla para ordenar prioridades.</li>
+                <li>Líder en rendimiento, promedio del mercado y calidad frente a precio.</li>
+                <li>Costo de uso frente a puntaje, separado por gama alta, media y económica.</li>
+                <li>Ranking por análisis, lógica y ciencia con tabla de prioridades.</li>
               </ul>
               <div class="tag-list">
                 <span class="tag">Datos en línea</span>
@@ -407,6 +426,7 @@
           </article>
 
           <div class="powerbi-frame-card border-beam-card">
+            <div class="pbi-skeleton" aria-hidden="true"></div>
             <iframe
               id="powerbi-iframe-ia"
               title="Modelos_IA_Frontera"
@@ -437,16 +457,16 @@
               <span class="mini-badge">Pagos al día</span>
             </div>
             <h3>Banca y pagos</h3>
-            <p class="project-context">Soy Analista de datos y responsable de tesorería para una cartera múltiple de empresas en una firma contable en Perú. Esa práctica diaria respalda cada herramienta que diseño.</p>
+            <p class="project-context">Gestiono tesorería y movimientos bancarios para una cartera multiempresa en Perú.</p>
             <ul class="project-bullets">
-              <li>Cargo pagos masivos de proveedores, sueldos de planilla, depósitos de CTS y detracciones.</li>
-              <li>Envío alertas cada viernes y controlo tablas de préstamos, cuotas y fraccionamientos.</li>
-              <li>Reviso el tipo de cambio bancario y presento reclamos formales ante diferencias.</li>
+              <li>Concilio bancos y analizo movimientos y partidas pendientes para 5 empresas.</li>
+              <li>Proceso pagos masivos, planillas, CTS y detracciones, con alertas cada viernes.</li>
+              <li>Controlo préstamos, reviso el tipo de cambio bancario y presento reclamos por diferencias.</li>
             </ul>
             <div class="tag-list">
-              <span class="tag">Banca corporativa</span>
+              <span class="tag">Conciliación bancaria</span>
               <span class="tag">Planillas y CTS</span>
-              <span class="tag">Multiempresa</span>
+              <span class="tag">5 empresas</span>
             </div>
           </article>
 
@@ -457,11 +477,11 @@
               <span class="mini-badge">Formalizado</span>
             </div>
             <h3>Orden en pagos</h3>
-            <p class="project-context">Participé en la creación del área de tesorería, redactando el manual de pagos y los flujos digitales de aprobación.</p>
+            <p class="project-context">Participé en la creación del área de tesorería y su circuito digital de aprobación.</p>
             <ul class="project-bullets">
-              <li>Definí reglas claras de quién revisa la factura, quién autoriza y quién transfiere.</li>
-              <li>Diseñé tres flujogramas para pasar de firmas en papel a aprobaciones digitales.</li>
-              <li>Valido información y archivo documentación comercial y tributaria con apoyo de automatización inteligente.</li>
+              <li>Redacto el manual de pagos: quién revisa, quién autoriza y quién transfiere.</li>
+              <li>Diseñé 3 flujogramas para pasar de firmas en papel a control digital.</li>
+              <li>Valido y archivo documentación comercial y tributaria sin procesos dispersos.</li>
             </ul>
             <div class="tag-list">
               <span class="tag">Manual de pagos</span>
@@ -477,11 +497,16 @@
               <span class="mini-badge">En pruebas · 80%</span>
             </div>
             <h3>Descargas en lote</h3>
-            <p class="project-context">Estoy armando una herramienta propia para bajar facturas de compras y ventas desde el portal tributario sin hacerlo una por una.</p>
+            <div class="progress-meter-wrap" role="progressbar" aria-label="Avance de herramienta Descargas en lote" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-meter-track">
+                <span class="progress-meter-fill"></span>
+              </div>
+            </div>
+            <p class="project-context">Construyo una herramienta propia para descargar comprobantes del portal tributario en bloque.</p>
             <ul class="project-bullets">
-              <li>Incluye un panel de botones rápidos activo para entrar en un clic a portales y bancos.</li>
-              <li>La pantalla para descargar comprobantes y registros mensuales avanza al 80%.</li>
-              <li>Actualmente en etapa de pruebas y ajuste funcional antes de su lanzamiento.</li>
+              <li>Panel activo de accesos en un clic a bancos y portal tributario.</li>
+              <li>Módulo de facturas, boletas y registros mensuales al 80% de avance.</li>
+              <li>En pruebas funcionales antes de salir a operación diaria.</li>
             </ul>
             <div class="tag-list">
               <span class="tag">Accesos rápidos</span>
@@ -505,7 +530,7 @@
 
         <!-- Franja de Rubros y Labor Principal (Anónimo) -->
         <div class="client-logos-strip" aria-label="Rubros y funciones en los que he trabajado">
-          <span class="logos-strip-label">Experiencia real por rubro y labor principal</span>
+          <span class="logos-strip-label">Experiencia real por rubro</span>
           <div class="logos-row">
             <div class="client-logo-badge" title="Salud y Comercial: Pagos masivos y conciliación bancaria">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/></svg>
@@ -513,7 +538,7 @@
             </div>
             <div class="client-logo-badge" title="Importación y Distribución: Validación y archivo documental automatizado">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 10h8M8 14h5"/></svg>
-              <span>IMPORTACIÓN · Validación y archivo con IA</span>
+              <span>IMPORTACIÓN · Archivo y validación</span>
             </div>
             <div class="client-logo-badge" title="Firmas y Servicios: Cierres contables y estados financieros">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>
@@ -539,7 +564,7 @@
               <button type="button" class="pricing-tier-item active" data-tier="Macros y plantillas en Excel" onclick="selectServiceTier('Macros y plantillas en Excel', this)">
                 <div class="tier-main">
                   <span class="tier-name">Macros y plantillas en Excel</span>
-                  <span class="tier-desc">Los creo desde cero según tus archivos para compras, ventas o cruces.</span>
+                  <span class="tier-desc">Para compras, ventas, conciliaciones y cruces diarios.</span>
                 </div>
                 <div class="tier-price-col">
                   <span class="tier-price">Según tu flujo</span>
@@ -550,7 +575,7 @@
               <button type="button" class="pricing-tier-item" data-tier="Tableros en Power BI y Excel" onclick="selectServiceTier('Tableros en Power BI y Excel', this)">
                 <div class="tier-main">
                   <span class="tier-name">Tableros en Power BI y Excel</span>
-                  <span class="tier-desc">Los armo a la medida de tus ventas, caja, cobranzas o divisas.</span>
+                  <span class="tier-desc">Control de caja, cobranzas, ventas o divisas.</span>
                 </div>
                 <div class="tier-price-col">
                   <span class="tier-price">Con tus datos</span>
@@ -561,7 +586,7 @@
               <button type="button" class="pricing-tier-item" data-tier="Estados financieros automatizados" onclick="selectServiceTier('Estados financieros automatizados', this)">
                 <div class="tier-main">
                   <span class="tier-name">Estados financieros automatizados</span>
-                  <span class="tier-desc">Los construyo según tu sistema para balance, ERI, cuentas sin destino y notas.</span>
+                  <span class="tier-desc">Balance, ERI, cuentas sin destino y notas.</span>
                 </div>
                 <div class="tier-price-col">
                   <span class="tier-price">Según tu sistema</span>
@@ -571,7 +596,7 @@
             </div>
 
             <p class="pricing-custom-note">
-              <strong>A tu medida:</strong> No uso formatos genéricos; cada herramienta se crea desde cero según lo que necesite tu empresa y se cotiza según el alcance.
+              Sin plantillas genéricas: cada herramienta se cotiza según el alcance real.
             </p>
           </article>
 
@@ -588,13 +613,14 @@
             <form id="quick-quote-form" class="quick-quote-form" onsubmit="handleQuoteSubmit('whatsapp'); return false;">
               <div class="form-row-two">
                 <div class="form-field">
-                  <label for="quote-name">Tu nombre o empresa</label>
+                  <label for="quote-name">Nombre o empresa</label>
                   <input type="text" id="quote-name" name="name" placeholder="Ej. Juan Pérez / Empresa Comercial" required>
                 </div>
                 <div class="form-field">
-                  <label for="quote-service">¿Qué necesitas armar?</label>
+                  <label for="quote-service">Servicio</label>
                   <select id="quote-service" name="service">
                     <option value="Macros y plantillas en Excel">Macros y plantillas en Excel</option>
+                    <option value="Conciliaciones y control en Excel">Conciliaciones y control en Excel</option>
                     <option value="Tableros en Power BI y Excel">Tableros en Power BI y Excel</option>
                     <option value="Estados financieros automatizados">Estados financieros automatizados</option>
                     <option value="Consulta general / Otro proyecto">Consulta general / Otro proyecto</option>
@@ -603,8 +629,8 @@
               </div>
 
               <div class="form-field">
-                <label for="quote-goal">Cuéntame en breve qué tarea quieres agilizar</label>
-                <input type="text" id="quote-goal" name="goal" placeholder="Ej. Quiero que mis balances o cargas de compras se armen sin tipear a mano">
+                <label for="quote-goal">¿Qué proceso quieres agilizar?</label>
+                <input type="text" id="quote-goal" name="goal" placeholder="Ej. Conciliaciones bancarias, balances o cargas en Excel">
               </div>
 
               <div class="quote-submit-row">
@@ -616,28 +642,28 @@
             <div class="contact-footer-bar">
               <div class="contact-actions-row">
                 <!-- WhatsApp Monocromático -->
-                <a href="https://wa.me/51960748142" target="_blank" rel="noopener noreferrer" class="nav-social-btn nav-icon-btn" title="WhatsApp: +51 960 748 142" aria-label="WhatsApp">
+                <a href="https://wa.me/51960748142" target="_blank" rel="noopener noreferrer" class="nav-icon-btn" title="WhatsApp: +51 960 748 142" aria-label="WhatsApp">
                   <img src="whatsapp.svg" width="24" height="24" alt="WhatsApp" class="contact-icon">
                 </a>
 
                 <!-- LinkedIn Monocromático -->
-                <a href="https://www.linkedin.com/in/francoguerreroav/" target="_blank" rel="noopener noreferrer" class="nav-social-btn nav-icon-btn" title="LinkedIn: Franco Guerrero" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/francoguerreroav/" target="_blank" rel="noopener noreferrer" class="nav-icon-btn" title="LinkedIn: Franco Guerrero" aria-label="LinkedIn">
                   <img src="linkedin.svg" width="24" height="24" alt="LinkedIn" class="contact-icon">
                 </a>
 
                 <!-- GitHub Monocromático -->
-                <a href="https://github.com/Franco-G" target="_blank" rel="noopener noreferrer" class="nav-social-btn nav-icon-btn" title="GitHub: Franco-G" aria-label="GitHub">
+                <a href="https://github.com/Franco-G" target="_blank" rel="noopener noreferrer" class="nav-icon-btn" title="GitHub: Franco-G" aria-label="GitHub">
                   <img src="github.svg" width="24" height="24" alt="GitHub" class="contact-icon">
                 </a>
 
                 <!-- Gmail Monocromático -->
-                <a href="mailto:guerrerofranco1429@gmail.com" class="nav-social-btn nav-icon-btn" title="Correo: guerrerofranco1429@gmail.com" aria-label="Correo">
+                <a href="mailto:guerrerofranco1429@gmail.com" class="nav-icon-btn" title="Correo: guerrerofranco1429@gmail.com" aria-label="Correo">
                   <img src="gmail.svg" width="24" height="24" alt="Correo" class="contact-icon">
                 </a>
               </div>
 
               <button type="button" class="btn btn-secondary back-to-top-btn shimmer-btn" onclick="goToSlide(0)" title="Volver a la primera sección">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 5px;">
+                <svg class="btn-arrow-up" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="12" y1="19" x2="12" y2="5"></line>
                   <polyline points="5 12 12 5 19 12"></polyline>
                 </svg>
@@ -651,6 +677,6 @@
   </main>
 
   <!-- Controlador de Navegación e Interactividad -->
-  <script src="app.js?v=14.0"></script>
+  <script src="app.js?v=15.0"></script>
 </body>
 </html>
