@@ -506,32 +506,6 @@ h3 {
   line-height: 1.4;
 }
 
-/* R3-1: Indicador en vivo separado para ritmo demostrativo */
-.demo-pace-badge {
-  margin-top: 8px;
-  display: inline-flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 4px;
-  max-width: 100%;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--primary-pressed);
-  background: var(--primary-light);
-  border: 1px solid rgba(66, 133, 244, 0.25);
-  border-radius: 9999px;
-  padding: 2px 9px;
-  line-height: 1.35;
-}
-
-.demo-pace-num {
-  font-variant-numeric: tabular-nums;
-  display: inline-block;
-  min-width: 3ch;
-  text-align: right;
-  font-weight: 700;
-}
-
 /* ========================================================
    MAGIC UI: BORDER BEAM EN TARJETAS Y VISORES
    ======================================================== */
@@ -1972,7 +1946,6 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   .metric-num { font-size: 23px; }
   .metric-caption { font-size: 10px; letter-spacing: 0.03em; }
   .metric-sub { font-size: 11px; line-height: 1.35; }
-  .demo-pace-badge { font-size: 9.5px; padding: 2px 6px; margin-top: 6px; }
   .nav-container { padding: 0 0.85rem; gap: 6px; }
   .header-scroll-progress { padding: 4px 0.85rem 6px; }
   .nav-brand { font-size: 13.5px; gap: 7px; }

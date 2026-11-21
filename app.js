@@ -47,7 +47,6 @@ function initApp() {
   initPowerBiSkeletons();
   initHeroEntrance();
   triggerNumberTicker();
-  initDemoPaceCounter();
   updateScrollProgress();
   alignInitialHash();
 }
@@ -309,7 +308,7 @@ function handleQuoteSubmit(channel) {
 }
 
 /**
- * 4. Animación de Métricas Cuantitativas (Number Ticker + Contador Demo Aparte)
+ * 4. Animación de Métricas Cuantitativas (Number Ticker + Incremento en Vivo)
  */
 function triggerNumberTicker() {
   if (tickerHasRun) return;
@@ -321,15 +320,19 @@ function triggerNumberTicker() {
     const target = parseInt(el.getAttribute('data-ticker-target'), 10);
     const prefix = el.getAttribute('data-ticker-prefix') || '';
     const suffix = el.getAttribute('data-ticker-suffix') || '';
+    const liveStepMs = parseInt(el.getAttribute('data-live-increment'), 10);
+    const onDone = liveStepMs > 0 ? () => startLiveMetricIncrement(el, target, prefix, suffix, liveStepMs) : null;
+
     if (REDUCED_MOTION_MQ.matches) {
       el.textContent = `${prefix}${target}${suffix}`;
+      if (onDone) onDone();
     } else {
-      animateValue(el, 0, target, 1100, prefix, suffix);
+      animateValue(el, 0, target, 1100, prefix, suffix, onDone);
     }
   });
 }
 
-function animateValue(obj, start, end, duration, prefix, suffix) {
+function animateValue(obj, start, end, duration, prefix, suffix, onComplete) {
   let startTimestamp = null;
   const step = (timestamp) => {
     if (!startTimestamp) startTimestamp = timestamp;
@@ -341,54 +344,47 @@ function animateValue(obj, start, end, duration, prefix, suffix) {
       window.requestAnimationFrame(step);
     } else {
       obj.textContent = `${prefix}${end}${suffix}`;
+      if (typeof onComplete === 'function') onComplete();
     }
   };
   window.requestAnimationFrame(step);
 }
 
-function initDemoPaceCounter() {
-  const counterEl = document.getElementById('demo-pace-counter');
-  if (!counterEl) return;
-
-  let count = 1;
+function startLiveMetricIncrement(el, startValue, prefix, suffix, intervalMs) {
+  let count = startValue;
   let isVisible = true;
   let timerId = null;
 
-  const renderCount = () => {
-    counterEl.textContent = String(count).padStart(3, '0');
-  };
-
-  const syncDemoTimer = () => {
+  const syncTimer = () => {
     const shouldRun = isVisible && !document.hidden && !REDUCED_MOTION_MQ.matches;
     if (shouldRun && !timerId) {
       timerId = window.setInterval(() => {
-        count = count >= 999 ? 1 : count + 1;
-        renderCount();
-      }, 1000);
+        count += 1;
+        el.textContent = `${prefix}${count}${suffix}`;
+      }, intervalMs);
     } else if (!shouldRun && timerId) {
       window.clearInterval(timerId);
       timerId = null;
     }
   };
 
-  const cardEl = counterEl.closest('.metric-card') || counterEl;
+  const cardEl = el.closest('.metric-card') || el;
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         isVisible = entry.isIntersecting;
-        syncDemoTimer();
+        syncTimer();
       });
     }, { threshold: 0.05 });
     io.observe(cardEl);
   }
 
-  document.addEventListener('visibilitychange', syncDemoTimer);
+  document.addEventListener('visibilitychange', syncTimer);
   if (typeof REDUCED_MOTION_MQ.addEventListener === 'function') {
-    REDUCED_MOTION_MQ.addEventListener('change', syncDemoTimer);
+    REDUCED_MOTION_MQ.addEventListener('change', syncTimer);
   }
 
-  renderCount();
-  syncDemoTimer();
+  syncTimer();
 }
 
 /**
