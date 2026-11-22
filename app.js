@@ -38,7 +38,7 @@ function initApp() {
   initTouchGuard();
   initRotationBanner();
   initContactForm();
-  initHeroShowcase();
+  initExcelShowcase();
   syncHeaderHeightVar();
   initScrollTracking();
   initProgressRailClick();
@@ -199,10 +199,9 @@ function updateActiveMenuFromScroll() {
 }
 
 function syncHeaderMenuLinks(targetIndex) {
-  const mappedIndex = (targetIndex >= 3 && targetIndex <= 4) ? 3 : targetIndex;
   document.querySelectorAll('.nav-menu-link').forEach(link => {
     const linkIdx = parseInt(link.getAttribute('data-slide-index'), 10);
-    link.classList.toggle('active', linkIdx === mappedIndex);
+    link.classList.toggle('active', linkIdx === targetIndex);
   });
 }
 
@@ -691,54 +690,87 @@ function initRotationBanner() {
 }
 
 /**
- * 11. Vitrina Rotativa en Portada y Visor Galería de Muestras en Excel
+ * 11. Vitrina Grande de Plantillas en Excel y Visor Ampliado (Excel + Power BI)
  */
+const HERO_PBI_URL = 'https://app.powerbi.com/view?r=eyJrIjoiNDcwOTNiMjEtNTNmYy00NjhkLTk3ZjQtOGE0NjE1NzA1ZDk3IiwidCI6ImM0YTY2YzM0LTJiYjctNDUxZi04YmUxLWIyYzI2YTQzMDE1OCIsImMiOjR9';
+
 const GALLERY_SAMPLES = [
   {
+    cat: 'Contabilidad PCGE',
+    badge: 'En Soles (S/)',
+    showcaseTitle: 'Flujos de efectivo',
+    desc: 'Estado de Flujos de Efectivo bajo taxonomía oficial SMV / SUNAT, listo sin digitación manual.',
+    bullets: [
+      'Clasificación automática por actividad operativa, inversión y financiamiento.',
+      'Lectura directa desde tu registro de transacciones PCGE.',
+      'Entrega limpia para gerencia sin exponer tus fórmulas.'
+    ],
     src: 'muestras/muestra-balances-pcge.png',
-    shortLabel: 'Estado de Flujos de Efectivo (PCGE)',
     title: 'Estado de Flujos de Efectivo (PCGE / SMV)',
     caption: 'Modelo real estructurado en Excel con cuentas contables peruanas en Soles.',
     service: 'Estados financieros automatizados'
   },
   {
+    cat: 'Automatización Excel',
+    badge: 'Validación PCGE',
+    showcaseTitle: 'Registro contable',
+    desc: 'Base transaccional ordenada con macros de validación para cargar datos desde tu ERP sin errores.',
+    bullets: [
+      'Clasifica cuentas y subcuentas según el Plan Contable General Empresarial.',
+      'Calcula totales en Soles y detecta inconsistencias antes del cierre.',
+      'Reduce el trabajo operativo repetitivo con botones de un solo clic.'
+    ],
     src: 'muestras/muestra-transacciones-pcge.png',
-    shortLabel: 'Registro de Transacciones (PCGE 2019)',
     title: 'Registro de Transacciones Contables (PCGE)',
     caption: 'Vista real en Excel con validaciones, totales en Soles y clasificación por cuenta.',
     service: 'Macros y plantillas en Excel'
   },
   {
+    cat: 'Control Gerencial',
+    badge: 'Indicadores clave',
+    showcaseTitle: 'Tablero gerencial',
+    desc: 'Resumen financiero mensual en Soles con estado de resultados, balance general y métricas de retorno.',
+    bullets: [
+      'Ganancias y pérdidas frente a períodos anteriores en una sola pantalla.',
+      'Ratios de liquidez, endeudamiento, TIR y WACC listos para directorio.',
+      'Actualización inmediata al pegar el reporte exportado de tu sistema.'
+    ],
     src: 'muestras/muestra-tablero-financiero.png',
-    shortLabel: 'Dashboard Económico Financiero (S/)',
     title: 'Dashboard Económico Financiero en Excel',
     caption: 'Tablero real en Soles con Ganancias y Pérdidas, Balance General, TIR y WACC.',
     service: 'Tableros en Power BI y Excel'
   },
   {
+    cat: 'Tesorería y Bancos',
+    badge: 'Control de saldos',
+    showcaseTitle: 'Conciliación mensual',
+    desc: 'Cruce ágil entre extractos bancarios y contabilidad para identificar partidas pendientes en minutos.',
+    bullets: [
+      'Control diario de depósitos, egresos y saldos bancarios por cuenta.',
+      'Filtros dinámicos por estado de conciliación y tipo de movimiento.',
+      'Soporte claro para arqueos de caja, pagos y auditoría interna.'
+    ],
     src: 'muestras/muestra-conciliacion-bancaria.png',
-    shortLabel: 'Conciliación Bancaria Mensual',
     title: 'Conciliación Bancaria y Validación en Excel',
     caption: 'Control de depósitos, saldos y estado de conciliación con filtros dinámicos.',
     service: 'Tableros en Power BI y Excel'
   },
   {
     src: 'muestras/muestra-pack-62.png',
-    shortLabel: 'Pack 62 Plantillas en Excel',
     title: 'Pack 62 Plantillas en Excel',
     caption: 'Muestra real de 3 plantillas incluidas gratis al concretar cualquier servicio pagado.',
     service: 'Pack 62 plantillas en Excel'
   }
 ];
 
-let heroSlideIndex = 0;
-let heroShowcaseTimer = null;
-let heroShowcasePaused = false;
+let excelSlideIndex = 0;
+let excelShowcaseTimer = null;
+let excelShowcasePaused = false;
 let currentGalleryIndex = 0;
 let lastModalTrigger = null;
 
-function restartHeroProgress() {
-  const fill = document.getElementById('hero-showcase-progress-fill');
+function restartExcelProgress() {
+  const fill = document.getElementById('excel-stage-progress-fill');
   if (!fill) return;
   fill.classList.remove('is-animating');
   if (REDUCED_MOTION_MQ.matches) return;
@@ -746,85 +778,121 @@ function restartHeroProgress() {
   fill.classList.add('is-animating');
 }
 
-function setHeroSlide(index) {
-  const slides = document.querySelectorAll('.hero-showcase-slide');
-  const tabs = document.querySelectorAll('.hero-tab-btn');
-  const labelEl = document.getElementById('hero-showcase-label');
+function setExcelSlide(index) {
+  const showcase = document.getElementById('excel-showcase');
+  if (!showcase) return;
+  const slides = showcase.querySelectorAll('.hero-showcase-slide');
+  const tabs = document.querySelectorAll('.excel-stage-tabs .hero-tab-btn');
   if (slides.length === 0) return;
 
-  heroSlideIndex = ((index % slides.length) + slides.length) % slides.length;
+  excelSlideIndex = ((index % slides.length) + slides.length) % slides.length;
   slides.forEach((slide, i) => {
-    slide.classList.toggle('is-active', i === heroSlideIndex);
+    slide.classList.toggle('is-active', i === excelSlideIndex);
   });
   tabs.forEach((tab, i) => {
-    const active = i === heroSlideIndex;
+    const active = i === excelSlideIndex;
     tab.classList.toggle('is-active', active);
     tab.setAttribute('aria-selected', active ? 'true' : 'false');
   });
 
-  const info = GALLERY_SAMPLES[heroSlideIndex];
-  if (labelEl && info) {
-    labelEl.textContent = info.shortLabel;
+  const info = GALLERY_SAMPLES[excelSlideIndex];
+  if (info) {
+    const catEl = document.getElementById('excel-stage-cat');
+    const badgeEl = document.getElementById('excel-stage-badge');
+    const titleEl = document.getElementById('excel-stage-title');
+    const descEl = document.getElementById('excel-stage-desc');
+    const bulletsEl = document.getElementById('excel-stage-bullets');
+
+    if (catEl && info.cat) catEl.textContent = info.cat;
+    if (badgeEl && info.badge) badgeEl.textContent = info.badge;
+    if (titleEl && info.showcaseTitle) titleEl.textContent = info.showcaseTitle;
+    if (descEl && info.desc) descEl.textContent = info.desc;
+    if (bulletsEl && Array.isArray(info.bullets)) {
+      bulletsEl.textContent = '';
+      info.bullets.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        bulletsEl.appendChild(li);
+      });
+    }
   }
-  restartHeroProgress();
-  scheduleHeroShowcase();
+
+  restartExcelProgress();
+  scheduleExcelShowcase();
 }
 
-function scheduleHeroShowcase() {
-  if (heroShowcaseTimer) {
-    clearTimeout(heroShowcaseTimer);
-    heroShowcaseTimer = null;
+function scheduleExcelShowcase() {
+  if (excelShowcaseTimer) {
+    clearTimeout(excelShowcaseTimer);
+    excelShowcaseTimer = null;
   }
-  if (REDUCED_MOTION_MQ.matches || heroShowcasePaused || document.hidden) return;
+  if (REDUCED_MOTION_MQ.matches || excelShowcasePaused || document.hidden) return;
   const modal = document.getElementById('sample-lightbox');
   if (modal && !modal.hidden) return;
 
-  heroShowcaseTimer = setTimeout(() => {
-    setHeroSlide(heroSlideIndex + 1);
+  excelShowcaseTimer = setTimeout(() => {
+    setExcelSlide(excelSlideIndex + 1);
   }, 4000);
 }
 
-function initHeroShowcase() {
-  const showcase = document.getElementById('hero-showcase');
+function initExcelShowcase() {
+  const showcase = document.getElementById('excel-showcase');
   if (!showcase) return;
 
-  showcase.addEventListener('mouseenter', () => {
-    heroShowcasePaused = true;
-    scheduleHeroShowcase();
+  const parentSection = showcase.closest('.slide-section') || showcase;
+  parentSection.addEventListener('mouseenter', () => {
+    excelShowcasePaused = true;
+    scheduleExcelShowcase();
   });
-  showcase.addEventListener('mouseleave', () => {
-    heroShowcasePaused = false;
-    scheduleHeroShowcase();
+  parentSection.addEventListener('mouseleave', () => {
+    excelShowcasePaused = false;
+    scheduleExcelShowcase();
   });
-  showcase.addEventListener('focusin', () => {
-    heroShowcasePaused = true;
-    scheduleHeroShowcase();
+  parentSection.addEventListener('focusin', () => {
+    excelShowcasePaused = true;
+    scheduleExcelShowcase();
   });
-  showcase.addEventListener('focusout', (e) => {
-    if (!showcase.contains(e.relatedTarget)) {
-      heroShowcasePaused = false;
-      scheduleHeroShowcase();
+  parentSection.addEventListener('focusout', (e) => {
+    if (!parentSection.contains(e.relatedTarget)) {
+      excelShowcasePaused = false;
+      scheduleExcelShowcase();
     }
   });
   document.addEventListener('visibilitychange', () => {
-    scheduleHeroShowcase();
+    scheduleExcelShowcase();
   });
 
-  setHeroSlide(0);
+  setExcelSlide(0);
 }
 
-function openCurrentHeroSample() {
-  const sample = GALLERY_SAMPLES[heroSlideIndex] || GALLERY_SAMPLES[0];
+function openCurrentExcelSample() {
+  const sample = GALLERY_SAMPLES[excelSlideIndex] || GALLERY_SAMPLES[0];
   openSampleModal(sample.src, sample.title, sample.caption, sample.service);
+}
+
+function quoteCurrentExcelService() {
+  const sample = GALLERY_SAMPLES[excelSlideIndex] || GALLERY_SAMPLES[0];
+  quoteSpecificService(sample.service || 'Estados financieros automatizados');
 }
 
 function renderModalSample(sample) {
   const imgEl = document.getElementById('sample-lightbox-img');
+  const pbiEl = document.getElementById('sample-lightbox-pbi');
+  const navEl = document.getElementById('sample-lightbox-nav');
+  const kickerEl = document.getElementById('sample-lightbox-kicker');
   const titleEl = document.getElementById('sample-lightbox-title');
   const captionEl = document.getElementById('sample-lightbox-caption');
   const counterEl = document.getElementById('sample-lightbox-counter');
   const ctaBtn = document.getElementById('sample-lightbox-cta');
   if (!imgEl || !titleEl || !captionEl) return;
+
+  if (pbiEl) {
+    pbiEl.hidden = true;
+    pbiEl.removeAttribute('src');
+  }
+  imgEl.hidden = false;
+  if (navEl) navEl.hidden = false;
+  if (kickerEl) kickerEl.textContent = 'Muestra real en Excel';
 
   imgEl.src = sample.src;
   imgEl.alt = sample.title || 'Captura real en Microsoft Excel';
@@ -864,13 +932,50 @@ function openSampleModal(imgSrc, title, caption, serviceValue) {
 
   modal.hidden = false;
   document.documentElement.style.overflow = 'hidden';
-  scheduleHeroShowcase();
+  scheduleExcelShowcase();
+  if (closeBtn) closeBtn.focus();
+}
+
+function openPowerBiModal() {
+  const modal = document.getElementById('sample-lightbox');
+  const closeBtn = document.getElementById('sample-lightbox-close');
+  const imgEl = document.getElementById('sample-lightbox-img');
+  const pbiEl = document.getElementById('sample-lightbox-pbi');
+  const navEl = document.getElementById('sample-lightbox-nav');
+  const kickerEl = document.getElementById('sample-lightbox-kicker');
+  const titleEl = document.getElementById('sample-lightbox-title');
+  const captionEl = document.getElementById('sample-lightbox-caption');
+  const ctaBtn = document.getElementById('sample-lightbox-cta');
+  if (!modal || !pbiEl || !imgEl || !titleEl || !captionEl) return;
+
+  lastModalTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  imgEl.hidden = true;
+  imgEl.removeAttribute('src');
+  if (navEl) navEl.hidden = true;
+  if (kickerEl) kickerEl.textContent = 'Power BI · Datos web en vivo';
+
+  titleEl.textContent = 'Monitor de divisas frente al dólar';
+  captionEl.textContent = 'Comparativa diaria frente al dólar: Perú, Colombia, Chile y Argentina (Banco Central Europeo).';
+  pbiEl.src = HERO_PBI_URL;
+  pbiEl.hidden = false;
+
+  if (ctaBtn) {
+    ctaBtn.onclick = () => {
+      closeSampleModal();
+      quoteSpecificService('Tableros en Power BI y Excel');
+    };
+  }
+
+  modal.hidden = false;
+  document.documentElement.style.overflow = 'hidden';
+  scheduleExcelShowcase();
   if (closeBtn) closeBtn.focus();
 }
 
 function stepSampleModal(delta) {
   const modal = document.getElementById('sample-lightbox');
-  if (!modal || modal.hidden) return;
+  const navEl = document.getElementById('sample-lightbox-nav');
+  if (!modal || modal.hidden || (navEl && navEl.hidden)) return;
   currentGalleryIndex = (currentGalleryIndex + delta + GALLERY_SAMPLES.length) % GALLERY_SAMPLES.length;
   renderModalSample(GALLERY_SAMPLES[currentGalleryIndex]);
 }
@@ -878,12 +983,17 @@ function stepSampleModal(delta) {
 function closeSampleModal() {
   const modal = document.getElementById('sample-lightbox');
   const imgEl = document.getElementById('sample-lightbox-img');
+  const pbiEl = document.getElementById('sample-lightbox-pbi');
   if (!modal || modal.hidden) return;
 
   modal.hidden = true;
   document.documentElement.style.overflow = '';
   if (imgEl) imgEl.removeAttribute('src');
-  scheduleHeroShowcase();
+  if (pbiEl) {
+    pbiEl.hidden = true;
+    pbiEl.removeAttribute('src');
+  }
+  scheduleExcelShowcase();
   if (lastModalTrigger && typeof lastModalTrigger.focus === 'function') {
     lastModalTrigger.focus();
   }
@@ -909,8 +1019,10 @@ window.selectServiceTier = selectServiceTier;
 window.quoteSpecificService = quoteSpecificService;
 window.handleQuoteSubmit = handleQuoteSubmit;
 window.copyContactEmail = copyContactEmail;
-window.setHeroSlide = setHeroSlide;
-window.openCurrentHeroSample = openCurrentHeroSample;
+window.setExcelSlide = setExcelSlide;
+window.openCurrentExcelSample = openCurrentExcelSample;
+window.quoteCurrentExcelService = quoteCurrentExcelService;
+window.openPowerBiModal = openPowerBiModal;
 window.openSampleModal = openSampleModal;
 window.stepSampleModal = stepSampleModal;
 window.closeSampleModal = closeSampleModal;

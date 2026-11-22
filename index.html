@@ -27,7 +27,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
   
   <script>document.documentElement.classList.add('js');</script>
-  <link rel="stylesheet" href="style.css?v=19.0">
+  <link rel="stylesheet" href="style.css?v=20.0">
 </head>
 <body>
   <!-- Escenario de fondo fijo limpio -->
@@ -47,7 +47,8 @@
         <a href="#inicio" class="nav-menu-link active" data-slide-index="0" onclick="goToSlide(0); return false;">Inicio</a>
         <a href="#experiencia" class="nav-menu-link" data-slide-index="1" onclick="goToSlide(1); return false;">Resultados</a>
         <a href="#soluciones" class="nav-menu-link" data-slide-index="2" onclick="goToSlide(2); return false;">Servicios</a>
-        <a href="#dashboard-powerbi" class="nav-menu-link" data-slide-index="3" onclick="goToSlide(3); return false;">Power BI</a>
+        <a href="#dashboard-powerbi" class="nav-menu-link" data-slide-index="3" onclick="goToSlide(3); return false;">Muestras</a>
+        <a href="#powerbi-ia" class="nav-menu-link" data-slide-index="4" onclick="goToSlide(4); return false;">Power BI</a>
         <a href="#respaldo" class="nav-menu-link" data-slide-index="5" onclick="goToSlide(5); return false;">Experiencia</a>
         <a href="#contacto" class="nav-menu-link" data-slide-index="6" onclick="goToSlide(6); return false;">Contacto</a>
       </nav>
@@ -130,30 +131,28 @@
             </div>
           </header>
 
-          <!-- Vitrina Interactiva Rotativa de Muestras Reales en Excel -->
-          <div class="hero-showcase-card border-beam-card" id="hero-showcase" aria-label="Muestras reales en Excel">
+          <!-- Primera Vista: Dashboard Interactivo de Monedas y Divisas (Power BI en Vivo) -->
+          <div class="hero-pbi-card border-beam-card powerbi-slide" aria-label="Dashboard en vivo de Monedas y Divisas">
             <div class="hero-showcase-head">
               <div class="hero-showcase-status">
                 <span class="live-dot" aria-hidden="true"></span>
-                <span id="hero-showcase-label">Estado de Flujos de Efectivo (PCGE)</span>
+                <span>Monitor de divisas · Datos web en vivo</span>
               </div>
-              <button type="button" class="hero-showcase-zoom" onclick="openCurrentHeroSample()">Ampliar</button>
+              <button type="button" class="hero-showcase-zoom" onclick="openPowerBiModal()">Ampliar</button>
             </div>
 
-            <button type="button" class="hero-showcase-stage" onclick="openCurrentHeroSample()" aria-label="Ampliar muestra activa en Excel">
-              <img src="muestras/muestra-balances-pcge.png" alt="Muestra real en Excel de Estado de Flujos de Efectivo PCGE" class="hero-showcase-slide is-active" data-index="0">
-              <img src="muestras/muestra-transacciones-pcge.png" alt="Muestra real en Excel de Registro de Transacciones PCGE" class="hero-showcase-slide" data-index="1" loading="lazy">
-              <img src="muestras/muestra-tablero-financiero.png" alt="Muestra real en Excel de Dashboard Económico Financiero" class="hero-showcase-slide" data-index="2" loading="lazy">
-              <img src="muestras/muestra-conciliacion-bancaria.png" alt="Muestra real en Excel de Conciliación Bancaria Mensual" class="hero-showcase-slide" data-index="3" loading="lazy">
-              <span class="hero-showcase-progress" aria-hidden="true"><span class="hero-showcase-progress-fill" id="hero-showcase-progress-fill"></span></span>
-            </button>
-
-            <div class="hero-showcase-tabs" role="tablist" aria-label="Elegir muestra en Excel">
-              <button type="button" class="hero-tab-btn is-active" role="tab" aria-selected="true" onclick="setHeroSlide(0)">01 Balances</button>
-              <button type="button" class="hero-tab-btn" role="tab" aria-selected="false" onclick="setHeroSlide(1)">02 Macros</button>
-              <button type="button" class="hero-tab-btn" role="tab" aria-selected="false" onclick="setHeroSlide(2)">03 Tablero</button>
-              <button type="button" class="hero-tab-btn" role="tab" aria-selected="false" onclick="setHeroSlide(3)">04 Cruces</button>
+            <div class="powerbi-frame-card hero-pbi-frame">
+              <div class="pbi-skeleton" aria-hidden="true"></div>
+              <iframe
+                id="powerbi-iframe-divisas"
+                title="Monitor_Divisas_Globales"
+                src="https://app.powerbi.com/view?r=eyJrIjoiNDcwOTNiMjEtNTNmYy00NjhkLTk3ZjQtOGE0NjE1NzA1ZDk3IiwidCI6ImM0YTY2YzM0LTJiYjctNDUxZi04YmUxLWIyYzI2YTQzMDE1OCIsImMiOjR9"
+                frameborder="0"
+                allowFullScreen="true">
+              </iframe>
             </div>
+
+            <p class="hero-pbi-caption">Tipo de cambio diario frente al dólar: Perú, Colombia, Chile y Argentina (Banco Central Europeo).</p>
           </div>
         </div>
 
@@ -371,76 +370,62 @@
             </div>
           </article>
         </div>
-
-        <!-- Franja Promocional: Bono Pack 62 Plantillas -->
-        <aside class="card promo-bonus-banner" aria-label="Promoción por servicio contratado">
-          <button type="button" class="promo-thumb-btn" onclick="openSampleModal('muestras/muestra-pack-62.png', 'Pack 62 Plantillas en Excel', 'Muestra real de 3 plantillas incluidas gratis al concretar cualquier servicio pagado.', 'Pack 62 plantillas en Excel')" aria-label="Ampliar muestra del Pack 62 plantillas">
-            <img src="muestras/muestra-pack-62.png" alt="Muestra real de 3 plantillas del Pack 62 en Excel" loading="lazy">
-            <img src="muestras/muestra-tablero-financiero.png" alt="" class="promo-thumb-alt" aria-hidden="true" loading="lazy">
-            <span class="sample-thumb-pill">Ver</span>
-          </button>
-          <div class="promo-bonus-copy">
-            <div class="promo-bonus-top">
-              <span class="card-category">Promoción activa</span>
-              <span class="mini-badge">Gratis con tu servicio</span>
-            </div>
-            <h3>Pack 62 plantillas</h3>
-            <p class="promo-bonus-text">Llévate gratis este paquete de finanzas, presupuesto y cobranzas en Excel al concretar cualquier servicio pagado, más diagnóstico inicial sin costo.</p>
-          </div>
-          <button type="button" class="btn btn-primary shimmer-btn promo-bonus-cta" onclick="quoteSpecificService('Pack 62 plantillas en Excel')">Solicitar con bono <span class="btn-arrow" aria-hidden="true">→</span></button>
-        </aside>
       </div>
     </section>
 
-    <!-- Sección 4: Muestra Práctica Power BI 01 - Monitor de divisas -->
-    <section id="dashboard-powerbi" class="slide-section powerbi-slide" aria-label="Muestra Power BI 1: Monitor de divisas">
+    <!-- Sección 4: Vitrina Grande Interactiva de Plantillas Reales en Excel -->
+    <section id="dashboard-powerbi" class="slide-section" aria-label="Vitrina grande de plantillas reales en Excel">
       <div class="container slide-container">
         <div class="slide-header-row">
           <div>
-            <span class="slide-badge">Muestra práctica 01 · Power BI</span>
-            <div class="title-with-badge">
-              <span class="live-dot" aria-hidden="true"></span>
-              <h2>Monitor de divisas</h2>
-            </div>
-            <p class="section-subtitle">Datos web en vivo.</p>
+            <span class="slide-badge">Muestras reales · Excel</span>
+            <h2>Plantillas en uso</h2>
+            <p class="section-subtitle">Vistas reales listas para operar.</p>
           </div>
-          <div class="pbi-quick-jump" aria-label="Cambiar entre muestras de Power BI">
-            <button type="button" class="tab-btn active" onclick="goToSlide(3)">01. Divisas</button>
+          <div class="pbi-quick-jump" aria-label="Cambiar entre muestras de Excel y Power BI">
+            <button type="button" class="tab-btn active" onclick="goToSlide(3)">01. Muestras Excel</button>
             <button type="button" class="tab-btn" onclick="goToSlide(4)">02. Modelos IA</button>
           </div>
         </div>
 
         <div class="powerbi-project-grid">
-          <article class="card powerbi-info-card">
+          <article class="card excel-info-card">
             <div class="powerbi-card-inner">
               <div class="card-top">
-                <span class="card-category">Finanzas · Datos web</span>
-                <span class="mini-badge">Serie 2026</span>
+                <span class="card-category" id="excel-stage-cat">Contabilidad PCGE</span>
+                <span class="mini-badge" id="excel-stage-badge">En Soles (S/)</span>
               </div>
-              <h3>Monedas de Latinoamérica</h3>
-              <p class="project-context">Pensado para presupuestos y compras en dólares. Toma las cotizaciones diarias del Banco Central Europeo.</p>
-              <ul class="project-bullets">
-                <li>Tipo de cambio vigente frente al dólar en 4 países: Perú, Colombia, Chile y Argentina.</li>
-                <li>Evolución diaria 2026 y variación acumulada por moneda.</li>
-                <li>Tabla con tasa actual, variación y estabilidad.</li>
+              <h3 id="excel-stage-title">Flujos de efectivo</h3>
+              <p class="project-context" id="excel-stage-desc">Estado de Flujos de Efectivo bajo taxonomía oficial SMV / SUNAT, listo sin digitación manual.</p>
+              <ul class="project-bullets" id="excel-stage-bullets">
+                <li>Clasificación automática por actividad operativa, inversión y financiamiento.</li>
+                <li>Lectura directa desde tu registro de transacciones PCGE.</li>
+                <li>Cero fórmulas expuestas: entrega limpia para gerencia.</li>
               </ul>
-              <div class="tag-list">
-                <span class="tag">Datos Banco Europeo</span>
-                <span class="tag">Dólar en Latam</span>
-                <span class="tag">Power BI</span>
+
+              <div class="excel-stage-tabs" role="tablist" aria-label="Elegir plantilla real en Excel">
+                <button type="button" class="hero-tab-btn is-active" role="tab" aria-selected="true" onclick="setExcelSlide(0)">01 Balances</button>
+                <button type="button" class="hero-tab-btn" role="tab" aria-selected="false" onclick="setExcelSlide(1)">02 Macros</button>
+                <button type="button" class="hero-tab-btn" role="tab" aria-selected="false" onclick="setExcelSlide(2)">03 Tablero</button>
+                <button type="button" class="hero-tab-btn" role="tab" aria-selected="false" onclick="setExcelSlide(3)">04 Cruces</button>
+              </div>
+
+              <div class="card-footer-cta">
+                <button type="button" class="sample-text-btn" onclick="openCurrentExcelSample()">Ampliar imagen <span class="btn-arrow" aria-hidden="true">→</span></button>
+                <button type="button" class="inline-quote-btn" onclick="quoteCurrentExcelService()">Consultar <span class="btn-arrow" aria-hidden="true">→</span></button>
               </div>
             </div>
           </article>
 
-          <div class="powerbi-frame-card border-beam-card">
-            <div class="pbi-skeleton" aria-hidden="true"></div>
-            <iframe
-              id="powerbi-iframe-divisas"
-              title="Monitor_Divisas_Globales"
-              src="https://app.powerbi.com/view?r=eyJrIjoiNDcwOTNiMjEtNTNmYy00NjhkLTk3ZjQtOGE0NjE1NzA1ZDk3IiwidCI6ImM0YTY2YzM0LTJiYjctNDUxZi04YmUxLWIyYzI2YTQzMDE1OCIsImMiOjR9"
-              frameborder="0"
-              allowFullScreen="true">
-            </iframe>
+          <div class="excel-stage-card border-beam-card" id="excel-showcase">
+            <button type="button" class="excel-stage-btn" onclick="openCurrentExcelSample()" aria-label="Ampliar plantilla actual en Excel">
+              <img src="muestras/muestra-balances-pcge.png" alt="Muestra real en Excel de Estado de Flujos de Efectivo PCGE" class="hero-showcase-slide is-active" data-index="0">
+              <img src="muestras/muestra-transacciones-pcge.png" alt="Muestra real en Excel de Registro de Transacciones PCGE" class="hero-showcase-slide" data-index="1" loading="lazy">
+              <img src="muestras/muestra-tablero-financiero.png" alt="Muestra real en Excel de Dashboard Económico Financiero" class="hero-showcase-slide" data-index="2" loading="lazy">
+              <img src="muestras/muestra-conciliacion-bancaria.png" alt="Muestra real en Excel de Conciliación Bancaria Mensual" class="hero-showcase-slide" data-index="3" loading="lazy">
+              <span class="sample-thumb-pill">Ampliar</span>
+              <span class="hero-showcase-progress" aria-hidden="true"><span class="hero-showcase-progress-fill" id="excel-stage-progress-fill"></span></span>
+            </button>
           </div>
         </div>
       </div>
@@ -451,15 +436,15 @@
       <div class="container slide-container">
         <div class="slide-header-row">
           <div>
-            <span class="slide-badge">Muestra práctica 02 · Power BI</span>
+            <span class="slide-badge">Muestra práctica · Power BI</span>
             <div class="title-with-badge">
               <span class="live-dot" aria-hidden="true"></span>
               <h2>Modelos de IA</h2>
             </div>
             <p class="section-subtitle">Calidad frente a precio.</p>
           </div>
-          <div class="pbi-quick-jump" aria-label="Cambiar entre muestras de Power BI">
-            <button type="button" class="tab-btn" onclick="goToSlide(3)">01. Divisas</button>
+          <div class="pbi-quick-jump" aria-label="Cambiar entre muestras">
+            <button type="button" class="tab-btn" onclick="goToSlide(3)">01. Muestras Excel</button>
             <button type="button" class="tab-btn active" onclick="goToSlide(4)">02. Modelos IA</button>
           </div>
         </div>
@@ -655,8 +640,30 @@
             </div>
           </div>
 
-          <!-- Formulario Único de Cotización + 4 Canales Oficiales -->
-          <div class="contact-card border-beam-card">
+          <!-- Cierre en 2 Columnas: Bono Pack 62 a la izquierda + Formulario a la derecha -->
+          <div class="contact-dual-grid">
+            <aside class="card promo-bonus-card" aria-label="Promoción por servicio contratado">
+              <div class="card-top">
+                <span class="card-category">Promoción activa</span>
+                <span class="mini-badge">Gratis con tu servicio</span>
+              </div>
+              <h3>Pack 62 plantillas</h3>
+              <button type="button" class="promo-card-thumb" onclick="openSampleModal('muestras/muestra-pack-62.png', 'Pack 62 Plantillas en Excel', 'Muestra real de 3 plantillas incluidas gratis al concretar cualquier servicio pagado.', 'Pack 62 plantillas en Excel')" aria-label="Ampliar muestra del Pack 62 plantillas">
+                <img src="muestras/muestra-pack-62.png" alt="Muestra real de 3 plantillas del Pack 62 en Excel" loading="lazy">
+                <img src="muestras/muestra-tablero-financiero.png" alt="" class="promo-thumb-alt" aria-hidden="true" loading="lazy">
+                <span class="sample-thumb-pill">Ampliar</span>
+              </button>
+              <p class="project-context">Llévate gratis este paquete en Excel al concretar cualquier servicio pagado:</p>
+              <ul class="project-bullets">
+                <li>Finanzas, balances, ratios y análisis económico.</li>
+                <li>Flujo de caja, presupuestos, cobranzas y caja diaria.</li>
+                <li>Incluye tus 2 modelos contables PCGE y diagnóstico sin costo.</li>
+              </ul>
+              <button type="button" class="btn btn-secondary shimmer-btn promo-card-cta" onclick="selectServiceTier('Pack 62 plantillas en Excel', null, true)">Activar bono en consulta <span class="btn-arrow" aria-hidden="true">→</span></button>
+            </aside>
+
+            <!-- Formulario Único de Cotización + 4 Canales Oficiales -->
+            <div class="contact-card border-beam-card">
             <div class="visual-header">
               <div class="visual-title-row">
                 <span class="live-dot" aria-hidden="true"></span>
@@ -733,30 +740,32 @@
                 Regresar al inicio
               </button>
             </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Visor Ampliado de Muestras Reales en Excel -->
+  <!-- Visor Ampliado de Muestras Reales (Excel y Power BI) -->
   <div id="sample-lightbox" class="sample-lightbox" role="dialog" aria-modal="true" aria-labelledby="sample-lightbox-title" hidden>
     <div class="sample-lightbox-backdrop" onclick="closeSampleModal()"></div>
     <div class="sample-lightbox-dialog">
       <div class="sample-lightbox-header">
         <div>
-          <span class="card-category">Muestra real en Excel</span>
+          <span class="card-category" id="sample-lightbox-kicker">Muestra real en Excel</span>
           <div id="sample-lightbox-title" class="sample-lightbox-title">Vista previa</div>
         </div>
         <button type="button" id="sample-lightbox-close" class="sample-lightbox-close" onclick="closeSampleModal()" aria-label="Cerrar vista ampliada">×</button>
       </div>
       <div class="sample-lightbox-body">
         <img id="sample-lightbox-img" src="" alt="Captura real en Microsoft Excel">
+        <iframe id="sample-lightbox-pbi" class="sample-lightbox-pbi" title="Tablero Power BI ampliado" frameborder="0" allowFullScreen="true" hidden></iframe>
       </div>
       <div class="sample-lightbox-footer">
         <p id="sample-lightbox-caption"></p>
         <div class="lightbox-controls-row">
-          <div class="lightbox-nav-group" aria-label="Navegar entre muestras">
+          <div class="lightbox-nav-group" id="sample-lightbox-nav" aria-label="Navegar entre muestras">
             <button type="button" class="lightbox-nav-btn" onclick="stepSampleModal(-1)" aria-label="Muestra anterior">← Anterior</button>
             <span id="sample-lightbox-counter" class="lightbox-counter">1 / 5</span>
             <button type="button" class="lightbox-nav-btn" onclick="stepSampleModal(1)" aria-label="Siguiente muestra">Siguiente →</button>
@@ -768,6 +777,6 @@
   </div>
 
   <!-- Controlador de Navegación e Interactividad -->
-  <script src="app.js?v=19.0"></script>
+  <script src="app.js?v=20.0"></script>
 </body>
 </html>
