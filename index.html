@@ -27,7 +27,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
   
   <script>document.documentElement.classList.add('js');</script>
-  <link rel="stylesheet" href="style.css?v=18.0">
+  <link rel="stylesheet" href="style.css?v=19.0">
 </head>
 <body>
   <!-- Escenario de fondo fijo limpio -->
@@ -114,20 +114,48 @@
 
   <!-- Contenedor Maestro de Landing Page (Desplazamiento Libre Continuo) -->
   <main class="slides-wrapper" id="slides-wrapper">
-    <!-- Sección 1: Hero de Landing Page e Indicadores Clave -->
+    <!-- Sección 1: Hero de Landing Page, Vitrina Viva e Indicadores Clave -->
     <section id="inicio" class="slide-section hero-chapter" aria-label="Inicio y propuesta de valor">
       <div class="container slide-container">
-        <header class="hero-section">
-          <h1>Decisiones con datos</h1>
-          <p class="hero-subtitle">Finanzas, reportes y automatización.</p>
-          <p class="hero-text">
-            Soy Analista de datos y responsable de tesorería en una firma contable en Perú, a cargo de pagos y conciliaciones bancarias. Para tu negocio diseño desde cero estados financieros actualizables, macros en Excel y tableros en Power BI con lo que exporta tu sistema, ahorrando más de 73 horas al mes.
-          </p>
-          <div class="btn-group">
-            <a href="#contacto" class="btn btn-primary shimmer-btn" onclick="goToSlide(6); return false;">Contactar ahora</a>
-            <a href="#experiencia" class="btn btn-secondary shimmer-btn" onclick="goToSlide(1); return false;">Ver horas ahorradas</a>
+        <div class="hero-grid">
+          <header class="hero-section">
+            <h1>Decisiones con datos</h1>
+            <p class="hero-subtitle">Finanzas, reportes y automatización.</p>
+            <p class="hero-text">
+              Soy Analista de datos y responsable de tesorería en una firma contable en Perú, a cargo de pagos y conciliaciones bancarias. Para tu negocio diseño desde cero estados financieros actualizables, macros en Excel y tableros en Power BI con lo que exporta tu sistema, ahorrando más de 73 horas al mes.
+            </p>
+            <div class="btn-group">
+              <a href="#contacto" class="btn btn-primary shimmer-btn" onclick="goToSlide(6); return false;">Contactar ahora</a>
+              <a href="#experiencia" class="btn btn-secondary shimmer-btn" onclick="goToSlide(1); return false;">Ver horas ahorradas</a>
+            </div>
+          </header>
+
+          <!-- Vitrina Interactiva Rotativa de Muestras Reales en Excel -->
+          <div class="hero-showcase-card border-beam-card" id="hero-showcase" aria-label="Muestras reales en Excel">
+            <div class="hero-showcase-head">
+              <div class="hero-showcase-status">
+                <span class="live-dot" aria-hidden="true"></span>
+                <span id="hero-showcase-label">Estado de Flujos de Efectivo (PCGE)</span>
+              </div>
+              <button type="button" class="hero-showcase-zoom" onclick="openCurrentHeroSample()">Ampliar</button>
+            </div>
+
+            <button type="button" class="hero-showcase-stage" onclick="openCurrentHeroSample()" aria-label="Ampliar muestra activa en Excel">
+              <img src="muestras/muestra-balances-pcge.png" alt="Muestra real en Excel de Estado de Flujos de Efectivo PCGE" class="hero-showcase-slide is-active" data-index="0">
+              <img src="muestras/muestra-transacciones-pcge.png" alt="Muestra real en Excel de Registro de Transacciones PCGE" class="hero-showcase-slide" data-index="1" loading="lazy">
+              <img src="muestras/muestra-tablero-financiero.png" alt="Muestra real en Excel de Dashboard Económico Financiero" class="hero-showcase-slide" data-index="2" loading="lazy">
+              <img src="muestras/muestra-conciliacion-bancaria.png" alt="Muestra real en Excel de Conciliación Bancaria Mensual" class="hero-showcase-slide" data-index="3" loading="lazy">
+              <span class="hero-showcase-progress" aria-hidden="true"><span class="hero-showcase-progress-fill" id="hero-showcase-progress-fill"></span></span>
+            </button>
+
+            <div class="hero-showcase-tabs" role="tablist" aria-label="Elegir muestra en Excel">
+              <button type="button" class="hero-tab-btn is-active" role="tab" aria-selected="true" onclick="setHeroSlide(0)">01 Balances</button>
+              <button type="button" class="hero-tab-btn" role="tab" aria-selected="false" onclick="setHeroSlide(1)">02 Macros</button>
+              <button type="button" class="hero-tab-btn" role="tab" aria-selected="false" onclick="setHeroSlide(2)">03 Tablero</button>
+              <button type="button" class="hero-tab-btn" role="tab" aria-selected="false" onclick="setHeroSlide(3)">04 Cruces</button>
+            </div>
           </div>
-        </header>
+        </div>
 
         <!-- 4 Métricas de Impacto en Horas y Control -->
         <div class="metrics-row">
@@ -348,6 +376,7 @@
         <aside class="card promo-bonus-banner" aria-label="Promoción por servicio contratado">
           <button type="button" class="promo-thumb-btn" onclick="openSampleModal('muestras/muestra-pack-62.png', 'Pack 62 Plantillas en Excel', 'Muestra real de 3 plantillas incluidas gratis al concretar cualquier servicio pagado.', 'Pack 62 plantillas en Excel')" aria-label="Ampliar muestra del Pack 62 plantillas">
             <img src="muestras/muestra-pack-62.png" alt="Muestra real de 3 plantillas del Pack 62 en Excel" loading="lazy">
+            <img src="muestras/muestra-tablero-financiero.png" alt="" class="promo-thumb-alt" aria-hidden="true" loading="lazy">
             <span class="sample-thumb-pill">Ver</span>
           </button>
           <div class="promo-bonus-copy">
@@ -726,12 +755,19 @@
       </div>
       <div class="sample-lightbox-footer">
         <p id="sample-lightbox-caption"></p>
-        <button type="button" id="sample-lightbox-cta" class="btn btn-primary shimmer-btn">Consultar por esto <span class="btn-arrow" aria-hidden="true">→</span></button>
+        <div class="lightbox-controls-row">
+          <div class="lightbox-nav-group" aria-label="Navegar entre muestras">
+            <button type="button" class="lightbox-nav-btn" onclick="stepSampleModal(-1)" aria-label="Muestra anterior">← Anterior</button>
+            <span id="sample-lightbox-counter" class="lightbox-counter">1 / 5</span>
+            <button type="button" class="lightbox-nav-btn" onclick="stepSampleModal(1)" aria-label="Siguiente muestra">Siguiente →</button>
+          </div>
+          <button type="button" id="sample-lightbox-cta" class="btn btn-primary shimmer-btn">Consultar por esto <span class="btn-arrow" aria-hidden="true">→</span></button>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Controlador de Navegación e Interactividad -->
-  <script src="app.js?v=18.0"></script>
+  <script src="app.js?v=19.0"></script>
 </body>
 </html>

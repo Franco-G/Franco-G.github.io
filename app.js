@@ -38,6 +38,7 @@ function initApp() {
   initTouchGuard();
   initRotationBanner();
   initContactForm();
+  initHeroShowcase();
   syncHeaderHeightVar();
   initScrollTracking();
   initProgressRailClick();
@@ -690,35 +691,188 @@ function initRotationBanner() {
 }
 
 /**
- * 11. Visor Ampliado de Muestras Reales en Excel
+ * 11. Vitrina Rotativa en Portada y Visor Galería de Muestras en Excel
  */
+const GALLERY_SAMPLES = [
+  {
+    src: 'muestras/muestra-balances-pcge.png',
+    shortLabel: 'Estado de Flujos de Efectivo (PCGE)',
+    title: 'Estado de Flujos de Efectivo (PCGE / SMV)',
+    caption: 'Modelo real estructurado en Excel con cuentas contables peruanas en Soles.',
+    service: 'Estados financieros automatizados'
+  },
+  {
+    src: 'muestras/muestra-transacciones-pcge.png',
+    shortLabel: 'Registro de Transacciones (PCGE 2019)',
+    title: 'Registro de Transacciones Contables (PCGE)',
+    caption: 'Vista real en Excel con validaciones, totales en Soles y clasificación por cuenta.',
+    service: 'Macros y plantillas en Excel'
+  },
+  {
+    src: 'muestras/muestra-tablero-financiero.png',
+    shortLabel: 'Dashboard Económico Financiero (S/)',
+    title: 'Dashboard Económico Financiero en Excel',
+    caption: 'Tablero real en Soles con Ganancias y Pérdidas, Balance General, TIR y WACC.',
+    service: 'Tableros en Power BI y Excel'
+  },
+  {
+    src: 'muestras/muestra-conciliacion-bancaria.png',
+    shortLabel: 'Conciliación Bancaria Mensual',
+    title: 'Conciliación Bancaria y Validación en Excel',
+    caption: 'Control de depósitos, saldos y estado de conciliación con filtros dinámicos.',
+    service: 'Tableros en Power BI y Excel'
+  },
+  {
+    src: 'muestras/muestra-pack-62.png',
+    shortLabel: 'Pack 62 Plantillas en Excel',
+    title: 'Pack 62 Plantillas en Excel',
+    caption: 'Muestra real de 3 plantillas incluidas gratis al concretar cualquier servicio pagado.',
+    service: 'Pack 62 plantillas en Excel'
+  }
+];
+
+let heroSlideIndex = 0;
+let heroShowcaseTimer = null;
+let heroShowcasePaused = false;
+let currentGalleryIndex = 0;
 let lastModalTrigger = null;
 
-function openSampleModal(imgSrc, title, caption, serviceValue) {
+function restartHeroProgress() {
+  const fill = document.getElementById('hero-showcase-progress-fill');
+  if (!fill) return;
+  fill.classList.remove('is-animating');
+  if (REDUCED_MOTION_MQ.matches) return;
+  void fill.offsetWidth;
+  fill.classList.add('is-animating');
+}
+
+function setHeroSlide(index) {
+  const slides = document.querySelectorAll('.hero-showcase-slide');
+  const tabs = document.querySelectorAll('.hero-tab-btn');
+  const labelEl = document.getElementById('hero-showcase-label');
+  if (slides.length === 0) return;
+
+  heroSlideIndex = ((index % slides.length) + slides.length) % slides.length;
+  slides.forEach((slide, i) => {
+    slide.classList.toggle('is-active', i === heroSlideIndex);
+  });
+  tabs.forEach((tab, i) => {
+    const active = i === heroSlideIndex;
+    tab.classList.toggle('is-active', active);
+    tab.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+
+  const info = GALLERY_SAMPLES[heroSlideIndex];
+  if (labelEl && info) {
+    labelEl.textContent = info.shortLabel;
+  }
+  restartHeroProgress();
+  scheduleHeroShowcase();
+}
+
+function scheduleHeroShowcase() {
+  if (heroShowcaseTimer) {
+    clearTimeout(heroShowcaseTimer);
+    heroShowcaseTimer = null;
+  }
+  if (REDUCED_MOTION_MQ.matches || heroShowcasePaused || document.hidden) return;
   const modal = document.getElementById('sample-lightbox');
+  if (modal && !modal.hidden) return;
+
+  heroShowcaseTimer = setTimeout(() => {
+    setHeroSlide(heroSlideIndex + 1);
+  }, 4000);
+}
+
+function initHeroShowcase() {
+  const showcase = document.getElementById('hero-showcase');
+  if (!showcase) return;
+
+  showcase.addEventListener('mouseenter', () => {
+    heroShowcasePaused = true;
+    scheduleHeroShowcase();
+  });
+  showcase.addEventListener('mouseleave', () => {
+    heroShowcasePaused = false;
+    scheduleHeroShowcase();
+  });
+  showcase.addEventListener('focusin', () => {
+    heroShowcasePaused = true;
+    scheduleHeroShowcase();
+  });
+  showcase.addEventListener('focusout', (e) => {
+    if (!showcase.contains(e.relatedTarget)) {
+      heroShowcasePaused = false;
+      scheduleHeroShowcase();
+    }
+  });
+  document.addEventListener('visibilitychange', () => {
+    scheduleHeroShowcase();
+  });
+
+  setHeroSlide(0);
+}
+
+function openCurrentHeroSample() {
+  const sample = GALLERY_SAMPLES[heroSlideIndex] || GALLERY_SAMPLES[0];
+  openSampleModal(sample.src, sample.title, sample.caption, sample.service);
+}
+
+function renderModalSample(sample) {
   const imgEl = document.getElementById('sample-lightbox-img');
   const titleEl = document.getElementById('sample-lightbox-title');
   const captionEl = document.getElementById('sample-lightbox-caption');
+  const counterEl = document.getElementById('sample-lightbox-counter');
   const ctaBtn = document.getElementById('sample-lightbox-cta');
-  const closeBtn = document.getElementById('sample-lightbox-close');
-  if (!modal || !imgEl || !titleEl || !captionEl) return;
+  if (!imgEl || !titleEl || !captionEl) return;
 
-  lastModalTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-  imgEl.src = imgSrc;
-  imgEl.alt = title || 'Captura real en Microsoft Excel';
-  titleEl.textContent = title || 'Muestra real en Excel';
-  captionEl.textContent = caption || '';
+  imgEl.src = sample.src;
+  imgEl.alt = sample.title || 'Captura real en Microsoft Excel';
+  titleEl.textContent = sample.title || 'Muestra real en Excel';
+  captionEl.textContent = sample.caption || '';
 
+  if (counterEl) {
+    counterEl.textContent = `${currentGalleryIndex + 1} / ${GALLERY_SAMPLES.length}`;
+  }
   if (ctaBtn) {
     ctaBtn.onclick = () => {
       closeSampleModal();
-      quoteSpecificService(serviceValue || 'Consulta general / Otro proyecto');
+      quoteSpecificService(sample.service || 'Consulta general / Otro proyecto');
     };
   }
+}
+
+function openSampleModal(imgSrc, title, caption, serviceValue) {
+  const modal = document.getElementById('sample-lightbox');
+  const closeBtn = document.getElementById('sample-lightbox-close');
+  if (!modal) return;
+
+  lastModalTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  const foundIdx = GALLERY_SAMPLES.findIndex(s => s.src === imgSrc);
+  currentGalleryIndex = foundIdx !== -1 ? foundIdx : 0;
+
+  const activeSample = foundIdx !== -1
+    ? GALLERY_SAMPLES[foundIdx]
+    : { src: imgSrc, title, caption, service: serviceValue };
+
+  renderModalSample({
+    src: imgSrc || activeSample.src,
+    title: title || activeSample.title,
+    caption: caption || activeSample.caption,
+    service: serviceValue || activeSample.service
+  });
 
   modal.hidden = false;
   document.documentElement.style.overflow = 'hidden';
+  scheduleHeroShowcase();
   if (closeBtn) closeBtn.focus();
+}
+
+function stepSampleModal(delta) {
+  const modal = document.getElementById('sample-lightbox');
+  if (!modal || modal.hidden) return;
+  currentGalleryIndex = (currentGalleryIndex + delta + GALLERY_SAMPLES.length) % GALLERY_SAMPLES.length;
+  renderModalSample(GALLERY_SAMPLES[currentGalleryIndex]);
 }
 
 function closeSampleModal() {
@@ -729,6 +883,7 @@ function closeSampleModal() {
   modal.hidden = true;
   document.documentElement.style.overflow = '';
   if (imgEl) imgEl.removeAttribute('src');
+  scheduleHeroShowcase();
   if (lastModalTrigger && typeof lastModalTrigger.focus === 'function') {
     lastModalTrigger.focus();
   }
@@ -736,8 +891,16 @@ function closeSampleModal() {
 }
 
 document.addEventListener('keydown', (e) => {
+  const modal = document.getElementById('sample-lightbox');
+  if (!modal || modal.hidden) return;
   if (e.key === 'Escape') {
     closeSampleModal();
+  } else if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    stepSampleModal(-1);
+  } else if (e.key === 'ArrowRight') {
+    e.preventDefault();
+    stepSampleModal(1);
   }
 });
 
@@ -746,5 +909,8 @@ window.selectServiceTier = selectServiceTier;
 window.quoteSpecificService = quoteSpecificService;
 window.handleQuoteSubmit = handleQuoteSubmit;
 window.copyContactEmail = copyContactEmail;
+window.setHeroSlide = setHeroSlide;
+window.openCurrentHeroSample = openCurrentHeroSample;
 window.openSampleModal = openSampleModal;
+window.stepSampleModal = stepSampleModal;
 window.closeSampleModal = closeSampleModal;
