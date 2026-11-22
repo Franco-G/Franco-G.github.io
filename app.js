@@ -37,6 +37,7 @@ function initApp() {
 
   initTouchGuard();
   initRotationBanner();
+  initContactForm();
   syncHeaderHeightVar();
   initScrollTracking();
   initProgressRailClick();
@@ -243,33 +244,85 @@ function goToSlide(targetIndex) {
 }
 
 /**
- * 3. Selección de Paquetes Freelance y Envío de Mensaje Directo
+ * 3. Selección de Solución y Envío de Mensaje Directo
  */
-function selectServiceTier(tierValue, triggerEl) {
-  document.querySelectorAll('.pricing-tier-item').forEach(item => {
-    const isSelected = triggerEl ? item === triggerEl : item.getAttribute('data-tier') === tierValue;
-    item.classList.toggle('active', isSelected);
-  });
+const CONTACT_EMAIL = 'guerrerofranco1429@gmail.com';
+const SERVICE_PLACEHOLDERS = {
+  'Estados financieros automatizados': 'Ej. Automatizar balance general, ERI y cuentas sin destino desde mi reporte contable.',
+  'Macros y plantillas en Excel': 'Ej. Macro para carga masiva de compras, ventas o planillas sin digitar a mano.',
+  'Tableros en Power BI y Excel': 'Ej. Conciliación bancaria automática, cruces SUNAT o tablero de caja y cobranzas.',
+  'Consulta general / Otro proyecto': 'Ej. Cuéntame qué archivo, reporte o flujo mensual te quita más horas.'
+};
 
-  const serviceSelect = document.getElementById('quote-service');
-  if (serviceSelect && tierValue) {
-    serviceSelect.value = tierValue;
-    if (!REDUCED_MOTION_MQ.matches) {
-      serviceSelect.classList.remove('is-flashing');
-      void serviceSelect.offsetWidth;
-      serviceSelect.classList.add('is-flashing');
-      const clearFlash = () => serviceSelect.classList.remove('is-flashing');
-      serviceSelect.addEventListener('animationend', clearFlash, { once: true });
-      setTimeout(clearFlash, 750);
-    }
+function clearNameValidation() {
+  const nameInput = document.getElementById('quote-name');
+  const nameError = document.getElementById('quote-name-error');
+  if (nameInput) {
+    nameInput.classList.remove('is-invalid');
+    nameInput.removeAttribute('aria-invalid');
+  }
+  if (nameError) {
+    nameError.hidden = true;
+  }
+}
+
+function initContactForm() {
+  const nameInput = document.getElementById('quote-name');
+  if (nameInput) {
+    nameInput.addEventListener('input', clearNameValidation);
   }
 
-  const nameInput = document.getElementById('quote-name');
+  const pills = Array.from(document.querySelectorAll('.service-pill-btn'));
+  pills.forEach((pill, index) => {
+    pill.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowDown' && e.key !== 'ArrowLeft' && e.key !== 'ArrowUp') return;
+      e.preventDefault();
+      const step = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : -1;
+      const nextPill = pills[(index + step + pills.length) % pills.length];
+      if (nextPill) {
+        selectServiceTier(nextPill.getAttribute('data-service'), nextPill, false);
+        nextPill.focus();
+      }
+    });
+  });
+}
+
+function selectServiceTier(tierValue, triggerEl, shouldFocus = false) {
+  let activePill = null;
+  document.querySelectorAll('.service-pill-btn').forEach(item => {
+    const isSelected = triggerEl ? item === triggerEl : item.getAttribute('data-service') === tierValue;
+    item.classList.toggle('active', isSelected);
+    item.setAttribute('aria-checked', isSelected ? 'true' : 'false');
+    if (isSelected) activePill = item;
+  });
+
+  const resolvedValue = tierValue || (activePill ? activePill.getAttribute('data-service') : '');
+  const serviceInput = document.getElementById('quote-service');
+  if (serviceInput && resolvedValue) {
+    serviceInput.value = resolvedValue;
+  }
+
   const goalInput = document.getElementById('quote-goal');
-  if (nameInput && !nameInput.value.trim()) {
-    nameInput.focus();
-  } else if (goalInput) {
-    goalInput.focus();
+  if (goalInput && SERVICE_PLACEHOLDERS[resolvedValue]) {
+    goalInput.placeholder = SERVICE_PLACEHOLDERS[resolvedValue];
+  }
+
+  if (activePill && !triggerEl && !REDUCED_MOTION_MQ.matches) {
+    activePill.classList.remove('is-flashing');
+    void activePill.offsetWidth;
+    activePill.classList.add('is-flashing');
+    const clearFlash = () => activePill.classList.remove('is-flashing');
+    activePill.addEventListener('animationend', clearFlash, { once: true });
+    setTimeout(clearFlash, 750);
+  }
+
+  if (shouldFocus) {
+    const nameInput = document.getElementById('quote-name');
+    if (nameInput && !nameInput.value.trim()) {
+      nameInput.focus();
+    } else if (goalInput) {
+      goalInput.focus();
+    }
   }
 }
 
@@ -279,32 +332,94 @@ function quoteSpecificService(tierValue) {
     goToSlide(contactIdx);
   }
   setTimeout(() => {
-    selectServiceTier(tierValue, null);
+    selectServiceTier(tierValue, null, true);
   }, REDUCED_MOTION_MQ.matches ? 50 : 450);
+}
+
+function showQuoteFeedback(message, allowCopyEmail) {
+  const feedbackEl = document.getElementById('quote-feedback');
+  const feedbackTextEl = document.getElementById('quote-feedback-text');
+  const copyBtn = document.getElementById('copy-email-btn');
+  if (!feedbackEl || !feedbackTextEl) return;
+
+  feedbackTextEl.textContent = message;
+  if (copyBtn) {
+    copyBtn.textContent = 'Copiar correo';
+    copyBtn.hidden = !allowCopyEmail;
+  }
+  feedbackEl.hidden = false;
+}
+
+function copyContactEmail() {
+  const copyBtn = document.getElementById('copy-email-btn');
+  const feedbackTextEl = document.getElementById('quote-feedback-text');
+  const confirmCopied = () => {
+    if (copyBtn) copyBtn.textContent = 'Correo copiado';
+    if (feedbackTextEl) feedbackTextEl.textContent = `Dirección copiada: ${CONTACT_EMAIL}`;
+  };
+  const showManualCopy = () => {
+    if (feedbackTextEl) feedbackTextEl.textContent = `Escríbeme directo a ${CONTACT_EMAIL}`;
+  };
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(CONTACT_EMAIL).then(confirmCopied, showManualCopy);
+    return;
+  }
+
+  const tempInput = document.createElement('input');
+  tempInput.value = CONTACT_EMAIL;
+  tempInput.setAttribute('readonly', '');
+  tempInput.style.position = 'absolute';
+  tempInput.style.left = '-9999px';
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  const copied = document.execCommand('copy');
+  document.body.removeChild(tempInput);
+  if (copied) {
+    confirmCopied();
+  } else {
+    showManualCopy();
+  }
 }
 
 function handleQuoteSubmit(channel) {
   const nameInput = document.getElementById('quote-name');
-  const serviceSelect = document.getElementById('quote-service');
+  const nameError = document.getElementById('quote-name-error');
+  const serviceInput = document.getElementById('quote-service');
   const goalInput = document.getElementById('quote-goal');
 
-  const name = (nameInput && nameInput.value.trim()) ? nameInput.value.trim() : 'Cliente interesado';
-  const service = (serviceSelect && serviceSelect.value) ? serviceSelect.value : 'Automatización Financiera & BI';
+  const rawName = nameInput ? nameInput.value.trim() : '';
+  if (!rawName) {
+    if (nameInput) {
+      nameInput.classList.add('is-invalid');
+      nameInput.setAttribute('aria-invalid', 'true');
+      nameInput.focus();
+    }
+    if (nameError) {
+      nameError.hidden = false;
+    }
+    return;
+  }
+
+  clearNameValidation();
+  const service = (serviceInput && serviceInput.value) ? serviceInput.value : 'Automatización Financiera & BI';
   const goal = (goalInput && goalInput.value.trim()) ? goalInput.value.trim() : 'Me gustaría conversar sobre este servicio y conocer el alcance.';
 
   if (channel === 'email') {
-    const subject = encodeURIComponent(`Consulta: ${service} - ${name}`);
+    const subject = encodeURIComponent(`Consulta: ${service} - ${rawName}`);
     const body = encodeURIComponent(
-      `Hola Franco,\n\nSoy ${name}.\n\nEstoy interesado en: ${service}.\nDetalle o proceso a resolver: ${goal}\n\nQuedo atento para coordinar una breve reunión.`
+      `Hola Franco,\n\nSoy ${rawName}.\n\nEstoy interesado en: ${service}.\nDetalle o proceso a resolver: ${goal}\n\nQuedo atento para coordinar una breve reunión.`
     );
-    window.location.href = `mailto:guerrerofranco1429@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    showQuoteFeedback('Se abrió tu aplicación de correo con el mensaje listo.', true);
     return;
   }
 
   const waMessage = encodeURIComponent(
-    `Hola Franco, soy *${name}*. Vi tu portafolio y me interesa consultar por: *${service}*.\n\nProceso o consulta: ${goal}`
+    `Hola Franco, soy *${rawName}*. Vi tu portafolio y me interesa consultar por: *${service}*.\n\nProceso o consulta: ${goal}`
   );
   window.open(`https://wa.me/51960748142?text=${waMessage}`, '_blank', 'noopener,noreferrer');
+  showQuoteFeedback('Se abrió WhatsApp con tu consulta lista para enviar.', false);
 }
 
 /**
@@ -577,3 +692,4 @@ window.goToSlide = goToSlide;
 window.selectServiceTier = selectServiceTier;
 window.quoteSpecificService = quoteSpecificService;
 window.handleQuoteSubmit = handleQuoteSubmit;
+window.copyContactEmail = copyContactEmail;
