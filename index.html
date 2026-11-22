@@ -27,7 +27,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
   
   <script>document.documentElement.classList.add('js');</script>
-  <link rel="stylesheet" href="style.css?v=17.0">
+  <link rel="stylesheet" href="style.css?v=18.0">
 </head>
 <body>
   <!-- Escenario de fondo fijo limpio -->
@@ -190,7 +190,10 @@
               </div>
             </div>
 
-            <p class="result-summary">Encuentra cuentas sin destino y descuadres al instante.</p>
+            <div class="result-footer-row">
+              <p class="result-summary">Encuentra cuentas sin destino y descuadres al instante.</p>
+              <button type="button" class="sample-text-btn" onclick="openSampleModal('muestras/muestra-balances-pcge.png', 'Estado de Flujos de Efectivo (PCGE / SMV)', 'Modelo estructurado con cuentas contables peruanas en Soles y sin digitación manual.', 'Estados financieros automatizados')">Ver muestra <span class="btn-arrow" aria-hidden="true">→</span></button>
+            </div>
           </article>
 
           <!-- Comparativo 2: Cargas en Excel -->
@@ -216,7 +219,10 @@
               </div>
             </div>
 
-            <p class="result-summary">Evita errores de tipeo en montos, fechas y comprobantes.</p>
+            <div class="result-footer-row">
+              <p class="result-summary">Evita errores de tipeo en montos, fechas y comprobantes.</p>
+              <button type="button" class="sample-text-btn" onclick="openSampleModal('muestras/muestra-transacciones-pcge.png', 'Registro Estructurado de Transacciones (PCGE)', 'Tabla limpia con cuentas, glosas y totales automáticos lista para carga o análisis.', 'Macros y plantillas en Excel')">Ver muestra <span class="btn-arrow" aria-hidden="true">→</span></button>
+            </div>
           </article>
 
           <!-- Comparativo 3: Cruce de Impuestos -->
@@ -242,7 +248,10 @@
               </div>
             </div>
 
-            <p class="result-summary">Detecta duplicados, diferencias o compras omitidas antes de declarar.</p>
+            <div class="result-footer-row">
+              <p class="result-summary">Detecta duplicados, diferencias o compras omitidas antes de declarar.</p>
+              <button type="button" class="sample-text-btn" onclick="openSampleModal('muestras/muestra-conciliacion-bancaria.png', 'Conciliación Bancaria y Validación en Excel', 'Control de depósitos, saldos y estado de conciliación con filtros dinámicos.', 'Tableros en Power BI y Excel')">Ver muestra <span class="btn-arrow" aria-hidden="true">→</span></button>
+            </div>
           </article>
         </div>
       </div>
@@ -266,11 +275,14 @@
               <span class="mini-badge">Ahorra 28h al mes</span>
             </div>
             <h3>Balances sin digitación</h3>
+            <button type="button" class="sample-thumb-btn" onclick="openSampleModal('muestras/muestra-balances-pcge.png', 'Estado de Flujos de Efectivo (PCGE / SMV)', 'Modelo real estructurado en Excel con cuentas contables peruanas en Soles.', 'Estados financieros automatizados')" aria-label="Ampliar muestra de Balances sin digitación">
+              <img src="muestras/muestra-balances-pcge.png" alt="Muestra real en Excel de Estado de Flujos de Efectivo PCGE" loading="lazy">
+              <span class="sample-thumb-pill">Ampliar</span>
+            </button>
             <p class="project-context">Con lo que exporta tu sistema, armo balances actualizables sin digitar ni cambiar de software.</p>
             <ul class="project-bullets">
               <li>Balance de comprobación y resultados por periodo.</li>
-              <li>Detecta cuentas sin destino y descuadres.</li>
-              <li>Incluye balance general, patrimonio, ratios y notas 10 a 59.</li>
+              <li>Detecta cuentas sin destino, descuadres y notas 10 a 59.</li>
             </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
@@ -288,11 +300,14 @@
               <span class="mini-badge">Ahorra 25h al mes</span>
             </div>
             <h3>Plantillas en Excel</h3>
+            <button type="button" class="sample-thumb-btn" onclick="openSampleModal('muestras/muestra-transacciones-pcge.png', 'Registro de Transacciones Contables (PCGE)', 'Vista real en Excel con validaciones, totales en Soles y clasificación por cuenta.', 'Macros y plantillas en Excel')" aria-label="Ampliar muestra de Plantillas en Excel">
+              <img src="muestras/muestra-transacciones-pcge.png" alt="Muestra real en Excel de registro contable y clasificación PCGE" loading="lazy">
+              <span class="sample-thumb-pill">Ampliar</span>
+            </button>
             <p class="project-context">Diseño macros y plantillas según tus archivos para dejar de digitar a mano.</p>
             <ul class="project-bullets">
               <li>Pegas tus datos y generas la carga masiva en un clic.</li>
               <li>Evita errores en montos, fechas y comprobantes.</li>
-              <li>Ahorra hasta 25 horas al mes en compras, ventas o planillas.</li>
             </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
@@ -310,11 +325,14 @@
               <span class="mini-badge">Ahorra 20h al mes</span>
             </div>
             <h3>Revisión y tableros</h3>
-            <p class="project-context">Cruzo bancos y declaraciones contra tu contabilidad, con tableros claros en Power BI.</p>
+            <button type="button" class="sample-thumb-btn" onclick="openSampleModal('muestras/muestra-tablero-financiero.png', 'Dashboard Económico Financiero en Excel', 'Tablero real en Soles con Ganancias y Pérdidas, Balance General, TIR y WACC.', 'Tableros en Power BI y Excel')" aria-label="Ampliar muestra de Revisión y tableros">
+              <img src="muestras/muestra-tablero-financiero.png" alt="Muestra real en Excel de Dashboard Económico Financiero en Soles" loading="lazy">
+              <span class="sample-thumb-pill">Ampliar</span>
+            </button>
+            <p class="project-context">Cruzo bancos y declaraciones contra tu contabilidad, con tableros claros en Excel y Power BI.</p>
             <ul class="project-bullets">
-              <li>Concilia movimientos bancarios y cruza declaraciones en segundos.</li>
-              <li>Detecta partidas pendientes, compras omitidas y duplicados.</li>
-              <li>Visualiza caja, cobranzas y márgenes al día en Power BI.</li>
+              <li>Concilia bancos y cruza declaraciones en segundos.</li>
+              <li>Visualiza caja, cobranzas y márgenes al día.</li>
             </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
@@ -328,6 +346,10 @@
 
         <!-- Franja Promocional: Bono Pack 62 Plantillas -->
         <aside class="card promo-bonus-banner" aria-label="Promoción por servicio contratado">
+          <button type="button" class="promo-thumb-btn" onclick="openSampleModal('muestras/muestra-pack-62.png', 'Pack 62 Plantillas en Excel', 'Muestra real de 3 plantillas incluidas gratis al concretar cualquier servicio pagado.', 'Pack 62 plantillas en Excel')" aria-label="Ampliar muestra del Pack 62 plantillas">
+            <img src="muestras/muestra-pack-62.png" alt="Muestra real de 3 plantillas del Pack 62 en Excel" loading="lazy">
+            <span class="sample-thumb-pill">Ver</span>
+          </button>
           <div class="promo-bonus-copy">
             <div class="promo-bonus-top">
               <span class="card-category">Promoción activa</span>
@@ -525,6 +547,36 @@
             </div>
           </article>
         </div>
+
+        <!-- Flujo de Trabajo en 4 Pasos (Sin Revelar Fórmulas) -->
+        <div class="card workflow-strip-card" aria-label="Flujo de trabajo en 4 pasos">
+          <div class="workflow-strip-head">
+            <h3>Método de trabajo</h3>
+            <span class="mini-badge">Flujo en 4 pasos</span>
+          </div>
+          <div class="workflow-steps-grid">
+            <div class="workflow-step">
+              <span class="workflow-step-num">01</span>
+              <strong class="workflow-step-title">Archivo base</strong>
+              <p>Recibo lo que exporta tu sistema o banco, sin cambiar tu programa.</p>
+            </div>
+            <div class="workflow-step">
+              <span class="workflow-step-num">02</span>
+              <strong class="workflow-step-title">Orden y reglas</strong>
+              <p>Limpio formatos, cruces y validaciones automáticas en segundo plano.</p>
+            </div>
+            <div class="workflow-step">
+              <span class="workflow-step-num">03</span>
+              <strong class="workflow-step-title">Alertas claras</strong>
+              <p>El archivo resalta descuadres, omisiones o cuentas sin destino.</p>
+            </div>
+            <div class="workflow-step">
+              <span class="workflow-step-num">04</span>
+              <strong class="workflow-step-title">Entrega lista</strong>
+              <p>Reporte gerencial o carga masiva resuelta en un clic.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -658,7 +710,28 @@
     </section>
   </main>
 
+  <!-- Visor Ampliado de Muestras Reales en Excel -->
+  <div id="sample-lightbox" class="sample-lightbox" role="dialog" aria-modal="true" aria-labelledby="sample-lightbox-title" hidden>
+    <div class="sample-lightbox-backdrop" onclick="closeSampleModal()"></div>
+    <div class="sample-lightbox-dialog">
+      <div class="sample-lightbox-header">
+        <div>
+          <span class="card-category">Muestra real en Excel</span>
+          <div id="sample-lightbox-title" class="sample-lightbox-title">Vista previa</div>
+        </div>
+        <button type="button" id="sample-lightbox-close" class="sample-lightbox-close" onclick="closeSampleModal()" aria-label="Cerrar vista ampliada">×</button>
+      </div>
+      <div class="sample-lightbox-body">
+        <img id="sample-lightbox-img" src="" alt="Captura real en Microsoft Excel">
+      </div>
+      <div class="sample-lightbox-footer">
+        <p id="sample-lightbox-caption"></p>
+        <button type="button" id="sample-lightbox-cta" class="btn btn-primary shimmer-btn">Consultar por esto <span class="btn-arrow" aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </div>
+
   <!-- Controlador de Navegación e Interactividad -->
-  <script src="app.js?v=17.0"></script>
+  <script src="app.js?v=18.0"></script>
 </body>
 </html>

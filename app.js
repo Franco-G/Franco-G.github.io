@@ -689,8 +689,62 @@ function initRotationBanner() {
   }
 }
 
+/**
+ * 11. Visor Ampliado de Muestras Reales en Excel
+ */
+let lastModalTrigger = null;
+
+function openSampleModal(imgSrc, title, caption, serviceValue) {
+  const modal = document.getElementById('sample-lightbox');
+  const imgEl = document.getElementById('sample-lightbox-img');
+  const titleEl = document.getElementById('sample-lightbox-title');
+  const captionEl = document.getElementById('sample-lightbox-caption');
+  const ctaBtn = document.getElementById('sample-lightbox-cta');
+  const closeBtn = document.getElementById('sample-lightbox-close');
+  if (!modal || !imgEl || !titleEl || !captionEl) return;
+
+  lastModalTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  imgEl.src = imgSrc;
+  imgEl.alt = title || 'Captura real en Microsoft Excel';
+  titleEl.textContent = title || 'Muestra real en Excel';
+  captionEl.textContent = caption || '';
+
+  if (ctaBtn) {
+    ctaBtn.onclick = () => {
+      closeSampleModal();
+      quoteSpecificService(serviceValue || 'Consulta general / Otro proyecto');
+    };
+  }
+
+  modal.hidden = false;
+  document.documentElement.style.overflow = 'hidden';
+  if (closeBtn) closeBtn.focus();
+}
+
+function closeSampleModal() {
+  const modal = document.getElementById('sample-lightbox');
+  const imgEl = document.getElementById('sample-lightbox-img');
+  if (!modal || modal.hidden) return;
+
+  modal.hidden = true;
+  document.documentElement.style.overflow = '';
+  if (imgEl) imgEl.removeAttribute('src');
+  if (lastModalTrigger && typeof lastModalTrigger.focus === 'function') {
+    lastModalTrigger.focus();
+  }
+  lastModalTrigger = null;
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeSampleModal();
+  }
+});
+
 window.goToSlide = goToSlide;
 window.selectServiceTier = selectServiceTier;
 window.quoteSpecificService = quoteSpecificService;
 window.handleQuoteSubmit = handleQuoteSubmit;
 window.copyContactEmail = copyContactEmail;
+window.openSampleModal = openSampleModal;
+window.closeSampleModal = closeSampleModal;
