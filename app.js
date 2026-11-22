@@ -776,18 +776,18 @@ const GALLERY_SAMPLES = [
     service: 'Asesoría financiera'
   },
   {
-    cat: 'Automatización Excel',
-    badge: 'Validación PCGE',
-    showcaseTitle: 'Registro contable',
-    desc: 'Base transaccional ordenada con macros de validación para cargar datos desde tu sistema sin errores.',
+    cat: 'Automatización con Macros',
+    badge: 'Botones en un clic',
+    showcaseTitle: 'Macro de gastos',
+    desc: 'Panel automatizado con botones de macro para actualizar datos, alternar vistas y controlar presupuestos.',
     bullets: [
-      'Clasifica cuentas y subcuentas según el Plan Contable General Empresarial.',
-      'Calcula totales en Soles y detecta inconsistencias antes del cierre.',
-      'Reduce el trabajo operativo repetitivo con botones de un solo clic.'
+      'Botones directos en Excel para actualizar, filtrar estimado o ver gasto real.',
+      'Gráficos comparativos por categoría que se ajustan al instante.',
+      'Reemplaza reportes manuales con un tablero listo para gerencia.'
     ],
-    src: 'muestras/muestra-transacciones-pcge.png',
-    title: 'Registro de Transacciones Contables (PCGE)',
-    caption: 'Vista real en Excel con validaciones, totales en Soles y clasificación por cuenta.',
+    src: 'muestras/muestra-macros-excel.png',
+    title: 'Macro y Tablero de Gastos en Excel',
+    caption: 'Vista real en Excel con botones de macro (Actualiza, Estimado, Actual), filtros dinámicos y gráficos comparativos.',
     service: 'Consultoría en Excel y Power BI'
   },
   {
