@@ -66,11 +66,11 @@ body {
 
 .slide-section {
   width: 100%;
-  min-height: calc(100vh - 56px);
+  min-height: auto;
   scroll-margin-top: var(--header-height, 56px);
   box-sizing: border-box;
   margin: 0;
-  padding: 1.5rem 0;
+  padding: 2rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,9 +78,9 @@ body {
 }
 
 .slide-section:first-of-type {
-  min-height: 100vh;
-  padding-top: 4.5rem;
-  padding-bottom: 1.5rem;
+  min-height: auto;
+  padding-top: 5.25rem;
+  padding-bottom: 1.75rem;
 }
 
 .slide-container {
@@ -1639,8 +1639,9 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
    SECCIÓN 7: FRANJA DE RUBROS + FORMULARIO ÚNICO DE CONTACTO
    ======================================================== */
 .contact-slide {
+  min-height: calc(100vh - 56px);
   margin: 0;
-  padding: 0.75rem 0;
+  padding: 1.25rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2440,12 +2441,18 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
 
   .slide-section {
     min-height: auto;
-    padding: 2.5rem 0;
+    padding: 1.5rem 0;
   }
 
   .slide-section:first-of-type {
     min-height: auto;
-    padding-top: calc(var(--header-height, 84px) + 1.5rem);
+    padding-top: calc(var(--header-height, 84px) + 1rem);
+    padding-bottom: 1.25rem;
+  }
+
+  .contact-slide {
+    min-height: auto;
+    padding: 1.5rem 0;
   }
 
   .slide-container {
