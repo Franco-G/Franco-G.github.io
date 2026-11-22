@@ -27,7 +27,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
   
   <script>document.documentElement.classList.add('js');</script>
-  <link rel="stylesheet" href="style.css?v=16.0">
+  <link rel="stylesheet" href="style.css?v=17.0">
 </head>
 <body>
   <!-- Escenario de fondo fijo limpio -->
@@ -325,6 +325,19 @@
             </div>
           </article>
         </div>
+
+        <!-- Franja Promocional: Bono Pack 62 Plantillas -->
+        <aside class="card promo-bonus-banner" aria-label="Promoción por servicio contratado">
+          <div class="promo-bonus-copy">
+            <div class="promo-bonus-top">
+              <span class="card-category">Promoción activa</span>
+              <span class="mini-badge">Gratis con tu servicio</span>
+            </div>
+            <h3>Pack 62 plantillas</h3>
+            <p class="promo-bonus-text">Llévate gratis este paquete de finanzas, presupuesto y cobranzas en Excel al concretar cualquier servicio pagado, más diagnóstico inicial sin costo.</p>
+          </div>
+          <button type="button" class="btn btn-primary shimmer-btn promo-bonus-cta" onclick="quoteSpecificService('Pack 62 plantillas en Excel')">Solicitar con bono <span class="btn-arrow" aria-hidden="true">→</span></button>
+        </aside>
       </div>
     </section>
 
@@ -579,6 +592,7 @@
                   <button type="button" class="service-pill-btn active" role="radio" aria-checked="true" data-service="Estados financieros automatizados" onclick="selectServiceTier('Estados financieros automatizados', this)">Estados financieros</button>
                   <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Macros y plantillas en Excel" onclick="selectServiceTier('Macros y plantillas en Excel', this)">Macros en Excel</button>
                   <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Tableros en Power BI y Excel" onclick="selectServiceTier('Tableros en Power BI y Excel', this)">Conciliaciones / Power BI</button>
+                  <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Pack 62 plantillas en Excel" onclick="selectServiceTier('Pack 62 plantillas en Excel', this)">Pack 62 plantillas</button>
                   <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Consulta general / Otro proyecto" onclick="selectServiceTier('Consulta general / Otro proyecto', this)">Otro proyecto / Consulta</button>
                 </div>
               </div>
@@ -594,7 +608,7 @@
                 <textarea id="quote-goal" name="goal" rows="2" placeholder="Ej. Automatizar balance general, ERI y cuentas sin destino desde mi reporte contable."></textarea>
               </div>
 
-              <p class="form-reassurance">Sin compromiso: revisamos tu flujo actual y definimos el alcance real.</p>
+              <p class="form-reassurance">Incluye diagnóstico inicial sin costo. El Pack de 62 plantillas es gratis al concretar tu servicio.</p>
 
               <div class="quote-submit-row">
                 <button type="submit" class="btn btn-primary shimmer-btn">Escribir por WhatsApp</button>
@@ -645,6 +659,6 @@
   </main>
 
   <!-- Controlador de Navegación e Interactividad -->
-  <script src="app.js?v=16.0"></script>
+  <script src="app.js?v=17.0"></script>
 </body>
 </html>

@@ -251,6 +251,7 @@ const SERVICE_PLACEHOLDERS = {
   'Estados financieros automatizados': 'Ej. Automatizar balance general, ERI y cuentas sin destino desde mi reporte contable.',
   'Macros y plantillas en Excel': 'Ej. Macro para carga masiva de compras, ventas o planillas sin digitar a mano.',
   'Tableros en Power BI y Excel': 'Ej. Conciliación bancaria automática, cruces SUNAT o tablero de caja y cobranzas.',
+  'Pack 62 plantillas en Excel': 'Ej. Quiero cotizar un servicio a medida y llevarme gratis el Pack de 62 plantillas en Excel.',
   'Consulta general / Otro proyecto': 'Ej. Cuéntame qué archivo, reporte o flujo mensual te quita más horas.'
 };
 
