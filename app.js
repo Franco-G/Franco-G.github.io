@@ -247,12 +247,12 @@ function goToSlide(targetIndex) {
  * 3. Selección de Solución y Envío de Mensaje Directo
  */
 const CONTACT_EMAIL = 'guerrerofranco1429@gmail.com';
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/guerrerofranco1429@gmail.com';
 const SERVICE_PLACEHOLDERS = {
-  'Estados financieros automatizados': 'Ej. Automatizar balance general, ERI y cuentas sin destino desde mi reporte contable.',
-  'Macros y plantillas en Excel': 'Ej. Macro para carga masiva de compras, ventas o planillas sin digitar a mano.',
-  'Tableros en Power BI y Excel': 'Ej. Conciliación bancaria automática, cruces SUNAT o tablero de caja y cobranzas.',
-  'Pack 62 plantillas en Excel': 'Ej. Quiero cotizar un servicio a medida y llevarme gratis el Pack de 62 plantillas en Excel.',
-  'Consulta general / Otro proyecto': 'Ej. Cuéntame qué archivo, reporte o flujo mensual te quita más horas.'
+  'Asesoría financiera': 'Ej. Ordenar caja diaria, flujos de efectivo o balances mensuales sin digitar a mano.',
+  'Consultoría en Excel y Power BI': 'Ej. Automatizar reportes en Excel o armar un tablero gerencial con lo que ya descarga mi sistema.',
+  'Sociedad para estudio contable': 'Ej. Trabajar juntos acelerando cierres PCGE, flujos o cruces bancarios de nuestros clientes.',
+  'Consulta general': 'Ej. Cuéntame brevemente qué proceso quieres mejorar y coordinamos una revisión de 20 minutos.'
 };
 
 function clearNameValidation() {
@@ -267,10 +267,26 @@ function clearNameValidation() {
   }
 }
 
+function clearEmailValidation() {
+  const emailInput = document.getElementById('quote-email');
+  const emailError = document.getElementById('quote-email-error');
+  if (emailInput) {
+    emailInput.classList.remove('is-invalid');
+    emailInput.removeAttribute('aria-invalid');
+  }
+  if (emailError) {
+    emailError.hidden = true;
+  }
+}
+
 function initContactForm() {
   const nameInput = document.getElementById('quote-name');
+  const emailInput = document.getElementById('quote-email');
   if (nameInput) {
     nameInput.addEventListener('input', clearNameValidation);
+  }
+  if (emailInput) {
+    emailInput.addEventListener('input', clearEmailValidation);
   }
 
   const pills = Array.from(document.querySelectorAll('.service-pill-btn'));
@@ -337,13 +353,14 @@ function quoteSpecificService(tierValue) {
   }, REDUCED_MOTION_MQ.matches ? 50 : 450);
 }
 
-function showQuoteFeedback(message, allowCopyEmail) {
+function showQuoteFeedback(message, allowCopyEmail, isError = false) {
   const feedbackEl = document.getElementById('quote-feedback');
   const feedbackTextEl = document.getElementById('quote-feedback-text');
   const copyBtn = document.getElementById('copy-email-btn');
   if (!feedbackEl || !feedbackTextEl) return;
 
   feedbackTextEl.textContent = message;
+  feedbackEl.classList.toggle('is-error', isError);
   if (copyBtn) {
     copyBtn.textContent = 'Copiar correo';
     copyBtn.hidden = !allowCopyEmail;
@@ -383,44 +400,92 @@ function copyContactEmail() {
   }
 }
 
-function handleQuoteSubmit(channel) {
+async function handleQuoteSubmit() {
   const nameInput = document.getElementById('quote-name');
   const nameError = document.getElementById('quote-name-error');
+  const emailInput = document.getElementById('quote-email');
+  const emailError = document.getElementById('quote-email-error');
   const serviceInput = document.getElementById('quote-service');
   const goalInput = document.getElementById('quote-goal');
+  const submitBtn = document.getElementById('quote-submit-btn');
 
   const rawName = nameInput ? nameInput.value.trim() : '';
+  const rawEmail = emailInput ? emailInput.value.trim() : '';
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawEmail);
+
+  let hasError = false;
   if (!rawName) {
     if (nameInput) {
       nameInput.classList.add('is-invalid');
       nameInput.setAttribute('aria-invalid', 'true');
       nameInput.focus();
     }
-    if (nameError) {
-      nameError.hidden = false;
+    if (nameError) nameError.hidden = false;
+    hasError = true;
+  } else {
+    clearNameValidation();
+  }
+
+  if (!emailValid) {
+    if (emailInput) {
+      emailInput.classList.add('is-invalid');
+      emailInput.setAttribute('aria-invalid', 'true');
+      if (!hasError) emailInput.focus();
     }
-    return;
+    if (emailError) emailError.hidden = false;
+    hasError = true;
+  } else {
+    clearEmailValidation();
   }
 
-  clearNameValidation();
-  const service = (serviceInput && serviceInput.value) ? serviceInput.value : 'Automatización Financiera & BI';
-  const goal = (goalInput && goalInput.value.trim()) ? goalInput.value.trim() : 'Me gustaría conversar sobre este servicio y conocer el alcance.';
+  if (hasError) return;
 
-  if (channel === 'email') {
-    const subject = encodeURIComponent(`Consulta: ${service} - ${rawName}`);
-    const body = encodeURIComponent(
-      `Hola Franco,\n\nSoy ${rawName}.\n\nEstoy interesado en: ${service}.\nDetalle o proceso a resolver: ${goal}\n\nQuedo atento para coordinar una breve reunión.`
-    );
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    showQuoteFeedback('Se abrió tu aplicación de correo con el mensaje listo.', true);
-    return;
+  const service = (serviceInput && serviceInput.value) ? serviceInput.value : 'Asesoría financiera';
+  const goal = (goalInput && goalInput.value.trim()) ? goalInput.value.trim() : 'Me gustaría conversar sobre cómo trabajar juntos y revisar el alcance.';
+
+  const originalBtnText = submitBtn ? submitBtn.textContent : '';
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando consulta...';
   }
 
-  const waMessage = encodeURIComponent(
-    `Hola Franco, soy *${rawName}*. Vi tu portafolio y me interesa consultar por: *${service}*.\n\nProceso o consulta: ${goal}`
-  );
-  window.open(`https://wa.me/51960748142?text=${waMessage}`, '_blank', 'noopener,noreferrer');
-  showQuoteFeedback('Se abrió WhatsApp con tu consulta lista para enviar.', false);
+  try {
+    const response = await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        Nombre_o_Empresa: rawName,
+        Correo_de_Contacto: rawEmail,
+        Modalidad: service,
+        Mensaje: goal,
+        _replyto: rawEmail,
+        _subject: `Nueva consulta web: ${service} - ${rawName}`,
+        _captcha: 'false',
+        _template: 'table',
+        _url: window.location.href
+      })
+    });
+
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || result.success === false || result.success === 'false') {
+      throw new Error('send-failed');
+    }
+
+    if (nameInput) nameInput.value = '';
+    if (emailInput) emailInput.value = '';
+    if (goalInput) goalInput.value = '';
+    showQuoteFeedback(`¡Listo! Tu consulta llegó directo a mi correo. Te responderé hoy a ${rawEmail}.`, false, false);
+  } catch (err) {
+    showQuoteFeedback(`No se pudo enviar automáticamente ahora. Escríbeme por WhatsApp o copia mi correo (${CONTACT_EMAIL}):`, true, true);
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalBtnText || 'Enviar consulta por correo';
+    }
+  }
 }
 
 /**
@@ -708,13 +773,13 @@ const GALLERY_SAMPLES = [
     src: 'muestras/muestra-balances-pcge.png',
     title: 'Estado de Flujos de Efectivo (PCGE / SMV)',
     caption: 'Modelo real estructurado en Excel con cuentas contables peruanas en Soles.',
-    service: 'Estados financieros automatizados'
+    service: 'Asesoría financiera'
   },
   {
     cat: 'Automatización Excel',
     badge: 'Validación PCGE',
     showcaseTitle: 'Registro contable',
-    desc: 'Base transaccional ordenada con macros de validación para cargar datos desde tu ERP sin errores.',
+    desc: 'Base transaccional ordenada con macros de validación para cargar datos desde tu sistema sin errores.',
     bullets: [
       'Clasifica cuentas y subcuentas según el Plan Contable General Empresarial.',
       'Calcula totales en Soles y detecta inconsistencias antes del cierre.',
@@ -723,7 +788,7 @@ const GALLERY_SAMPLES = [
     src: 'muestras/muestra-transacciones-pcge.png',
     title: 'Registro de Transacciones Contables (PCGE)',
     caption: 'Vista real en Excel con validaciones, totales en Soles y clasificación por cuenta.',
-    service: 'Macros y plantillas en Excel'
+    service: 'Consultoría en Excel y Power BI'
   },
   {
     cat: 'Control Gerencial',
@@ -732,13 +797,13 @@ const GALLERY_SAMPLES = [
     desc: 'Resumen financiero mensual en Soles con estado de resultados, balance general y métricas de retorno.',
     bullets: [
       'Ganancias y pérdidas frente a períodos anteriores en una sola pantalla.',
-      'Ratios de liquidez, endeudamiento, TIR y WACC listos para directorio.',
+      'Ratios de liquidez, endeudamiento, TIR y WACC listos para gerencia.',
       'Actualización inmediata al pegar el reporte exportado de tu sistema.'
     ],
     src: 'muestras/muestra-tablero-financiero.png',
     title: 'Dashboard Económico Financiero en Excel',
     caption: 'Tablero real en Soles con Ganancias y Pérdidas, Balance General, TIR y WACC.',
-    service: 'Tableros en Power BI y Excel'
+    service: 'Consultoría en Excel y Power BI'
   },
   {
     cat: 'Tesorería y Bancos',
@@ -748,18 +813,18 @@ const GALLERY_SAMPLES = [
     bullets: [
       'Control diario de depósitos, egresos y saldos bancarios por cuenta.',
       'Filtros dinámicos por estado de conciliación y tipo de movimiento.',
-      'Soporte claro para arqueos de caja, pagos y auditoría interna.'
+      'Soporte claro para arqueos de caja, pagos y estudios contables.'
     ],
     src: 'muestras/muestra-conciliacion-bancaria.png',
     title: 'Conciliación Bancaria y Validación en Excel',
     caption: 'Control de depósitos, saldos y estado de conciliación con filtros dinámicos.',
-    service: 'Tableros en Power BI y Excel'
+    service: 'Sociedad para estudio contable'
   },
   {
     src: 'muestras/muestra-pack-62.png',
     title: 'Pack 62 Plantillas en Excel',
-    caption: 'Muestra real de 3 plantillas incluidas gratis al concretar cualquier servicio pagado.',
-    service: 'Pack 62 plantillas en Excel'
+    caption: 'Muestra real de 3 plantillas incluidas gratis al iniciar asesoría, consultoría o sociedad.',
+    service: 'Asesoría financiera'
   }
 ];
 
@@ -870,11 +935,6 @@ function openCurrentExcelSample() {
   openSampleModal(sample.src, sample.title, sample.caption, sample.service);
 }
 
-function quoteCurrentExcelService() {
-  const sample = GALLERY_SAMPLES[excelSlideIndex] || GALLERY_SAMPLES[0];
-  quoteSpecificService(sample.service || 'Estados financieros automatizados');
-}
-
 function renderModalSample(sample) {
   const imgEl = document.getElementById('sample-lightbox-img');
   const pbiEl = document.getElementById('sample-lightbox-pbi');
@@ -905,7 +965,7 @@ function renderModalSample(sample) {
   if (ctaBtn) {
     ctaBtn.onclick = () => {
       closeSampleModal();
-      quoteSpecificService(sample.service || 'Consulta general / Otro proyecto');
+      quoteSpecificService(sample.service || 'Consulta general');
     };
   }
 }
@@ -962,7 +1022,7 @@ function openPowerBiModal() {
   if (ctaBtn) {
     ctaBtn.onclick = () => {
       closeSampleModal();
-      quoteSpecificService('Tableros en Power BI y Excel');
+      quoteSpecificService('Consultoría en Excel y Power BI');
     };
   }
 
@@ -1021,7 +1081,6 @@ window.handleQuoteSubmit = handleQuoteSubmit;
 window.copyContactEmail = copyContactEmail;
 window.setExcelSlide = setExcelSlide;
 window.openCurrentExcelSample = openCurrentExcelSample;
-window.quoteCurrentExcelService = quoteCurrentExcelService;
 window.openPowerBiModal = openPowerBiModal;
 window.openSampleModal = openSampleModal;
 window.stepSampleModal = stepSampleModal;

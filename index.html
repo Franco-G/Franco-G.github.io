@@ -27,7 +27,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
   
   <script>document.documentElement.classList.add('js');</script>
-  <link rel="stylesheet" href="style.css?v=20.0">
+  <link rel="stylesheet" href="style.css?v=21.0">
 </head>
 <body>
   <!-- Escenario de fondo fijo limpio -->
@@ -46,7 +46,7 @@
       <nav class="nav-menu-links" aria-label="Menú principal">
         <a href="#inicio" class="nav-menu-link active" data-slide-index="0" onclick="goToSlide(0); return false;">Inicio</a>
         <a href="#experiencia" class="nav-menu-link" data-slide-index="1" onclick="goToSlide(1); return false;">Resultados</a>
-        <a href="#soluciones" class="nav-menu-link" data-slide-index="2" onclick="goToSlide(2); return false;">Servicios</a>
+        <a href="#soluciones" class="nav-menu-link" data-slide-index="2">Asesoría</a>
         <a href="#dashboard-powerbi" class="nav-menu-link" data-slide-index="3" onclick="goToSlide(3); return false;">Muestras</a>
         <a href="#powerbi-ia" class="nav-menu-link" data-slide-index="4" onclick="goToSlide(4); return false;">Power BI</a>
         <a href="#respaldo" class="nav-menu-link" data-slide-index="5" onclick="goToSlide(5); return false;">Experiencia</a>
@@ -123,11 +123,10 @@
             <h1>Decisiones con datos</h1>
             <p class="hero-subtitle">Finanzas, reportes y automatización.</p>
             <p class="hero-text">
-              Soy Analista de datos y responsable de tesorería en una firma contable en Perú, a cargo de pagos y conciliaciones bancarias. Para tu negocio diseño desde cero estados financieros actualizables, macros en Excel y tableros en Power BI con lo que exporta tu sistema, ahorrando más de 73 horas al mes.
+              Soy Analista de datos y responsable de tesorería en una firma contable en Perú. Ofrezco asesoría financiera, consultoría en Excel y Power BI, y sociedad de trabajo para estudios contables usando lo que ya exporta tu sistema.
             </p>
             <div class="btn-group">
-              <a href="#contacto" class="btn btn-primary shimmer-btn" onclick="goToSlide(6); return false;">Contactar ahora</a>
-              <a href="#experiencia" class="btn btn-secondary shimmer-btn" onclick="goToSlide(1); return false;">Ver horas ahorradas</a>
+              <a href="#contacto" class="btn btn-primary shimmer-btn" onclick="goToSlide(6); return false;">Conversemos ahora</a>
             </div>
           </header>
 
@@ -190,7 +189,6 @@
             <h2>Resultados en negocio</h2>
             <p class="section-subtitle">Horas operativas ahorradas cada mes.</p>
           </div>
-          <button type="button" class="btn btn-secondary btn-sm-pill" onclick="goToSlide(2)">Ver servicios <span class="btn-arrow" aria-hidden="true">→</span></button>
         </div>
 
         <div class="results-comparison-grid">
@@ -219,7 +217,6 @@
 
             <div class="result-footer-row">
               <p class="result-summary">Encuentra cuentas sin destino y descuadres al instante.</p>
-              <button type="button" class="sample-text-btn" onclick="openSampleModal('muestras/muestra-balances-pcge.png', 'Estado de Flujos de Efectivo (PCGE / SMV)', 'Modelo estructurado con cuentas contables peruanas en Soles y sin digitación manual.', 'Estados financieros automatizados')">Ver muestra <span class="btn-arrow" aria-hidden="true">→</span></button>
             </div>
           </article>
 
@@ -248,7 +245,6 @@
 
             <div class="result-footer-row">
               <p class="result-summary">Evita errores de tipeo en montos, fechas y comprobantes.</p>
-              <button type="button" class="sample-text-btn" onclick="openSampleModal('muestras/muestra-transacciones-pcge.png', 'Registro Estructurado de Transacciones (PCGE)', 'Tabla limpia con cuentas, glosas y totales automáticos lista para carga o análisis.', 'Macros y plantillas en Excel')">Ver muestra <span class="btn-arrow" aria-hidden="true">→</span></button>
             </div>
           </article>
 
@@ -277,96 +273,92 @@
 
             <div class="result-footer-row">
               <p class="result-summary">Detecta duplicados, diferencias o compras omitidas antes de declarar.</p>
-              <button type="button" class="sample-text-btn" onclick="openSampleModal('muestras/muestra-conciliacion-bancaria.png', 'Conciliación Bancaria y Validación en Excel', 'Control de depósitos, saldos y estado de conciliación con filtros dinámicos.', 'Tableros en Power BI y Excel')">Ver muestra <span class="btn-arrow" aria-hidden="true">→</span></button>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Sección 3: Servicios a Medida (Grilla de 3 Columnas para Freelance) -->
-    <section id="soluciones" class="slide-section" aria-label="Servicios freelance a medida">
+    <!-- Sección 3: Formas de Trabajar Juntos (Asesoría, Consultoría y Sociedad) -->
+    <section id="soluciones" class="slide-section" aria-label="Asesoría, consultoría y sociedad">
       <div class="container slide-container">
         <div class="slide-header-row">
           <div>
-            <h2>Servicios a medida</h2>
-            <p class="section-subtitle">Hechos desde cero para ti.</p>
+            <h2>Cómo trabajamos</h2>
+            <p class="section-subtitle">Asesoría, consultoría y sociedad.</p>
           </div>
         </div>
 
         <div class="services-bento-grid">
-          <!-- Servicio 1: Estados Financieros Automáticos -->
+          <!-- Opción 1: Asesoría Financiera -->
           <article class="card service-bento-card">
             <div class="card-top">
-              <span class="card-category">Servicio 01</span>
+              <span class="card-category">Asesoría 01</span>
               <span class="mini-badge">Ahorra 28h al mes</span>
             </div>
-            <h3>Balances sin digitación</h3>
-            <button type="button" class="sample-thumb-btn" onclick="openSampleModal('muestras/muestra-balances-pcge.png', 'Estado de Flujos de Efectivo (PCGE / SMV)', 'Modelo real estructurado en Excel con cuentas contables peruanas en Soles.', 'Estados financieros automatizados')" aria-label="Ampliar muestra de Balances sin digitación">
+            <h3>Asesoría financiera</h3>
+            <button type="button" class="sample-thumb-btn" onclick="openSampleModal('muestras/muestra-balances-pcge.png', 'Estado de Flujos de Efectivo (PCGE / SMV)', 'Modelo real estructurado en Excel con cuentas contables peruanas en Soles.', 'Asesoría financiera')" aria-label="Ampliar muestra de Asesoría financiera">
               <img src="muestras/muestra-balances-pcge.png" alt="Muestra real en Excel de Estado de Flujos de Efectivo PCGE" loading="lazy">
               <span class="sample-thumb-pill">Ampliar</span>
             </button>
-            <p class="project-context">Con lo que exporta tu sistema, armo balances actualizables sin digitar ni cambiar de software.</p>
+            <p class="project-context">Ordeno tus balances, caja diaria y reportes gerenciales sin cambiar tu sistema actual.</p>
             <ul class="project-bullets">
-              <li>Balance de comprobación y resultados por periodo.</li>
-              <li>Detecta cuentas sin destino, descuadres y notas 10 a 59.</li>
+              <li>Estados financieros actualizables listos en horas.</li>
+              <li>Detecta cuentas sin destino y descuadres al instante.</li>
             </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
-                <span class="tag">Balance y ERI</span>
-                <span class="tag">Cuentas 10 a 59</span>
+                <span class="tag">Balance y caja</span>
+                <span class="tag">Gerencia</span>
               </div>
-              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Estados financieros automatizados')">Consultar <span class="btn-arrow" aria-hidden="true">→</span></button>
             </div>
           </article>
 
-          <!-- Servicio 2: Macros y Plantillas en Excel -->
+          <!-- Opción 2: Consultoría en Excel -->
           <article class="card service-bento-card">
             <div class="card-top">
-              <span class="card-category">Servicio 02</span>
+              <span class="card-category">Consultoría 02</span>
               <span class="mini-badge">Ahorra 25h al mes</span>
             </div>
-            <h3>Plantillas en Excel</h3>
-            <button type="button" class="sample-thumb-btn" onclick="openSampleModal('muestras/muestra-transacciones-pcge.png', 'Registro de Transacciones Contables (PCGE)', 'Vista real en Excel con validaciones, totales en Soles y clasificación por cuenta.', 'Macros y plantillas en Excel')" aria-label="Ampliar muestra de Plantillas en Excel">
+            <h3>Consultoría en Excel</h3>
+            <button type="button" class="sample-thumb-btn" onclick="openSampleModal('muestras/muestra-transacciones-pcge.png', 'Registro de Transacciones Contables (PCGE)', 'Vista real en Excel con validaciones, totales en Soles y clasificación por cuenta.', 'Consultoría en Excel y Power BI')" aria-label="Ampliar muestra de Consultoría en Excel">
               <img src="muestras/muestra-transacciones-pcge.png" alt="Muestra real en Excel de registro contable y clasificación PCGE" loading="lazy">
               <span class="sample-thumb-pill">Ampliar</span>
             </button>
-            <p class="project-context">Diseño macros y plantillas según tus archivos para dejar de digitar a mano.</p>
+            <p class="project-context">Creo herramientas y automatizaciones hechas a tu medida según los reportes que ya descargas.</p>
             <ul class="project-bullets">
-              <li>Pegas tus datos y generas la carga masiva en un clic.</li>
-              <li>Evita errores en montos, fechas y comprobantes.</li>
+              <li>Pegas tus datos y evitas horas de digitación manual.</li>
+              <li>Control limpio en montos, fechas y comprobantes.</li>
             </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
-                <span class="tag">Macros Excel</span>
-                <span class="tag">Carga masiva</span>
+                <span class="tag">Excel a medida</span>
+                <span class="tag">Carga rápida</span>
               </div>
-              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Macros y plantillas en Excel')">Consultar <span class="btn-arrow" aria-hidden="true">→</span></button>
             </div>
           </article>
 
-          <!-- Servicio 3: Conciliaciones, Cruces SUNAT y Tableros -->
+          <!-- Opción 3: Sociedad con Estudios Contables -->
           <article class="card service-bento-card">
             <div class="card-top">
-              <span class="card-category">Servicio 03</span>
+              <span class="card-category">Sociedad 03</span>
               <span class="mini-badge">Ahorra 20h al mes</span>
             </div>
-            <h3>Revisión y tableros</h3>
-            <button type="button" class="sample-thumb-btn" onclick="openSampleModal('muestras/muestra-tablero-financiero.png', 'Dashboard Económico Financiero en Excel', 'Tablero real en Soles con Ganancias y Pérdidas, Balance General, TIR y WACC.', 'Tableros en Power BI y Excel')" aria-label="Ampliar muestra de Revisión y tableros">
+            <h3>Sociedad con estudios</h3>
+            <button type="button" class="sample-thumb-btn" onclick="openSampleModal('muestras/muestra-tablero-financiero.png', 'Dashboard Económico Financiero en Excel', 'Tablero real en Soles con Ganancias y Pérdidas, Balance General, TIR y WACC.', 'Sociedad para estudio contable')" aria-label="Ampliar muestra de Sociedad con estudios">
               <img src="muestras/muestra-tablero-financiero.png" alt="Muestra real en Excel de Dashboard Económico Financiero en Soles" loading="lazy">
               <span class="sample-thumb-pill">Ampliar</span>
             </button>
-            <p class="project-context">Cruzo bancos y declaraciones contra tu contabilidad, con tableros claros en Excel y Power BI.</p>
+            <p class="project-context">Trabajo como socio de apoyo para estudios contables, acelerando cierres y reportes en Excel o Power BI.</p>
             <ul class="project-bullets">
-              <li>Concilia bancos y cruza declaraciones en segundos.</li>
-              <li>Visualiza caja, cobranzas y márgenes al día.</li>
+              <li>Concilia bancos y valida comprobantes en segundos.</li>
+              <li>Atiende más clientes en tu estudio sin ampliar planilla.</li>
             </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
-                <span class="tag">Conciliación y SUNAT</span>
+                <span class="tag">Estudios contables</span>
                 <span class="tag">Power BI</span>
               </div>
-              <button type="button" class="inline-quote-btn" onclick="quoteSpecificService('Tableros en Power BI y Excel')">Consultar <span class="btn-arrow" aria-hidden="true">→</span></button>
             </div>
           </article>
         </div>
@@ -400,7 +392,7 @@
               <ul class="project-bullets" id="excel-stage-bullets">
                 <li>Clasificación automática por actividad operativa, inversión y financiamiento.</li>
                 <li>Lectura directa desde tu registro de transacciones PCGE.</li>
-                <li>Cero fórmulas expuestas: entrega limpia para gerencia.</li>
+                <li>Entrega limpia para gerencia sin exponer tus fórmulas.</li>
               </ul>
 
               <div class="excel-stage-tabs" role="tablist" aria-label="Elegir plantilla real en Excel">
@@ -408,11 +400,6 @@
                 <button type="button" class="hero-tab-btn" role="tab" aria-selected="false" onclick="setExcelSlide(1)">02 Macros</button>
                 <button type="button" class="hero-tab-btn" role="tab" aria-selected="false" onclick="setExcelSlide(2)">03 Tablero</button>
                 <button type="button" class="hero-tab-btn" role="tab" aria-selected="false" onclick="setExcelSlide(3)">04 Cruces</button>
-              </div>
-
-              <div class="card-footer-cta">
-                <button type="button" class="sample-text-btn" onclick="openCurrentExcelSample()">Ampliar imagen <span class="btn-arrow" aria-hidden="true">→</span></button>
-                <button type="button" class="inline-quote-btn" onclick="quoteCurrentExcelService()">Consultar <span class="btn-arrow" aria-hidden="true">→</span></button>
               </div>
             </div>
           </article>
@@ -640,67 +627,73 @@
             </div>
           </div>
 
-          <!-- Cierre en 2 Columnas: Bono Pack 62 a la izquierda + Formulario a la derecha -->
+          <!-- Cierre en 2 Caminos Claros: Bono + WhatsApp directo a la izquierda | Formulario a tu correo a la derecha -->
           <div class="contact-dual-grid">
-            <aside class="card promo-bonus-card" aria-label="Promoción por servicio contratado">
+            <aside class="card promo-bonus-card" aria-label="Regalo incluido y contacto directo por WhatsApp">
               <div class="card-top">
-                <span class="card-category">Promoción activa</span>
-                <span class="mini-badge">Gratis con tu servicio</span>
+                <span class="card-category">Regalo incluido</span>
+                <span class="mini-badge">Gratis al trabajar juntos</span>
               </div>
               <h3>Pack 62 plantillas</h3>
-              <button type="button" class="promo-card-thumb" onclick="openSampleModal('muestras/muestra-pack-62.png', 'Pack 62 Plantillas en Excel', 'Muestra real de 3 plantillas incluidas gratis al concretar cualquier servicio pagado.', 'Pack 62 plantillas en Excel')" aria-label="Ampliar muestra del Pack 62 plantillas">
+              <button type="button" class="promo-card-thumb" onclick="openSampleModal('muestras/muestra-pack-62.png', 'Pack 62 Plantillas en Excel', 'Muestra real de 3 plantillas incluidas gratis al iniciar tu asesoría, consultoría o sociedad.', 'Asesoría financiera')" aria-label="Ampliar muestra del Pack 62 plantillas">
                 <img src="muestras/muestra-pack-62.png" alt="Muestra real de 3 plantillas del Pack 62 en Excel" loading="lazy">
                 <img src="muestras/muestra-tablero-financiero.png" alt="" class="promo-thumb-alt" aria-hidden="true" loading="lazy">
                 <span class="sample-thumb-pill">Ampliar</span>
               </button>
-              <p class="project-context">Llévate gratis este paquete en Excel al concretar cualquier servicio pagado:</p>
+              <p class="project-context">Llévate gratis este paquete en Excel al iniciar tu asesoría, consultoría o sociedad:</p>
               <ul class="project-bullets">
                 <li>Finanzas, balances, ratios y análisis económico.</li>
                 <li>Flujo de caja, presupuestos, cobranzas y caja diaria.</li>
-                <li>Incluye tus 2 modelos contables PCGE y diagnóstico sin costo.</li>
+                <li>Incluye revisión sin costo de 20 minutos sobre tu archivo.</li>
               </ul>
-              <button type="button" class="btn btn-secondary shimmer-btn promo-card-cta" onclick="selectServiceTier('Pack 62 plantillas en Excel', null, true)">Activar bono en consulta <span class="btn-arrow" aria-hidden="true">→</span></button>
+              <a href="https://wa.me/51960748142?text=Hola%20Franco%2C%20vi%20tu%20portafolio%20y%20me%20interesa%20conversar%20sobre%20asesor%C3%ADa%2C%20consultor%C3%ADa%20o%20sociedad." target="_blank" rel="noopener noreferrer" class="btn btn-primary shimmer-btn promo-card-cta">Escribir directo por WhatsApp <span class="btn-arrow" aria-hidden="true">→</span></a>
             </aside>
 
-            <!-- Formulario Único de Cotización + 4 Canales Oficiales -->
+            <!-- Camino 2: Formulario directo a Gmail + 4 Canales Oficiales -->
             <div class="contact-card border-beam-card">
             <div class="visual-header">
               <div class="visual-title-row">
                 <span class="live-dot" aria-hidden="true"></span>
-                <h3>Cotiza tu solución</h3>
+                <h3>Escríbeme por correo</h3>
               </div>
               <span class="mini-badge">Respuesta en el día</span>
             </div>
 
-            <form id="quick-quote-form" class="quick-quote-form" onsubmit="handleQuoteSubmit('whatsapp'); return false;" novalidate>
+            <form id="quick-quote-form" class="quick-quote-form" onsubmit="handleQuoteSubmit(); return false;" novalidate>
               <div class="form-field">
-                <span class="field-label" id="service-pills-label">¿Qué solución necesitas?</span>
-                <input type="hidden" id="quote-service" name="service" value="Estados financieros automatizados">
+                <span class="field-label" id="service-pills-label">¿Cómo te gustaría trabajar juntos?</span>
+                <input type="hidden" id="quote-service" name="service" value="Asesoría financiera">
                 <div class="service-pills-group" role="radiogroup" aria-labelledby="service-pills-label">
-                  <button type="button" class="service-pill-btn active" role="radio" aria-checked="true" data-service="Estados financieros automatizados" onclick="selectServiceTier('Estados financieros automatizados', this)">Estados financieros</button>
-                  <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Macros y plantillas en Excel" onclick="selectServiceTier('Macros y plantillas en Excel', this)">Macros en Excel</button>
-                  <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Tableros en Power BI y Excel" onclick="selectServiceTier('Tableros en Power BI y Excel', this)">Conciliaciones / Power BI</button>
-                  <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Pack 62 plantillas en Excel" onclick="selectServiceTier('Pack 62 plantillas en Excel', this)">Pack 62 plantillas</button>
-                  <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Consulta general / Otro proyecto" onclick="selectServiceTier('Consulta general / Otro proyecto', this)">Otro proyecto / Consulta</button>
+                  <button type="button" class="service-pill-btn active" role="radio" aria-checked="true" data-service="Asesoría financiera" onclick="selectServiceTier('Asesoría financiera', this)">Asesoría</button>
+                  <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Consultoría en Excel y Power BI" onclick="selectServiceTier('Consultoría en Excel y Power BI', this)">Consultoría</button>
+                  <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Sociedad para estudio contable" onclick="selectServiceTier('Sociedad para estudio contable', this)">Sociedad</button>
+                  <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Consulta general" onclick="selectServiceTier('Consulta general', this)">Otro tema</button>
+                </div>
+              </div>
+
+              <div class="form-two-cols">
+                <div class="form-field">
+                  <label for="quote-name">Nombre o empresa</label>
+                  <input type="text" id="quote-name" name="name" placeholder="Ej. Carla / Distribuidora Sur" required aria-describedby="quote-name-error">
+                  <span id="quote-name-error" class="field-error-msg" role="alert" hidden>Ingresa tu nombre o empresa.</span>
+                </div>
+
+                <div class="form-field">
+                  <label for="quote-email">Tu correo</label>
+                  <input type="email" id="quote-email" name="email" placeholder="Ej. carla@empresa.com" required aria-describedby="quote-email-error">
+                  <span id="quote-email-error" class="field-error-msg" role="alert" hidden>Ingresa un correo válido para responderte.</span>
                 </div>
               </div>
 
               <div class="form-field">
-                <label for="quote-name">Nombre o empresa</label>
-                <input type="text" id="quote-name" name="name" placeholder="Ej. Carla Mendoza / Distribuidora Sur" required aria-describedby="quote-name-error">
-                <span id="quote-name-error" class="field-error-msg" role="alert" hidden>Ingresa tu nombre o empresa para continuar.</span>
+                <label for="quote-goal">¿En qué te puedo ayudar?</label>
+                <textarea id="quote-goal" name="goal" rows="2" placeholder="Ej. Ordenar balances, flujo de caja mensual o trabajar juntos en los cierres del estudio."></textarea>
               </div>
 
-              <div class="form-field">
-                <label for="quote-goal">¿Qué proceso quieres agilizar?</label>
-                <textarea id="quote-goal" name="goal" rows="2" placeholder="Ej. Automatizar balance general, ERI y cuentas sin destino desde mi reporte contable."></textarea>
-              </div>
-
-              <p class="form-reassurance">Incluye diagnóstico inicial sin costo. El Pack de 62 plantillas es gratis al concretar tu servicio.</p>
+              <p class="form-reassurance">Llega directo a mi correo. Si prefieres no dejar datos, escríbeme directo por WhatsApp.</p>
 
               <div class="quote-submit-row">
-                <button type="submit" class="btn btn-primary shimmer-btn">Escribir por WhatsApp</button>
-                <button type="button" class="btn btn-secondary shimmer-btn" onclick="handleQuoteSubmit('email')">Enviar por correo</button>
+                <button type="submit" id="quote-submit-btn" class="btn btn-primary shimmer-btn">Enviar consulta por correo</button>
               </div>
 
               <div id="quote-feedback" class="quote-feedback" role="status" aria-live="polite" hidden>
@@ -777,6 +770,6 @@
   </div>
 
   <!-- Controlador de Navegación e Interactividad -->
-  <script src="app.js?v=20.0"></script>
+  <script src="app.js?v=21.0"></script>
 </body>
 </html>

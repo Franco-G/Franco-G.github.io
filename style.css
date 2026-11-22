@@ -462,7 +462,7 @@ h3 {
   gap: 6px;
   margin-top: auto;
   padding-top: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 0;
 }
 
 .excel-stage-card {
@@ -570,11 +570,6 @@ h3 {
   text-decoration: none;
   transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   cursor: pointer;
-}
-
-.btn-sm-pill {
-  padding: 6px 14px;
-  font-size: 12.5px;
 }
 
 .btn-primary {
@@ -919,20 +914,6 @@ body.is-tab-hidden .pbi-skeleton::after {
   border-top: 1px solid var(--hairline-soft);
 }
 
-.inline-quote-btn {
-  background: var(--primary-light);
-  color: var(--primary-pressed);
-  border: 1px solid rgba(66, 133, 244, 0.35);
-  border-radius: 9999px;
-  padding: 4px 11px;
-  font-size: 11.5px;
-  font-weight: 600;
-  font-family: inherit;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.18s ease;
-}
-
 /* ========================================================
    SECCIÓN 2: RESULTADOS EN NEGOCIO (ANTES VS DESPUÉS)
    ======================================================== */
@@ -1092,23 +1073,6 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
   line-height: 1.4;
   color: var(--body);
   margin: 0;
-}
-
-.sample-text-btn {
-  appearance: none;
-  background: transparent;
-  border: none;
-  padding: 2px 0;
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--primary-pressed);
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  align-self: flex-start;
-  cursor: pointer;
-  transition: color 0.18s ease;
 }
 
 /* ========================================================
@@ -1832,6 +1796,12 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   gap: 10px;
 }
 
+.form-two-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
 .form-field {
   display: flex;
   flex-direction: column;
@@ -1962,6 +1932,12 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   font-weight: 500;
 }
 
+.quote-feedback.is-error {
+  background: rgba(234, 67, 53, 0.08);
+  border-color: rgba(234, 67, 53, 0.28);
+  color: var(--danger-text);
+}
+
 .quote-feedback[hidden] {
   display: none;
 }
@@ -2050,7 +2026,6 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
 
 /* R3-15: Hundimiento táctil breve al presionar botones */
 .btn:active,
-.inline-quote-btn:active,
 .tab-btn:active,
 .service-pill-btn:active,
 .copy-email-btn:active,
@@ -2208,22 +2183,6 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
     opacity: 1;
   }
 
-  .inline-quote-btn:hover {
-    background: var(--primary-pressed);
-    color: #ffffff;
-    border-color: var(--primary-pressed);
-    transform: translateY(-1px);
-  }
-
-  .sample-text-btn:hover {
-    color: var(--primary);
-  }
-
-  .sample-text-btn:hover .btn-arrow,
-  .sample-text-btn:focus-visible .btn-arrow {
-    transform: translateX(3px);
-  }
-
   .sample-thumb-btn:hover,
   .promo-card-thumb:hover {
     border-color: var(--primary);
@@ -2286,9 +2245,7 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
 
   /* R3-14: Avance sutil de flechas */
   .btn:hover .btn-arrow,
-  .btn:focus-visible .btn-arrow,
-  .inline-quote-btn:hover .btn-arrow,
-  .inline-quote-btn:focus-visible .btn-arrow {
+  .btn:focus-visible .btn-arrow {
     transform: translateX(3px);
   }
 
@@ -2389,7 +2346,6 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   .btn-arrow-up,
   .metric-card,
   .card,
-  .inline-quote-btn,
   .compare-box,
   .compare-meter-fill,
   .progress-meter-fill,
@@ -2409,7 +2365,6 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   .lightbox-nav-btn,
   .service-pill-btn,
   .copy-email-btn,
-  .sample-text-btn,
   .sample-thumb-btn,
   .sample-thumb-btn img,
   .promo-card-thumb,
@@ -2435,7 +2390,6 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   }
 
   .btn:active,
-  .inline-quote-btn:active,
   .tab-btn:active,
   .service-pill-btn:active,
   .copy-email-btn:active,
@@ -2443,7 +2397,6 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   .metric-card:hover,
   .card:hover,
   .nav-icon-btn:hover,
-  .inline-quote-btn:hover,
   .back-to-top-btn:hover,
   .client-logo-badge:hover svg {
     transform: none !important;
@@ -2563,8 +2516,8 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   .nav-icon-btn { width: 34px; height: 34px; min-width: 34px; min-height: 34px; }
   .nav-icon-btn .contact-icon { width: 17px; height: 17px; }
   .contact-card { padding: 16px; }
+  .form-two-cols { grid-template-columns: 1fr; gap: 8px; }
   .service-pills-group { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .service-pill-btn:last-child { grid-column: 1 / -1; }
   .quote-submit-row { flex-direction: column; }
   .contact-footer-bar {
     flex-direction: column;
