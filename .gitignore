@@ -1,7 +1,8 @@
 # 1. Carpetas de trabajo interno y soporte local
 referencias/
 pruebas/
-.agents/
+.agents/*
+!.agents/skills/
 docs/
 tasks/
 
@@ -19,3 +20,4 @@ screenshot*.png
 graphify-out/
 .graphify*
 .agents/plugins/
+.claude/skills
