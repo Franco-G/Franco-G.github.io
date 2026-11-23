@@ -18,3 +18,4 @@ screenshot*.png
 # 4. Graphify (archivos de análisis y grafos de conocimiento)
 graphify-out/
 .graphify*
+.agents/plugins/
