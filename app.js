@@ -44,6 +44,7 @@ function initApp() {
   initCompareBoxHighlight();
   initViewportPauseObserver();
   initRevealObserver();
+  initCardSpotlight();
   initHeroEntrance();
   triggerNumberTicker();
   updateScrollProgress();
@@ -377,7 +378,17 @@ function updateDiagnosticEstimate() {
   const hintEl = document.getElementById('diag-scope-hint');
   const summaryEl = document.getElementById('diag-summary-text');
 
-  if (savedEl) savedEl.textContent = `~${state.savedHours} horas/mes`;
+  if (savedEl) {
+    const nextText = `~${state.savedHours} horas/mes`;
+    if (savedEl.textContent !== nextText) {
+      savedEl.textContent = nextText;
+      if (!REDUCED_MOTION_MQ.matches) {
+        savedEl.classList.remove('is-updated');
+        void savedEl.offsetWidth;
+        savedEl.classList.add('is-updated');
+      }
+    }
+  }
   if (hintEl) hintEl.textContent = state.hint;
   if (summaryEl) {
     summaryEl.textContent = `${state.service} · ${state.volume} · ~${state.savedHours} h/mes ahorradas`;
@@ -737,22 +748,32 @@ function initHeroEntrance() {
 }
 
 function initRevealObserver() {
-  const revealTargets = Array.from(document.querySelectorAll('.result-compare-card, #respaldo .service-bento-card'));
+  const revealTargets = Array.from(document.querySelectorAll(
+    '.result-compare-card, .service-bento-card, .case-real-card, .workflow-strip-card, .promo-bonus-card, .contact-card'
+  ));
   if (revealTargets.length === 0) return;
 
   const markRevealed = (el) => {
     el.classList.add('is-revealed');
-    if (el.classList.contains('result-compare-card')) {
-      window.setTimeout(() => {
-        el.style.transitionDelay = '0ms';
-      }, 600);
-    }
+    window.setTimeout(() => {
+      el.style.transitionDelay = '0ms';
+    }, 550);
   };
 
   if (REDUCED_MOTION_MQ.matches || !('IntersectionObserver' in window)) {
     revealTargets.forEach(markRevealed);
     return;
   }
+
+  revealTargets.forEach((el) => {
+    const parent = el.parentElement;
+    if (!parent) return;
+    const siblings = Array.from(parent.children).filter(child => revealTargets.includes(child));
+    const siblingIndex = siblings.indexOf(el);
+    if (siblingIndex > 0) {
+      el.style.transitionDelay = `${Math.min(siblingIndex, 3) * 65}ms`;
+    }
+  });
 
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -761,9 +782,27 @@ function initRevealObserver() {
         io.unobserve(entry.target);
       }
     });
-  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.08 });
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
 
   revealTargets.forEach(el => io.observe(el));
+}
+
+function initCardSpotlight() {
+  if (REDUCED_MOTION_MQ.matches) return;
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  document.querySelectorAll('.card').forEach(card => {
+    let rafId = 0;
+    card.addEventListener('pointermove', (e) => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(() => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--spot-x', `${Math.round(e.clientX - rect.left)}px`);
+        card.style.setProperty('--spot-y', `${Math.round(e.clientY - rect.top)}px`);
+        rafId = 0;
+      });
+    }, { passive: true });
+  });
 }
 
 /**
@@ -792,14 +831,18 @@ const GALLERY_SAMPLES = [
     cat: 'Flujo Cuenta 10',
     badge: 'Soles y Dólares',
     showcaseTitle: 'Flujo en caja',
-    desc: 'De un Libro Mayor plano a un flujo real en Soles y Dólares listo para decidir, armado desde cero con datos ficticios.',
+    desc: 'De un Libro Mayor plano a flujo real PEN y USD sin cambiar tu sistema.',
     flowIn: 'Libro Mayor exportado',
     flowProc: 'Filtro Cuenta 10 + TC editable',
     flowOut: 'Flujo real en PEN y USD',
-    bullets: [
-      'Funciona con lo que exporta tu empresa, sin cambiar de sistema.',
-      'Resumen automático por periodo, cuenta bancaria y pasarela.',
-      'Sin candados ni macros ocultas: listo para probar en tu equipo.'
+    rawTitle: 'Exportación típica de Libro Mayor (crudo)',
+    rawIssues: ['Fechas mixtas', 'Cuentas mezcladas', 'Sin tipo de cambio'],
+    rawHeaders: ['Cuenta', 'Fecha', 'Glosa sistema', 'Mon', 'Importe'],
+    rawRows: [
+      ['104101', '03-oct-26', 'TRF CLI-09 FACT 412', 'PEN', '4820.00', false],
+      ['104201', '2026/10/04', 'ABONO USD REXT-11', 'USD', '1250.00', true],
+      ['421200', '05/10/2026', 'PROV SERV LOGISTICO', 'PEN', '-1980.00', true],
+      ['104102', '06.10.26', 'LIQ CULQI LOTE 04', 'PEN', '8129.51', false]
     ],
     src: 'muestras/muestra-flujo-cuenta10.png',
     title: 'Flujo de Caja Cuenta 10 (Soles y Dólares)',
@@ -810,17 +853,21 @@ const GALLERY_SAMPLES = [
     cat: 'Pasarelas y Bancos',
     badge: 'En Soles (S/)',
     showcaseTitle: 'Cruce de pasarelas',
-    desc: 'Consolidación de boletas de Yape, Plin y Culqi contra el extracto BCP, separando comisiones y abonos en tránsito.',
-    flowIn: 'Boletas pasarelas + extracto BCP',
+    desc: 'Boletas de Yape, Plin y Culqi cruzadas contra extractos bancarios separando comisiones.',
+    flowIn: 'Boletas pasarelas + extracto',
     flowProc: 'Cruce neto y cálculo de comisión',
     flowOut: 'Cuadre diario con alertas claras',
-    bullets: [
-      'Detecta al instante abonos pendientes, diferencias y comisiones.',
-      'Ordena lotes de cientos de boletas en minutos sin digitar fila por fila.',
-      'Construido en Excel sobre los reportes que ya descargas.'
+    rawTitle: 'Reportes sueltos de pasarela vs. banco (crudo)',
+    rawIssues: ['Comisión oculta', 'Sin cruzar abono', 'Lotes sin estado'],
+    rawHeaders: ['Fecha', 'Canal', 'Boleta', 'Bruto S/', 'Observación'],
+    rawRows: [
+      ['03/11/26', 'Culqi POS', 'B001-04169', '6940.00', 'Falta comisión', true],
+      ['04/11/26', 'Plin', 'B001-04216', '3510.00', 'Sin conciliar BCP', true],
+      ['05/11/26', 'Culqi Web', 'B001-04261', '8420.00', 'Abono parcial', true],
+      ['13/11/26', 'Culqi POS', 'B001-04585', '1240.00', 'Pendiente abono', true]
     ],
     src: 'muestras/muestra-conciliacion-pasarelas.png',
-    title: 'Conciliación de Yape, Plin y Culqi vs. Extracto BCP',
+    title: 'Conciliación de Yape, Plin y Culqi vs. Extracto Bancario',
     caption: 'Muestra propia en Soles (datos ficticios) cruzando lotes de boletas, comisiones y abonos bancarios.',
     service: 'Conciliación digital'
   },
@@ -828,14 +875,18 @@ const GALLERY_SAMPLES = [
     cat: 'Consolidación Mensual',
     badge: 'Carga masiva',
     showcaseTitle: 'Consolidado de libros',
-    desc: 'Unificación automática de múltiples Excels mensuales con formatos distintos en una sola salida depurada lista para subir.',
+    desc: 'Unificación de Excels mensuales dispares en una sola salida depurada lista para cargar.',
     flowIn: 'Excels mensuales dispares',
     flowProc: 'Limpieza, depuración y formato único',
     flowOut: 'Archivo validado para carga masiva',
-    bullets: [
-      'Elimina duplicados y homologa encabezados y fechas sin tipeo manual.',
-      'Control de totales de base imponible e IGV antes de importar.',
-      'Incluye guía corta para que tu equipo repita el proceso cada mes.'
+    rawTitle: 'Excels mensuales con formatos distintos (crudo)',
+    rawIssues: ['Columnas movidas', 'Filas duplicadas', 'IGV sin validar'],
+    rawHeaders: ['Mes', 'Doc / RUC', 'Fecha', 'Importe', 'Alerta'],
+    rawRows: [
+      ['Ene-26', '20541120911', '12/01/26', '84520.00', 'Encabezado fila 5', true],
+      ['2026-02', 'F001-00214', '14-feb', '1240.00', 'Fila duplicada', true],
+      ['Mar 26', '20601988210', '2026.03.19', '96400.00', 'Formato texto', true],
+      ['2026-04', 'B002-01822', '08/04/2026', '91250.00', 'IGV desfasado', true]
     ],
     src: 'muestras/muestra-consolidacion-libros.png',
     title: 'Control de Unificación y Carga Masiva de Libros',
@@ -847,8 +898,83 @@ const GALLERY_SAMPLES = [
 let excelSlideIndex = 0;
 let excelShowcaseTimer = null;
 let excelShowcasePaused = false;
+let kitchenViewMode = 'clean';
 let currentGalleryIndex = 0;
 let lastModalTrigger = null;
+
+function renderKitchenRawPanel(sample) {
+  const panel = document.getElementById('kitchen-raw-panel');
+  if (!panel || !sample) return;
+  panel.textContent = '';
+
+  const head = document.createElement('div');
+  head.className = 'raw-sheet-head';
+  const title = document.createElement('span');
+  title.className = 'raw-sheet-title';
+  title.textContent = sample.rawTitle;
+  const issuesWrap = document.createElement('div');
+  issuesWrap.className = 'raw-issues-row';
+  sample.rawIssues.forEach(issue => {
+    const pill = document.createElement('span');
+    pill.className = 'raw-issue-pill';
+    pill.textContent = issue;
+    issuesWrap.appendChild(pill);
+  });
+  head.appendChild(title);
+  head.appendChild(issuesWrap);
+  panel.appendChild(head);
+
+  const table = document.createElement('table');
+  table.className = 'raw-sheet-table';
+  const thead = document.createElement('thead');
+  const headRow = document.createElement('tr');
+  sample.rawHeaders.forEach(h => {
+    const th = document.createElement('th');
+    th.textContent = h;
+    headRow.appendChild(th);
+  });
+  thead.appendChild(headRow);
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  sample.rawRows.forEach(row => {
+    const tr = document.createElement('tr');
+    const isMessy = row[row.length - 1] === true;
+    row.slice(0, -1).forEach((val, idx) => {
+      const td = document.createElement('td');
+      td.textContent = val;
+      if (isMessy && idx === row.length - 2) {
+        td.className = 'is-messy';
+      }
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  panel.appendChild(table);
+}
+
+function setKitchenViewMode(mode) {
+  kitchenViewMode = mode === 'raw' ? 'raw' : 'clean';
+  const cleanBtn = document.getElementById('kitchen-clean-btn');
+  const rawPanel = document.getElementById('kitchen-raw-panel');
+  const modeBtns = document.querySelectorAll('.kitchen-mode-btn');
+
+  modeBtns.forEach(btn => {
+    const active = btn.getAttribute('data-kitchen-mode') === kitchenViewMode;
+    btn.classList.toggle('is-active', active);
+    btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+  });
+
+  if (cleanBtn) cleanBtn.hidden = kitchenViewMode === 'raw';
+  if (rawPanel) {
+    rawPanel.hidden = kitchenViewMode !== 'raw';
+    if (kitchenViewMode === 'raw') {
+      renderKitchenRawPanel(GALLERY_SAMPLES[excelSlideIndex] || GALLERY_SAMPLES[0]);
+    }
+  }
+  scheduleExcelShowcase();
+}
 
 function restartExcelProgress() {
   const fill = document.getElementById('excel-stage-progress-fill');
@@ -885,7 +1011,6 @@ function setExcelSlide(index) {
     const inEl = document.getElementById('excel-stage-in');
     const procEl = document.getElementById('excel-stage-proc');
     const outEl = document.getElementById('excel-stage-out');
-    const bulletsEl = document.getElementById('excel-stage-bullets');
 
     if (catEl && info.cat) catEl.textContent = info.cat;
     if (badgeEl && info.badge) badgeEl.textContent = info.badge;
@@ -894,13 +1019,8 @@ function setExcelSlide(index) {
     if (inEl && info.flowIn) inEl.textContent = info.flowIn;
     if (procEl && info.flowProc) procEl.textContent = info.flowProc;
     if (outEl && info.flowOut) outEl.textContent = info.flowOut;
-    if (bulletsEl && Array.isArray(info.bullets)) {
-      bulletsEl.textContent = '';
-      info.bullets.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = item;
-        bulletsEl.appendChild(li);
-      });
+    if (kitchenViewMode === 'raw') {
+      renderKitchenRawPanel(info);
     }
   }
 
@@ -913,7 +1033,7 @@ function scheduleExcelShowcase() {
     clearTimeout(excelShowcaseTimer);
     excelShowcaseTimer = null;
   }
-  if (REDUCED_MOTION_MQ.matches || excelShowcasePaused || document.hidden) return;
+  if (REDUCED_MOTION_MQ.matches || excelShowcasePaused || kitchenViewMode === 'raw' || document.hidden) return;
   const modal = document.getElementById('sample-lightbox');
   if (modal && !modal.hidden) return;
 
@@ -1130,6 +1250,7 @@ window.openFaqModal = openFaqModal;
 window.closeFaqModal = closeFaqModal;
 window.trackEvent = trackEvent;
 window.setExcelSlide = setExcelSlide;
+window.setKitchenViewMode = setKitchenViewMode;
 window.openCurrentExcelSample = openCurrentExcelSample;
 window.openSampleModal = openSampleModal;
 window.openCertificateModal = openCertificateModal;
