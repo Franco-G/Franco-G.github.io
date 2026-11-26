@@ -7,7 +7,6 @@
 let sections = [];
 let tickerHasRun = false;
 const HEADER_HEIGHT = 56;
-const BANNER_STORAGE_KEY = 'rotation_hint_dismissed';
 const REDUCED_MOTION_MQ = window.matchMedia('(prefers-reduced-motion: reduce)');
 const MOBILE_RAIL_MQ = window.matchMedia('(max-width: 900px)');
 
@@ -36,7 +35,6 @@ function initApp() {
   mobileProgressEl = document.getElementById('header-scroll-progress');
 
   initTouchGuard();
-  initRotationBanner();
   initContactForm();
   initExcelShowcase();
   syncHeaderHeightVar();
@@ -229,30 +227,18 @@ function goToSlide(targetIndex) {
   if (window.history && window.history.replaceState && targetEl.id) {
     window.history.replaceState(null, '', '#' + targetEl.id);
   }
-
-  if (targetEl.classList.contains('powerbi-slide') && !REDUCED_MOTION_MQ.matches) {
-    const infoCard = targetEl.querySelector('.powerbi-info-card');
-    if (infoCard) {
-      infoCard.classList.remove('is-arriving');
-      void infoCard.offsetWidth;
-      infoCard.classList.add('is-arriving');
-      const clearArrive = () => infoCard.classList.remove('is-arriving');
-      infoCard.addEventListener('animationend', clearArrive, { once: true });
-      setTimeout(clearArrive, 700);
-    }
-  }
 }
 
 /**
- * 3. Selección de Solución y Envío de Mensaje Directo
+ * 3. Selección de Solución y Envío de Mensaje Directo (Formspree)
  */
 const CONTACT_EMAIL = 'guerrerofranco1429@gmail.com';
-const FORM_ENDPOINT = 'https://formsubmit.co/ajax/guerrerofranco1429@gmail.com';
+const FORM_ENDPOINT = 'https://formspree.io/f/xgakqpok';
 const SERVICE_PLACEHOLDERS = {
-  'Asesoría financiera': 'Ej. Ordenar caja diaria, flujos de efectivo o balances mensuales sin digitar a mano.',
-  'Consultoría en Excel y Power BI': 'Ej. Automatizar reportes en Excel o armar un tablero gerencial con lo que ya descarga mi sistema.',
-  'Sociedad para estudio contable': 'Ej. Trabajar juntos acelerando cierres PCGE, flujos o cruces bancarios de nuestros clientes.',
-  'Consulta general': 'Ej. Cuéntame brevemente qué proceso quieres mejorar y coordinamos una revisión de 20 minutos.'
+  'Flujo de caja': 'Ej. Ordenar flujo de caja en Soles y Dólares desde nuestro Libro Mayor CSV.',
+  'Limpieza de libros': 'Ej. Unificar Excels mensuales de compras o ventas y preparar archivo para carga masiva.',
+  'Conciliación digital': 'Ej. Cruzar extractos bancarios con reportes de Yape, Plin o Culqi y comisiones.',
+  'Consulta general': 'Ej. Cuéntame brevemente qué archivo o reporte quieres ordenar y lo revisamos.'
 };
 
 function clearNameValidation() {
@@ -440,8 +426,8 @@ async function handleQuoteSubmit() {
 
   if (hasError) return;
 
-  const service = (serviceInput && serviceInput.value) ? serviceInput.value : 'Asesoría financiera';
-  const goal = (goalInput && goalInput.value.trim()) ? goalInput.value.trim() : 'Me gustaría conversar sobre cómo trabajar juntos y revisar el alcance.';
+  const service = (serviceInput && serviceInput.value) ? serviceInput.value : 'Flujo de caja';
+  const goal = (goalInput && goalInput.value.trim()) ? goalInput.value.trim() : 'Me gustaría consultar sobre cómo ordenar un archivo o reporte.';
 
   const originalBtnText = submitBtn ? submitBtn.textContent : '';
   if (submitBtn) {
@@ -457,27 +443,23 @@ async function handleQuoteSubmit() {
         'Accept': 'application/json'
       },
       body: JSON.stringify({
-        Nombre_o_Empresa: rawName,
-        Correo_de_Contacto: rawEmail,
-        Modalidad: service,
-        Mensaje: goal,
-        _replyto: rawEmail,
-        _subject: `Nueva consulta web: ${service} - ${rawName}`,
-        _captcha: 'false',
-        _template: 'table',
-        _url: window.location.href
+        nombre_o_empresa: rawName,
+        email: rawEmail,
+        modalidad: service,
+        mensaje: goal,
+        _subject: `Nueva consulta web: ${service} - ${rawName}`
       })
     });
 
     const result = await response.json().catch(() => ({}));
-    if (!response.ok || result.success === false || result.success === 'false') {
+    if (!response.ok || result.errors) {
       throw new Error('send-failed');
     }
 
     if (nameInput) nameInput.value = '';
     if (emailInput) emailInput.value = '';
     if (goalInput) goalInput.value = '';
-    showQuoteFeedback(`¡Listo! Tu consulta llegó directo a mi correo. Te responderé hoy a ${rawEmail}.`, false, false);
+    showQuoteFeedback(`¡Listo! Tu consulta llegó directo a mi correo. Te responderé en menos de 24 horas a ${rawEmail}.`, false, false);
   } catch (err) {
     showQuoteFeedback(`No se pudo enviar automáticamente ahora. Escríbeme por WhatsApp o copia mi correo (${CONTACT_EMAIL}):`, true, true);
   } finally {
@@ -721,37 +703,32 @@ function initAnchorIntercept() {
 }
 
 /**
- * 10. Control del Banner de Sugerencia de Rotación en Celular
+ * 10. Carga Bajo Clic del Tablero Power BI de Portada
  */
-function initRotationBanner() {
-  const banner = document.getElementById('rotation-hint-banner');
-  const dismissBtn = document.getElementById('btn-dismiss-banner');
-  if (!banner) return;
+function loadHeroPowerBi() {
+  const container = document.getElementById('hero-pbi-container');
+  if (!container || container.querySelector('iframe')) return;
 
-  if (typeof sessionStorage !== 'undefined') {
-    try {
-      if (sessionStorage.getItem(BANNER_STORAGE_KEY) === 'true') {
-        banner.classList.add('is-dismissed');
-        return;
-      }
-    } catch (err) {
-      banner.dataset.storageRestricted = 'true';
-    }
-  }
+  container.classList.remove('is-loaded');
+  container.innerHTML = '';
 
-  if (dismissBtn) {
-    dismissBtn.addEventListener('click', () => {
-      banner.classList.add('is-dismissed');
-      syncHeaderHeightVar();
-      if (typeof sessionStorage !== 'undefined') {
-        try {
-          sessionStorage.setItem(BANNER_STORAGE_KEY, 'true');
-        } catch (err) {
-          banner.dataset.storageRestricted = 'true';
-        }
-      }
-    });
-  }
+  const skel = document.createElement('div');
+  skel.className = 'pbi-skeleton';
+  skel.setAttribute('aria-hidden', 'true');
+
+  const iframe = document.createElement('iframe');
+  iframe.id = 'powerbi-iframe-divisas';
+  iframe.title = 'Monitor_Divisas_Globales';
+  iframe.src = HERO_PBI_URL;
+  iframe.setAttribute('frameborder', '0');
+  iframe.setAttribute('allowFullScreen', 'true');
+
+  const markLoaded = () => container.classList.add('is-loaded');
+  iframe.addEventListener('load', markLoaded, { once: true });
+  window.setTimeout(markLoaded, 4500);
+
+  container.appendChild(skel);
+  container.appendChild(iframe);
 }
 
 /**
@@ -760,6 +737,21 @@ function initRotationBanner() {
 const HERO_PBI_URL = 'https://app.powerbi.com/view?r=eyJrIjoiNDcwOTNiMjEtNTNmYy00NjhkLTk3ZjQtOGE0NjE1NzA1ZDk3IiwidCI6ImM0YTY2YzM0LTJiYjctNDUxZi04YmUxLWIyYzI2YTQzMDE1OCIsImMiOjR9';
 
 const GALLERY_SAMPLES = [
+  {
+    cat: 'Flujo Cuenta 10',
+    badge: 'Soles y Dólares',
+    showcaseTitle: 'Flujo dos monedas',
+    desc: 'Flujo de caja operativo en Soles y Dólares construido sobre movimientos reales de Cuenta 10, con descarga directa de ejemplo.',
+    bullets: [
+      'Compatible con archivos Excel o CSV que ya exporta tu empresa.',
+      'Resumen automático por periodo, cuenta bancaria y pasarela.',
+      'Sin candados ni macros ocultas: listo para probar en tu equipo.'
+    ],
+    src: 'muestras/muestra-flujo-cuenta10.png',
+    title: 'Flujo de Caja Cuenta 10 (Soles y Dólares)',
+    caption: 'Modelo propio creado desde cero con datos ficticios de ejemplo. Puedes descargarlo gratis y probarlo en tu Excel.',
+    service: 'Flujo de caja'
+  },
   {
     cat: 'Contabilidad PCGE',
     badge: 'En Soles (S/)',
@@ -772,14 +764,14 @@ const GALLERY_SAMPLES = [
     ],
     src: 'muestras/muestra-balances-pcge.png',
     title: 'Estado de Flujos de Efectivo (PCGE / SMV)',
-    caption: 'Modelo real estructurado en Excel con cuentas contables peruanas en Soles.',
-    service: 'Asesoría financiera'
+    caption: 'Modelo estructurado en Excel con cuentas contables peruanas en Soles.',
+    service: 'Limpieza de libros'
   },
   {
-    cat: 'Automatización con Macros',
+    cat: 'Automatización en Excel',
     badge: 'Botones en un clic',
     showcaseTitle: 'Macro de gastos',
-    desc: 'Panel automatizado con botones de macro para actualizar datos, alternar vistas y controlar presupuestos.',
+    desc: 'Panel automatizado con botones de actualización rápida, filtros dinámicos y gráficos comparativos.',
     bullets: [
       'Botones directos en Excel para actualizar, filtrar estimado o ver gasto real.',
       'Gráficos comparativos por categoría que se ajustan al instante.',
@@ -787,44 +779,23 @@ const GALLERY_SAMPLES = [
     ],
     src: 'muestras/muestra-macros-excel.png',
     title: 'Macro y Tablero de Gastos en Excel',
-    caption: 'Vista real en Excel con botones de macro (Actualiza, Estimado, Actual), filtros dinámicos y gráficos comparativos.',
-    service: 'Consultoría en Excel y Power BI'
-  },
-  {
-    cat: 'Control Gerencial',
-    badge: 'Indicadores clave',
-    showcaseTitle: 'Tablero gerencial',
-    desc: 'Resumen financiero mensual en Soles con estado de resultados, balance general y métricas de retorno.',
-    bullets: [
-      'Ganancias y pérdidas frente a períodos anteriores en una sola pantalla.',
-      'Ratios de liquidez, endeudamiento, TIR y WACC listos para gerencia.',
-      'Actualización inmediata al pegar el reporte exportado de tu sistema.'
-    ],
-    src: 'muestras/muestra-tablero-financiero.png',
-    title: 'Dashboard Económico Financiero en Excel',
-    caption: 'Tablero real en Soles con Ganancias y Pérdidas, Balance General, TIR y WACC.',
-    service: 'Consultoría en Excel y Power BI'
+    caption: 'Vista en Excel con botones de actualización, filtros dinámicos y gráficos comparativos.',
+    service: 'Limpieza de libros'
   },
   {
     cat: 'Tesorería y Bancos',
     badge: 'Control de saldos',
     showcaseTitle: 'Conciliación mensual',
-    desc: 'Cruce ágil entre extractos bancarios y contabilidad para identificar partidas pendientes en minutos.',
+    desc: 'Cruce ágil entre extractos bancarios, pasarelas y contabilidad para identificar partidas pendientes en minutos.',
     bullets: [
       'Control diario de depósitos, egresos y saldos bancarios por cuenta.',
       'Filtros dinámicos por estado de conciliación y tipo de movimiento.',
-      'Soporte claro para arqueos de caja, pagos y estudios contables.'
+      'Soporte claro para arqueos de caja, pagos y conciliación de pasarelas.'
     ],
     src: 'muestras/muestra-conciliacion-bancaria.png',
     title: 'Conciliación Bancaria y Validación en Excel',
     caption: 'Control de depósitos, saldos y estado de conciliación con filtros dinámicos.',
-    service: 'Sociedad para estudio contable'
-  },
-  {
-    src: 'muestras/muestra-pack-62.png',
-    title: 'Pack 62 Plantillas en Excel',
-    caption: 'Muestra real de 3 plantillas incluidas gratis al iniciar asesoría, consultoría o sociedad.',
-    service: 'Asesoría financiera'
+    service: 'Conciliación digital'
   }
 ];
 
@@ -1022,7 +993,7 @@ function openPowerBiModal() {
   if (ctaBtn) {
     ctaBtn.onclick = () => {
       closeSampleModal();
-      quoteSpecificService('Consultoría en Excel y Power BI');
+      quoteSpecificService('Consulta general');
     };
   }
 
@@ -1075,6 +1046,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 window.goToSlide = goToSlide;
+window.loadHeroPowerBi = loadHeroPowerBi;
 window.selectServiceTier = selectServiceTier;
 window.quoteSpecificService = quoteSpecificService;
 window.handleQuoteSubmit = handleQuoteSubmit;

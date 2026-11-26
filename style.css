@@ -270,11 +270,6 @@ body {
   pointer-events: none;
 }
 
-/* Banner de rotación oculto en escritorio */
-.rotation-tip-banner {
-  display: none;
-}
-
 /* Franja móvil de avance oculta en escritorio (> 900px) */
 .header-scroll-progress {
   display: none;
@@ -412,6 +407,81 @@ h3 {
 .hero-pbi-card .hero-pbi-frame iframe {
   height: clamp(205px, calc(100vh - 510px), 275px);
   border-radius: 7px;
+}
+
+.hero-pbi-preview {
+  position: relative;
+  width: 100%;
+  height: clamp(205px, calc(100vh - 510px), 275px);
+  border-radius: 7px;
+  border: 1px solid var(--hairline);
+  overflow: hidden;
+  background: linear-gradient(160deg, #ffffff 0%, #f4f8ff 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-pbi-mock {
+  padding: 14px 14px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hero-pbi-mock-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--mute);
+}
+
+.hero-pbi-mock-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.hero-pbi-mock-item {
+  background: #ffffff;
+  border: 1px solid var(--hairline-soft);
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.hero-pbi-mock-item strong {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 13px;
+  color: var(--primary-pressed);
+}
+
+.hero-pbi-mock-item span {
+  font-size: 11px;
+  color: var(--mute);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hero-pbi-preview-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 14px;
+  border-top: 1px solid var(--hairline-soft);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.hero-pbi-load-btn {
+  font-size: 12px;
+  padding: 8px 16px;
 }
 
 .hero-pbi-caption {
@@ -1356,37 +1426,8 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
   text-align: center;
 }
 
-/* R3-5: Medidor animado al 80% en Descargas en lote */
-.progress-meter-wrap {
-  margin: 0 0 9px 0;
-}
-
-.progress-meter-track {
-  width: 100%;
-  height: 4px;
-  border-radius: 9999px;
-  background: var(--surface-soft);
-  border: 1px solid var(--hairline-soft);
-  overflow: hidden;
-}
-
-.progress-meter-fill {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 9999px;
-  background: linear-gradient(90deg, var(--primary) 0%, var(--success) 100%);
-  transform-origin: left center;
-  transform: scaleX(0.8);
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-html.js .service-bento-card:not(.is-revealed) .progress-meter-fill {
-  transform: scaleX(0);
-}
-
 /* ========================================================
-   SECCIONES 4 Y 5: MUESTRAS POWER BI INDEPENDIENTES
+   SECCIÓN 4 Y 5: VITRINA EXCEL + 4 CASOS REALES
    ======================================================== */
 .powerbi-slide {
   margin: 0;
@@ -1394,16 +1435,6 @@ html.js .service-bento-card:not(.is-revealed) .progress-meter-fill {
 
 .powerbi-slide .slide-header-row {
   margin-bottom: 0.75rem;
-}
-
-.title-with-badge {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.title-with-badge h2 {
-  margin-bottom: 0;
 }
 
 .live-dot {
@@ -1481,22 +1512,30 @@ html.js .service-bento-card:not(.is-revealed) .progress-meter-fill {
   width: 100%;
 }
 
-.powerbi-info-card {
-  padding: 18px 20px;
+.cases-real-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+  width: 100%;
 }
 
-/* R3-9: Destello suave al alternar entre 01. Divisas y 02. Modelos IA */
-.powerbi-info-card.is-arriving {
-  animation: pbi-arrive-flash 0.65s ease;
+.case-real-card {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-@keyframes pbi-arrive-flash {
-  0% {
-    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.4), var(--card-shadow-hover);
-  }
-  100% {
-    box-shadow: var(--card-shadow);
-  }
+.case-real-card .project-context {
+  margin-bottom: 4px;
+}
+
+.case-real-card .project-bullets {
+  margin-bottom: 6px;
+}
+
+.case-real-card .tag-list-inline {
+  margin-top: auto;
 }
 
 .powerbi-card-inner {
@@ -1693,7 +1732,7 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   position: relative;
   display: block;
   width: 100%;
-  height: 156px;
+  height: 132px;
   padding: 0;
   border: 1px solid var(--hairline);
   border-radius: 8px;
@@ -1703,8 +1742,14 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.promo-card-cta {
+.promo-cta-stack {
   margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.promo-card-cta {
   width: 100%;
   justify-content: center;
 }
@@ -2321,8 +2366,7 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   .service-pill-btn.is-flashing,
   .sample-thumb-btn img,
   .hero-showcase-progress-fill.is-animating,
-  .sample-lightbox-dialog,
-  .powerbi-info-card.is-arriving {
+  .sample-lightbox-dialog {
     animation: none !important;
     transition: none !important;
   }
@@ -2339,7 +2383,6 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   .card,
   .compare-box,
   .compare-meter-fill,
-  .progress-meter-fill,
   .result-compare-card,
   .tab-btn,
   .pbi-skeleton,
@@ -2374,10 +2417,6 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
 
   html.js .compare-meter-fill {
     transform: scaleX(var(--meter-scale, 1)) !important;
-  }
-
-  html.js .progress-meter-fill {
-    transform: scaleX(0.8) !important;
   }
 
   .btn:active,
@@ -2456,6 +2495,7 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   .results-comparison-grid,
   .services-bento-grid,
   .powerbi-project-grid,
+  .cases-real-grid,
   .contact-dual-grid {
     display: flex;
     flex-direction: column;
@@ -2471,7 +2511,8 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
     height: 380px;
   }
 
-  .hero-pbi-card .hero-pbi-frame iframe {
+  .hero-pbi-card .hero-pbi-frame iframe,
+  .hero-pbi-preview {
     height: 260px;
   }
 
@@ -2524,7 +2565,8 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   .contact-actions-row { justify-content: center; gap: 12px; }
   .powerbi-frame-card { padding: 6px; }
   .powerbi-frame-card iframe { height: 290px; }
-  .hero-pbi-card .hero-pbi-frame iframe { height: 210px; }
+  .hero-pbi-card .hero-pbi-frame iframe,
+  .hero-pbi-preview { height: 210px; }
 }
 
 @media (max-width: 440px) {
@@ -2543,69 +2585,6 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
 
 @media (max-width: 900px) and (orientation: portrait) {
   .slide-section:first-of-type {
-    padding-top: calc(var(--header-height, 118px) + 1.5rem);
-  }
-
-  .rotation-tip-banner {
-    display: block;
-    background: var(--primary-light);
-    border-top: 1px solid rgba(66, 133, 244, 0.18);
-    padding: 6px 1rem;
-  }
-
-  .rotation-tip-banner.is-dismissed {
-    display: none;
-  }
-
-  .rotation-tip-inner {
-    max-width: 1140px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-  }
-
-  .rotation-tip-text {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11.5px;
-    color: var(--ink);
-    line-height: 1.3;
-  }
-
-  .rotation-tip-icon {
-    width: 14px;
-    height: 14px;
-    color: var(--primary);
-    flex-shrink: 0;
-  }
-
-  .rotation-tip-title {
-    font-weight: 600;
-    color: var(--primary-pressed);
-    white-space: nowrap;
-  }
-
-  .rotation-tip-desc {
-    color: var(--body);
-    font-size: 11px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .rotation-tip-close {
-    background: transparent;
-    border: none;
-    color: var(--mute);
-    cursor: pointer;
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    flex-shrink: 0;
+    padding-top: calc(var(--header-height, 86px) + 1.25rem);
   }
 }
