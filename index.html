@@ -28,7 +28,7 @@
   
   <script>document.documentElement.classList.add('js');</script>
   <script data-goatcounter="https://franco-g.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-  <link rel="stylesheet" href="style.css?v=26.0">
+  <link rel="stylesheet" href="style.css?v=27.0">
 </head>
 <body>
   <!-- Escenario de fondo fijo limpio -->
@@ -258,7 +258,7 @@
       <div class="container slide-container">
         <div class="slide-header-row">
           <div>
-            <h2>Cómo trabajamos</h2>
+            <h2>Cómo trabajo</h2>
             <p class="section-subtitle">Encargos puntuales para tu empresa.</p>
           </div>
         </div>
@@ -286,6 +286,7 @@
                 <span class="tag">Cuenta 10</span>
                 <span class="tag">PEN y USD</span>
               </div>
+              <button type="button" class="service-card-link" onclick="quoteSpecificService('Flujo de caja')">Calcular esto →</button>
             </div>
           </article>
 
@@ -311,6 +312,7 @@
                 <span class="tag">Power Query</span>
                 <span class="tag">Carga masiva</span>
               </div>
+              <button type="button" class="service-card-link" onclick="quoteSpecificService('Limpieza de libros')">Calcular esto →</button>
             </div>
           </article>
 
@@ -323,7 +325,7 @@
             <h3>Conciliación digital</h3>
             <p class="project-context">Cruzo tus extractos bancarios con boletas de Yape, Plin o Culqi para cuadrar abonos y comisiones.</p>
             <div class="service-flow-box" aria-label="Flujo de trabajo de Conciliación digital">
-              <div class="service-flow-step"><strong>1. Entrada:</strong> Reportes de Yape, Plin, Culqi y extracto BCP.</div>
+              <div class="service-flow-step"><strong>1. Entrada:</strong> Reportes de pasarelas y extractos bancarios (BCP, BBVA y otros).</div>
               <div class="service-flow-step"><strong>2. Proceso:</strong> Cruce de abonos netos y comisiones descontadas.</div>
               <div class="service-flow-step"><strong>3. Entrega:</strong> Cuadre limpio con alertas de abonos en tránsito.</div>
             </div>
@@ -336,17 +338,18 @@
                 <span class="tag">Yape / Plin / Culqi</span>
                 <span class="tag">Bancos</span>
               </div>
+              <button type="button" class="service-card-link" onclick="quoteSpecificService('Conciliación digital')">Calcular esto →</button>
             </div>
           </article>
         </div>
 
         <div class="scope-fit-bar" aria-label="Para quién sí es y para quién no es">
           <div class="scope-fit-item">
-            <span class="scope-fit-yes">Sí atendemos</span>
+            <span class="scope-fit-yes">Sí atiendo</span>
             <span>Empresas y estudios que exportan Excel, bancos peruanos o reportes de Yape, Plin y Culqi.</span>
           </div>
           <div class="scope-fit-item">
-            <span class="scope-fit-no">No atendemos</span>
+            <span class="scope-fit-no">No atiendo</span>
             <span>Instalaciones o soporte interno dentro de sistemas contables de terceros.</span>
           </div>
         </div>
@@ -545,16 +548,15 @@
               <span class="mini-badge">Certificado</span>
             </div>
             <h3>Formación y respaldo</h3>
-            <p class="project-context">Base sólida en administración, finanzas corporativas y analítica aplicada a negocios.</p>
+            <p class="project-context">Base sólida en administración, finanzas empresariales y analítica aplicada a negocios.</p>
             <ul class="project-bullets">
               <li>Administración de Empresas (2.º puesto en IDAT, convalidando en UTP).</li>
-              <li>Diplomado en Finanzas Corporativas en ZEGEL IPAE (128 horas).</li>
-              <li>Certificaciones Microsoft Partner en Excel Financiero y Power BI Aplicativo.</li>
+              <li>Diplomado en Finanzas Empresariales en ZEGEL (128 horas cronológicas).</li>
+              <li>Especialista en Excel (72h) y Power BI Aplicativo (Microsoft Partner).</li>
             </ul>
-            <div class="tag-list">
-              <span class="tag">ZEGEL IPAE 128h</span>
-              <span class="tag">Microsoft Partner</span>
-              <span class="tag">IDAT · UTP</span>
+            <div class="cert-proof-row" aria-label="Certificados oficiales verificables">
+              <button type="button" class="cert-proof-btn" onclick="openCertificateModal('muestras/certificado-zegel-finanzas.jpg', 'Diplomado en Finanzas Empresariales · ZEGEL', 'Emitido por ZEGEL Educación Ejecutiva (128 horas cronológicas · Código verificable CE-51858542-2025-ZEGEL).')">Ver diploma ZEGEL ↗</button>
+              <button type="button" class="cert-proof-btn" onclick="openCertificateModal('muestras/certificado-we-microsoft-excel.jpg', 'Especialista en Excel · WE & Microsoft Partner', 'Niveles Básico, Intermedio y Avanzado (72 horas académicas · ID WE 00380083).')">Ver cert. Microsoft ↗</button>
             </div>
           </article>
 
@@ -743,6 +745,10 @@
                   <span class="diag-result-hint" id="diag-scope-hint">Ref. desde S/ 250 · Entrega 3 a 5 días</span>
                 </div>
 
+                <div class="diag-action-row">
+                  <button type="button" class="diag-faq-link" onclick="openFaqModal()">¿Dudas antes de escribir? Ver 7 preguntas frecuentes</button>
+                </div>
+
                 <div class="quote-submit-row">
                   <button type="button" class="btn btn-primary shimmer-btn" onclick="goToDiagStep(2)">Continuar con mi resumen <span class="btn-arrow" aria-hidden="true">→</span></button>
                 </div>
@@ -905,6 +911,6 @@
   </div>
 
   <!-- Controlador de Navegación e Interactividad -->
-  <script src="app.js?v=25.0"></script>
+  <script src="app.js?v=26.0"></script>
 </body>
 </html>

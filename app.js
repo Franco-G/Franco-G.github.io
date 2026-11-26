@@ -357,7 +357,8 @@ function getDiagnosticState() {
   const hoursRaw = hoursEl ? parseInt(hoursEl.value, 10) : 15;
   const hoursLabel = (hoursEl && hoursEl.selectedOptions[0]) ? hoursEl.selectedOptions[0].textContent : '10 a 20 horas';
   const source = sourceEl ? sourceEl.value : 'Excel o archivo exportado';
-  const savedHours = Math.max(3, Math.round((Number.isFinite(hoursRaw) ? hoursRaw : 15) * 0.7));
+  const volumeFactor = volume.startsWith('1 a 5') ? 0.65 : (volume.startsWith('Más') ? 0.78 : 0.72);
+  const savedHours = Math.max(3, Math.round((Number.isFinite(hoursRaw) ? hoursRaw : 15) * volumeFactor));
 
   return {
     service,
@@ -979,11 +980,47 @@ function renderModalSample(sample) {
     counterEl.textContent = `${currentGalleryIndex + 1} / ${GALLERY_SAMPLES.length}`;
   }
   if (ctaBtn) {
+    ctaBtn.textContent = 'Consultar por esto →';
     ctaBtn.onclick = () => {
       closeSampleModal();
       quoteSpecificService(sample.service || 'Consulta general');
     };
   }
+}
+
+function openCertificateModal(imgSrc, title, caption) {
+  const modal = document.getElementById('sample-lightbox');
+  const navEl = document.getElementById('sample-lightbox-nav');
+  const kickerEl = document.getElementById('sample-lightbox-kicker');
+  const imgEl = document.getElementById('sample-lightbox-img');
+  const titleEl = document.getElementById('sample-lightbox-title');
+  const captionEl = document.getElementById('sample-lightbox-caption');
+  const ctaBtn = document.getElementById('sample-lightbox-cta');
+  const closeBtn = document.getElementById('sample-lightbox-close');
+  if (!modal || !imgEl || !titleEl || !captionEl) return;
+
+  lastModalTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  if (navEl) navEl.hidden = true;
+  if (kickerEl) kickerEl.textContent = 'Certificado oficial verificable';
+  imgEl.hidden = false;
+  imgEl.src = imgSrc;
+  imgEl.alt = title;
+  titleEl.textContent = title;
+  captionEl.textContent = caption;
+
+  if (ctaBtn) {
+    ctaBtn.textContent = 'Ir al diagnóstico →';
+    ctaBtn.onclick = () => {
+      closeSampleModal();
+      goToSlide(6);
+    };
+  }
+
+  modal.hidden = false;
+  document.documentElement.style.overflow = 'hidden';
+  scheduleExcelShowcase();
+  trackEvent('certificado-visto');
+  if (closeBtn) closeBtn.focus();
 }
 
 function openSampleModal(imgSrc, title, caption, serviceValue) {
@@ -1095,5 +1132,6 @@ window.trackEvent = trackEvent;
 window.setExcelSlide = setExcelSlide;
 window.openCurrentExcelSample = openCurrentExcelSample;
 window.openSampleModal = openSampleModal;
+window.openCertificateModal = openCertificateModal;
 window.stepSampleModal = stepSampleModal;
 window.closeSampleModal = closeSampleModal;
