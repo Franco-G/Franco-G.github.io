@@ -790,10 +790,13 @@ const GALLERY_SAMPLES = [
   {
     cat: 'Flujo Cuenta 10',
     badge: 'Soles y Dólares',
-    showcaseTitle: 'Flujo dos monedas',
-    desc: 'Flujo de caja operativo en Soles y Dólares construido sobre movimientos de Cuenta 10, con descarga directa de ejemplo.',
+    showcaseTitle: 'Flujo en caja',
+    desc: 'De un Libro Mayor plano a un flujo real en Soles y Dólares listo para decidir, armado desde cero con datos ficticios.',
+    flowIn: 'Libro Mayor exportado',
+    flowProc: 'Filtro Cuenta 10 + TC editable',
+    flowOut: 'Flujo real en PEN y USD',
     bullets: [
-      'Compatible con archivos que ya exporta tu empresa, sin cambiar sistema.',
+      'Funciona con lo que exporta tu empresa, sin cambiar de sistema.',
       'Resumen automático por periodo, cuenta bancaria y pasarela.',
       'Sin candados ni macros ocultas: listo para probar en tu equipo.'
     ],
@@ -803,49 +806,40 @@ const GALLERY_SAMPLES = [
     service: 'Flujo de caja'
   },
   {
-    cat: 'Contabilidad PCGE',
+    cat: 'Pasarelas y Bancos',
     badge: 'En Soles (S/)',
-    showcaseTitle: 'Flujos de efectivo',
-    desc: 'Estado de Flujos de Efectivo bajo taxonomía oficial SMV / SUNAT, listo sin digitación manual.',
+    showcaseTitle: 'Cruce de pasarelas',
+    desc: 'Consolidación de boletas de Yape, Plin y Culqi contra el extracto BCP, separando comisiones y abonos en tránsito.',
+    flowIn: 'Boletas pasarelas + extracto BCP',
+    flowProc: 'Cruce neto y cálculo de comisión',
+    flowOut: 'Cuadre diario con alertas claras',
     bullets: [
-      'Clasificación automática por actividad operativa, inversión y financiamiento.',
-      'Lectura directa desde tu registro de transacciones PCGE.',
-      'Entrega limpia para gerencia sin exponer tus fórmulas.'
+      'Detecta al instante abonos pendientes, diferencias y comisiones.',
+      'Ordena lotes de cientos de boletas en minutos sin digitar fila por fila.',
+      'Construido en Excel sobre los reportes que ya descargas.'
     ],
-    src: 'muestras/muestra-balances-pcge.png',
-    title: 'Estado de Flujos de Efectivo (PCGE / SMV)',
-    caption: 'Modelo estructurado en Excel con cuentas contables peruanas en Soles.',
-    service: 'Limpieza de libros'
-  },
-  {
-    cat: 'Automatización en Excel',
-    badge: 'Botones en un clic',
-    showcaseTitle: 'Macro de gastos',
-    desc: 'Panel automatizado con botones de actualización rápida, filtros dinámicos y gráficos comparativos.',
-    bullets: [
-      'Botones directos en Excel para actualizar, filtrar estimado o ver gasto real.',
-      'Gráficos comparativos por categoría que se ajustan al instante.',
-      'Reemplaza reportes manuales con un tablero listo para gerencia.'
-    ],
-    src: 'muestras/muestra-macros-excel.png',
-    title: 'Macro y Tablero de Gastos en Excel',
-    caption: 'Vista en Excel con botones de actualización, filtros dinámicos y gráficos comparativos.',
-    service: 'Limpieza de libros'
-  },
-  {
-    cat: 'Tesorería y Bancos',
-    badge: 'Control de saldos',
-    showcaseTitle: 'Conciliación mensual',
-    desc: 'Cruce ágil entre extractos bancarios, pasarelas y contabilidad para identificar partidas pendientes en minutos.',
-    bullets: [
-      'Control diario de depósitos, egresos y saldos bancarios por cuenta.',
-      'Filtros dinámicos por estado de conciliación y tipo de movimiento.',
-      'Soporte claro para arqueos de caja, pagos y conciliación de pasarelas.'
-    ],
-    src: 'muestras/muestra-conciliacion-bancaria.png',
-    title: 'Conciliación Bancaria y Validación en Excel',
-    caption: 'Control de depósitos, saldos y estado de conciliación con filtros dinámicos.',
+    src: 'muestras/muestra-conciliacion-pasarelas.png',
+    title: 'Conciliación de Yape, Plin y Culqi vs. Extracto BCP',
+    caption: 'Muestra propia en Soles (datos ficticios) cruzando lotes de boletas, comisiones y abonos bancarios.',
     service: 'Conciliación digital'
+  },
+  {
+    cat: 'Consolidación Mensual',
+    badge: 'Carga masiva',
+    showcaseTitle: 'Consolidado de libros',
+    desc: 'Unificación automática de múltiples Excels mensuales con formatos distintos en una sola salida depurada lista para subir.',
+    flowIn: 'Excels mensuales dispares',
+    flowProc: 'Limpieza, depuración y formato único',
+    flowOut: 'Archivo validado para carga masiva',
+    bullets: [
+      'Elimina duplicados y homologa encabezados y fechas sin tipeo manual.',
+      'Control de totales de base imponible e IGV antes de importar.',
+      'Incluye guía corta para que tu equipo repita el proceso cada mes.'
+    ],
+    src: 'muestras/muestra-consolidacion-libros.png',
+    title: 'Control de Unificación y Carga Masiva de Libros',
+    caption: 'Muestra propia en Soles (datos ficticios) estandarizando periodos mensuales listos para carga masiva.',
+    service: 'Limpieza de libros'
   }
 ];
 
@@ -887,12 +881,18 @@ function setExcelSlide(index) {
     const badgeEl = document.getElementById('excel-stage-badge');
     const titleEl = document.getElementById('excel-stage-title');
     const descEl = document.getElementById('excel-stage-desc');
+    const inEl = document.getElementById('excel-stage-in');
+    const procEl = document.getElementById('excel-stage-proc');
+    const outEl = document.getElementById('excel-stage-out');
     const bulletsEl = document.getElementById('excel-stage-bullets');
 
     if (catEl && info.cat) catEl.textContent = info.cat;
     if (badgeEl && info.badge) badgeEl.textContent = info.badge;
     if (titleEl && info.showcaseTitle) titleEl.textContent = info.showcaseTitle;
     if (descEl && info.desc) descEl.textContent = info.desc;
+    if (inEl && info.flowIn) inEl.textContent = info.flowIn;
+    if (procEl && info.flowProc) procEl.textContent = info.flowProc;
+    if (outEl && info.flowOut) outEl.textContent = info.flowOut;
     if (bulletsEl && Array.isArray(info.bullets)) {
       bulletsEl.textContent = '';
       info.bullets.forEach(item => {
