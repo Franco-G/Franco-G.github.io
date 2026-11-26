@@ -27,7 +27,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
   
   <script>document.documentElement.classList.add('js');</script>
-  <link rel="stylesheet" href="style.css?v=24.0">
+  <script data-goatcounter="https://franco-g.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  <link rel="stylesheet" href="style.css?v=25.0">
 </head>
 <body>
   <!-- Escenario de fondo fijo limpio -->
@@ -107,7 +108,7 @@
             </p>
             <div class="btn-group">
               <a href="#contacto" class="btn btn-primary shimmer-btn" onclick="goToSlide(6); return false;">Revisar mi archivo</a>
-              <a href="muestras/flujo-caja-cuenta10-bimoneda.xlsx" download="Flujo-Caja-Cuenta10-Bimoneda-FrancoGuerrero.xlsx" class="btn btn-secondary">Descargar plantilla gratis</a>
+              <a href="muestras/flujo-caja-cuenta10-bimoneda.xlsx" download="Flujo-Caja-Cuenta10-Bimoneda-FrancoGuerrero.xlsx" class="btn btn-secondary" onclick="trackEvent('descarga-plantilla-excel')">Descargar plantilla gratis</a>
             </div>
           </header>
 
@@ -267,7 +268,7 @@
           <article class="card service-bento-card">
             <div class="card-top">
               <span class="card-category">Solución 01</span>
-              <span class="mini-badge">Soles y Dólares</span>
+              <span class="mini-badge">Desde S/ 250 · 3 a 5 días</span>
             </div>
             <h3>Flujo de caja</h3>
             <button type="button" class="sample-thumb-btn" onclick="openSampleModal('muestras/muestra-tablero-financiero.png', 'Tablero Económico Financiero en Excel', 'Tablero gerencial en Soles con resultados mensuales, márgenes, balance e indicadores clave.', 'Flujo de caja')" aria-label="Ampliar muestra de Flujo de caja">
@@ -277,7 +278,7 @@
             <p class="project-context">Ordeno tu flujo de caja real en dos monedas usando las exportaciones de tu Libro Mayor o bancos.</p>
             <ul class="project-bullets">
               <li>Control de entradas y salidas por cuenta bancaria y concepto.</li>
-              <li>Funciona sobre lo que exporta tu empresa sin cambiar tu sistema.</li>
+              <li>Alcance cerrado sobre muestra con 1 ronda de ajustes incluida.</li>
             </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
@@ -291,7 +292,7 @@
           <article class="card service-bento-card">
             <div class="card-top">
               <span class="card-category">Solución 02</span>
-              <span class="mini-badge">Consolidación Excel</span>
+              <span class="mini-badge">Desde S/ 200 · 2 a 4 días</span>
             </div>
             <h3>Cargas y cruces</h3>
             <button type="button" class="sample-thumb-btn" onclick="openSampleModal('muestras/muestra-macros-excel.png', 'Automatización y Tablero de Gastos en Excel', 'Vista real con botones de actualización rápida, filtros dinámicos y gráficos comparativos.', 'Limpieza de libros')" aria-label="Ampliar muestra de Cargas y cruces">
@@ -301,7 +302,7 @@
             <p class="project-context">Limpio archivos mensuales desordenados y armo plantillas listas para generar cargas masivas sin tipeo.</p>
             <ul class="project-bullets">
               <li>Une múltiples archivos en segundos desde tus reportes habituales.</li>
-              <li>Entrega con guía práctica para que tu equipo lo opere solo.</li>
+              <li>Alcance cerrado con guía práctica y 1 ronda de ajustes incluida.</li>
             </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
@@ -315,7 +316,7 @@
           <article class="card service-bento-card">
             <div class="card-top">
               <span class="card-category">Solución 03</span>
-              <span class="mini-badge">Bancos y pasarelas</span>
+              <span class="mini-badge">Desde S/ 250 · 3 a 5 días</span>
             </div>
             <h3>Conciliación digital</h3>
             <button type="button" class="sample-thumb-btn" onclick="openSampleModal('muestras/muestra-conciliacion-bancaria.png', 'Conciliación Bancaria y Validación en Excel', 'Control de depósitos, saldos y estado de conciliación con filtros dinámicos.', 'Conciliación digital')" aria-label="Ampliar muestra de Conciliación digital">
@@ -325,7 +326,7 @@
             <p class="project-context">Cruzo tus extractos bancarios con boletas de Yape, Plin o Culqi para cuadrar abonos y comisiones.</p>
             <ul class="project-bullets">
               <li>Detecta diferencias, abonos pendientes y comisiones al instante.</li>
-              <li>Trabajo puntual por entregable con total reserva de tus datos.</li>
+              <li>Cotización cerrada según volumen con reserva total de tus datos.</li>
             </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
@@ -334,6 +335,17 @@
               </div>
             </div>
           </article>
+        </div>
+
+        <div class="scope-fit-bar" aria-label="Para quién sí es y para quién no es">
+          <div class="scope-fit-item">
+            <span class="scope-fit-yes">Sí atendemos</span>
+            <span>Empresas y estudios que exportan Excel, bancos peruanos o reportes de Yape, Plin y Culqi.</span>
+          </div>
+          <div class="scope-fit-item">
+            <span class="scope-fit-no">No atendemos</span>
+            <span>Instalaciones o soporte interno dentro de sistemas contables de terceros.</span>
+          </div>
         </div>
       </div>
     </section>
@@ -494,6 +506,7 @@
             <h2>Respaldo y método</h2>
             <p class="section-subtitle">Experiencia comprobada en operación diaria.</p>
           </div>
+          <button type="button" class="btn btn-secondary faq-trigger-btn" onclick="openFaqModal()">Preguntas frecuentes (7)</button>
         </div>
 
         <div class="services-bento-grid">
@@ -655,61 +668,115 @@
                 <li>Incluye guía en 3 pasos para probarlo con tus propios datos.</li>
               </ul>
               <div class="promo-cta-stack">
-                <a href="muestras/flujo-caja-cuenta10-bimoneda.xlsx" download="Flujo-Caja-Cuenta10-Bimoneda-FrancoGuerrero.xlsx" class="btn btn-primary shimmer-btn promo-card-cta">Descargar plantilla Excel <span class="btn-arrow" aria-hidden="true">↓</span></a>
-                <a href="https://wa.me/51921689711?text=Hola%20Franco%2C%20vi%20tu%20portafolio%20y%20quiero%20consultar%20por%20un%20archivo%20en%20Excel%20o%20Google%20Sheets." target="_blank" rel="noopener noreferrer" class="btn btn-secondary promo-card-cta">Consultar directo por WhatsApp</a>
+                <a href="muestras/flujo-caja-cuenta10-bimoneda.xlsx" download="Flujo-Caja-Cuenta10-Bimoneda-FrancoGuerrero.xlsx" class="btn btn-primary shimmer-btn promo-card-cta" onclick="trackEvent('descarga-plantilla-excel')">Descargar plantilla Excel <span class="btn-arrow" aria-hidden="true">↓</span></a>
+                <a href="https://wa.me/51921689711?text=Hola%20Franco%2C%20vi%20tu%20portafolio%20y%20quiero%20consultar%20por%20un%20archivo%20en%20Excel%20o%20Google%20Sheets." target="_blank" rel="noopener noreferrer" class="btn btn-secondary promo-card-cta" onclick="trackEvent('consulta-whatsapp-click')">Consultar directo por WhatsApp</a>
               </div>
             </aside>
 
-            <!-- Camino 2: Formulario conectado a Formspree + 4 Canales Oficiales -->
+            <!-- Camino 2: Autodiagnóstico Interactivo en 2 Pasos (Formspree + WhatsApp) + 4 Canales Oficiales -->
             <div class="contact-card border-beam-card">
             <div class="visual-header">
               <div class="visual-title-row">
                 <span class="live-dot" aria-hidden="true"></span>
-                <h3>Escríbeme por correo</h3>
+                <h3>Diagnóstico rápido</h3>
               </div>
-              <span class="mini-badge">Respuesta en menos de 24h</span>
+              <span class="mini-badge" id="diag-step-badge">Paso 1 de 2 · Calcula tu ahorro</span>
             </div>
 
             <form id="quick-quote-form" class="quick-quote-form" onsubmit="handleQuoteSubmit(); return false;" novalidate>
-              <div class="form-field">
-                <span class="field-label" id="service-pills-label">¿Qué proceso quieres ordenar?</span>
-                <input type="hidden" id="quote-service" name="service" value="Flujo de caja">
-                <div class="service-pills-group" role="radiogroup" aria-labelledby="service-pills-label">
-                  <button type="button" class="service-pill-btn active" role="radio" aria-checked="true" data-service="Flujo de caja" onclick="selectServiceTier('Flujo de caja', this)">Flujo de caja</button>
-                  <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Limpieza de libros" onclick="selectServiceTier('Limpieza de libros', this)">Libros Excel</button>
-                  <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Conciliación digital" onclick="selectServiceTier('Conciliación digital', this)">Conciliación</button>
-                  <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Consulta general" onclick="selectServiceTier('Consulta general', this)">Otro tema</button>
-                </div>
-              </div>
-
-              <div class="form-two-cols">
+              <!-- Paso 1: 4 preguntas rápidas + cálculo al instante -->
+              <div id="diag-step-1" class="diag-step">
                 <div class="form-field">
-                  <label for="quote-name">Nombre o empresa</label>
-                  <input type="text" id="quote-name" name="name" placeholder="Ej. Carla / Distribuidora Sur" required aria-describedby="quote-name-error">
-                  <span id="quote-name-error" class="field-error-msg" role="alert" hidden>Ingresa tu nombre o empresa.</span>
+                  <span class="field-label" id="service-pills-label">1. ¿Qué proceso quieres ordenar?</span>
+                  <input type="hidden" id="quote-service" name="service" value="Flujo de caja">
+                  <div class="service-pills-group" role="radiogroup" aria-labelledby="service-pills-label">
+                    <button type="button" class="service-pill-btn active" role="radio" aria-checked="true" data-service="Flujo de caja" onclick="selectServiceTier('Flujo de caja', this)">Flujo de caja</button>
+                    <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Limpieza de libros" onclick="selectServiceTier('Limpieza de libros', this)">Libros Excel</button>
+                    <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Conciliación digital" onclick="selectServiceTier('Conciliación digital', this)">Conciliación</button>
+                    <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Consulta general" onclick="selectServiceTier('Consulta general', this)">Otro tema</button>
+                  </div>
+                </div>
+
+                <div class="diag-grid-2">
+                  <div class="form-field">
+                    <label for="diag-volume">2. Archivos o empresas al mes</label>
+                    <select id="diag-volume" name="volume" onchange="updateDiagnosticEstimate()">
+                      <option value="1 a 5 archivos">1 a 5 archivos</option>
+                      <option value="6 a 20 archivos" selected>6 a 20 archivos</option>
+                      <option value="Más de 20 archivos">Más de 20 archivos</option>
+                    </select>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="diag-hours">3. Horas que pierdes hoy al mes</label>
+                    <select id="diag-hours" name="hours" onchange="updateDiagnosticEstimate()">
+                      <option value="6">4 a 8 horas</option>
+                      <option value="15" selected>10 a 20 horas</option>
+                      <option value="30">Más de 25 horas</option>
+                    </select>
+                  </div>
                 </div>
 
                 <div class="form-field">
-                  <label for="quote-email">Tu correo</label>
-                  <input type="email" id="quote-email" name="email" placeholder="Ej. carla@empresa.com" required aria-describedby="quote-email-error">
-                  <span id="quote-email-error" class="field-error-msg" role="alert" hidden>Ingresa un correo válido para responderte.</span>
+                  <label for="diag-source">4. ¿De dónde salen tus datos hoy?</label>
+                  <select id="diag-source" name="source" onchange="updateDiagnosticEstimate()">
+                    <option value="Excel o archivo exportado" selected>Excel o archivo exportado de mi sistema</option>
+                    <option value="Yape, Plin o Culqi">Reportes de Yape, Plin o Culqi</option>
+                    <option value="Extractos bancarios y libro mayor">Extractos bancarios y libro mayor</option>
+                    <option value="Google Sheets o varios reportes">Google Sheets o varios reportes sueltos</option>
+                  </select>
+                </div>
+
+                <div class="diag-result-box" aria-live="polite">
+                  <div class="diag-result-metric">
+                    <span>Ahorro estimado:</span>
+                    <strong id="diag-hours-saved">~11 horas/mes</strong>
+                  </div>
+                  <span class="diag-result-hint" id="diag-scope-hint">Ref. desde S/ 250 · Entrega 3 a 5 días</span>
+                </div>
+
+                <div class="quote-submit-row">
+                  <button type="button" class="btn btn-primary shimmer-btn" onclick="goToDiagStep(2)">Continuar con mi resumen <span class="btn-arrow" aria-hidden="true">→</span></button>
                 </div>
               </div>
 
-              <div class="form-field">
-                <label for="quote-goal">¿Qué archivo o reporte necesitas resolver?</label>
-                <textarea id="quote-goal" name="goal" rows="2" placeholder="Ej. Flujo de caja en Soles y Dólares, cruce de Yape/Plin/Culqi o consolidar Excels mensuales."></textarea>
-              </div>
+              <!-- Paso 2: Datos de contacto + Envío por Correo o WhatsApp -->
+              <div id="diag-step-2" class="diag-step" hidden>
+                <div class="diag-summary-bar">
+                  <span id="diag-summary-text">Flujo de caja · 6 a 20 archivos · ~11 h/mes ahorradas</span>
+                  <button type="button" class="diag-edit-btn" onclick="goToDiagStep(1)">Editar</button>
+                </div>
 
-              <p class="form-reassurance">Llega directo a mi correo. Te respondo al cierre del día o en menos de 24 horas.</p>
+                <div class="form-two-cols">
+                  <div class="form-field">
+                    <label for="quote-name">Nombre o empresa</label>
+                    <input type="text" id="quote-name" name="name" placeholder="Ej. Carla / Distribuidora Sur" required aria-describedby="quote-name-error">
+                    <span id="quote-name-error" class="field-error-msg" role="alert" hidden>Ingresa tu nombre o empresa.</span>
+                  </div>
 
-              <div class="quote-submit-row">
-                <button type="submit" id="quote-submit-btn" class="btn btn-primary shimmer-btn">Enviar consulta por correo</button>
-              </div>
+                  <div class="form-field">
+                    <label for="quote-email">Tu correo</label>
+                    <input type="email" id="quote-email" name="email" placeholder="Ej. carla@empresa.com" required aria-describedby="quote-email-error">
+                    <span id="quote-email-error" class="field-error-msg" role="alert" hidden>Ingresa un correo válido para responderte.</span>
+                  </div>
+                </div>
 
-              <div id="quote-feedback" class="quote-feedback" role="status" aria-live="polite" hidden>
-                <span id="quote-feedback-text"></span>
-                <button type="button" id="copy-email-btn" class="copy-email-btn" onclick="copyContactEmail()" hidden>Copiar correo</button>
+                <div class="form-field">
+                  <label for="quote-goal">Detalle adicional (opcional)</label>
+                  <textarea id="quote-goal" name="goal" rows="2" placeholder="Ej. Flujo de caja en Soles y Dólares, cruce de Yape/Plin/Culqi o consolidar Excels mensuales."></textarea>
+                </div>
+
+                <p class="form-reassurance">Llega directo a mi correo con tu diagnóstico. Te respondo en menos de 24 horas.</p>
+
+                <div class="quote-submit-row">
+                  <button type="submit" id="quote-submit-btn" class="btn btn-primary shimmer-btn">Enviar por correo</button>
+                  <button type="button" class="btn btn-secondary" onclick="openDiagnosticWhatsApp()">Enviar por WhatsApp</button>
+                </div>
+
+                <div id="quote-feedback" class="quote-feedback" role="status" aria-live="polite" hidden>
+                  <span id="quote-feedback-text"></span>
+                  <button type="button" id="copy-email-btn" class="copy-email-btn" onclick="copyContactEmail()" hidden>Copiar correo</button>
+                </div>
               </div>
             </form>
 
@@ -779,7 +846,57 @@
     </div>
   </div>
 
+  <!-- Modal Limpio de las 7 Preguntas Frecuentes (Objeciones Reales) -->
+  <div id="faq-modal" class="sample-lightbox" role="dialog" aria-modal="true" aria-labelledby="faq-modal-title" hidden>
+    <div class="sample-lightbox-backdrop" onclick="closeFaqModal()"></div>
+    <div class="sample-lightbox-dialog">
+      <div class="sample-lightbox-header">
+        <div>
+          <span class="card-category">Transparencia antes de empezar</span>
+          <div id="faq-modal-title" class="sample-lightbox-title">7 preguntas frecuentes</div>
+        </div>
+        <button type="button" id="faq-modal-close" class="sample-lightbox-close" onclick="closeFaqModal()" aria-label="Cerrar preguntas frecuentes">×</button>
+      </div>
+      <div class="faq-modal-body">
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>1. ¿Tengo que cambiar de sistema contable o instalar programas?</summary>
+            <p>No. Trabajo exclusivamente sobre los archivos que tu sistema, banco o pasarela ya exporta (Excel, reportes de Yape, Plin, Culqi o extractos bancarios). Todo corre en tu propio Excel o Google Sheets.</p>
+          </details>
+          <details class="faq-item">
+            <summary>2. ¿Cómo proteges la confidencialidad de mis archivos y clientes?</summary>
+            <p>Podemos iniciar revisando una muestra con nombres ocultos o datos ficticios. Toda la información que compartas se usa únicamente para armar tu archivo y bajo reserva absoluta.</p>
+          </details>
+          <details class="faq-item">
+            <summary>3. ¿Qué pasa si mi banco o pasarela cambia el formato del reporte?</summary>
+            <p>Te entrego una guía corta explicando cómo actualizar columnas o parámetros, y cada encargo incluye 1 ronda de ajustes sobre tu archivo muestra para dejarlo estable desde el primer uso.</p>
+          </details>
+          <details class="faq-item">
+            <summary>4. ¿Por qué ordenar esto una vez en lugar de hacerlo manual cada mes?</summary>
+            <p>El trabajo manual repetitivo consume horas valiosas cada cierre y genera errores de digitación o comisiones omitidas. Una plantilla bien estructurada reduce días de cruce a minutos.</p>
+          </details>
+          <details class="faq-item">
+            <summary>5. ¿En qué horario respondes y cuánto demora una entrega?</summary>
+            <p>Respondo consultas al cierre del día o en menos de 24 horas. Los encargos puntuales se entregan en promedio entre 2 y 5 días según la cantidad de archivos y reglas de cruce.</p>
+          </details>
+          <details class="faq-item">
+            <summary>6. ¿Puedo ver una prueba o muestra antes de aprobar el trabajo?</summary>
+            <p>Sí. Puedes descargar gratis mi plantilla propia de Flujo de Caja en Soles y Dólares aquí mismo, y antes de cotizar reviso una muestra de tu archivo para confirmarte alcance, plazo y precio cerrado.</p>
+          </details>
+          <details class="faq-item">
+            <summary>7. ¿Quedo dependiendo de ti si necesito usar el archivo después?</summary>
+            <p>Nunca. Entregas con fórmulas visibles, sin candados ni licencias mensuales ocultas, más una guía práctica para que tú o tu equipo operen solos cada mes.</p>
+          </details>
+        </div>
+      </div>
+      <div class="sample-lightbox-footer">
+        <p>¿Tienes otra duda puntual sobre tus archivos?</p>
+        <button type="button" class="btn btn-primary shimmer-btn" onclick="closeFaqModal(); goToSlide(6);">Ir al diagnóstico rápido <span class="btn-arrow" aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </div>
+
   <!-- Controlador de Navegación e Interactividad -->
-  <script src="app.js?v=23.0"></script>
+  <script src="app.js?v=24.0"></script>
 </body>
 </html>

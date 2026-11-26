@@ -309,6 +309,8 @@ function selectServiceTier(tierValue, triggerEl, shouldFocus = false) {
     goalInput.placeholder = SERVICE_PLACEHOLDERS[resolvedValue];
   }
 
+  updateDiagnosticEstimate();
+
   if (activePill && !triggerEl && !REDUCED_MOTION_MQ.matches) {
     activePill.classList.remove('is-flashing');
     void activePill.offsetWidth;
@@ -319,13 +321,104 @@ function selectServiceTier(tierValue, triggerEl, shouldFocus = false) {
   }
 
   if (shouldFocus) {
+    goToDiagStep(1);
+  }
+}
+
+const SERVICE_HINTS = {
+  'Flujo de caja': 'Ref. desde S/ 250 · Entrega 3 a 5 días',
+  'Limpieza de libros': 'Ref. desde S/ 200 · Entrega 2 a 4 días',
+  'Conciliación digital': 'Ref. desde S/ 250 · Entrega 3 a 5 días',
+  'Consulta general': 'Cotización cerrada tras revisar muestra'
+};
+
+function trackEvent(eventName) {
+  try {
+    if (window.goatcounter && typeof window.goatcounter.count === 'function') {
+      window.goatcounter.count({
+        path: `evento/${eventName}`,
+        title: eventName,
+        event: true
+      });
+    }
+  } catch (e) {
+    // Analítica opcional: nunca interrumpe la navegación
+  }
+}
+
+function getDiagnosticState() {
+  const serviceInput = document.getElementById('quote-service');
+  const volumeEl = document.getElementById('diag-volume');
+  const hoursEl = document.getElementById('diag-hours');
+  const sourceEl = document.getElementById('diag-source');
+
+  const service = (serviceInput && serviceInput.value) ? serviceInput.value : 'Flujo de caja';
+  const volume = volumeEl ? volumeEl.value : '6 a 20 archivos';
+  const hoursRaw = hoursEl ? parseInt(hoursEl.value, 10) : 15;
+  const hoursLabel = (hoursEl && hoursEl.selectedOptions[0]) ? hoursEl.selectedOptions[0].textContent : '10 a 20 horas';
+  const source = sourceEl ? sourceEl.value : 'Excel o archivo exportado';
+  const savedHours = Math.max(3, Math.round((Number.isFinite(hoursRaw) ? hoursRaw : 15) * 0.7));
+
+  return {
+    service,
+    volume,
+    hoursRaw,
+    hoursLabel,
+    source,
+    savedHours,
+    hint: SERVICE_HINTS[service] || SERVICE_HINTS['Consulta general']
+  };
+}
+
+function updateDiagnosticEstimate() {
+  const state = getDiagnosticState();
+  const savedEl = document.getElementById('diag-hours-saved');
+  const hintEl = document.getElementById('diag-scope-hint');
+  const summaryEl = document.getElementById('diag-summary-text');
+
+  if (savedEl) savedEl.textContent = `~${state.savedHours} horas/mes`;
+  if (hintEl) hintEl.textContent = state.hint;
+  if (summaryEl) {
+    summaryEl.textContent = `${state.service} · ${state.volume} · ~${state.savedHours} h/mes ahorradas`;
+  }
+}
+
+function goToDiagStep(step) {
+  const step1 = document.getElementById('diag-step-1');
+  const step2 = document.getElementById('diag-step-2');
+  const badge = document.getElementById('diag-step-badge');
+  if (!step1 || !step2) return;
+
+  updateDiagnosticEstimate();
+  const isStep2 = step === 2;
+  step1.hidden = isStep2;
+  step2.hidden = !isStep2;
+
+  if (badge) {
+    badge.textContent = isStep2
+      ? 'Paso 2 de 2 · Envía tu resumen'
+      : 'Paso 1 de 2 · Calcula tu ahorro';
+  }
+
+  if (isStep2) {
+    trackEvent('diagnostico-calculado');
     const nameInput = document.getElementById('quote-name');
     if (nameInput && !nameInput.value.trim()) {
       nameInput.focus();
-    } else if (goalInput) {
-      goalInput.focus();
     }
   }
+}
+
+function openDiagnosticWhatsApp() {
+  const state = getDiagnosticState();
+  const nameInput = document.getElementById('quote-name');
+  const goalInput = document.getElementById('quote-goal');
+  const name = nameInput && nameInput.value.trim() ? `Soy ${nameInput.value.trim()}. ` : '';
+  const extra = goalInput && goalInput.value.trim() ? ` Detalle: ${goalInput.value.trim()}` : '';
+
+  const text = `Hola Franco, ${name}hice el diagnóstico en tu web: necesito ordenar "${state.service}" (${state.volume}, hoy pierdo ${state.hoursLabel}/mes, origen: ${state.source}, ahorro estimado ~${state.savedHours} h/mes).${extra}`;
+  trackEvent('consulta-whatsapp-click');
+  window.open(`https://wa.me/51921689711?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
 }
 
 function quoteSpecificService(tierValue) {
@@ -425,13 +518,14 @@ async function handleQuoteSubmit() {
 
   if (hasError) return;
 
-  const service = (serviceInput && serviceInput.value) ? serviceInput.value : 'Flujo de caja';
-  const goal = (goalInput && goalInput.value.trim()) ? goalInput.value.trim() : 'Me gustaría consultar sobre cómo ordenar un archivo o reporte.';
+  const diag = getDiagnosticState();
+  const service = (serviceInput && serviceInput.value) ? serviceInput.value : diag.service;
+  const goal = (goalInput && goalInput.value.trim()) ? goalInput.value.trim() : 'Sin detalle adicional.';
 
   const originalBtnText = submitBtn ? submitBtn.textContent : '';
   if (submitBtn) {
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Enviando consulta...';
+    submitBtn.textContent = 'Enviando...';
   }
 
   try {
@@ -445,8 +539,12 @@ async function handleQuoteSubmit() {
         nombre_o_empresa: rawName,
         email: rawEmail,
         modalidad: service,
+        volumen_mensual: diag.volume,
+        horas_actuales: diag.hoursLabel,
+        origen_datos: diag.source,
+        ahorro_estimado: `~${diag.savedHours} horas/mes`,
         mensaje: goal,
-        _subject: `Nueva consulta web: ${service} - ${rawName}`
+        _subject: `Diagnóstico web: ${service} (~${diag.savedHours}h/mes) - ${rawName}`
       })
     });
 
@@ -458,13 +556,14 @@ async function handleQuoteSubmit() {
     if (nameInput) nameInput.value = '';
     if (emailInput) emailInput.value = '';
     if (goalInput) goalInput.value = '';
-    showQuoteFeedback(`¡Listo! Tu consulta llegó directo a mi correo. Te responderé en menos de 24 horas a ${rawEmail}.`, false, false);
+    trackEvent('consulta-formspree-enviada');
+    showQuoteFeedback(`¡Listo! Tu diagnóstico llegó directo a mi correo. Te responderé en menos de 24 horas a ${rawEmail}.`, false, false);
   } catch (err) {
     showQuoteFeedback(`No se pudo enviar automáticamente ahora. Escríbeme por WhatsApp o copia mi correo (${CONTACT_EMAIL}):`, true, true);
   } finally {
     if (submitBtn) {
       submitBtn.disabled = false;
-      submitBtn.textContent = originalBtnText || 'Enviar consulta por correo';
+      submitBtn.textContent = originalBtnText || 'Enviar por correo';
     }
   }
 }
@@ -936,7 +1035,39 @@ function closeSampleModal() {
   lastModalTrigger = null;
 }
 
+let lastFaqTrigger = null;
+
+function openFaqModal() {
+  const modal = document.getElementById('faq-modal');
+  const closeBtn = document.getElementById('faq-modal-close');
+  if (!modal) return;
+
+  lastFaqTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  modal.hidden = false;
+  document.documentElement.style.overflow = 'hidden';
+  trackEvent('preguntas-frecuentes-abiertas');
+  if (closeBtn) closeBtn.focus();
+}
+
+function closeFaqModal() {
+  const modal = document.getElementById('faq-modal');
+  if (!modal || modal.hidden) return;
+
+  modal.hidden = true;
+  document.documentElement.style.overflow = '';
+  if (lastFaqTrigger && typeof lastFaqTrigger.focus === 'function') {
+    lastFaqTrigger.focus();
+  }
+  lastFaqTrigger = null;
+}
+
 document.addEventListener('keydown', (e) => {
+  const faqModal = document.getElementById('faq-modal');
+  if (faqModal && !faqModal.hidden && e.key === 'Escape') {
+    closeFaqModal();
+    return;
+  }
+
   const modal = document.getElementById('sample-lightbox');
   if (!modal || modal.hidden) return;
   if (e.key === 'Escape') {
@@ -955,6 +1086,12 @@ window.selectServiceTier = selectServiceTier;
 window.quoteSpecificService = quoteSpecificService;
 window.handleQuoteSubmit = handleQuoteSubmit;
 window.copyContactEmail = copyContactEmail;
+window.updateDiagnosticEstimate = updateDiagnosticEstimate;
+window.goToDiagStep = goToDiagStep;
+window.openDiagnosticWhatsApp = openDiagnosticWhatsApp;
+window.openFaqModal = openFaqModal;
+window.closeFaqModal = closeFaqModal;
+window.trackEvent = trackEvent;
 window.setExcelSlide = setExcelSlide;
 window.openCurrentExcelSample = openCurrentExcelSample;
 window.openSampleModal = openSampleModal;
