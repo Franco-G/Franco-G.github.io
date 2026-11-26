@@ -692,9 +692,9 @@ const GALLERY_SAMPLES = [
     cat: 'Flujo Cuenta 10',
     badge: 'Soles y Dólares',
     showcaseTitle: 'Flujo dos monedas',
-    desc: 'Flujo de caja operativo en Soles y Dólares construido sobre movimientos reales de Cuenta 10, con descarga directa de ejemplo.',
+    desc: 'Flujo de caja operativo en Soles y Dólares construido sobre movimientos de Cuenta 10, con descarga directa de ejemplo.',
     bullets: [
-      'Compatible con archivos Excel o CSV que ya exporta tu empresa.',
+      'Compatible con archivos que ya exporta tu empresa, sin cambiar sistema.',
       'Resumen automático por periodo, cuenta bancaria y pasarela.',
       'Sin candados ni macros ocultas: listo para probar en tu equipo.'
     ],
