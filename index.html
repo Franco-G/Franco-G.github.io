@@ -28,7 +28,7 @@
   
   <script>document.documentElement.classList.add('js');</script>
   <script data-goatcounter="https://franco-g.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-  <link rel="stylesheet" href="style.css?v=28.0">
+  <link rel="stylesheet" href="style.css?v=29.0">
 </head>
 <body>
   <!-- Escenario de fondo fijo limpio -->
@@ -46,12 +46,10 @@
 
       <nav class="nav-menu-links" aria-label="Menú principal">
         <a href="#inicio" class="nav-menu-link active" data-slide-index="0" onclick="goToSlide(0); return false;">Inicio</a>
-        <a href="#experiencia" class="nav-menu-link" data-slide-index="1" onclick="goToSlide(1); return false;">Resultados</a>
-        <a href="#soluciones" class="nav-menu-link" data-slide-index="2">Servicios</a>
-        <a href="#dashboard-powerbi" class="nav-menu-link" data-slide-index="3" onclick="goToSlide(3); return false;">Muestras</a>
-        <a href="#casos-reales" class="nav-menu-link" data-slide-index="4" onclick="goToSlide(4); return false;">Casos</a>
-        <a href="#respaldo" class="nav-menu-link" data-slide-index="5" onclick="goToSlide(5); return false;">Respaldo</a>
-        <a href="#contacto" class="nav-menu-link" data-slide-index="6" onclick="goToSlide(6); return false;">Contacto</a>
+        <a href="#flujo-trabajo" class="nav-menu-link" data-slide-index="1" onclick="goToSlide(1); return false;">Flujo</a>
+        <a href="#soluciones" class="nav-menu-link" data-slide-index="2" onclick="goToSlide(2); return false;">Servicios</a>
+        <a href="#respaldo" class="nav-menu-link" data-slide-index="3" onclick="goToSlide(3); return false;">Respaldo</a>
+        <a href="#contacto" class="nav-menu-link" data-slide-index="4" onclick="goToSlide(4); return false;">Contacto</a>
       </nav>
 
       <div class="nav-actions">
@@ -107,7 +105,7 @@
               Automatizo tus Excels dispares, conciliaciones de Yape, Plin o Culqi y flujos de caja en dos monedas, sin cambiar tu sistema.
             </p>
             <div class="btn-group">
-              <a href="#contacto" class="btn btn-primary shimmer-btn" onclick="goToSlide(6); return false;">Calcular mi ahorro</a>
+              <a href="#contacto" class="btn btn-primary shimmer-btn" onclick="goToSlide(4); return false;">Calcular mi ahorro</a>
               <a href="muestras/flujo-caja-cuenta10-bimoneda.xlsx" download="Flujo-Caja-Cuenta10-Bimoneda-FrancoGuerrero.xlsx" class="btn btn-secondary" onclick="trackEvent('descarga-plantilla-excel')">Descargar plantilla gratis</a>
             </div>
           </header>
@@ -155,94 +153,135 @@
       </div>
     </section>
 
-    <!-- Sección 2: Resultados en Negocio (Comparativo Directo Antes vs. Después a la Vista) -->
-    <section id="experiencia" class="slide-section" aria-label="Resultados en negocio">
+    <!-- Sección 2: Diagrama de Flujo Animado + Evidencia Real Sincronizada (4 Procesos) -->
+    <section id="flujo-trabajo" class="slide-section" aria-label="Diagrama de flujo de trabajo real en 4 procesos">
       <div class="container slide-container">
         <div class="slide-header-row">
           <div>
-            <h2>Resultados en negocio</h2>
-            <p class="section-subtitle">Horas ahorradas con orden real.</p>
+            <span class="slide-badge">Flujo real · 4 procesos</span>
+            <h2>Cómo transformo datos</h2>
+            <p class="section-subtitle">Del archivo crudo al control.</p>
+          </div>
+          <div class="flow-tabs" role="tablist" aria-label="Elegir caso de flujo de trabajo">
+            <button type="button" class="flow-tab-btn is-active" role="tab" aria-selected="true" onclick="setWorkflowCase(0)">01 Flujo Cuenta 10</button>
+            <button type="button" class="flow-tab-btn" role="tab" aria-selected="false" onclick="setWorkflowCase(1)">02 Yape / Plin / Culqi</button>
+            <button type="button" class="flow-tab-btn" role="tab" aria-selected="false" onclick="setWorkflowCase(2)">03 24 Libros</button>
+            <button type="button" class="flow-tab-btn" role="tab" aria-selected="false" onclick="setWorkflowCase(3)">04 Reporte Nube</button>
           </div>
         </div>
 
-        <div class="results-comparison-grid">
-          <!-- Comparativo 1: Libros Comerciales -->
-          <article class="card result-compare-card">
-            <div class="card-top">
-              <span class="card-category">Consolidación</span>
-              <span class="mini-badge">Menos de 6 h</span>
+        <!-- Diagrama de Flujo Visual con Flechas Animadas -->
+        <div class="card flow-diagram-card" id="workflow-diagram" aria-live="polite">
+          <div class="flow-canvas">
+            <div class="flow-node" data-step="1">
+              <div class="flow-node-head">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span class="flow-node-tag">01 · Origen</span>
+              </div>
+              <strong class="flow-node-title" id="flow-n1-title">Libro Mayor exportado</strong>
+              <p class="flow-node-desc" id="flow-n1-desc">Asientos planos en Soles y Dólares sin agrupar por caja.</p>
             </div>
-            <h3>Libros comerciales</h3>
-            <div class="result-roi-big">24 periodos / 6h</div>
-            <p class="result-roi-sub">Normalización y carga masiva.</p>
+
+            <div class="flow-arrow" aria-hidden="true">
+              <svg viewBox="0 0 36 20"><path class="flow-track" d="M2 10 H28"/><path class="flow-pulse" d="M2 10 H28"/><path class="flow-head" d="M24 5 L31 10 L24 15"/></svg>
+            </div>
+
+            <div class="flow-node" data-step="2">
+              <div class="flow-node-head">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                <span class="flow-node-tag">02 · Proceso</span>
+              </div>
+              <strong class="flow-node-title" id="flow-n2-title">Filtro Cuenta 10</strong>
+              <p class="flow-node-desc" id="flow-n2-desc">Reglas automáticas de limpieza y clasificación por concepto.</p>
+            </div>
+
+            <div class="flow-arrow" aria-hidden="true">
+              <svg viewBox="0 0 36 20"><path class="flow-track" d="M2 10 H28"/><path class="flow-pulse" d="M2 10 H28"/><path class="flow-head" d="M24 5 L31 10 L24 15"/></svg>
+            </div>
+
+            <div class="flow-node" data-step="3">
+              <div class="flow-node-head">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                <span class="flow-node-tag">03 · Control</span>
+              </div>
+              <strong class="flow-node-title" id="flow-n3-title">Modelo y tipo de cambio</strong>
+              <p class="flow-node-desc" id="flow-n3-desc">Cruce dinámico en dos monedas con parámetro editable.</p>
+            </div>
+
+            <div class="flow-arrow is-final-arrow" aria-hidden="true">
+              <svg viewBox="0 0 36 20"><path class="flow-track" d="M2 10 H28"/><path class="flow-pulse" d="M2 10 H28"/><path class="flow-head" d="M24 5 L31 10 L24 15"/></svg>
+            </div>
+
+            <div class="flow-node is-outcome" data-step="4">
+              <div class="flow-node-head">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <span class="flow-node-tag">04 · Resultado</span>
+              </div>
+              <strong class="flow-node-title" id="flow-n4-title">Flujo PEN y USD al día</strong>
+              <p class="flow-node-desc" id="flow-n4-desc">Liquidez real lista para decidir en gerencia sin esperar cierre.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Base Sincronizada: Antes vs. Después + Muestra Propia (Limpio / Crudo) -->
+        <div class="flow-evidence-grid">
+          <article class="card flow-compare-card">
+            <div class="card-top">
+              <span class="card-category" id="flow-ev-cat">Liquidez Bimoneda</span>
+              <span class="mini-badge" id="flow-ev-badge">Soles y Dólares</span>
+            </div>
+            <div class="result-roi-big" id="flow-ev-kpi">2 monedas al día</div>
 
             <div class="compare-stack">
               <div class="compare-box before" tabindex="0" role="button" aria-pressed="false">
                 <span class="compare-tag">Antes</span>
-                <p><strong>24 Excels dispares</strong> copiados uno por uno.</p>
+                <p id="flow-ev-before"><strong>Libro Mayor plano</strong> difícil de resumir para caja.</p>
                 <div class="compare-meter" aria-hidden="true"><span class="compare-meter-fill" style="--meter-scale: 1;"></span></div>
               </div>
               <div class="compare-box after" tabindex="0" role="button" aria-pressed="false">
                 <span class="compare-tag">Después</span>
-                <p><strong>Carga lista en 6 h</strong> con Power Query.</p>
-                <div class="compare-meter" aria-hidden="true"><span class="compare-meter-fill" style="--meter-scale: 0.125;"></span></div>
+                <p id="flow-ev-after"><strong>Flujo dinámico PEN y USD</strong> listo en minutos.</p>
+                <div class="compare-meter" aria-hidden="true"><span class="compare-meter-fill" id="flow-ev-meter" style="--meter-scale: 0.08;"></span></div>
               </div>
             </div>
           </article>
 
-          <!-- Comparativo 2: Bancos y Pasarelas -->
-          <article class="card result-compare-card">
-            <div class="card-top">
-              <span class="card-category">Tesorería Digital</span>
-              <span class="mini-badge">97.3% conciliado</span>
+          <div class="excel-stage-card border-beam-card" id="excel-showcase">
+            <div class="kitchen-mode-bar" role="group" aria-label="Alternar entre resultado limpio y archivo crudo">
+              <button type="button" class="kitchen-mode-btn is-active" data-kitchen-mode="clean" aria-pressed="true" onclick="setKitchenViewMode('clean')">Resultado limpio</button>
+              <button type="button" class="kitchen-mode-btn" data-kitchen-mode="raw" aria-pressed="false" onclick="setKitchenViewMode('raw')">Archivo crudo</button>
             </div>
-            <h3>Bancos y pasarelas</h3>
-            <div class="result-roi-big">4 meses en 7 días</div>
-            <p class="result-roi-sub">Cruce de abonos y comisiones.</p>
-
-            <div class="compare-stack">
-              <div class="compare-box before" tabindex="0" role="button" aria-pressed="false">
-                <span class="compare-tag">Antes</span>
-                <p><strong>4 meses de atraso</strong> revisando boleta por boleta.</p>
-                <div class="compare-meter" aria-hidden="true"><span class="compare-meter-fill" style="--meter-scale: 1;"></span></div>
+            <button type="button" class="excel-stage-btn" id="kitchen-clean-btn" onclick="openCurrentExcelSample()" aria-label="Ampliar muestra propia actual">
+              <img src="muestras/muestra-flujo-cuenta10.png" alt="Muestra propia en Excel de Flujo de Caja Cuenta 10 en Soles y Dólares" class="hero-showcase-slide is-active" data-index="0">
+              <img src="muestras/muestra-conciliacion-pasarelas.png" alt="Muestra propia en Excel de Conciliación de Yape, Plin y Culqi en Soles" class="hero-showcase-slide" data-index="1" loading="lazy">
+              <img src="muestras/muestra-consolidacion-libros.png" alt="Muestra propia en Excel de Consolidación de Libros Mensuales" class="hero-showcase-slide" data-index="2" loading="lazy">
+              <div id="kitchen-cloud-preview" class="kitchen-cloud-preview" hidden>
+                <div class="cloud-sheet-bar">
+                  <span class="raw-sheet-title">Google Sheets Corporativo · +50 Empresas</span>
+                  <span class="mini-badge">Acceso privado por empresa</span>
+                </div>
+                <table class="cloud-sheet-table">
+                  <thead>
+                    <tr><th>ID</th><th>Empresa (Demo)</th><th>Periodo</th><th>Liquidez</th><th>Estado</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>E-014</td><td>Comercial Andina S.A.C.</td><td>00 a 12</td><td>S/ 148,002</td><td class="cloud-ok">Actualizado</td></tr>
+                    <tr><td>E-027</td><td>Clínica Salud Sur</td><td>00 a 12</td><td>S/ 92,450</td><td class="cloud-ok">Actualizado</td></tr>
+                    <tr><td>E-043</td><td>Importadora Norte EIRL</td><td>00 a 12</td><td>S/ 215,890</td><td class="cloud-ok">Actualizado</td></tr>
+                    <tr><td>E-052</td><td>Servicios Pacífico SRL</td><td>00 a 12</td><td>S/ 64,120</td><td class="cloud-ok">Actualizado</td></tr>
+                  </tbody>
+                </table>
               </div>
-              <div class="compare-box after" tabindex="0" role="button" aria-pressed="false">
-                <span class="compare-tag">Después</span>
-                <p><strong>250 a 500 boletas</strong> conciliadas por lote semanal.</p>
-                <div class="compare-meter" aria-hidden="true"><span class="compare-meter-fill" style="--meter-scale: 0.08;"></span></div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Comparativo 3: Flujo de Fondos -->
-          <article class="card result-compare-card">
-            <div class="card-top">
-              <span class="card-category">Liquidez</span>
-              <span class="mini-badge">Soles y Dólares</span>
-            </div>
-            <h3>Flujo de fondos</h3>
-            <div class="result-roi-big">2 monedas al día</div>
-            <p class="result-roi-sub">Control real de Cuenta 10.</p>
-
-            <div class="compare-stack">
-              <div class="compare-box before" tabindex="0" role="button" aria-pressed="false">
-                <span class="compare-tag">Antes</span>
-                <p><strong>Libro Mayor plano</strong> imposible de leer rápido.</p>
-                <div class="compare-meter" aria-hidden="true"><span class="compare-meter-fill" style="--meter-scale: 1;"></span></div>
-              </div>
-              <div class="compare-box after" tabindex="0" role="button" aria-pressed="false">
-                <span class="compare-tag">Después</span>
-                <p><strong>Flujo real en PEN y USD</strong> listo al cierre.</p>
-                <div class="compare-meter" aria-hidden="true"><span class="compare-meter-fill" style="--meter-scale: 0.06;"></span></div>
-              </div>
-            </div>
-          </article>
+              <span class="sample-thumb-pill" id="kitchen-zoom-pill">Ampliar</span>
+            </button>
+            <div id="kitchen-raw-panel" class="kitchen-raw-panel" hidden></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Sección 3: Encargos Puntuales Orientados a Primera Venta (Sin sistemas excluidos) -->
-    <section id="soluciones" class="slide-section" aria-label="Servicios puntuales en Excel y BI">
+    <!-- Sección 3: Encargos Puntuales Orientados a Primera Venta -->
+    <section id="soluciones" class="slide-section" aria-label="Servicios puntuales en Excel y Google Sheets">
       <div class="container slide-container">
         <div class="slide-header-row">
           <div>
@@ -259,12 +298,11 @@
               <span class="mini-badge">Desde S/ 250 · 3 a 5 días</span>
             </div>
             <h3>Flujo de caja</h3>
-            <p class="project-context">Caja real en Soles y Dólares con 1 ronda de ajustes.</p>
-            <div class="service-flow-box" aria-label="Flujo de trabajo de Flujo de caja">
-              <div class="service-flow-step"><strong>1. Entrada:</strong> Libro Mayor o movimientos bancarios.</div>
-              <div class="service-flow-step"><strong>2. Proceso:</strong> Filtro Cuenta 10 y tipo de cambio.</div>
-              <div class="service-flow-step"><strong>3. Entrega:</strong> Flujo PEN y USD listo para decidir.</div>
-            </div>
+            <p class="project-context">Ordeno tu flujo de caja real en Soles y Dólares desde tus reportes exportados.</p>
+            <ul class="project-bullets">
+              <li>Control de entradas y salidas por cuenta y concepto.</li>
+              <li>Tipo de cambio editable y 1 ronda de ajustes incluida.</li>
+            </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
                 <span class="tag">Cuenta 10</span>
@@ -281,12 +319,11 @@
               <span class="mini-badge">Desde S/ 200 · 2 a 4 días</span>
             </div>
             <h3>Cargas y cruces</h3>
-            <p class="project-context">Unificación de Excels mensuales con guía incluida.</p>
-            <div class="service-flow-box" aria-label="Flujo de trabajo de Cargas y cruces">
-              <div class="service-flow-step"><strong>1. Entrada:</strong> Excels mensuales con formatos dispares.</div>
-              <div class="service-flow-step"><strong>2. Proceso:</strong> Limpieza y homologación automática.</div>
-              <div class="service-flow-step"><strong>3. Entrega:</strong> Archivo depurado para carga masiva.</div>
-            </div>
+            <p class="project-context">Unifico Excels mensuales desordenados en una sola plantilla lista para cargar.</p>
+            <ul class="project-bullets">
+              <li>Depura duplicados y homologa fechas sin tipeo manual.</li>
+              <li>Entrega con guía práctica para repetir cada cierre.</li>
+            </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
                 <span class="tag">Power Query</span>
@@ -303,12 +340,11 @@
               <span class="mini-badge">Desde S/ 250 · 3 a 5 días</span>
             </div>
             <h3>Conciliación digital</h3>
-            <p class="project-context">Cruce de pasarelas y bancos con reserva total.</p>
-            <div class="service-flow-box" aria-label="Flujo de trabajo de Conciliación digital">
-              <div class="service-flow-step"><strong>1. Entrada:</strong> Yape, Plin, Culqi y extractos (BCP, BBVA, etc.).</div>
-              <div class="service-flow-step"><strong>2. Proceso:</strong> Cruce de abonos netos y comisiones.</div>
-              <div class="service-flow-step"><strong>3. Entrega:</strong> Cuadre limpio con alertas pendientes.</div>
-            </div>
+            <p class="project-context">Cruzo extractos bancarios (BCP, BBVA y otros) con tus boletas de Yape, Plin o Culqi.</p>
+            <ul class="project-bullets">
+              <li>Separa abonos netos, comisiones y pendientes al instante.</li>
+              <li>Cotización cerrada según volumen con reserva total.</li>
+            </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
                 <span class="tag">Yape / Plin / Culqi</span>
@@ -332,148 +368,12 @@
       </div>
     </section>
 
-    <!-- Sección 4: La Cocina — Flujo Real de Trabajo con 3 Muestras 100% Propias -->
-    <section id="dashboard-powerbi" class="slide-section" aria-label="Flujo de trabajo real con muestras propias en Excel">
+    <!-- Sección 4: Respaldo Real y Certificados Verificables -->
+    <section id="respaldo" class="slide-section" aria-label="Respaldo profesional y certificados">
       <div class="container slide-container">
         <div class="slide-header-row">
           <div>
-            <span class="slide-badge">Flujo real · 100% propio</span>
-            <h2>Así transformo datos</h2>
-            <p class="section-subtitle">De archivo crudo a control.</p>
-          </div>
-          <div class="pbi-quick-jump" aria-label="Cambiar entre flujo real y casos aplicados">
-            <button type="button" class="tab-btn active" onclick="goToSlide(3)">01. Flujo real</button>
-            <button type="button" class="tab-btn" onclick="goToSlide(4)">02. Casos reales</button>
-          </div>
-        </div>
-
-        <div class="powerbi-project-grid">
-          <article class="card excel-info-card">
-            <div class="powerbi-card-inner">
-              <div class="card-top">
-                <span class="card-category" id="excel-stage-cat">Flujo Cuenta 10</span>
-                <span class="mini-badge" id="excel-stage-badge">Soles y Dólares</span>
-              </div>
-              <h3 id="excel-stage-title">Flujo en caja</h3>
-              <p class="project-context" id="excel-stage-desc">De un Libro Mayor plano a flujo real PEN y USD sin cambiar tu sistema.</p>
-
-              <div class="kitchen-flow-strip" aria-label="Transformación de entrada a resultado">
-                <div class="kitchen-flow-row"><span>Entrada:</span><strong id="excel-stage-in">Libro Mayor exportado</strong></div>
-                <div class="kitchen-flow-row"><span>Proceso:</span><strong id="excel-stage-proc">Filtro Cuenta 10 + TC editable</strong></div>
-                <div class="kitchen-flow-row"><span>Salida:</span><strong id="excel-stage-out">Flujo real en PEN y USD</strong></div>
-              </div>
-
-              <div class="excel-stage-tabs" role="tablist" aria-label="Elegir flujo real en Excel">
-                <button type="button" class="hero-tab-btn is-active" role="tab" aria-selected="true" onclick="setExcelSlide(0)">01 Flujo</button>
-                <button type="button" class="hero-tab-btn" role="tab" aria-selected="false" onclick="setExcelSlide(1)">02 Pasarelas</button>
-                <button type="button" class="hero-tab-btn" role="tab" aria-selected="false" onclick="setExcelSlide(2)">03 Libros</button>
-              </div>
-            </div>
-          </article>
-
-          <div class="excel-stage-card border-beam-card" id="excel-showcase">
-            <div class="kitchen-mode-bar" role="group" aria-label="Alternar entre archivo crudo y resultado limpio">
-              <button type="button" class="kitchen-mode-btn is-active" data-kitchen-mode="clean" aria-pressed="true" onclick="setKitchenViewMode('clean')">Resultado limpio</button>
-              <button type="button" class="kitchen-mode-btn" data-kitchen-mode="raw" aria-pressed="false" onclick="setKitchenViewMode('raw')">Archivo crudo</button>
-            </div>
-            <button type="button" class="excel-stage-btn" id="kitchen-clean-btn" onclick="openCurrentExcelSample()" aria-label="Ampliar muestra propia actual en Excel">
-              <img src="muestras/muestra-flujo-cuenta10.png" alt="Muestra propia en Excel de Flujo de Caja Cuenta 10 en Soles y Dólares" class="hero-showcase-slide is-active" data-index="0">
-              <img src="muestras/muestra-conciliacion-pasarelas.png" alt="Muestra propia en Excel de Conciliación de Yape, Plin y Culqi vs Extracto BCP en Soles" class="hero-showcase-slide" data-index="1" loading="lazy">
-              <img src="muestras/muestra-consolidacion-libros.png" alt="Muestra propia en Excel de Consolidación de Libros Mensuales para Carga Masiva" class="hero-showcase-slide" data-index="2" loading="lazy">
-              <span class="sample-thumb-pill">Ampliar</span>
-              <span class="hero-showcase-progress" aria-hidden="true"><span class="hero-showcase-progress-fill" id="excel-stage-progress-fill"></span></span>
-            </button>
-            <div id="kitchen-raw-panel" class="kitchen-raw-panel" hidden></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Sección 5: Tus 4 Casos Reales Aplicados (Reemplaza Modelos de IA) -->
-    <section id="casos-reales" class="slide-section" aria-label="Casos reales aplicados en operación">
-      <div class="container slide-container">
-        <div class="slide-header-row">
-          <div>
-            <span class="slide-badge">Evidencia comprobada</span>
-            <h2>Casos reales aplicados</h2>
-            <p class="section-subtitle">Problemas operativos resueltos con datos.</p>
-          </div>
-          <div class="pbi-quick-jump" aria-label="Cambiar entre flujo real y casos aplicados">
-            <button type="button" class="tab-btn" onclick="goToSlide(3)">01. Flujo real</button>
-            <button type="button" class="tab-btn active" onclick="goToSlide(4)">02. Casos reales</button>
-          </div>
-        </div>
-
-        <div class="cases-real-grid">
-          <!-- Caso 1: Flujo de Fondos 2 Monedas -->
-          <article class="card case-real-card">
-            <div class="card-top">
-              <span class="card-category">Caso 01 · Tesorería</span>
-              <span class="mini-badge">PEN y USD</span>
-            </div>
-            <h3>Flujo dos monedas</h3>
-            <div class="case-kpi-big">2 monedas al día</div>
-            <p class="project-context"><strong>Reto:</strong> Libro Mayor plano sin lectura gerencial. <strong>Logro:</strong> Proyección real de Cuenta 10 en Soles y Dólares.</p>
-            <div class="tag-list-inline">
-              <span class="tag">Cuenta 10</span>
-              <span class="tag">Power Pivot</span>
-            </div>
-          </article>
-
-          <!-- Caso 2: 24 Libros Comerciales -->
-          <article class="card case-real-card">
-            <div class="card-top">
-              <span class="card-category">Caso 02 · Consolidación</span>
-              <span class="mini-badge">Menos de 6 horas</span>
-            </div>
-            <h3>24 libros ordenados</h3>
-            <div class="case-kpi-big">24 libros / 6 h</div>
-            <p class="project-context"><strong>Reto:</strong> 24 Excels mensuales con formatos dispares. <strong>Logro:</strong> Carga masiva histórica lista sin tipeo manual.</p>
-            <div class="tag-list-inline">
-              <span class="tag">Power Query</span>
-              <span class="tag">Carga masiva</span>
-            </div>
-          </article>
-
-          <!-- Caso 3: Conciliación Yape/Plin/Culqi -->
-          <article class="card case-real-card">
-            <div class="card-top">
-              <span class="card-category">Caso 03 · Pasarelas</span>
-              <span class="mini-badge">En 1 semana</span>
-            </div>
-            <h3>Pasarelas al día</h3>
-            <div class="case-kpi-big">97.3% conciliado</div>
-            <p class="project-context"><strong>Reto:</strong> 4 meses atrasados en Yape, Plin y Culqi. <strong>Logro:</strong> Lotes de 250 a 500 boletas al día con comisiones cuadradas.</p>
-            <div class="tag-list-inline">
-              <span class="tag">Yape / Plin / Culqi</span>
-              <span class="tag">Comisiones</span>
-            </div>
-          </article>
-
-          <!-- Caso 4: Reporte Multientidad en la Nube -->
-          <article class="card case-real-card">
-            <div class="card-top">
-              <span class="card-category">Caso 04 · Multiempresa</span>
-              <span class="mini-badge">Entorno nube</span>
-            </div>
-            <h3>Reporte en nube</h3>
-            <div class="case-kpi-big">+50 empresas</div>
-            <p class="project-context"><strong>Reto:</strong> Saldos en Excel lentos para navegar. <strong>Logro:</strong> Migración a Google Sheets con acceso privado por empresa.</p>
-            <div class="tag-list-inline">
-              <span class="tag">Google Sheets</span>
-              <span class="tag">Acceso privado</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Sección 6: Respaldo Real, Credenciales y Método en 4 Pasos -->
-    <section id="respaldo" class="slide-section" aria-label="Respaldo profesional y método de trabajo">
-      <div class="container slide-container">
-        <div class="slide-header-row">
-          <div>
-            <h2>Respaldo y método</h2>
+            <h2>Respaldo real</h2>
             <p class="section-subtitle">Experiencia comprobada en operación diaria.</p>
           </div>
           <button type="button" class="btn btn-secondary faq-trigger-btn" onclick="openFaqModal()">Preguntas frecuentes (7)</button>
@@ -539,40 +439,10 @@
             </div>
           </article>
         </div>
-
-        <!-- Flujo de Trabajo en 4 Pasos -->
-        <div class="card workflow-strip-card" aria-label="Flujo de trabajo en 4 pasos">
-          <div class="workflow-strip-head">
-            <h3>Método sin fricción</h3>
-            <span class="mini-badge">Flujo en 4 pasos</span>
-          </div>
-          <div class="workflow-steps-grid">
-            <div class="workflow-step">
-              <span class="workflow-step-num">01</span>
-              <strong class="workflow-step-title">Archivo exportado</strong>
-              <p>Me envías una muestra en Excel sin tocar tu sistema.</p>
-            </div>
-            <div class="workflow-step">
-              <span class="workflow-step-num">02</span>
-              <strong class="workflow-step-title">Limpieza y orden</strong>
-              <p>Armo reglas de cruce y formatos automáticos.</p>
-            </div>
-            <div class="workflow-step">
-              <span class="workflow-step-num">03</span>
-              <strong class="workflow-step-title">Alertas claras</strong>
-              <p>Resalta diferencias y comisiones al instante.</p>
-            </div>
-            <div class="workflow-step">
-              <span class="workflow-step-num">04</span>
-              <strong class="workflow-step-title">Entrega y guía</strong>
-              <p>Recibes tu archivo listo con pasos simples de uso.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- Sección 7: Franja de Rubros Atendidos + Formulario Único de Contacto -->
+    <!-- Sección 5: Franja de Rubros Atendidos + Formulario Único de Contacto -->
     <section id="contacto" class="slide-section contact-slide" aria-label="Rubros atendidos y contacto">
       <div class="container slide-container">
         <div class="contact-shell">
@@ -859,12 +729,12 @@
       </div>
       <div class="sample-lightbox-footer">
         <p>¿Tienes otra duda puntual sobre tus archivos?</p>
-        <button type="button" class="btn btn-primary shimmer-btn" onclick="closeFaqModal(); goToSlide(6);">Ir al diagnóstico rápido <span class="btn-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="btn btn-primary shimmer-btn" onclick="closeFaqModal(); goToSlide(4);">Ir al diagnóstico rápido <span class="btn-arrow" aria-hidden="true">→</span></button>
       </div>
     </div>
   </div>
 
   <!-- Controlador de Navegación e Interactividad -->
-  <script src="app.js?v=27.0"></script>
+  <script src="app.js?v=28.0"></script>
 </body>
 </html>

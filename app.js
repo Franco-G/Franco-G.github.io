@@ -749,7 +749,7 @@ function initHeroEntrance() {
 
 function initRevealObserver() {
   const revealTargets = Array.from(document.querySelectorAll(
-    '.result-compare-card, .service-bento-card, .case-real-card, .workflow-strip-card, .promo-bonus-card, .contact-card'
+    '.flow-diagram-card, .flow-compare-card, .service-bento-card, .promo-bonus-card, .contact-card'
   ));
   if (revealTargets.length === 0) return;
 
@@ -828,13 +828,20 @@ function initAnchorIntercept() {
 
 const GALLERY_SAMPLES = [
   {
-    cat: 'Flujo Cuenta 10',
+    n1Title: 'Libro Mayor exportado',
+    n1Desc: 'Movimientos planos sin agrupar por caja ni moneda.',
+    n2Title: 'Filtro Cuenta 10',
+    n2Desc: 'Reglas automáticas de limpieza y clasificación por concepto.',
+    n3Title: 'Modelo y tipo de cambio',
+    n3Desc: 'Cruce dinámico en dos monedas con parámetro editable.',
+    n4Title: 'Flujo PEN y USD al día',
+    n4Desc: 'Liquidez real lista para decidir en gerencia al cierre.',
+    cat: 'Liquidez Bimoneda',
     badge: 'Soles y Dólares',
-    showcaseTitle: 'Flujo en caja',
-    desc: 'De un Libro Mayor plano a flujo real PEN y USD sin cambiar tu sistema.',
-    flowIn: 'Libro Mayor exportado',
-    flowProc: 'Filtro Cuenta 10 + TC editable',
-    flowOut: 'Flujo real en PEN y USD',
+    kpi: '2 monedas al día',
+    beforeHtml: '<strong>Libro Mayor plano</strong> difícil de resumir para caja.',
+    afterHtml: '<strong>Flujo dinámico PEN y USD</strong> listo en minutos.',
+    afterScale: '0.08',
     rawTitle: 'Exportación típica de Libro Mayor (crudo)',
     rawIssues: ['Fechas mixtas', 'Cuentas mezcladas', 'Sin tipo de cambio'],
     rawHeaders: ['Cuenta', 'Fecha', 'Glosa sistema', 'Mon', 'Importe'],
@@ -847,16 +854,24 @@ const GALLERY_SAMPLES = [
     src: 'muestras/muestra-flujo-cuenta10.png',
     title: 'Flujo de Caja Cuenta 10 (Soles y Dólares)',
     caption: 'Modelo propio creado desde cero con datos ficticios de ejemplo. Puedes descargarlo gratis y probarlo en tu Excel.',
-    service: 'Flujo de caja'
+    service: 'Flujo de caja',
+    isCloud: false
   },
   {
-    cat: 'Pasarelas y Bancos',
+    n1Title: 'Boletas + Extracto',
+    n1Desc: 'Reportes sueltos de Yape, Plin, Culqi y bancos.',
+    n2Title: 'Cruce por lotes',
+    n2Desc: 'Empareja cientos de boletas contra abonos bancarios.',
+    n3Title: 'Comisiones y pendientes',
+    n3Desc: 'Separa descuentos de pasarela y abonos en tránsito.',
+    n4Title: '97.3% al día en 7 días',
+    n4Desc: 'Cuatro meses de atraso regularizados en una semana.',
+    cat: 'Tesorería Digital',
     badge: 'En Soles (S/)',
-    showcaseTitle: 'Cruce de pasarelas',
-    desc: 'Boletas de Yape, Plin y Culqi cruzadas contra extractos bancarios separando comisiones.',
-    flowIn: 'Boletas pasarelas + extracto',
-    flowProc: 'Cruce neto y cálculo de comisión',
-    flowOut: 'Cuadre diario con alertas claras',
+    kpi: '4 meses en 7 días',
+    beforeHtml: '<strong>4 meses rezagados</strong> revisando boleta por boleta.',
+    afterHtml: '<strong>250 a 500 boletas</strong> conciliadas por lote semanal.',
+    afterScale: '0.09',
     rawTitle: 'Reportes sueltos de pasarela vs. banco (crudo)',
     rawIssues: ['Comisión oculta', 'Sin cruzar abono', 'Lotes sin estado'],
     rawHeaders: ['Fecha', 'Canal', 'Boleta', 'Bruto S/', 'Observación'],
@@ -869,16 +884,24 @@ const GALLERY_SAMPLES = [
     src: 'muestras/muestra-conciliacion-pasarelas.png',
     title: 'Conciliación de Yape, Plin y Culqi vs. Extracto Bancario',
     caption: 'Muestra propia en Soles (datos ficticios) cruzando lotes de boletas, comisiones y abonos bancarios.',
-    service: 'Conciliación digital'
+    service: 'Conciliación digital',
+    isCloud: false
   },
   {
+    n1Title: '24 Excels dispares',
+    n1Desc: 'Archivos mensuales de compras y ventas con distinto orden.',
+    n2Title: 'Limpieza automática',
+    n2Desc: 'Unifica encabezados, fechas y columnas en Power Query.',
+    n3Title: 'Validación de IGV',
+    n3Desc: 'Depura duplicados y cuadra totales por cada periodo.',
+    n4Title: 'Carga lista en < 6 h',
+    n4Desc: 'Archivo depurado listo para subir masivamente al sistema.',
     cat: 'Consolidación Mensual',
-    badge: 'Carga masiva',
-    showcaseTitle: 'Consolidado de libros',
-    desc: 'Unificación de Excels mensuales dispares en una sola salida depurada lista para cargar.',
-    flowIn: 'Excels mensuales dispares',
-    flowProc: 'Limpieza, depuración y formato único',
-    flowOut: 'Archivo validado para carga masiva',
+    badge: 'Menos de 6 horas',
+    kpi: '24 libros / 6 h',
+    beforeHtml: '<strong>24 Excels dispares</strong> copiados columna por columna.',
+    afterHtml: '<strong>Carga lista en 6 h</strong> sin digitación manual.',
+    afterScale: '0.12',
     rawTitle: 'Excels mensuales con formatos distintos (crudo)',
     rawIssues: ['Columnas movidas', 'Filas duplicadas', 'IGV sin validar'],
     rawHeaders: ['Mes', 'Doc / RUC', 'Fecha', 'Importe', 'Alerta'],
@@ -891,13 +914,42 @@ const GALLERY_SAMPLES = [
     src: 'muestras/muestra-consolidacion-libros.png',
     title: 'Control de Unificación y Carga Masiva de Libros',
     caption: 'Muestra propia en Soles (datos ficticios) estandarizando periodos mensuales listos para carga masiva.',
-    service: 'Limpieza de libros'
+    service: 'Limpieza de libros',
+    isCloud: false
+  },
+  {
+    n1Title: 'Saldos 00 a 12',
+    n1Desc: 'Balance base en Excel difícil de navegar por empresa.',
+    n2Title: 'Conexión por ID',
+    n2Desc: 'Separa los datos automáticamente para cada empresa.',
+    n3Title: 'Menú y entorno nube',
+    n3Desc: 'Accesos rápidos y permisos seguros en Google Sheets.',
+    n4Title: '+50 empresas al día',
+    n4Desc: 'Cada cliente consulta su estado financiero privado en línea.',
+    cat: 'Multiempresa en Nube',
+    badge: 'Google Sheets',
+    kpi: '+50 empresas',
+    beforeHtml: '<strong>Hojas lentas en Excel</strong> mezclando vistas por empresa.',
+    afterHtml: '<strong>Reporte privado en nube</strong> actualizado por empresa.',
+    afterScale: '0.07',
+    rawTitle: 'Tabla plana de saldos por periodo (crudo)',
+    rawIssues: ['Sin filtro de empresa', 'Navegación lenta', 'Riesgo de mezcla'],
+    rawHeaders: ['ID Emp', 'Cuenta', 'Per 00-12', 'Saldo S/', 'Control'],
+    rawRows: [
+      ['E-014', '10410', '00..12', '148002.00', 'Sin menú directo', true],
+      ['E-027', '12120', '00..12', '92450.00', 'Todo en 1 archivo', true],
+      ['E-043', '42120', '00..12', '-34120.00', 'Falta permiso ID', true],
+      ['E-052', '10410', '00..12', '64120.00', 'Sin filtro nube', true]
+    ],
+    src: 'muestras/muestra-flujo-cuenta10.png',
+    title: 'Reporte Financiero Multiempresa en Google Sheets',
+    caption: 'Arquitectura corporativa con acceso privado por ID de empresa para más de 50 entidades.',
+    service: 'Consulta general',
+    isCloud: true
   }
 ];
 
 let excelSlideIndex = 0;
-let excelShowcaseTimer = null;
-let excelShowcasePaused = false;
 let kitchenViewMode = 'clean';
 let currentGalleryIndex = 0;
 let lastModalTrigger = null;
@@ -973,107 +1025,85 @@ function setKitchenViewMode(mode) {
       renderKitchenRawPanel(GALLERY_SAMPLES[excelSlideIndex] || GALLERY_SAMPLES[0]);
     }
   }
-  scheduleExcelShowcase();
 }
 
-function restartExcelProgress() {
-  const fill = document.getElementById('excel-stage-progress-fill');
-  if (!fill) return;
-  fill.classList.remove('is-animating');
-  if (REDUCED_MOTION_MQ.matches) return;
-  void fill.offsetWidth;
-  fill.classList.add('is-animating');
-}
-
-function setExcelSlide(index) {
+function setWorkflowCase(index) {
   const showcase = document.getElementById('excel-showcase');
   if (!showcase) return;
   const slides = showcase.querySelectorAll('.hero-showcase-slide');
-  const tabs = document.querySelectorAll('.excel-stage-tabs .hero-tab-btn');
-  if (slides.length === 0) return;
+  const tabs = document.querySelectorAll('.flow-tabs .flow-tab-btn');
+  const cloudPreview = document.getElementById('kitchen-cloud-preview');
+  const zoomPill = document.getElementById('kitchen-zoom-pill');
 
-  excelSlideIndex = ((index % slides.length) + slides.length) % slides.length;
-  slides.forEach((slide, i) => {
-    slide.classList.toggle('is-active', i === excelSlideIndex);
-  });
+  excelSlideIndex = ((index % GALLERY_SAMPLES.length) + GALLERY_SAMPLES.length) % GALLERY_SAMPLES.length;
+  const info = GALLERY_SAMPLES[excelSlideIndex];
+
   tabs.forEach((tab, i) => {
     const active = i === excelSlideIndex;
     tab.classList.toggle('is-active', active);
     tab.setAttribute('aria-selected', active ? 'true' : 'false');
   });
 
-  const info = GALLERY_SAMPLES[excelSlideIndex];
-  if (info) {
-    const catEl = document.getElementById('excel-stage-cat');
-    const badgeEl = document.getElementById('excel-stage-badge');
-    const titleEl = document.getElementById('excel-stage-title');
-    const descEl = document.getElementById('excel-stage-desc');
-    const inEl = document.getElementById('excel-stage-in');
-    const procEl = document.getElementById('excel-stage-proc');
-    const outEl = document.getElementById('excel-stage-out');
+  slides.forEach((slide, i) => {
+    const isMatch = !info.isCloud && i === excelSlideIndex;
+    slide.hidden = info.isCloud;
+    slide.classList.toggle('is-active', isMatch);
+  });
 
-    if (catEl && info.cat) catEl.textContent = info.cat;
-    if (badgeEl && info.badge) badgeEl.textContent = info.badge;
-    if (titleEl && info.showcaseTitle) titleEl.textContent = info.showcaseTitle;
-    if (descEl && info.desc) descEl.textContent = info.desc;
-    if (inEl && info.flowIn) inEl.textContent = info.flowIn;
-    if (procEl && info.flowProc) procEl.textContent = info.flowProc;
-    if (outEl && info.flowOut) outEl.textContent = info.flowOut;
-    if (kitchenViewMode === 'raw') {
-      renderKitchenRawPanel(info);
-    }
+  if (cloudPreview) cloudPreview.hidden = !info.isCloud;
+  if (zoomPill) zoomPill.textContent = info.isCloud ? 'Cotizar similar' : 'Ampliar';
+
+  const nodeIds = [
+    ['flow-n1-title', info.n1Title], ['flow-n1-desc', info.n1Desc],
+    ['flow-n2-title', info.n2Title], ['flow-n2-desc', info.n2Desc],
+    ['flow-n3-title', info.n3Title], ['flow-n3-desc', info.n3Desc],
+    ['flow-n4-title', info.n4Title], ['flow-n4-desc', info.n4Desc]
+  ];
+  nodeIds.forEach(([id, txt]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = txt;
+  });
+
+  if (!REDUCED_MOTION_MQ.matches) {
+    document.querySelectorAll('#workflow-diagram .flow-node').forEach((node, i) => {
+      node.classList.remove('is-step-entering');
+      node.style.animationDelay = `${i * 55}ms`;
+      void node.offsetWidth;
+      node.classList.add('is-step-entering');
+    });
   }
 
-  restartExcelProgress();
-  scheduleExcelShowcase();
-}
+  const evCat = document.getElementById('flow-ev-cat');
+  const evBadge = document.getElementById('flow-ev-badge');
+  const evKpi = document.getElementById('flow-ev-kpi');
+  const evBefore = document.getElementById('flow-ev-before');
+  const evAfter = document.getElementById('flow-ev-after');
+  const evMeter = document.getElementById('flow-ev-meter');
 
-function scheduleExcelShowcase() {
-  if (excelShowcaseTimer) {
-    clearTimeout(excelShowcaseTimer);
-    excelShowcaseTimer = null;
+  if (evCat) evCat.textContent = info.cat;
+  if (evBadge) evBadge.textContent = info.badge;
+  if (evKpi) evKpi.textContent = info.kpi;
+  if (evBefore) evBefore.innerHTML = info.beforeHtml;
+  if (evAfter) evAfter.innerHTML = info.afterHtml;
+  if (evMeter) evMeter.style.setProperty('--meter-scale', info.afterScale);
+
+  if (kitchenViewMode === 'raw') {
+    renderKitchenRawPanel(info);
   }
-  if (REDUCED_MOTION_MQ.matches || excelShowcasePaused || kitchenViewMode === 'raw' || document.hidden) return;
-  const modal = document.getElementById('sample-lightbox');
-  if (modal && !modal.hidden) return;
-
-  excelShowcaseTimer = setTimeout(() => {
-    setExcelSlide(excelSlideIndex + 1);
-  }, 4000);
 }
 
 function initExcelShowcase() {
   const showcase = document.getElementById('excel-showcase');
   if (!showcase) return;
-
-  const parentSection = showcase.closest('.slide-section') || showcase;
-  parentSection.addEventListener('mouseenter', () => {
-    excelShowcasePaused = true;
-    scheduleExcelShowcase();
-  });
-  parentSection.addEventListener('mouseleave', () => {
-    excelShowcasePaused = false;
-    scheduleExcelShowcase();
-  });
-  parentSection.addEventListener('focusin', () => {
-    excelShowcasePaused = true;
-    scheduleExcelShowcase();
-  });
-  parentSection.addEventListener('focusout', (e) => {
-    if (!parentSection.contains(e.relatedTarget)) {
-      excelShowcasePaused = false;
-      scheduleExcelShowcase();
-    }
-  });
-  document.addEventListener('visibilitychange', () => {
-    scheduleExcelShowcase();
-  });
-
-  setExcelSlide(0);
+  setWorkflowCase(0);
 }
 
 function openCurrentExcelSample() {
   const sample = GALLERY_SAMPLES[excelSlideIndex] || GALLERY_SAMPLES[0];
+  if (sample.isCloud) {
+    quoteSpecificService(sample.service || 'Consulta general');
+    return;
+  }
   openSampleModal(sample.src, sample.title, sample.caption, sample.service);
 }
 
@@ -1096,8 +1126,10 @@ function renderModalSample(sample) {
   titleEl.textContent = sample.title || 'Muestra real en Excel';
   captionEl.textContent = sample.caption || '';
 
+  const imageSamples = GALLERY_SAMPLES.filter(s => !s.isCloud);
   if (counterEl) {
-    counterEl.textContent = `${currentGalleryIndex + 1} / ${GALLERY_SAMPLES.length}`;
+    const imgIdx = Math.max(0, imageSamples.findIndex(s => s.src === sample.src));
+    counterEl.textContent = `${imgIdx + 1} / ${imageSamples.length}`;
   }
   if (ctaBtn) {
     ctaBtn.textContent = 'Consultar por esto →';
@@ -1132,13 +1164,13 @@ function openCertificateModal(imgSrc, title, caption) {
     ctaBtn.textContent = 'Ir al diagnóstico →';
     ctaBtn.onclick = () => {
       closeSampleModal();
-      goToSlide(6);
+      const contactIdx = sections.findIndex(sec => sec.id === 'contacto');
+      goToSlide(contactIdx !== -1 ? contactIdx : 4);
     };
   }
 
   modal.hidden = false;
   document.documentElement.style.overflow = 'hidden';
-  scheduleExcelShowcase();
   trackEvent('certificado-visto');
   if (closeBtn) closeBtn.focus();
 }
@@ -1149,11 +1181,12 @@ function openSampleModal(imgSrc, title, caption, serviceValue) {
   if (!modal) return;
 
   lastModalTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-  const foundIdx = GALLERY_SAMPLES.findIndex(s => s.src === imgSrc);
+  const imageSamples = GALLERY_SAMPLES.filter(s => !s.isCloud);
+  const foundIdx = imageSamples.findIndex(s => s.src === imgSrc);
   currentGalleryIndex = foundIdx !== -1 ? foundIdx : 0;
 
   const activeSample = foundIdx !== -1
-    ? GALLERY_SAMPLES[foundIdx]
+    ? imageSamples[foundIdx]
     : { src: imgSrc, title, caption, service: serviceValue };
 
   renderModalSample({
@@ -1165,7 +1198,6 @@ function openSampleModal(imgSrc, title, caption, serviceValue) {
 
   modal.hidden = false;
   document.documentElement.style.overflow = 'hidden';
-  scheduleExcelShowcase();
   if (closeBtn) closeBtn.focus();
 }
 
@@ -1173,8 +1205,9 @@ function stepSampleModal(delta) {
   const modal = document.getElementById('sample-lightbox');
   const navEl = document.getElementById('sample-lightbox-nav');
   if (!modal || modal.hidden || (navEl && navEl.hidden)) return;
-  currentGalleryIndex = (currentGalleryIndex + delta + GALLERY_SAMPLES.length) % GALLERY_SAMPLES.length;
-  renderModalSample(GALLERY_SAMPLES[currentGalleryIndex]);
+  const imageSamples = GALLERY_SAMPLES.filter(s => !s.isCloud);
+  currentGalleryIndex = (currentGalleryIndex + delta + imageSamples.length) % imageSamples.length;
+  renderModalSample(imageSamples[currentGalleryIndex]);
 }
 
 function closeSampleModal() {
@@ -1185,7 +1218,6 @@ function closeSampleModal() {
   modal.hidden = true;
   document.documentElement.style.overflow = '';
   if (imgEl) imgEl.removeAttribute('src');
-  scheduleExcelShowcase();
   if (lastModalTrigger && typeof lastModalTrigger.focus === 'function') {
     lastModalTrigger.focus();
   }
@@ -1249,7 +1281,7 @@ window.openDiagnosticWhatsApp = openDiagnosticWhatsApp;
 window.openFaqModal = openFaqModal;
 window.closeFaqModal = closeFaqModal;
 window.trackEvent = trackEvent;
-window.setExcelSlide = setExcelSlide;
+window.setWorkflowCase = setWorkflowCase;
 window.setKitchenViewMode = setKitchenViewMode;
 window.openCurrentExcelSample = openCurrentExcelSample;
 window.openSampleModal = openSampleModal;

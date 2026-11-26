@@ -462,18 +462,159 @@ h3 {
   transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 
-/* Vitrina Grande Interactiva de Excel (Sección 4) */
-.excel-info-card {
-  padding: 18px 20px;
+/* Diagrama de Flujo Animado y Vitrina Real (Sección 2: #flujo-trabajo) */
+.flow-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
-.excel-stage-tabs {
+.flow-tab-btn {
+  appearance: none;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--body);
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 9999px;
+  padding: 5px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+}
+
+.flow-tab-btn.is-active {
+  background: var(--primary-btn);
+  color: #ffffff;
+  border-color: var(--primary-pressed);
+}
+
+.flow-diagram-card {
+  padding: 13px 16px;
+  margin-bottom: 0.85rem;
+}
+
+.flow-canvas {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr) 34px minmax(0, 1fr) 34px minmax(0, 1fr);
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.flow-node {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 10px 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  height: 100%;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, opacity 0.22s ease;
+}
+
+.flow-node.is-outcome {
+  background: var(--success-light);
+  border-color: rgba(52, 168, 83, 0.45);
+}
+
+.flow-node-head {
+  display: flex;
+  align-items: center;
   gap: 6px;
-  margin-top: auto;
-  padding-top: 8px;
-  margin-bottom: 0;
+  color: var(--primary-pressed);
+}
+
+.flow-node.is-outcome .flow-node-head {
+  color: var(--success-text);
+}
+
+.flow-node-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.flow-node-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.flow-node-desc {
+  font-size: 11px;
+  line-height: 1.38;
+  color: var(--body);
+  margin: 0;
+}
+
+.flow-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.flow-arrow svg {
+  width: 34px;
+  height: 20px;
+  display: block;
+}
+
+.flow-track {
+  stroke: var(--hairline);
+  stroke-width: 2;
+  fill: none;
+}
+
+.flow-pulse {
+  stroke: var(--primary);
+  stroke-width: 2.5;
+  stroke-dasharray: 7 9;
+  fill: none;
+  animation: flow-dash 1.1s linear infinite;
+}
+
+.flow-arrow.is-final-arrow .flow-pulse {
+  stroke: var(--success);
+}
+
+.flow-head {
+  stroke: var(--primary);
+  stroke-width: 2.2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.flow-arrow.is-final-arrow .flow-head {
+  stroke: var(--success);
+}
+
+@keyframes flow-dash {
+  from { stroke-dashoffset: 32; }
+  to { stroke-dashoffset: 0; }
+}
+
+.flow-evidence-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 1rem;
+  align-items: stretch;
+  width: 100%;
+}
+
+.flow-compare-card {
+  padding: 14px 16px;
+  gap: 6px;
 }
 
 .excel-stage-card {
@@ -492,7 +633,7 @@ h3 {
   position: relative;
   display: block;
   width: 100%;
-  height: clamp(305px, calc(100vh - 305px), 420px);
+  height: clamp(195px, calc(100vh - 475px), 255px);
   padding: 0;
   border-radius: 10px;
   border: 1px solid var(--hairline);
@@ -502,7 +643,9 @@ h3 {
 }
 
 .excel-stage-btn[hidden],
-.kitchen-raw-panel[hidden] {
+.kitchen-raw-panel[hidden],
+.kitchen-cloud-preview[hidden],
+.hero-showcase-slide[hidden] {
   display: none;
 }
 
@@ -537,15 +680,61 @@ h3 {
 }
 
 .kitchen-raw-panel {
-  height: clamp(305px, calc(100vh - 305px), 420px);
+  height: clamp(195px, calc(100vh - 475px), 255px);
   border-radius: 10px;
   border: 1px solid var(--hairline);
   background: var(--canvas);
-  padding: 12px 14px;
+  padding: 10px 12px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
   overflow: auto;
+}
+
+.kitchen-cloud-preview {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  text-align: left;
+  overflow: auto;
+}
+
+.cloud-sheet-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cloud-sheet-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.cloud-sheet-table th,
+.cloud-sheet-table td {
+  padding: 5px 7px;
+  border: 1px solid var(--hairline);
+  text-align: left;
+  color: var(--ink);
+}
+
+.cloud-sheet-table th {
+  background: var(--primary-btn);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.cloud-sheet-table td.cloud-ok {
+  background: var(--success-light);
+  color: var(--success-text);
+  font-weight: 700;
 }
 
 .raw-sheet-head {
@@ -558,7 +747,7 @@ h3 {
 
 .raw-sheet-title {
   font-family: 'Inter Tight', sans-serif;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 700;
   color: var(--ink);
 }
@@ -570,7 +759,7 @@ h3 {
 }
 
 .raw-issue-pill {
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 600;
   color: var(--danger-text);
   background: var(--danger-light);
@@ -584,12 +773,12 @@ h3 {
   border-collapse: collapse;
   background: #ffffff;
   border: 1px solid var(--hairline);
-  font-size: 11.5px;
+  font-size: 11px;
 }
 
 .raw-sheet-table th,
 .raw-sheet-table td {
-  padding: 6px 8px;
+  padding: 5px 7px;
   border: 1px solid var(--hairline);
   text-align: left;
   color: var(--ink);
@@ -623,48 +812,6 @@ h3 {
 .hero-showcase-slide.is-active {
   opacity: 1;
   transform: scale(1);
-}
-
-.hero-showcase-progress {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 3px;
-  background: rgba(32, 33, 36, 0.12);
-  pointer-events: none;
-}
-
-.hero-showcase-progress-fill {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, var(--primary) 0%, var(--success) 100%);
-  transform-origin: left center;
-  transform: scaleX(0);
-}
-
-.hero-tab-btn {
-  appearance: none;
-  font-family: inherit;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--body);
-  background: var(--canvas);
-  border: 1px solid var(--hairline);
-  border-radius: 6px;
-  padding: 6px 8px;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: border-color 0.18s ease, background-color 0.18s ease, color 0.18s ease;
-}
-
-.hero-tab-btn.is-active {
-  color: var(--primary-pressed);
-  background: var(--primary-light);
-  border-color: var(--primary);
 }
 
 /* Botones */
@@ -1064,35 +1211,15 @@ body.is-tab-hidden .card::before {
 }
 
 /* ========================================================
-   SECCIÓN 2: RESULTADOS EN NEGOCIO (ANTES VS DESPUÉS)
+   COMPARATIVO ANTES / DESPUÉS (SECCIÓN 2)
    ======================================================== */
-.results-comparison-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-  width: 100%;
-  align-items: stretch;
-}
-
-.result-compare-card {
-  padding: 18px 20px;
-  gap: 6px;
-}
-
 .result-roi-big {
   font-family: 'Inter Tight', sans-serif;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--primary-pressed);
   line-height: 1.15;
   letter-spacing: -0.02em;
-}
-
-.result-roi-sub {
-  font-size: 12px;
-  color: var(--mute);
-  font-weight: 500;
-  margin-bottom: 4px;
 }
 
 .compare-stack {
@@ -1204,12 +1331,12 @@ body.is-tab-hidden .card::before {
   background: var(--success);
 }
 
-html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
+html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
   transform: scaleX(0);
 }
 
 /* ========================================================
-   SECCIONES 3 Y 6: GRILLAS BENTO DE 3 COLUMNAS
+   SECCIONES 3 Y 4: GRILLAS BENTO DE 3 COLUMNAS
    ======================================================== */
 .services-bento-grid {
   display: grid;
@@ -1222,60 +1349,6 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
 .service-bento-card {
   padding: 16px 18px;
   min-height: auto;
-}
-
-/* Micro-flujo visual Entrada -> Proceso -> Entrega en Sección 3 */
-.service-flow-box {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin: 4px 0 10px;
-  padding: 9px 11px;
-  border-radius: 8px;
-  background: var(--canvas);
-  border: 1px solid var(--hairline-soft);
-}
-
-.service-flow-step {
-  font-size: 11.5px;
-  line-height: 1.38;
-  color: var(--body);
-}
-
-.service-flow-step strong {
-  color: var(--primary-pressed);
-  font-weight: 700;
-}
-
-/* Indicador Entrada -> Proceso -> Salida en Sección 4 (La cocina) */
-.kitchen-flow-strip {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin: 4px 0 10px;
-  padding: 9px 11px;
-  border-radius: 8px;
-  background: var(--primary-light);
-  border: 1px solid rgba(66, 133, 244, 0.25);
-}
-
-.kitchen-flow-row {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  font-size: 11.5px;
-  line-height: 1.35;
-}
-
-.kitchen-flow-row span {
-  font-weight: 700;
-  color: var(--primary-pressed);
-  min-width: 58px;
-}
-
-.kitchen-flow-row strong {
-  font-weight: 600;
-  color: var(--ink);
 }
 
 .promo-card-thumb img {
@@ -1299,68 +1372,6 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
   border-radius: 9999px;
   letter-spacing: 0.02em;
   pointer-events: none;
-}
-
-/* Franja de Método de Trabajo en Sección 6 (#respaldo) */
-.workflow-strip-card {
-  margin-top: 0.95rem;
-  padding: 13px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.workflow-strip-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.workflow-strip-head h3 {
-  font-size: 15px;
-  margin: 0;
-}
-
-.workflow-steps-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.workflow-step {
-  position: relative;
-  background: var(--canvas);
-  border: 1px solid var(--hairline-soft);
-  border-radius: 8px;
-  padding: 9px 11px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
-}
-
-.workflow-step-num {
-  font-family: 'Inter Tight', sans-serif;
-  font-size: 10.5px;
-  font-weight: 700;
-  color: var(--primary-pressed);
-  letter-spacing: 0.04em;
-}
-
-.workflow-step-title {
-  font-size: 12.5px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.25;
-}
-
-.workflow-step p {
-  font-size: 11px;
-  line-height: 1.38;
-  color: var(--body);
-  margin: 0;
 }
 
 /* Visor Ampliado de Muestras en Excel */
@@ -1523,76 +1534,6 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
   background-color: var(--success);
   display: inline-block;
   flex-shrink: 0;
-}
-
-.pbi-quick-jump {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.tab-btn {
-  background: var(--surface-soft);
-  border: 1px solid transparent;
-  padding: 4px 10px;
-  border-radius: 9999px;
-  font-size: 11.5px;
-  font-weight: 500;
-  font-family: inherit;
-  color: var(--body);
-  cursor: pointer;
-  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-}
-
-.tab-btn.active {
-  background: var(--primary-btn);
-  color: #ffffff;
-  border-color: var(--primary-pressed);
-}
-
-.powerbi-project-grid {
-  display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 1.25rem;
-  align-items: stretch;
-  width: 100%;
-}
-
-.cases-real-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.9rem;
-  width: 100%;
-}
-
-.case-real-card {
-  padding: 15px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.case-kpi-big {
-  font-family: 'Inter Tight', sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--primary-pressed);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-}
-
-.case-real-card .project-context {
-  margin-bottom: 6px;
-}
-
-.case-real-card .tag-list-inline {
-  margin-top: auto;
-}
-
-.powerbi-card-inner {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
 }
 
 /* ========================================================
@@ -2255,7 +2196,8 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
 
 /* R3-15: Hundimiento táctil breve al presionar botones */
 .btn:active,
-.tab-btn:active,
+.flow-tab-btn:active,
+.kitchen-mode-btn:active,
 .service-pill-btn:active,
 .copy-email-btn:active,
 .nav-icon-btn:active {
@@ -2294,33 +2236,34 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
     }
   }
 
-  html.js .result-compare-card,
+  html.js .flow-diagram-card,
+  html.js .flow-compare-card,
   html.js .service-bento-card,
-  html.js .case-real-card,
-  html.js .workflow-strip-card,
   html.js .promo-bonus-card,
   html.js .contact-card {
     transition: opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1), transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
   }
 
-  html.js .result-compare-card:not(.is-revealed),
+  html.js .flow-diagram-card:not(.is-revealed),
+  html.js .flow-compare-card:not(.is-revealed),
   html.js .service-bento-card:not(.is-revealed),
-  html.js .case-real-card:not(.is-revealed),
-  html.js .workflow-strip-card:not(.is-revealed),
   html.js .promo-bonus-card:not(.is-revealed),
   html.js .contact-card:not(.is-revealed) {
     opacity: 0;
     transform: translateY(14px);
   }
 
-  html.js .result-compare-card.is-revealed,
+  html.js .flow-diagram-card.is-revealed,
+  html.js .flow-compare-card.is-revealed,
   html.js .service-bento-card.is-revealed,
-  html.js .case-real-card.is-revealed,
-  html.js .workflow-strip-card.is-revealed,
   html.js .promo-bonus-card.is-revealed,
   html.js .contact-card.is-revealed {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  .flow-node.is-step-entering {
+    animation: hero-fade-up 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
   .diag-step:not([hidden]) {
@@ -2335,25 +2278,6 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
     0% { transform: scale(0.92); opacity: 0.65; }
     60% { transform: scale(1.06); opacity: 1; }
     100% { transform: scale(1); opacity: 1; }
-  }
-
-  /* Dinamismo sutil en vitrina de portada y miniaturas de Servicios */
-  .hero-showcase-progress-fill.is-animating {
-    animation: hero-progress-fill 4s linear forwards;
-  }
-
-  .excel-stage-card:hover .hero-showcase-progress-fill.is-animating,
-  .excel-stage-card:focus-within .hero-showcase-progress-fill.is-animating {
-    animation-play-state: paused;
-  }
-
-  @keyframes hero-progress-fill {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
-  }
-
-  body.is-tab-hidden .hero-showcase-progress-fill.is-animating {
-    animation-play-state: paused !important;
   }
 
   .sample-lightbox:not([hidden]) .sample-lightbox-dialog {
@@ -2431,14 +2355,14 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
     border-color: var(--primary);
   }
 
-  .hero-tab-btn:hover {
+  .flow-tab-btn:hover,
+  .kitchen-mode-btn:not(.is-active):hover {
     border-color: var(--primary);
     color: var(--ink);
   }
 
-  .workflow-step:hover {
+  .flow-node:hover {
     border-color: rgba(66, 133, 244, 0.45);
-    background: #f4f8ff;
     transform: translateY(-2px);
   }
 
@@ -2486,15 +2410,15 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
 
   /* R3-2: Cursor analítico 30px solo en cifras y resultados en escritorio no táctil */
   html:not(.is-touch) .metrics-row .metric-card,
-  html:not(.is-touch) .results-comparison-grid .result-compare-card {
+  html:not(.is-touch) .flow-compare-card {
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www%2Ew3%2Eorg/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Ccircle cx='15' cy='15' r='11' fill='rgba(66,133,244,0.10)' stroke='%234285F4' stroke-width='1.5'/%3E%3Cpath d='M15 3v7M15 20v7M3 15h7M20 15h7' stroke='%23202124' stroke-width='1.6' stroke-linecap='round'/%3E%3Ccircle cx='15' cy='15' r='2' fill='%234285F4'/%3E%3C/svg%3E") 15 15, crosshair;
   }
 
   html:not(.is-touch) .metrics-row .metric-card a,
   html:not(.is-touch) .metrics-row .metric-card button,
-  html:not(.is-touch) .results-comparison-grid .result-compare-card a,
-  html:not(.is-touch) .results-comparison-grid .result-compare-card button,
-  html:not(.is-touch) .results-comparison-grid .result-compare-card .compare-box {
+  html:not(.is-touch) .flow-compare-card a,
+  html:not(.is-touch) .flow-compare-card button,
+  html:not(.is-touch) .flow-compare-card .compare-box {
     cursor: pointer;
   }
 
@@ -2556,10 +2480,15 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
   .shimmer-btn::after,
   .service-pill-btn.is-flashing,
   .hero-sample-thumb img,
-  .hero-showcase-progress-fill.is-animating,
+  .flow-pulse,
+  .flow-node.is-step-entering,
   .sample-lightbox-dialog {
     animation: none !important;
     transition: none !important;
+  }
+
+  .flow-pulse {
+    stroke-dasharray: none !important;
   }
 
   .sticky-header-bar,
@@ -2574,8 +2503,10 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
   .card,
   .compare-box,
   .compare-meter-fill,
-  .result-compare-card,
-  .tab-btn,
+  .flow-compare-card,
+  .flow-tab-btn,
+  .kitchen-mode-btn,
+  .flow-node,
   .scroll-progress-fill,
   .scroll-progress-pct,
   .header-scroll-fill,
@@ -2584,8 +2515,6 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
   .client-logo-badge svg,
   .hero-showcase-zoom,
   .hero-showcase-slide,
-  .hero-tab-btn,
-  .workflow-step,
   .lightbox-nav-btn,
   .service-pill-btn,
   .copy-email-btn,
@@ -2600,10 +2529,9 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
     transition: none !important;
   }
 
-  html.js .result-compare-card,
+  html.js .flow-diagram-card,
+  html.js .flow-compare-card,
   html.js .service-bento-card,
-  html.js .case-real-card,
-  html.js .workflow-strip-card,
   html.js .promo-bonus-card,
   html.js .contact-card {
     opacity: 1 !important;
@@ -2615,7 +2543,8 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
   }
 
   .btn:active,
-  .tab-btn:active,
+  .flow-tab-btn:active,
+  .kitchen-mode-btn:active,
   .service-pill-btn:active,
   .copy-email-btn:active,
   .nav-icon-btn:active,
@@ -2687,10 +2616,18 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .results-comparison-grid,
+  .flow-canvas {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .flow-arrow {
+    margin: 0 auto;
+    transform: rotate(90deg);
+  }
+
   .services-bento-grid,
-  .powerbi-project-grid,
-  .cases-real-grid,
+  .flow-evidence-grid,
   .contact-dual-grid {
     display: flex;
     flex-direction: column;
@@ -2706,8 +2643,9 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
     height: 245px;
   }
 
-  .excel-stage-btn {
-    height: 290px;
+  .excel-stage-btn,
+  .kitchen-raw-panel {
+    height: 240px;
   }
 
   .service-bento-card {
@@ -2717,10 +2655,6 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
   .promo-card-thumb {
     height: 120px;
   }
-
-  .workflow-steps-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 680px) {
@@ -2728,8 +2662,8 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
   .slide-container { padding: 0 1rem; }
   .header-scroll-progress { padding: 4px 1rem 6px; }
   .logos-row { grid-template-columns: 1fr; }
-  .workflow-steps-grid { grid-template-columns: 1fr; }
-  .excel-stage-btn { height: 220px; }
+  .excel-stage-btn,
+  .kitchen-raw-panel { height: 220px; }
   .lightbox-controls-row,
   .lightbox-controls-row .btn { width: 100%; justify-content: space-between; }
   .sample-lightbox-footer .btn { width: 100%; }
