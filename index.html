@@ -28,7 +28,7 @@
   
   <script>document.documentElement.classList.add('js');</script>
   <script data-goatcounter="https://franco-g.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-  <link rel="stylesheet" href="style.css?v=29.0">
+  <link rel="stylesheet" href="style.css?v=30.0">
 </head>
 <body>
   <!-- Escenario de fondo fijo limpio -->
@@ -74,6 +74,14 @@
         </a>
       </div>
     </div>
+
+    <!-- Accesos rápidos exclusivos de celular/tablet (<= 900px) -->
+    <nav class="mobile-quick-nav" aria-label="Accesos rápidos">
+      <a href="#flujo-trabajo" class="mobile-quick-link" data-slide-index="1" onclick="goToSlide(1); return false;">Flujo</a>
+      <a href="#soluciones" class="mobile-quick-link" data-slide-index="2" onclick="goToSlide(2); return false;">Servicios</a>
+      <a href="#respaldo" class="mobile-quick-link" data-slide-index="3" onclick="goToSlide(3); return false;">Respaldo</a>
+      <a href="#contacto" class="mobile-quick-link" data-slide-index="4" onclick="goToSlide(4); return false;">Contacto</a>
+    </nav>
 
     <!-- Franja de porcentaje integrada en la base del encabezado móvil (<= 900px) -->
     <div class="header-scroll-progress" id="header-scroll-progress" aria-label="Porcentaje de avance en la página">
@@ -442,49 +450,14 @@
       </div>
     </section>
 
-    <!-- Sección 5: Franja de Rubros Atendidos + Formulario Único de Contacto -->
-    <section id="contacto" class="slide-section contact-slide" aria-label="Rubros atendidos y contacto">
+    <!-- Sección 5: Contacto Directo, Plantilla Gratuita y Diagnóstico -->
+    <section id="contacto" class="slide-section contact-slide" aria-label="Contacto directo y diagnóstico">
       <div class="container slide-container">
         <div class="contact-shell">
           <div class="slide-header-row">
             <div>
               <h2>Contacto directo</h2>
               <p class="section-subtitle">Cuéntame qué proceso quieres automatizar.</p>
-            </div>
-          </div>
-
-          <!-- Franja de Rubros y Labor Principal (Anónimo) -->
-          <div class="client-logos-strip" aria-label="Rubros y funciones en los que he trabajado">
-            <span class="logos-strip-label">Experiencia real por rubro</span>
-            <div class="logos-row">
-              <div class="client-logo-badge" title="Salud y Comercial: Pagos masivos y conciliación bancaria">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/></svg>
-                <div class="rubro-text">
-                  <strong class="rubro-sector">Salud y comercial</strong>
-                  <span class="rubro-task">Conciliación y pagos</span>
-                </div>
-              </div>
-              <div class="client-logo-badge" title="Importación y Distribución: Validación y archivo documental automatizado">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 10h8M8 14h5"/></svg>
-                <div class="rubro-text">
-                  <strong class="rubro-sector">Importación</strong>
-                  <span class="rubro-task">Archivo y validación</span>
-                </div>
-              </div>
-              <div class="client-logo-badge" title="Firmas y Servicios: Flujos de caja, libros y reportes">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>
-                <div class="rubro-text">
-                  <strong class="rubro-sector">Firmas y servicios</strong>
-                  <span class="rubro-task">Cierres y reportes</span>
-                </div>
-              </div>
-              <div class="client-logo-badge" title="Retail y Consumo: Pasarelas Yape, Plin, Culqi y deudas">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 11l9-7 9 7v9H3z"/></svg>
-                <div class="rubro-text">
-                  <strong class="rubro-sector">Retail y consumo</strong>
-                  <span class="rubro-task">Pasarelas y deudas</span>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -495,10 +468,12 @@
                 <span class="card-category">Recurso gratuito propio</span>
                 <span class="mini-badge">Descarga directa .xlsx</span>
               </div>
-              <h3>Plantilla gratis propia</h3>
+              <div class="promo-head-row">
+                <h3>Plantilla gratis propia</h3>
+                <button type="button" class="hero-showcase-zoom" onclick="openSampleModal('muestras/muestra-flujo-cuenta10.png', 'Flujo de Caja Cuenta 10 (Soles y Dólares)', 'Modelo propio creado desde cero con datos ficticios de ejemplo. Puedes descargarlo gratis y probarlo en tu Excel.', 'Flujo de caja')">Ampliar</button>
+              </div>
               <button type="button" class="promo-card-thumb" onclick="openSampleModal('muestras/muestra-flujo-cuenta10.png', 'Flujo de Caja Cuenta 10 (Soles y Dólares)', 'Modelo propio creado desde cero con datos ficticios de ejemplo. Puedes descargarlo gratis y probarlo en tu Excel.', 'Flujo de caja')" aria-label="Ampliar vista previa de plantilla gratuita">
                 <img src="muestras/muestra-flujo-cuenta10.png" alt="Vista previa real de Flujo de Caja Cuenta 10 en Soles y Dólares" loading="lazy">
-                <span class="sample-thumb-pill">Ampliar</span>
               </button>
               <p class="project-context">Plantilla propia en <strong>Soles y Dólares (Cuenta 10)</strong> con tipo de cambio editable, datos ficticios y guía en 3 pasos.</p>
               <div class="promo-cta-stack">
@@ -735,6 +710,6 @@
   </div>
 
   <!-- Controlador de Navegación e Interactividad -->
-  <script src="app.js?v=28.0"></script>
+  <script src="app.js?v=29.0"></script>
 </body>
 </html>

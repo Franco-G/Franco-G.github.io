@@ -197,7 +197,7 @@ function updateActiveMenuFromScroll() {
 }
 
 function syncHeaderMenuLinks(targetIndex) {
-  document.querySelectorAll('.nav-menu-link').forEach(link => {
+  document.querySelectorAll('.nav-menu-link, .mobile-quick-link').forEach(link => {
     const linkIdx = parseInt(link.getAttribute('data-slide-index'), 10);
     link.classList.toggle('active', linkIdx === targetIndex);
   });
@@ -596,11 +596,11 @@ function triggerNumberTicker() {
     const liveStepMs = parseInt(el.getAttribute('data-live-increment'), 10);
     const onDone = liveStepMs > 0 ? () => startLiveMetricIncrement(el, target, prefix, suffix, liveStepMs) : null;
 
-    if (REDUCED_MOTION_MQ.matches) {
+    if (REDUCED_MOTION_MQ.matches || target <= 5) {
       el.textContent = `${prefix}${target}${suffix}`;
       if (onDone) onDone();
     } else {
-      animateValue(el, 0, target, 1100, prefix, suffix, onDone);
+      animateValue(el, 0, target, 450, prefix, suffix, onDone);
     }
   });
 }
@@ -611,7 +611,7 @@ function animateValue(obj, start, end, duration, prefix, suffix, onComplete) {
     if (!startTimestamp) startTimestamp = timestamp;
     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
     const ease = 1 - Math.pow(1 - progress, 3);
-    const current = Math.floor(ease * (end - start) + start);
+    const current = Math.round(ease * (end - start) + start);
     obj.textContent = `${prefix}${current}${suffix}`;
     if (progress < 1) {
       window.requestAnimationFrame(step);

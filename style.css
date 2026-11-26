@@ -270,7 +270,31 @@ body {
   pointer-events: none;
 }
 
-/* Franja móvil de avance oculta en escritorio (> 900px) */
+/* Accesos rápidos y franja móvil de avance ocultos en escritorio (> 900px) */
+.mobile-quick-nav {
+  display: none;
+}
+
+.mobile-quick-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--body);
+  text-decoration: none;
+  text-align: center;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.mobile-quick-link.active {
+  color: var(--primary-pressed);
+  background: var(--primary-light);
+}
+
 .header-scroll-progress {
   display: none;
 }
@@ -1360,20 +1384,6 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.sample-thumb-pill {
-  position: absolute;
-  right: 7px;
-  bottom: 7px;
-  font-size: 10px;
-  font-weight: 700;
-  color: #ffffff;
-  background: rgba(32, 33, 36, 0.84);
-  padding: 2px 8px;
-  border-radius: 9999px;
-  letter-spacing: 0.02em;
-  pointer-events: none;
-}
-
 /* Visor Ampliado de Muestras en Excel */
 .sample-lightbox {
   position: fixed;
@@ -1602,7 +1612,7 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
 }
 
 /* ========================================================
-   SECCIÓN 7: FRANJA DE RUBROS + FORMULARIO ÚNICO DE CONTACTO
+   SECCIÓN 5: CONTACTO DIRECTO, PLANTILLA GRATUITA Y DIAGNÓSTICO
    ======================================================== */
 .contact-slide {
   min-height: calc(100vh - 56px);
@@ -1622,19 +1632,7 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
 }
 
 .contact-slide .slide-header-row {
-  margin-bottom: 0.45rem;
-}
-
-.client-logos-strip {
-  background: var(--surface-card);
-  border: 1px solid var(--hairline);
-  border-radius: 10px;
-  padding: 8px 14px;
   margin-bottom: 0.65rem;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  box-shadow: var(--card-shadow);
 }
 
 .contact-dual-grid {
@@ -1655,6 +1653,13 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
 
 .promo-bonus-card::after {
   background: linear-gradient(135deg, #ffffff 0%, #f4f8ff 100%);
+}
+
+.promo-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .promo-card-thumb {
@@ -1681,62 +1686,6 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
 .promo-card-cta {
   width: 100%;
   justify-content: center;
-}
-
-.logos-strip-label {
-  font-size: 10.5px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--mute);
-}
-
-.logos-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-}
-
-.client-logo-badge {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
-  min-width: 0;
-  padding: 7px 10px;
-  border-radius: 7px;
-  background: var(--canvas);
-  border: 1px solid var(--hairline-soft);
-  color: var(--ink);
-  transition: border-color 0.18s ease, background-color 0.18s ease;
-}
-
-.rubro-text {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  gap: 1px;
-}
-
-.rubro-sector {
-  font-family: 'Inter Tight', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.2;
-}
-
-.rubro-task {
-  font-size: 10.5px;
-  font-weight: 500;
-  color: var(--body);
-  line-height: 1.25;
-}
-
-.client-logo-badge svg {
-  color: var(--primary);
-  flex-shrink: 0;
-  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .contact-card {
@@ -2449,16 +2398,6 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
     transform: scale(1.35);
     background-color: var(--primary-pressed);
   }
-
-  /* R3-20: Acento suave en ícono de cada rubro en Contacto */
-  .client-logo-badge:hover {
-    border-color: rgba(66, 133, 244, 0.45);
-    background-color: #f4f8ff;
-  }
-
-  .client-logo-badge:hover svg {
-    transform: scale(1.12);
-  }
 }
 
 /* ========================================================
@@ -2495,6 +2434,7 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
   .sticky-header-bar::after,
   .nav-menu-link,
   .nav-menu-link::after,
+  .mobile-quick-link,
   .nav-icon-btn,
   .btn,
   .btn-arrow,
@@ -2511,8 +2451,6 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
   .scroll-progress-pct,
   .header-scroll-fill,
   .header-scroll-pct,
-  .client-logo-badge,
-  .client-logo-badge svg,
   .hero-showcase-zoom,
   .hero-showcase-slide,
   .lightbox-nav-btn,
@@ -2551,8 +2489,7 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
   .metric-card:hover,
   .card:hover,
   .nav-icon-btn:hover,
-  .back-to-top-btn:hover,
-  .client-logo-badge:hover svg {
+  .back-to-top-btn:hover {
     transform: none !important;
   }
 }
@@ -2578,6 +2515,15 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
     display: none;
   }
 
+  .mobile-quick-nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    padding: 4px 1.25rem 6px;
+    border-top: 1px solid var(--hairline-soft);
+    background: rgba(255, 255, 255, 0.96);
+  }
+
   /* Ocultar pastilla lateral en <= 900px y activar franja integrada en encabezado */
   .scroll-progress-rail {
     display: none;
@@ -2599,7 +2545,7 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
 
   .slide-section:first-of-type {
     min-height: auto;
-    padding-top: calc(var(--header-height, 84px) + 1rem);
+    padding-top: calc(var(--header-height, 118px) + 1rem);
     padding-bottom: 1.25rem;
   }
 
@@ -2610,10 +2556,6 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
 
   .slide-container {
     padding: 0 1.25rem;
-  }
-
-  .logos-row {
-    grid-template-columns: repeat(2, 1fr);
   }
 
   .flow-canvas {
@@ -2653,29 +2595,93 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
   }
 
   .promo-card-thumb {
-    height: 120px;
+    height: auto;
+  }
+
+  .promo-card-thumb img {
+    height: auto;
+    max-height: 210px;
+    object-fit: contain;
+    background: #ffffff;
+  }
+
+  /* Áreas táctiles cómodas (>= 40px) en celular y tablet */
+  .flow-tab-btn,
+  .hero-showcase-zoom,
+  .kitchen-mode-btn,
+  .service-card-link,
+  .cert-proof-btn,
+  .diag-faq-link,
+  .diag-edit-btn,
+  .service-pill-btn {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-showcase-zoom {
+    padding: 0 14px;
+  }
+
+  .kitchen-mode-btn {
+    padding: 0 14px;
+  }
+
+  .service-card-link,
+  .diag-faq-link {
+    padding: 4px 6px;
+  }
+
+  .cert-proof-btn,
+  .diag-edit-btn {
+    padding: 6px 12px;
   }
 }
 
 @media (max-width: 680px) {
   .container { padding: 0 1rem; }
   .slide-container { padding: 0 1rem; }
+  .mobile-quick-nav { padding: 4px 1rem 6px; }
   .header-scroll-progress { padding: 4px 1rem 6px; }
-  .logos-row { grid-template-columns: 1fr; }
+  .flow-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    width: 100%;
+  }
+  .flow-tab-btn {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6px 8px;
+    white-space: normal;
+    line-height: 1.2;
+  }
+  .flow-diagram-card {
+    padding: 10px 12px;
+  }
+  .flow-node {
+    padding: 8px 10px;
+  }
+  .flow-arrow {
+    height: 20px;
+  }
   .excel-stage-btn,
   .kitchen-raw-panel { height: 220px; }
   .lightbox-controls-row,
   .lightbox-controls-row .btn { width: 100%; justify-content: space-between; }
   .sample-lightbox-footer .btn { width: 100%; }
-  .client-logo-badge { white-space: normal; line-height: 1.3; }
   h1 { font-size: 30px; }
   h2 { font-size: 22px; }
   .metrics-row { grid-template-columns: 1fr 1fr; gap: 10px; }
   .btn-group { flex-direction: column; width: 100%; }
   .btn { width: 100%; text-align: center; justify-content: center; }
   .nav-actions { gap: 6px; }
-  .nav-icon-btn { width: 34px; height: 34px; min-width: 34px; min-height: 34px; }
-  .nav-icon-btn .contact-icon { width: 17px; height: 17px; }
+  .nav-icon-btn { width: 36px; height: 36px; min-width: 36px; min-height: 36px; }
+  .nav-icon-btn .contact-icon { width: 18px; height: 18px; }
   .contact-card { padding: 16px; }
   .form-two-cols,
   .diag-grid-2,
@@ -2699,14 +2705,15 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
   .metric-caption { font-size: 10px; letter-spacing: 0.03em; }
   .metric-sub { font-size: 11px; line-height: 1.35; }
   .nav-container { padding: 0 0.85rem; gap: 6px; }
+  .mobile-quick-nav { padding: 4px 0.85rem 6px; gap: 4px; }
   .header-scroll-progress { padding: 4px 0.85rem 6px; }
   .nav-brand { font-size: 13.5px; gap: 7px; }
   .nav-logo { width: 28px; height: 28px; }
-  .nav-icon-btn { width: 32px; height: 32px; min-width: 32px; min-height: 32px; }
+  .nav-icon-btn { width: 36px; height: 36px; min-width: 36px; min-height: 36px; }
 }
 
 @media (max-width: 900px) and (orientation: portrait) {
   .slide-section:first-of-type {
-    padding-top: calc(var(--header-height, 86px) + 1.25rem);
+    padding-top: calc(var(--header-height, 118px) + 1.25rem);
   }
 }
