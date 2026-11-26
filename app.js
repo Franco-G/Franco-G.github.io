@@ -44,7 +44,6 @@ function initApp() {
   initCompareBoxHighlight();
   initViewportPauseObserver();
   initRevealObserver();
-  initPowerBiSkeletons();
   initHeroEntrance();
   triggerNumberTicker();
   updateScrollProgress();
@@ -609,7 +608,7 @@ function initViewportPauseObserver() {
   document.addEventListener('visibilitychange', syncTabState);
   syncTabState();
 
-  const targets = document.querySelectorAll('.metric-card, .border-beam-card, .card, .powerbi-slide');
+  const targets = document.querySelectorAll('.metric-card, .border-beam-card, .card');
   if (!('IntersectionObserver' in window)) {
     targets.forEach(el => el.classList.add('is-in-view'));
     return;
@@ -668,25 +667,7 @@ function initRevealObserver() {
 }
 
 /**
- * 8. Skeleton de Carga en Tableros Power BI
- */
-function initPowerBiSkeletons() {
-  const frames = document.querySelectorAll('.powerbi-frame-card');
-  frames.forEach(card => {
-    const iframe = card.querySelector('iframe');
-    if (!iframe) {
-      card.classList.add('is-loaded');
-      return;
-    }
-
-    const markLoaded = () => card.classList.add('is-loaded');
-    iframe.addEventListener('load', markLoaded, { once: true });
-    window.setTimeout(markLoaded, 4500);
-  });
-}
-
-/**
- * 9. Interceptación de Enlaces de Ancla Internos (#)
+ * 8. Interceptación de Enlaces de Ancla Internos (#)
  */
 function initAnchorIntercept() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -703,38 +684,8 @@ function initAnchorIntercept() {
 }
 
 /**
- * 10. Carga Bajo Clic del Tablero Power BI de Portada
+ * 9. Vitrina Grande de Plantillas en Excel y Visor Ampliado
  */
-function loadHeroPowerBi() {
-  const container = document.getElementById('hero-pbi-container');
-  if (!container || container.querySelector('iframe')) return;
-
-  container.classList.remove('is-loaded');
-  container.innerHTML = '';
-
-  const skel = document.createElement('div');
-  skel.className = 'pbi-skeleton';
-  skel.setAttribute('aria-hidden', 'true');
-
-  const iframe = document.createElement('iframe');
-  iframe.id = 'powerbi-iframe-divisas';
-  iframe.title = 'Monitor_Divisas_Globales';
-  iframe.src = HERO_PBI_URL;
-  iframe.setAttribute('frameborder', '0');
-  iframe.setAttribute('allowFullScreen', 'true');
-
-  const markLoaded = () => container.classList.add('is-loaded');
-  iframe.addEventListener('load', markLoaded, { once: true });
-  window.setTimeout(markLoaded, 4500);
-
-  container.appendChild(skel);
-  container.appendChild(iframe);
-}
-
-/**
- * 11. Vitrina Grande de Plantillas en Excel y Visor Ampliado (Excel + Power BI)
- */
-const HERO_PBI_URL = 'https://app.powerbi.com/view?r=eyJrIjoiNDcwOTNiMjEtNTNmYy00NjhkLTk3ZjQtOGE0NjE1NzA1ZDk3IiwidCI6ImM0YTY2YzM0LTJiYjctNDUxZi04YmUxLWIyYzI2YTQzMDE1OCIsImMiOjR9';
 
 const GALLERY_SAMPLES = [
   {
@@ -908,7 +859,6 @@ function openCurrentExcelSample() {
 
 function renderModalSample(sample) {
   const imgEl = document.getElementById('sample-lightbox-img');
-  const pbiEl = document.getElementById('sample-lightbox-pbi');
   const navEl = document.getElementById('sample-lightbox-nav');
   const kickerEl = document.getElementById('sample-lightbox-kicker');
   const titleEl = document.getElementById('sample-lightbox-title');
@@ -917,10 +867,6 @@ function renderModalSample(sample) {
   const ctaBtn = document.getElementById('sample-lightbox-cta');
   if (!imgEl || !titleEl || !captionEl) return;
 
-  if (pbiEl) {
-    pbiEl.hidden = true;
-    pbiEl.removeAttribute('src');
-  }
   imgEl.hidden = false;
   if (navEl) navEl.hidden = false;
   if (kickerEl) kickerEl.textContent = 'Muestra real en Excel';
@@ -967,42 +913,6 @@ function openSampleModal(imgSrc, title, caption, serviceValue) {
   if (closeBtn) closeBtn.focus();
 }
 
-function openPowerBiModal() {
-  const modal = document.getElementById('sample-lightbox');
-  const closeBtn = document.getElementById('sample-lightbox-close');
-  const imgEl = document.getElementById('sample-lightbox-img');
-  const pbiEl = document.getElementById('sample-lightbox-pbi');
-  const navEl = document.getElementById('sample-lightbox-nav');
-  const kickerEl = document.getElementById('sample-lightbox-kicker');
-  const titleEl = document.getElementById('sample-lightbox-title');
-  const captionEl = document.getElementById('sample-lightbox-caption');
-  const ctaBtn = document.getElementById('sample-lightbox-cta');
-  if (!modal || !pbiEl || !imgEl || !titleEl || !captionEl) return;
-
-  lastModalTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-  imgEl.hidden = true;
-  imgEl.removeAttribute('src');
-  if (navEl) navEl.hidden = true;
-  if (kickerEl) kickerEl.textContent = 'Power BI · Datos web en vivo';
-
-  titleEl.textContent = 'Monitor de divisas frente al dólar';
-  captionEl.textContent = 'Comparativa diaria frente al dólar: Perú, Colombia, Chile y Argentina (Banco Central Europeo).';
-  pbiEl.src = HERO_PBI_URL;
-  pbiEl.hidden = false;
-
-  if (ctaBtn) {
-    ctaBtn.onclick = () => {
-      closeSampleModal();
-      quoteSpecificService('Consulta general');
-    };
-  }
-
-  modal.hidden = false;
-  document.documentElement.style.overflow = 'hidden';
-  scheduleExcelShowcase();
-  if (closeBtn) closeBtn.focus();
-}
-
 function stepSampleModal(delta) {
   const modal = document.getElementById('sample-lightbox');
   const navEl = document.getElementById('sample-lightbox-nav');
@@ -1014,16 +924,11 @@ function stepSampleModal(delta) {
 function closeSampleModal() {
   const modal = document.getElementById('sample-lightbox');
   const imgEl = document.getElementById('sample-lightbox-img');
-  const pbiEl = document.getElementById('sample-lightbox-pbi');
   if (!modal || modal.hidden) return;
 
   modal.hidden = true;
   document.documentElement.style.overflow = '';
   if (imgEl) imgEl.removeAttribute('src');
-  if (pbiEl) {
-    pbiEl.hidden = true;
-    pbiEl.removeAttribute('src');
-  }
   scheduleExcelShowcase();
   if (lastModalTrigger && typeof lastModalTrigger.focus === 'function') {
     lastModalTrigger.focus();
@@ -1046,14 +951,12 @@ document.addEventListener('keydown', (e) => {
 });
 
 window.goToSlide = goToSlide;
-window.loadHeroPowerBi = loadHeroPowerBi;
 window.selectServiceTier = selectServiceTier;
 window.quoteSpecificService = quoteSpecificService;
 window.handleQuoteSubmit = handleQuoteSubmit;
 window.copyContactEmail = copyContactEmail;
 window.setExcelSlide = setExcelSlide;
 window.openCurrentExcelSample = openCurrentExcelSample;
-window.openPowerBiModal = openPowerBiModal;
 window.openSampleModal = openSampleModal;
 window.stepSampleModal = stepSampleModal;
 window.closeSampleModal = closeSampleModal;

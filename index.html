@@ -111,37 +111,20 @@
             </div>
           </header>
 
-          <!-- Primera Vista: Dashboard Interactivo de Monedas y Divisas (Carga rápida bajo clic) -->
-          <div class="hero-pbi-card border-beam-card powerbi-slide" aria-label="Dashboard en vivo de Monedas y Divisas">
+          <!-- Primera Vista: Muestra Real de Flujo de Caja Cuenta 10 (Soles y Dólares) -->
+          <div class="hero-sample-card border-beam-card" aria-label="Muestra en Excel de Flujo de Caja en Soles y Dólares">
             <div class="hero-showcase-head">
               <div class="hero-showcase-status">
-                <span class="live-dot" aria-hidden="true"></span>
-                <span>Monitor de divisas · Datos web en vivo</span>
+                <span>Flujo de caja · Soles y Dólares</span>
               </div>
-              <button type="button" class="hero-showcase-zoom" onclick="openPowerBiModal()">Ampliar</button>
+              <button type="button" class="hero-showcase-zoom" onclick="openSampleModal('muestras/muestra-flujo-cuenta10.png', 'Flujo de Caja Cuenta 10 (Soles y Dólares)', 'Modelo propio creado desde cero con datos ficticios de ejemplo. Puedes descargarlo gratis y probarlo en tu Excel.', 'Flujo de caja')">Ampliar</button>
             </div>
 
-            <div class="powerbi-frame-card hero-pbi-frame" id="hero-pbi-container">
-              <div class="hero-pbi-preview" id="hero-pbi-preview">
-                <div class="hero-pbi-mock" aria-hidden="true">
-                  <div class="hero-pbi-mock-head">
-                    <span>Referencia diaria · BCE frente al dólar (USD)</span>
-                    <span class="mini-badge">Power BI</span>
-                  </div>
-                  <div class="hero-pbi-mock-grid">
-                    <div class="hero-pbi-mock-item"><strong>PEN</strong><span>Sol peruano</span></div>
-                    <div class="hero-pbi-mock-item"><strong>COP</strong><span>Peso colombiano</span></div>
-                    <div class="hero-pbi-mock-item"><strong>CLP</strong><span>Peso chileno</span></div>
-                    <div class="hero-pbi-mock-item"><strong>ARS</strong><span>Peso argentino</span></div>
-                  </div>
-                </div>
-                <div class="hero-pbi-preview-overlay">
-                  <button type="button" class="btn btn-primary hero-pbi-load-btn" onclick="loadHeroPowerBi()">Activar tablero Power BI en vivo</button>
-                </div>
-              </div>
-            </div>
+            <button type="button" class="hero-sample-thumb" onclick="openSampleModal('muestras/muestra-flujo-cuenta10.png', 'Flujo de Caja Cuenta 10 (Soles y Dólares)', 'Modelo propio creado desde cero con datos ficticios de ejemplo. Puedes descargarlo gratis y probarlo en tu Excel.', 'Flujo de caja')" aria-label="Ampliar muestra de Flujo de Caja en Soles y Dólares">
+              <img src="muestras/muestra-flujo-cuenta10.png" alt="Muestra real en Excel de Flujo de Caja Cuenta 10 en Soles y Dólares">
+            </button>
 
-            <p class="hero-pbi-caption">Tipo de cambio diario frente al dólar: Perú, Colombia, Chile y Argentina (Banco Central Europeo).</p>
+            <p class="hero-pbi-caption">Modelo propio en Excel Cuenta 10 (PEN y USD) listo para descargar gratis y probar con tus datos.</p>
           </div>
         </div>
 
@@ -768,7 +751,7 @@
     </section>
   </main>
 
-  <!-- Visor Ampliado de Muestras Reales (Excel y Power BI) -->
+  <!-- Visor Ampliado de Muestras Reales en Excel -->
   <div id="sample-lightbox" class="sample-lightbox" role="dialog" aria-modal="true" aria-labelledby="sample-lightbox-title" hidden>
     <div class="sample-lightbox-backdrop" onclick="closeSampleModal()"></div>
     <div class="sample-lightbox-dialog">
@@ -781,7 +764,6 @@
       </div>
       <div class="sample-lightbox-body">
         <img id="sample-lightbox-img" src="" alt="Captura real en Microsoft Excel">
-        <iframe id="sample-lightbox-pbi" class="sample-lightbox-pbi" title="Tablero Power BI ampliado" frameborder="0" allowFullScreen="true" hidden></iframe>
       </div>
       <div class="sample-lightbox-footer">
         <p id="sample-lightbox-caption"></p>
