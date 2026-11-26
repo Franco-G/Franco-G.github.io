@@ -40,18 +40,23 @@
   padding: 0;
 }
 
-html, body {
+html {
   min-height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow-x: clip;
   scroll-behavior: smooth;
   background-color: var(--canvas);
 }
 
 body {
+  min-height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+  background-color: var(--canvas);
   color: var(--body);
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 14px;
@@ -1130,13 +1135,6 @@ html.js .result-compare-card:not(.is-revealed) .compare-meter-fill {
   pointer-events: none;
 }
 
-.promo-thumb-alt {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
-}
-
 /* Franja de Método de Trabajo en Sección 6 (#respaldo) */
 .workflow-strip-card {
   margin-top: 0.95rem;
@@ -1682,8 +1680,12 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   padding: 14px 16px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
   border-color: rgba(66, 133, 244, 0.35);
+  background: linear-gradient(135deg, #ffffff 0%, #f4f8ff 100%);
+}
+
+.promo-bonus-card::after {
   background: linear-gradient(135deg, #ffffff 0%, #f4f8ff 100%);
 }
 
@@ -1691,7 +1693,7 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   position: relative;
   display: block;
   width: 100%;
-  height: 88px;
+  height: 156px;
   padding: 0;
   border: 1px solid var(--hairline);
   border-radius: 8px;
@@ -2110,12 +2112,7 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
     animation-delay: -6s;
   }
 
-  .promo-thumb-alt {
-    animation: promo-alt-fade 7s ease-in-out infinite;
-  }
-
   body.is-tab-hidden .sample-thumb-btn img,
-  body.is-tab-hidden .promo-thumb-alt,
   body.is-tab-hidden .hero-showcase-progress-fill.is-animating {
     animation-play-state: paused !important;
   }
@@ -2123,12 +2120,6 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   @keyframes thumb-gentle-pan {
     from { transform: scale(1.01) translate3d(0, 0, 0); }
     to { transform: scale(1.07) translate3d(-1.5%, -4%, 0); }
-  }
-
-  @keyframes promo-alt-fade {
-    0%, 42% { opacity: 0; }
-    50%, 92% { opacity: 1; }
-    100% { opacity: 0; }
   }
 
   .sample-lightbox:not([hidden]) .sample-lightbox-dialog {
@@ -2329,7 +2320,6 @@ html.js .powerbi-frame-card.is-loaded .pbi-skeleton {
   .pbi-skeleton::after,
   .service-pill-btn.is-flashing,
   .sample-thumb-btn img,
-  .promo-thumb-alt,
   .hero-showcase-progress-fill.is-animating,
   .sample-lightbox-dialog,
   .powerbi-info-card.is-arriving {
