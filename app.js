@@ -962,9 +962,22 @@ const GALLERY_SAMPLES = [
 ];
 
 let excelSlideIndex = 0;
+let heroSlideIndex = 0;
+let heroAutoTimer = null;
+let flowAutoTimer = null;
+let heroPaused = false;
+let flowPaused = false;
+let flowPauseUntil = 0;
 let kitchenViewMode = 'clean';
 let currentGalleryIndex = 0;
 let lastModalTrigger = null;
+
+const HERO_SAMPLE_META = [
+  { label: 'Flujo de fondos · Muestra propia', caption: 'Plantilla propia de flujo de caja lista para descargar gratis.' },
+  { label: 'Consolidado automático · Muestra propia', caption: 'Carpeta conectada en Power Query lista para carga masiva.' },
+  { label: 'Conciliación bancaria · Muestra propia', caption: 'Control automático de abonos, comisiones y duplicados.' },
+  { label: 'Reportes en línea · Muestra propia', caption: 'Estados Financieros y ratios actualizados en Google Sheets.' }
+];
 
 function renderKitchenRawPanel(sample) {
   const panel = document.getElementById('kitchen-raw-panel');
@@ -1039,13 +1052,17 @@ function setKitchenViewMode(mode) {
   }
 }
 
-function setWorkflowCase(index) {
+function setWorkflowCase(index, userInitiated) {
   const showcase = document.getElementById('excel-showcase');
   if (!showcase) return;
   const slides = showcase.querySelectorAll('.hero-showcase-slide');
   const tabs = document.querySelectorAll('.flow-tabs .flow-tab-btn');
   const cloudPreview = document.getElementById('kitchen-cloud-preview');
   const zoomBtn = document.getElementById('kitchen-zoom-btn');
+
+  if (userInitiated) {
+    flowPauseUntil = Date.now() + 14000;
+  }
 
   excelSlideIndex = ((index % GALLERY_SAMPLES.length) + GALLERY_SAMPLES.length) % GALLERY_SAMPLES.length;
   const info = GALLERY_SAMPLES[excelSlideIndex];
@@ -1104,10 +1121,69 @@ function setWorkflowCase(index) {
   }
 }
 
+function setHeroSampleSlide(index) {
+  const card = document.getElementById('hero-sample-card');
+  if (!card) return;
+  const slides = card.querySelectorAll('.hero-showcase-slide');
+  if (!slides.length) return;
+  heroSlideIndex = ((index % slides.length) + slides.length) % slides.length;
+  slides.forEach((img, i) => {
+    img.classList.toggle('is-active', i === heroSlideIndex);
+  });
+  const meta = HERO_SAMPLE_META[heroSlideIndex] || HERO_SAMPLE_META[0];
+  const lbl = document.getElementById('hero-sample-label');
+  const cap = document.getElementById('hero-sample-caption');
+  if (lbl) lbl.textContent = meta.label;
+  if (cap) cap.textContent = meta.caption;
+}
+
+function openHeroSampleModal() {
+  const sample = GALLERY_SAMPLES[heroSlideIndex] || GALLERY_SAMPLES[0];
+  openSampleModal(sample.src, sample.title, sample.caption, sample.service);
+}
+
+function isAnyModalOpen() {
+  const lb = document.getElementById('sample-lightbox');
+  const faq = document.getElementById('faq-modal');
+  return (lb && !lb.hidden) || (faq && !faq.hidden);
+}
+
 function initExcelShowcase() {
   const showcase = document.getElementById('excel-showcase');
-  if (!showcase) return;
-  setWorkflowCase(0);
+  const heroCard = document.getElementById('hero-sample-card');
+  const flowSec = document.getElementById('flujo-trabajo');
+
+  if (showcase) {
+    setWorkflowCase(0, false);
+  }
+  if (heroCard) {
+    setHeroSampleSlide(0);
+    heroCard.addEventListener('mouseenter', () => { heroPaused = true; });
+    heroCard.addEventListener('mouseleave', () => { heroPaused = false; });
+    heroCard.addEventListener('focusin', () => { heroPaused = true; });
+    heroCard.addEventListener('focusout', () => { heroPaused = false; });
+  }
+  if (flowSec) {
+    flowSec.addEventListener('mouseenter', () => { flowPaused = true; });
+    flowSec.addEventListener('mouseleave', () => { flowPaused = false; });
+    flowSec.addEventListener('focusin', () => { flowPaused = true; });
+    flowSec.addEventListener('focusout', () => { flowPaused = false; });
+  }
+
+  if (!REDUCED_MOTION_MQ.matches) {
+    if (heroAutoTimer) clearInterval(heroAutoTimer);
+    heroAutoTimer = setInterval(() => {
+      if (document.hidden || heroPaused || isAnyModalOpen()) return;
+      setHeroSampleSlide(heroSlideIndex + 1);
+    }, 4500);
+
+    if (flowAutoTimer) clearInterval(flowAutoTimer);
+    flowAutoTimer = setInterval(() => {
+      if (document.hidden || flowPaused || isAnyModalOpen()) return;
+      if (kitchenViewMode !== 'clean' || Date.now() < flowPauseUntil) return;
+      setWorkflowCase(excelSlideIndex + 1, false);
+    }, 6000);
+  }
 }
 
 function openCurrentExcelSample() {
@@ -1144,7 +1220,7 @@ function renderModalSample(sample) {
     counterEl.textContent = `${imgIdx + 1} / ${imageSamples.length}`;
   }
   if (ctaBtn) {
-    ctaBtn.textContent = 'Consultar por esto →';
+    ctaBtn.textContent = 'Consultar →';
     ctaBtn.onclick = () => {
       closeSampleModal();
       quoteSpecificService(sample.service || 'Otro tema');
@@ -1173,7 +1249,7 @@ function openCertificateModal(imgSrc, title, caption) {
   captionEl.textContent = caption;
 
   if (ctaBtn) {
-    ctaBtn.textContent = 'Ir al diagnóstico →';
+    ctaBtn.textContent = 'Consultar →';
     ctaBtn.onclick = () => {
       closeSampleModal();
       const contactIdx = sections.findIndex(sec => sec.id === 'contacto');

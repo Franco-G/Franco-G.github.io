@@ -118,20 +118,23 @@
             </div>
           </header>
 
-          <!-- Primera Vista: Muestra Propia de Flujo de Caja -->
-          <div class="hero-sample-card border-beam-card" aria-label="Muestra propia de flujo de caja en Excel">
+          <!-- Primera Vista: Carrusel de Muestras Propias -->
+          <div class="hero-sample-card border-beam-card" id="hero-sample-card" aria-label="Muestras propias de reportes en Excel y Google Sheets">
             <div class="hero-showcase-head">
               <div class="hero-showcase-status">
-                <span>Flujo de fondos · Muestra propia</span>
+                <span id="hero-sample-label">Flujo de fondos · Muestra propia</span>
               </div>
-              <button type="button" class="hero-showcase-zoom" onclick="openSampleModal('muestras/muestra-flujo-cuenta10.png', 'Flujo de fondos (flujo de caja)', 'Plantilla propia con fórmulas abiertas. Descárgala gratis y adáptala a la moneda de tu empresa.', 'Flujo de caja')">Ampliar</button>
+              <button type="button" class="hero-showcase-zoom" onclick="openHeroSampleModal()">Ampliar</button>
             </div>
 
-            <button type="button" class="hero-sample-thumb" onclick="openSampleModal('muestras/muestra-flujo-cuenta10.png', 'Flujo de fondos (flujo de caja)', 'Plantilla propia con fórmulas abiertas. Descárgala gratis y adáptala a la moneda de tu empresa.', 'Flujo de caja')" aria-label="Ampliar muestra de flujo de caja en Excel">
-              <img src="muestras/muestra-flujo-cuenta10.png" alt="Muestra real en Excel de flujo de fondos con datos de ejemplo">
+            <button type="button" class="hero-sample-thumb" onclick="openHeroSampleModal()" aria-label="Ampliar muestra actual">
+              <img src="muestras/muestra-flujo-cuenta10.png" alt="Muestra real en Excel de flujo de fondos con datos de ejemplo" class="hero-showcase-slide is-active" data-hero-index="0">
+              <img src="muestras/muestra-consolidacion-libros.png" alt="Muestra real en Excel de consolidado automático por carpeta" class="hero-showcase-slide" data-hero-index="1" loading="lazy">
+              <img src="muestras/muestra-conciliacion-pasarelas.png" alt="Muestra real en Excel de conciliación bancaria y cobros digitales" class="hero-showcase-slide" data-hero-index="2" loading="lazy">
+              <img src="muestras/muestra-reporte-en-linea.png" alt="Muestra real de reporte financiero en línea en Google Sheets" class="hero-showcase-slide" data-hero-index="3" loading="lazy">
             </button>
 
-            <p class="hero-pbi-caption">Plantilla propia de flujo de caja lista para descargar gratis.</p>
+            <p class="hero-pbi-caption" id="hero-sample-caption">Plantilla propia de flujo de caja lista para descargar gratis.</p>
           </div>
         </div>
 
@@ -166,10 +169,10 @@
             <p class="section-subtitle">Paso a paso: del archivo desordenado al reporte listo.</p>
           </div>
           <div class="flow-tabs" role="tablist" aria-label="Elegir ejemplo de automatización">
-            <button type="button" class="flow-tab-btn is-active" role="tab" aria-selected="true" onclick="setWorkflowCase(0)">Flujo de caja</button>
-            <button type="button" class="flow-tab-btn" role="tab" aria-selected="false" onclick="setWorkflowCase(1)">Unificar varios Excel</button>
-            <button type="button" class="flow-tab-btn" role="tab" aria-selected="false" onclick="setWorkflowCase(2)">Conciliación bancaria</button>
-            <button type="button" class="flow-tab-btn" role="tab" aria-selected="false" onclick="setWorkflowCase(3)">Reportes en línea</button>
+            <button type="button" class="flow-tab-btn is-active" role="tab" aria-selected="true" onclick="setWorkflowCase(0, true)">Flujo de caja</button>
+            <button type="button" class="flow-tab-btn" role="tab" aria-selected="false" onclick="setWorkflowCase(1, true)">Unificar varios Excel</button>
+            <button type="button" class="flow-tab-btn" role="tab" aria-selected="false" onclick="setWorkflowCase(2, true)">Conciliación bancaria</button>
+            <button type="button" class="flow-tab-btn" role="tab" aria-selected="false" onclick="setWorkflowCase(3, true)">Reportes en línea</button>
           </div>
         </div>
 
@@ -689,6 +692,6 @@
   </div>
 
   <!-- Controlador de Navegación e Interactividad -->
-  <script src="app.js?v=32.0"></script>
+  <script src="app.js?v=33.0"></script>
 </body>
 </html>
