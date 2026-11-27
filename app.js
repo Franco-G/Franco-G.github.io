@@ -964,7 +964,8 @@ const GALLERY_SAMPLES = [
 let excelSlideIndex = 0;
 let heroSlideIndex = 0;
 let heroAutoTimer = null;
-let flowAutoTimer = null;
+let flowStepTimer = null;
+let flowStepIndex = 0;
 let heroPaused = false;
 let flowPaused = false;
 let flowPauseUntil = 0;
@@ -1062,6 +1063,7 @@ function setWorkflowCase(index, userInitiated) {
 
   if (userInitiated) {
     flowPauseUntil = Date.now() + 14000;
+    highlightFlowStep(0);
   }
 
   excelSlideIndex = ((index % GALLERY_SAMPLES.length) + GALLERY_SAMPLES.length) % GALLERY_SAMPLES.length;
@@ -1148,6 +1150,39 @@ function isAnyModalOpen() {
   return (lb && !lb.hidden) || (faq && !faq.hidden);
 }
 
+function highlightFlowStep(stepIdx) {
+  const nodes = document.querySelectorAll('#workflow-diagram .flow-node');
+  if (!nodes.length) return;
+  flowStepIndex = ((stepIdx % nodes.length) + nodes.length) % nodes.length;
+  nodes.forEach((node, i) => {
+    node.classList.toggle('is-step-active', i === flowStepIndex);
+  });
+}
+
+function scheduleNextFlowTick(delayMs) {
+  if (flowStepTimer) clearTimeout(flowStepTimer);
+  flowStepTimer = setTimeout(() => {
+    if (REDUCED_MOTION_MQ.matches) return;
+    if (document.hidden || flowPaused || isAnyModalOpen() || kitchenViewMode !== 'clean' || Date.now() < flowPauseUntil) {
+      scheduleNextFlowTick(800);
+      return;
+    }
+
+    const nodes = document.querySelectorAll('#workflow-diagram .flow-node');
+    const totalSteps = nodes.length || 4;
+
+    if (flowStepIndex < totalSteps - 1) {
+      highlightFlowStep(flowStepIndex + 1);
+      const nextDelay = flowStepIndex === totalSteps - 1 ? 2100 : 1450;
+      scheduleNextFlowTick(nextDelay);
+    } else {
+      setWorkflowCase(excelSlideIndex + 1, false);
+      highlightFlowStep(0);
+      scheduleNextFlowTick(1450);
+    }
+  }, delayMs);
+}
+
 function initExcelShowcase() {
   const showcase = document.getElementById('excel-showcase');
   const heroCard = document.getElementById('hero-sample-card');
@@ -1177,12 +1212,10 @@ function initExcelShowcase() {
       setHeroSampleSlide(heroSlideIndex + 1);
     }, 4500);
 
-    if (flowAutoTimer) clearInterval(flowAutoTimer);
-    flowAutoTimer = setInterval(() => {
-      if (document.hidden || flowPaused || isAnyModalOpen()) return;
-      if (kitchenViewMode !== 'clean' || Date.now() < flowPauseUntil) return;
-      setWorkflowCase(excelSlideIndex + 1, false);
-    }, 6000);
+    if (showcase) {
+      highlightFlowStep(0);
+      scheduleNextFlowTick(1450);
+    }
   }
 }
 
