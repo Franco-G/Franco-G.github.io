@@ -441,7 +441,7 @@ h3 {
   object-fit: contain;
   object-position: center;
   background: #ffffff;
-  padding: 4px;
+  padding: 0;
   display: block;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -838,7 +838,7 @@ h3 {
   object-fit: contain;
   object-position: center;
   background: #ffffff;
-  padding: 4px;
+  padding: 0;
   opacity: 0;
   transform: scale(1.03);
   transition: opacity 0.45s ease, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1942,12 +1942,7 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
   border: 1px solid rgba(234, 67, 53, 0.25);
 }
 
-/* Botón y Modal de 7 Preguntas Frecuentes (Objeciones) */
-.faq-trigger-btn {
-  padding: 7px 14px;
-  font-size: 12px;
-}
-
+/* Modal de 7 Preguntas Frecuentes (Objeciones) */
 .faq-modal-body {
   background: var(--surface-soft);
   padding: 14px 18px;
@@ -2516,18 +2511,29 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
 
   .slide-section {
     min-height: auto;
-    padding: 1.5rem 0;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--hairline-soft);
   }
 
   .slide-section:first-of-type {
     min-height: auto;
-    padding-top: calc(var(--header-height, 118px) + 1rem);
-    padding-bottom: 1.25rem;
+    border-top: none;
+    padding-top: calc(var(--header-height, 118px) + 1.5rem);
+    padding-bottom: 2.25rem;
   }
 
   .contact-slide {
     min-height: auto;
-    padding: 1.5rem 0;
+    padding: 2.5rem 0 3rem;
+    border-top: 1px solid var(--hairline-soft);
+  }
+
+  /* Flat Design (design.md): tarjetas limpias con borde 1px sin sombras pesadas en móvil */
+  .card,
+  .metric-card,
+  .border-beam-card {
+    box-shadow: none;
+    border-color: var(--hairline);
   }
 
   .slide-container {
@@ -2535,13 +2541,12 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
   }
 
   .flow-canvas {
-    grid-template-columns: 1fr;
-    gap: 6px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
   }
 
   .flow-arrow {
-    margin: 0 auto;
-    transform: rotate(90deg);
+    display: none;
   }
 
   .services-bento-grid,
@@ -2549,19 +2554,24 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
   .contact-dual-grid {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.15rem;
   }
 
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 1.15rem;
+    gap: 1.35rem;
   }
 
   .hero-sample-thumb {
-    height: 245px;
+    height: auto;
+    aspect-ratio: 16 / 10;
   }
 
-  .excel-stage-btn,
+  .excel-stage-btn {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+
   .kitchen-raw-panel {
     height: 240px;
   }
@@ -2626,49 +2636,88 @@ html.js .flow-compare-card:not(.is-revealed) .compare-meter-fill {
     line-height: 1.2;
   }
   .flow-diagram-card {
-    padding: 10px 12px;
+    padding: 12px;
   }
   .flow-node {
-    padding: 8px 10px;
+    padding: 10px;
   }
-  .flow-arrow {
-    height: 20px;
-  }
-  .excel-stage-btn,
   .kitchen-raw-panel { height: 220px; }
-  .lightbox-controls-row,
-  .lightbox-controls-row .btn { width: 100%; justify-content: space-between; }
-  .sample-lightbox-footer .btn { width: 100%; }
+  .lightbox-controls-row {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+  .lightbox-controls-row .btn,
+  .sample-lightbox-footer .btn { width: auto; }
   h1 { font-size: 30px; }
   h2 { font-size: 22px; }
-  .metrics-row { grid-template-columns: 1fr; gap: 8px; }
-  .btn-group { flex-direction: column; width: 100%; }
-  .btn { width: 100%; text-align: center; justify-content: center; }
+  /* Bento 2+1 en móvil (design.md): 2 tarjetas lado a lado + 1 destacada debajo */
+  .metrics-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .metrics-row .metric-card:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+  /* Botones proporcionados al texto, sin barras gigantes de 100% */
+  .btn-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: auto;
+    gap: 10px;
+  }
+  .btn {
+    width: auto;
+    min-height: 40px;
+    padding: 9px 18px;
+    font-size: 13.5px;
+    text-align: center;
+    justify-content: center;
+  }
+  .promo-cta-stack {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .promo-card-cta {
+    width: auto;
+    flex: 1 1 auto;
+  }
   .nav-actions { gap: 6px; }
   .nav-icon-btn { width: 36px; height: 36px; min-width: 36px; min-height: 36px; }
   .nav-icon-btn .contact-icon { width: 18px; height: 18px; }
   .contact-card { padding: 16px; }
   .form-two-cols,
   .diag-grid-2,
-  .scope-fit-bar { grid-template-columns: 1fr; gap: 8px; }
+  .scope-fit-bar { grid-template-columns: 1fr; gap: 10px; }
   .service-pills-group { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .quote-submit-row { flex-direction: column; }
+  .quote-submit-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .quote-submit-row .btn {
+    flex: 1 1 auto;
+  }
   .contact-footer-bar {
     flex-direction: column;
     align-items: center;
     gap: 12px;
   }
   .contact-actions-row { justify-content: center; gap: 12px; }
-  .hero-sample-thumb { height: 205px; }
+  .hero-sample-thumb { height: auto; aspect-ratio: 16 / 10; }
 }
 
 @media (max-width: 440px) {
-  /* Mantener métricas compactas en 1 columna limpia en celulares (360px - 440px) */
+  /* Bento compacto en celulares pequeños (360px - 440px) */
   .metrics-row { gap: 8px; }
   .metric-card { padding: 13px 14px; }
-  .metric-num { font-size: 23px; }
+  .metric-num { font-size: 24px; }
   .metric-caption { font-size: 10px; letter-spacing: 0.03em; }
-  .metric-sub { font-size: 11px; line-height: 1.35; }
+  .metric-sub { font-size: 11.5px; line-height: 1.38; }
   .nav-container { padding: 0 0.85rem; gap: 6px; }
   .mobile-quick-nav { padding: 4px 0.85rem 6px; gap: 4px; }
   .header-scroll-progress { padding: 4px 0.85rem 6px; }
