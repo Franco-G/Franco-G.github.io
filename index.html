@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Automatización Contable y Finanzas en Excel | Franco Guerrero</title>
-  <meta name="description" content="Flujos de caja en dos monedas, conciliaciones de bancos y pasarelas, y consolidación de libros en Excel y Google Sheets.">
+  <title>Control Financiero y Excel | Franco Guerrero</title>
+  <meta name="description" content="Automatizo reportes en Excel, consolido archivos por carpeta con Power Query, armo flujos de caja reales y ordeno cobros de Yape, Plin o Culqi.">
   
   <!-- Open Graph y Redes Sociales -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://franco-g.github.io/">
-  <meta property="og:title" content="Automatización Contable y Finanzas en Excel | Franco Guerrero">
-  <meta property="og:description" content="Flujos de caja en dos monedas, conciliaciones de bancos y pasarelas, y consolidación de libros en Excel y Google Sheets.">
+  <meta property="og:title" content="Control Financiero y Excel | Franco Guerrero">
+  <meta property="og:description" content="Automatizo reportes en Excel, consolido archivos por carpeta con Power Query, armo flujos de caja reales y ordeno cobros de Yape, Plin o Culqi.">
   <meta property="og:image" content="https://franco-g.github.io/foto_perfil_circular_1x1.jpeg">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://franco-g.github.io/">
-  <meta name="twitter:title" content="Automatización Contable y Finanzas en Excel | Franco Guerrero">
-  <meta name="twitter:description" content="Flujos de caja en dos monedas, conciliaciones de bancos y pasarelas, y consolidación de libros en Excel y Google Sheets.">
+  <meta name="twitter:title" content="Control Financiero y Excel | Franco Guerrero">
+  <meta name="twitter:description" content="Automatizo reportes en Excel, consolido archivos por carpeta con Power Query, armo flujos de caja reales y ordeno cobros de Yape, Plin o Culqi.">
   <meta name="twitter:image" content="https://franco-g.github.io/foto_perfil_circular_1x1.jpeg">
   
   <link rel="icon" type="image/png" href="favicon.png?v=7.0">
@@ -28,7 +28,7 @@
   
   <script>document.documentElement.classList.add('js');</script>
   <script data-goatcounter="https://franco-g.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-  <link rel="stylesheet" href="style.css?v=30.0">
+  <link rel="stylesheet" href="style.css?v=31.0">
 </head>
 <body>
   <!-- Escenario de fondo fijo limpio -->
@@ -102,79 +102,74 @@
 
   <!-- Contenedor Maestro de Landing Page (Desplazamiento Libre Continuo) -->
   <main class="slides-wrapper" id="slides-wrapper">
-    <!-- Sección 1: Hero de Landing Page, Vitrina Viva e Indicadores Clave -->
+    <!-- Sección 1: Hero de Landing Page, Muestra Propia e Indicadores Reales -->
     <section id="inicio" class="slide-section hero-chapter" aria-label="Inicio y propuesta de valor">
       <div class="container slide-container">
         <div class="hero-grid">
           <header class="hero-section">
-            <h1>Cierres sin fricción</h1>
-            <p class="hero-subtitle">Finanzas, control y ahorro real.</p>
+            <h1>Automatizo tus reportes en Excel</h1>
+            <p class="hero-subtitle">Menos horas manuales y más control de tu negocio.</p>
             <p class="hero-text">
-              Automatizo tus Excels dispares, conciliaciones de Yape, Plin o Culqi y flujos de caja en dos monedas, sin cambiar tu sistema.
+              Ordeno tus Excels desordenados, consolido cobros de Yape, Plin o Culqi y armo tu flujo de caja mensual y anual, sin cambiar tu sistema.
             </p>
             <div class="btn-group">
-              <a href="#contacto" class="btn btn-primary shimmer-btn" onclick="goToSlide(4); return false;">Calcular mi ahorro</a>
-              <a href="muestras/flujo-caja-cuenta10-bimoneda.xlsx" download="Flujo-Caja-Cuenta10-Bimoneda-FrancoGuerrero.xlsx" class="btn btn-secondary" onclick="trackEvent('descarga-plantilla-excel')">Descargar plantilla gratis</a>
+              <a href="#diagnostico-card" class="btn btn-primary shimmer-btn" onclick="goToDiagnostic(); return false;">Calcular mi ahorro</a>
+              <a href="muestras/flujo-caja-cuenta10-bimoneda.xlsx" download="Plantilla-Flujo-de-Caja-FrancoGuerrero.xlsx" class="btn btn-secondary" onclick="trackEvent('descarga-plantilla-excel')">Descargar plantilla gratis</a>
             </div>
           </header>
 
-          <!-- Primera Vista: Muestra Real de Flujo de Caja Cuenta 10 (Soles y Dólares) -->
-          <div class="hero-sample-card border-beam-card" aria-label="Muestra en Excel de Flujo de Caja en Soles y Dólares">
+          <!-- Primera Vista: Muestra Propia de Flujo de Caja -->
+          <div class="hero-sample-card border-beam-card" aria-label="Muestra propia de flujo de caja en Excel">
             <div class="hero-showcase-head">
               <div class="hero-showcase-status">
-                <span>Muestra propia · PEN y USD</span>
+                <span>Muestra propia · Flujo de caja</span>
               </div>
-              <button type="button" class="hero-showcase-zoom" onclick="openSampleModal('muestras/muestra-flujo-cuenta10.png', 'Flujo de Caja Cuenta 10 (Soles y Dólares)', 'Modelo propio creado desde cero con datos ficticios de ejemplo. Puedes descargarlo gratis y probarlo en tu Excel.', 'Flujo de caja')">Ampliar</button>
+              <button type="button" class="hero-showcase-zoom" onclick="openSampleModal('muestras/muestra-flujo-cuenta10.png', 'Flujo de caja real (ejemplo editable)', 'Plantilla propia con datos de ejemplo. Puedes descargarla gratis y adaptarla a la moneda de tu empresa.', 'Flujo de caja')">Ampliar</button>
             </div>
 
-            <button type="button" class="hero-sample-thumb" onclick="openSampleModal('muestras/muestra-flujo-cuenta10.png', 'Flujo de Caja Cuenta 10 (Soles y Dólares)', 'Modelo propio creado desde cero con datos ficticios de ejemplo. Puedes descargarlo gratis y probarlo en tu Excel.', 'Flujo de caja')" aria-label="Ampliar muestra de Flujo de Caja en Soles y Dólares">
-              <img src="muestras/muestra-flujo-cuenta10.png" alt="Muestra real en Excel de Flujo de Caja Cuenta 10 en Soles y Dólares">
+            <button type="button" class="hero-sample-thumb" onclick="openSampleModal('muestras/muestra-flujo-cuenta10.png', 'Flujo de caja real (ejemplo editable)', 'Plantilla propia con datos de ejemplo. Puedes descargarla gratis y adaptarla a la moneda de tu empresa.', 'Flujo de caja')" aria-label="Ampliar muestra de flujo de caja en Excel">
+              <img src="muestras/muestra-flujo-cuenta10.png" alt="Muestra real en Excel de flujo de caja con datos de ejemplo">
             </button>
 
-            <p class="hero-pbi-caption">Plantilla propia Cuenta 10 (PEN y USD) lista para descargar gratis.</p>
+            <p class="hero-pbi-caption">Plantilla propia de flujo de caja lista para descargar gratis.</p>
           </div>
         </div>
 
-        <!-- 4 Métricas Reales Verificables -->
+        <!-- 3 Métricas Reales de Impacto -->
         <div class="metrics-row">
           <div class="metric-card">
-            <div class="metric-num" data-ticker-target="24">24</div>
-            <div class="metric-caption">Libros en 6 horas</div>
-            <div class="metric-sub">Formatos dispares unificados listos para carga.</div>
+            <div class="metric-num" data-ticker-target="87" data-ticker-prefix="-" data-ticker-suffix="%">-87%</div>
+            <div class="metric-caption">Menos tiempo en cierres</div>
+            <div class="metric-sub">Reportes que tomaban 32 horas bajaron a 4 horas automáticas.</div>
           </div>
           <div class="metric-card">
-            <div class="metric-num" data-ticker-target="97" data-ticker-suffix="%">97%</div>
-            <div class="metric-caption">Conciliación semanal</div>
-            <div class="metric-sub">Cuatro meses de Yape, Plin y Culqi al día.</div>
+            <div class="metric-num" data-ticker-target="25" data-ticker-prefix="+" data-ticker-suffix=" h">+25 h</div>
+            <div class="metric-caption">Ahorradas cada mes</div>
+            <div class="metric-sub">Carpetas en Power Query sin armar archivos uno por uno.</div>
           </div>
           <div class="metric-card">
-            <div class="metric-num" data-ticker-target="50" data-ticker-prefix="+">+50</div>
-            <div class="metric-caption">Empresas integradas</div>
-            <div class="metric-sub">Saldos y balances actualizados en la nube.</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-num" data-ticker-target="2" data-ticker-suffix=" monedas">2 monedas</div>
-            <div class="metric-caption">Flujo real PEN y USD</div>
-            <div class="metric-sub">Caja y bancos desde lo que exporta tu sistema.</div>
+            <div class="metric-num" data-ticker-target="4" data-ticker-suffix=" meses">4 meses</div>
+            <div class="metric-caption">Al día en 2 semanas</div>
+            <div class="metric-sub">Consolidado de Yape, Plin y Culqi con registro en sistema.</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Sección 2: Diagrama de Flujo Animado + Evidencia Real Sincronizada (4 Procesos) -->
-    <section id="flujo-trabajo" class="slide-section" aria-label="Diagrama de flujo de trabajo real en 4 procesos">
+    <!-- Sección 2: Ejemplos Reales Paso a Paso + Evidencia Sincronizada -->
+    <section id="flujo-trabajo" class="slide-section" aria-label="Ejemplos reales de automatización en Excel y Google Sheets">
       <div class="container slide-container">
         <div class="slide-header-row">
           <div>
-            <span class="slide-badge">Flujo real · 4 procesos</span>
-            <h2>Cómo transformo datos</h2>
-            <p class="section-subtitle">Del archivo crudo al control.</p>
+            <span class="slide-badge">Ejemplos reales</span>
+            <h2>Cómo ordeno tus archivos</h2>
+            <p class="section-subtitle">Paso a paso: del archivo desordenado al reporte listo.</p>
           </div>
-          <div class="flow-tabs" role="tablist" aria-label="Elegir caso de flujo de trabajo">
-            <button type="button" class="flow-tab-btn is-active" role="tab" aria-selected="true" onclick="setWorkflowCase(0)">01 Flujo Cuenta 10</button>
-            <button type="button" class="flow-tab-btn" role="tab" aria-selected="false" onclick="setWorkflowCase(1)">02 Yape / Plin / Culqi</button>
-            <button type="button" class="flow-tab-btn" role="tab" aria-selected="false" onclick="setWorkflowCase(2)">03 24 Libros</button>
-            <button type="button" class="flow-tab-btn" role="tab" aria-selected="false" onclick="setWorkflowCase(3)">04 Reporte Nube</button>
+          <div class="flow-tabs" role="tablist" aria-label="Elegir ejemplo de automatización">
+            <button type="button" class="flow-tab-btn is-active" role="tab" aria-selected="true" onclick="setWorkflowCase(0)">Flujo de caja</button>
+            <button type="button" class="flow-tab-btn" role="tab" aria-selected="false" onclick="setWorkflowCase(1)">Unificar varios Excel</button>
+            <button type="button" class="flow-tab-btn" role="tab" aria-selected="false" onclick="setWorkflowCase(2)">Yape, Plin y Culqi</button>
+            <button type="button" class="flow-tab-btn" role="tab" aria-selected="false" onclick="setWorkflowCase(3)">Reportes en línea</button>
           </div>
         </div>
 
@@ -186,8 +181,8 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                 <span class="flow-node-tag">01 · Origen</span>
               </div>
-              <strong class="flow-node-title" id="flow-n1-title">Libro Mayor exportado</strong>
-              <p class="flow-node-desc" id="flow-n1-desc">Asientos planos en Soles y Dólares sin agrupar por caja.</p>
+              <strong class="flow-node-title" id="flow-n1-title">Movimientos conciliados</strong>
+              <p class="flow-node-desc" id="flow-n1-desc">Información real de cuentas contables ya cuadrada.</p>
             </div>
 
             <div class="flow-arrow" aria-hidden="true">
@@ -199,8 +194,8 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
                 <span class="flow-node-tag">02 · Proceso</span>
               </div>
-              <strong class="flow-node-title" id="flow-n2-title">Filtro Cuenta 10</strong>
-              <p class="flow-node-desc" id="flow-n2-desc">Reglas automáticas de limpieza y clasificación por concepto.</p>
+              <strong class="flow-node-title" id="flow-n2-title">Limpieza en Power Query</strong>
+              <p class="flow-node-desc" id="flow-n2-desc">Separa entradas y salidas reales de efectivo por concepto.</p>
             </div>
 
             <div class="flow-arrow" aria-hidden="true">
@@ -210,10 +205,10 @@
             <div class="flow-node" data-step="3">
               <div class="flow-node-head">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-                <span class="flow-node-tag">03 · Control</span>
+                <span class="flow-node-tag">03 · Cálculo</span>
               </div>
-              <strong class="flow-node-title" id="flow-n3-title">Modelo y tipo de cambio</strong>
-              <p class="flow-node-desc" id="flow-n3-desc">Cruce dinámico en dos monedas con parámetro editable.</p>
+              <strong class="flow-node-title" id="flow-n3-title">Modelo en Power Pivot</strong>
+              <p class="flow-node-desc" id="flow-n3-desc">Calcula flujo mensual y anual consolidado por moneda o saldo neto.</p>
             </div>
 
             <div class="flow-arrow is-final-arrow" aria-hidden="true">
@@ -225,8 +220,8 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
                 <span class="flow-node-tag">04 · Resultado</span>
               </div>
-              <strong class="flow-node-title" id="flow-n4-title">Flujo PEN y USD al día</strong>
-              <p class="flow-node-desc" id="flow-n4-desc">Liquidez real lista para decidir en gerencia sin esperar cierre.</p>
+              <strong class="flow-node-title" id="flow-n4-title">Flujo de caja real</strong>
+              <p class="flow-node-desc" id="flow-n4-desc">Listo en la moneda que uses para decidir sin esperar cierre.</p>
             </div>
           </div>
         </div>
@@ -235,52 +230,54 @@
         <div class="flow-evidence-grid">
           <article class="card flow-compare-card">
             <div class="card-top">
-              <span class="card-category" id="flow-ev-cat">Liquidez Bimoneda</span>
-              <span class="mini-badge" id="flow-ev-badge">Soles y Dólares</span>
+              <span class="card-category" id="flow-ev-cat">Flujo de caja</span>
+              <span class="mini-badge" id="flow-ev-badge">En tu moneda</span>
             </div>
-            <div class="result-roi-big" id="flow-ev-kpi">2 monedas al día</div>
+            <div class="result-roi-big" id="flow-ev-kpi">Mensual y anual</div>
 
             <div class="compare-stack">
               <div class="compare-box before" tabindex="0" role="button" aria-pressed="false">
                 <span class="compare-tag">Antes</span>
-                <p id="flow-ev-before"><strong>Libro Mayor plano</strong> difícil de resumir para caja.</p>
+                <p id="flow-ev-before"><strong>Movimientos dispersos</strong> difíciles de resumir para ver el efectivo real.</p>
                 <div class="compare-meter" aria-hidden="true"><span class="compare-meter-fill" style="--meter-scale: 1;"></span></div>
               </div>
               <div class="compare-box after" tabindex="0" role="button" aria-pressed="false">
                 <span class="compare-tag">Después</span>
-                <p id="flow-ev-after"><strong>Flujo dinámico PEN y USD</strong> listo en minutos.</p>
+                <p id="flow-ev-after"><strong>Flujo automático en Excel</strong> consolidado por moneda y saldo neto.</p>
                 <div class="compare-meter" aria-hidden="true"><span class="compare-meter-fill" id="flow-ev-meter" style="--meter-scale: 0.08;"></span></div>
               </div>
             </div>
           </article>
 
           <div class="excel-stage-card border-beam-card" id="excel-showcase">
-            <div class="kitchen-mode-bar" role="group" aria-label="Alternar entre resultado limpio y archivo crudo">
-              <button type="button" class="kitchen-mode-btn is-active" data-kitchen-mode="clean" aria-pressed="true" onclick="setKitchenViewMode('clean')">Resultado limpio</button>
-              <button type="button" class="kitchen-mode-btn" data-kitchen-mode="raw" aria-pressed="false" onclick="setKitchenViewMode('raw')">Archivo crudo</button>
+            <div class="kitchen-stage-head">
+              <div class="kitchen-mode-bar" role="group" aria-label="Alternar entre resultado limpio y archivo crudo">
+                <button type="button" class="kitchen-mode-btn is-active" data-kitchen-mode="clean" aria-pressed="true" onclick="setKitchenViewMode('clean')">Resultado limpio</button>
+                <button type="button" class="kitchen-mode-btn" data-kitchen-mode="raw" aria-pressed="false" onclick="setKitchenViewMode('raw')">Archivo crudo</button>
+              </div>
+              <button type="button" class="hero-showcase-zoom" id="kitchen-zoom-btn" onclick="openCurrentExcelSample()">Ampliar</button>
             </div>
             <button type="button" class="excel-stage-btn" id="kitchen-clean-btn" onclick="openCurrentExcelSample()" aria-label="Ampliar muestra propia actual">
-              <img src="muestras/muestra-flujo-cuenta10.png" alt="Muestra propia en Excel de Flujo de Caja Cuenta 10 en Soles y Dólares" class="hero-showcase-slide is-active" data-index="0">
-              <img src="muestras/muestra-conciliacion-pasarelas.png" alt="Muestra propia en Excel de Conciliación de Yape, Plin y Culqi en Soles" class="hero-showcase-slide" data-index="1" loading="lazy">
-              <img src="muestras/muestra-consolidacion-libros.png" alt="Muestra propia en Excel de Consolidación de Libros Mensuales" class="hero-showcase-slide" data-index="2" loading="lazy">
+              <img src="muestras/muestra-flujo-cuenta10.png" alt="Muestra propia en Excel de flujo de caja real" class="hero-showcase-slide is-active" data-index="0">
+              <img src="muestras/muestra-consolidacion-libros.png" alt="Muestra propia en Excel de consolidado automático de Excels por carpeta" class="hero-showcase-slide" data-index="1" loading="lazy">
+              <img src="muestras/muestra-conciliacion-pasarelas.png" alt="Muestra propia en Excel de consolidado de Yape, Plin y Culqi" class="hero-showcase-slide" data-index="2" loading="lazy">
               <div id="kitchen-cloud-preview" class="kitchen-cloud-preview" hidden>
                 <div class="cloud-sheet-bar">
-                  <span class="raw-sheet-title">Google Sheets Corporativo · +50 Empresas</span>
-                  <span class="mini-badge">Acceso privado por empresa</span>
+                  <span class="raw-sheet-title">Google Sheets compartido · Reportes al día</span>
+                  <span class="mini-badge">Acceso privado</span>
                 </div>
                 <table class="cloud-sheet-table">
                   <thead>
-                    <tr><th>ID</th><th>Empresa (Demo)</th><th>Periodo</th><th>Liquidez</th><th>Estado</th></tr>
+                    <tr><th>ID</th><th>Empresa (Demo)</th><th>Periodo</th><th>Saldo caja</th><th>Estado</th></tr>
                   </thead>
                   <tbody>
-                    <tr><td>E-014</td><td>Comercial Andina S.A.C.</td><td>00 a 12</td><td>S/ 148,002</td><td class="cloud-ok">Actualizado</td></tr>
-                    <tr><td>E-027</td><td>Clínica Salud Sur</td><td>00 a 12</td><td>S/ 92,450</td><td class="cloud-ok">Actualizado</td></tr>
-                    <tr><td>E-043</td><td>Importadora Norte EIRL</td><td>00 a 12</td><td>S/ 215,890</td><td class="cloud-ok">Actualizado</td></tr>
-                    <tr><td>E-052</td><td>Servicios Pacífico SRL</td><td>00 a 12</td><td>S/ 64,120</td><td class="cloud-ok">Actualizado</td></tr>
+                    <tr><td>E-01</td><td>Empresa Demo A</td><td>Ene - Dic</td><td>S/ 148,002</td><td class="cloud-ok">Actualizado</td></tr>
+                    <tr><td>E-02</td><td>Empresa Demo B</td><td>Ene - Dic</td><td>S/ 92,450</td><td class="cloud-ok">Actualizado</td></tr>
+                    <tr><td>E-03</td><td>Empresa Demo C</td><td>Ene - Dic</td><td>S/ 215,890</td><td class="cloud-ok">Actualizado</td></tr>
+                    <tr><td>E-04</td><td>Empresa Demo D</td><td>Ene - Dic</td><td>S/ 64,120</td><td class="cloud-ok">Actualizado</td></tr>
                   </tbody>
                 </table>
               </div>
-              <span class="sample-thumb-pill" id="kitchen-zoom-pill">Ampliar</span>
             </button>
             <div id="kitchen-raw-panel" class="kitchen-raw-panel" hidden></div>
           </div>
@@ -288,133 +285,133 @@
       </div>
     </section>
 
-    <!-- Sección 3: Encargos Puntuales Orientados a Primera Venta -->
+    <!-- Sección 3: Servicios Puntuales Orientados a Negocio -->
     <section id="soluciones" class="slide-section" aria-label="Servicios puntuales en Excel y Google Sheets">
       <div class="container slide-container">
         <div class="slide-header-row">
           <div>
-            <h2>Cómo trabajo</h2>
-            <p class="section-subtitle">Encargos puntuales para tu empresa.</p>
+            <h2>Servicios puntuales en Excel</h2>
+            <p class="section-subtitle">Soluciones concretas con precio claro antes de empezar.</p>
           </div>
         </div>
 
         <div class="services-bento-grid">
-          <!-- Opción 1: Flujo de Caja -->
+          <!-- Servicio 1: Flujo de caja real -->
           <article class="card service-bento-card">
             <div class="card-top">
-              <span class="card-category">Solución 01</span>
+              <span class="card-category">Control de efectivo</span>
               <span class="mini-badge">Desde S/ 250 · 3 a 5 días</span>
             </div>
-            <h3>Flujo de caja</h3>
-            <p class="project-context">Ordeno tu flujo de caja real en Soles y Dólares desde tus reportes exportados.</p>
+            <h3>Flujo de caja real</h3>
+            <p class="project-context">Armo tu flujo mensual y anual con Power Query y Power Pivot desde tus reportes conciliados.</p>
             <ul class="project-bullets">
-              <li>Control de entradas y salidas por cuenta y concepto.</li>
-              <li>Tipo de cambio editable y 1 ronda de ajustes incluida.</li>
+              <li>Consolidado por moneda o saldo neto en la moneda que uses.</li>
+              <li>Incluye una ronda de ajustes sobre tus archivos reales.</li>
             </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
-                <span class="tag">Cuenta 10</span>
-                <span class="tag">PEN y USD</span>
+                <span class="tag">Power Query</span>
+                <span class="tag">En tu moneda</span>
               </div>
               <button type="button" class="service-card-link" onclick="quoteSpecificService('Flujo de caja')">Calcular esto →</button>
             </div>
           </article>
 
-          <!-- Opción 2: Cargas y Cruces -->
+          <!-- Servicio 2: Unificar varios Excel -->
           <article class="card service-bento-card">
             <div class="card-top">
-              <span class="card-category">Solución 02</span>
+              <span class="card-category">Carpetas automáticas</span>
               <span class="mini-badge">Desde S/ 200 · 2 a 4 días</span>
             </div>
-            <h3>Cargas y cruces</h3>
-            <p class="project-context">Unifico Excels mensuales desordenados en una sola plantilla lista para cargar.</p>
+            <h3>Unificar varios Excel</h3>
+            <p class="project-context">Conecto una carpeta en Power Query para que agregues reportes y actualices un único consolidado.</p>
             <ul class="project-bullets">
-              <li>Depura duplicados y homologa fechas sin tipeo manual.</li>
-              <li>Entrega con guía práctica para repetir cada cierre.</li>
+              <li>Junta cualquier cantidad de Excels sin copiar ni pegar.</li>
+              <li>Deja listo el consolidado o carga masiva en un clic.</li>
             </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
                 <span class="tag">Power Query</span>
-                <span class="tag">Carga masiva</span>
+                <span class="tag">Varios archivos</span>
               </div>
-              <button type="button" class="service-card-link" onclick="quoteSpecificService('Limpieza de libros')">Calcular esto →</button>
+              <button type="button" class="service-card-link" onclick="quoteSpecificService('Unificar Excels')">Calcular esto →</button>
             </div>
           </article>
 
-          <!-- Opción 3: Conciliación Digital -->
+          <!-- Servicio 3: Orden y registro de cobros -->
           <article class="card service-bento-card">
             <div class="card-top">
-              <span class="card-category">Solución 03</span>
+              <span class="card-category">Yape, Plin y Culqi</span>
               <span class="mini-badge">Desde S/ 250 · 3 a 5 días</span>
             </div>
-            <h3>Conciliación digital</h3>
-            <p class="project-context">Cruzo extractos bancarios (BCP, BBVA y otros) con tus boletas de Yape, Plin o Culqi.</p>
+            <h3>Orden y registro de cobros</h3>
+            <p class="project-context">Consolido tus reportes de pasarelas y bancos para ordenar comisiones y acelerar el registro en tu sistema.</p>
             <ul class="project-bullets">
-              <li>Separa abonos netos, comisiones y pendientes al instante.</li>
-              <li>Cotización cerrada según volumen con reserva total.</li>
+              <li>Reúne cobros, comisiones y pendientes en una base limpia.</li>
+              <li>Prepara la carga automatizada sin digitar movimiento por movimiento.</li>
             </ul>
             <div class="card-footer-cta">
               <div class="tag-list-inline">
-                <span class="tag">Yape / Plin / Culqi</span>
-                <span class="tag">Bancos</span>
+                <span class="tag">Yape, Plin y Culqi</span>
+                <span class="tag">Registro ERP</span>
               </div>
-              <button type="button" class="service-card-link" onclick="quoteSpecificService('Conciliación digital')">Calcular esto →</button>
+              <button type="button" class="service-card-link" onclick="quoteSpecificService('Cobros y registros')">Calcular esto →</button>
             </div>
           </article>
         </div>
 
-        <div class="scope-fit-bar" aria-label="Para quién sí es y para quién no es">
+        <div class="scope-fit-bar" aria-label="Qué sí hago y qué no hago">
           <div class="scope-fit-item">
-            <span class="scope-fit-yes">Sí atiendo</span>
-            <span>Exportaciones Excel, bancos peruanos y Yape, Plin o Culqi.</span>
+            <span class="scope-fit-yes">Sí hago</span>
+            <span>Automatización en Excel, Google Sheets, bancos y pasarelas de pago.</span>
           </div>
           <div class="scope-fit-item">
-            <span class="scope-fit-no">No atiendo</span>
-            <span>Soporte interno dentro de software contable de terceros.</span>
+            <span class="scope-fit-no">No hago</span>
+            <span>Contabilidad tributaria ni soporte dentro de software de terceros.</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Sección 4: Respaldo Real y Certificados Verificables -->
-    <section id="respaldo" class="slide-section" aria-label="Respaldo profesional y certificados">
+    <!-- Sección 4: Experiencia Real y Certificados Verificables -->
+    <section id="respaldo" class="slide-section" aria-label="Experiencia profesional y certificados">
       <div class="container slide-container">
         <div class="slide-header-row">
           <div>
-            <h2>Respaldo real</h2>
-            <p class="section-subtitle">Experiencia comprobada en operación diaria.</p>
+            <h2>Mi experiencia y respaldo</h2>
+            <p class="section-subtitle">Trabajo diario en finanzas, pagos y automatización.</p>
           </div>
           <button type="button" class="btn btn-secondary faq-trigger-btn" onclick="openFaqModal()">Preguntas frecuentes (7)</button>
         </div>
 
         <div class="services-bento-grid">
-          <!-- Columna 1: Tesorería Corporativa -->
+          <!-- Columna 1: Experiencia en firma contable -->
           <article class="card service-bento-card">
             <div class="card-top">
-              <span class="card-category">Operación Multiempresa</span>
-              <span class="mini-badge">8+ empresas</span>
+              <span class="card-category">Firma contable</span>
+              <span class="mini-badge">Práctica diaria</span>
             </div>
-            <h3>Tesorería corporativa</h3>
-            <p class="project-context">Control bancario y pagos para grupos empresariales en Perú.</p>
+            <h3>Experiencia en finanzas y datos</h3>
+            <p class="project-context">Trabajo diario en firma contable llevando tesorería, bancos y automatización de reportes.</p>
             <ul class="project-bullets">
-              <li>Pagos masivos BCP, BBVA, planillas y detracciones.</li>
-              <li>Control de préstamos, fraccionamientos y tipo de cambio.</li>
-              <li>3 flujogramas y manual de pagos de 6 páginas.</li>
+              <li>Control de pagos, cuentas por pagar, deudas y extractos bancarios.</li>
+              <li>Consolidación de múltiples Excels con Power Query y Power Pivot.</li>
+              <li>Reportes automáticos en Excel y Google Sheets conectados al sistema.</li>
             </ul>
             <div class="tag-list">
-              <span class="tag">Telecrédito BCP</span>
-              <span class="tag">BBVA Net Cash</span>
-              <span class="tag">SIRE SUNAT</span>
+              <span class="tag">Bancos y pagos</span>
+              <span class="tag">Power Query</span>
+              <span class="tag">Google Sheets</span>
             </div>
           </article>
 
-          <!-- Columna 2: Formación y Respaldo -->
+          <!-- Columna 2: Estudios y certificados -->
           <article class="card service-bento-card">
             <div class="card-top">
               <span class="card-category">Credenciales</span>
-              <span class="mini-badge">Certificado</span>
+              <span class="mini-badge">Verificable</span>
             </div>
-            <h3>Formación y respaldo</h3>
+            <h3>Estudios y certificados</h3>
             <p class="project-context">Administración, finanzas empresariales y analítica aplicada.</p>
             <ul class="project-bullets">
               <li>Administración (2.º puesto IDAT, cursando UTP).</li>
@@ -427,22 +424,22 @@
             </div>
           </article>
 
-          <!-- Columna 3: Trabajo por Entregables y Alcance Claro -->
+          <!-- Columna 3: Cómo trabajamos juntos -->
           <article class="card service-bento-card">
             <div class="card-top">
-              <span class="card-category">Alcance Cerrado</span>
-              <span class="mini-badge">Sin sorpresas</span>
+              <span class="card-category">Sin sorpresas</span>
+              <span class="mini-badge">Remoto y puntual</span>
             </div>
-            <h3>Entrega por proyecto</h3>
-            <p class="project-context">Remoto y puntual. No instalo ni intervengo tu software.</p>
+            <h3>Cómo trabajamos juntos</h3>
+            <p class="project-context">Trabajo sobre los archivos que ya exportas, sin instalar programas raros.</p>
             <ul class="project-bullets">
-              <li>Todo corre en tu Excel o Google Sheets.</li>
-              <li>Fórmulas abiertas y guía clara sin dependencia.</li>
-              <li>Muestra previa antes de definir plazo y precio.</li>
+              <li>Todo corre en tu propio Excel o Google Sheets.</li>
+              <li>Fórmulas abiertas y guía práctica para que no dependas de mí.</li>
+              <li>Reviso una muestra tuya antes de darte plazo y precio fijo.</li>
             </ul>
             <div class="tag-list">
               <span class="tag">Confidencialidad</span>
-              <span class="tag">Sin cambiar sistema</span>
+              <span class="tag">Fórmulas abiertas</span>
               <span class="tag">Guía incluida</span>
             </div>
           </article>
@@ -450,46 +447,45 @@
       </div>
     </section>
 
-    <!-- Sección 5: Contacto Directo, Plantilla Gratuita y Diagnóstico -->
-    <section id="contacto" class="slide-section contact-slide" aria-label="Contacto directo y diagnóstico">
+    <!-- Sección 5: Contacto Directo, Plantilla Gratuita y Calculadora -->
+    <section id="contacto" class="slide-section contact-slide" aria-label="Contacto directo, plantilla gratuita y cálculo de ahorro">
       <div class="container slide-container">
         <div class="contact-shell">
           <div class="slide-header-row">
             <div>
-              <h2>Contacto directo</h2>
-              <p class="section-subtitle">Cuéntame qué proceso quieres automatizar.</p>
+              <h2>Cotiza o prueba una plantilla</h2>
+              <p class="section-subtitle">Calcula cuántas horas puedes ahorrar cada mes.</p>
             </div>
           </div>
 
-          <!-- Cierre en 2 Caminos Claros: Plantilla propia gratuita a la izquierda | Formspree a la derecha -->
+          <!-- Cierre en 2 Caminos Claros: Plantilla propia gratuita a la izquierda | Calculadora a la derecha -->
           <div class="contact-dual-grid">
             <aside class="card promo-bonus-card" aria-label="Descarga gratuita de plantilla propia y WhatsApp">
               <div class="card-top">
                 <span class="card-category">Recurso gratuito propio</span>
-                <span class="mini-badge">Descarga directa .xlsx</span>
+                <span class="mini-badge">Archivo .xlsx</span>
               </div>
-              <div class="promo-head-row">
-                <h3>Plantilla gratis propia</h3>
-                <button type="button" class="hero-showcase-zoom" onclick="openSampleModal('muestras/muestra-flujo-cuenta10.png', 'Flujo de Caja Cuenta 10 (Soles y Dólares)', 'Modelo propio creado desde cero con datos ficticios de ejemplo. Puedes descargarlo gratis y probarlo en tu Excel.', 'Flujo de caja')">Ampliar</button>
-              </div>
-              <button type="button" class="promo-card-thumb" onclick="openSampleModal('muestras/muestra-flujo-cuenta10.png', 'Flujo de Caja Cuenta 10 (Soles y Dólares)', 'Modelo propio creado desde cero con datos ficticios de ejemplo. Puedes descargarlo gratis y probarlo en tu Excel.', 'Flujo de caja')" aria-label="Ampliar vista previa de plantilla gratuita">
-                <img src="muestras/muestra-flujo-cuenta10.png" alt="Vista previa real de Flujo de Caja Cuenta 10 en Soles y Dólares" loading="lazy">
-              </button>
-              <p class="project-context">Plantilla propia en <strong>Soles y Dólares (Cuenta 10)</strong> con tipo de cambio editable, datos ficticios y guía en 3 pasos.</p>
+              <h3>Prueba mi plantilla gratis</h3>
+              <p class="project-context">Descarga mi plantilla de flujo de caja con datos de ejemplo para ver cómo ordeno un reporte en Excel.</p>
+              <ul class="project-bullets">
+                <li>Entradas y salidas ordenadas por categoría.</li>
+                <li>Fórmulas abiertas adaptables a cualquier moneda.</li>
+                <li>Guía breve en 3 pasos para usarla con tus propios datos.</li>
+              </ul>
               <div class="promo-cta-stack">
-                <a href="muestras/flujo-caja-cuenta10-bimoneda.xlsx" download="Flujo-Caja-Cuenta10-Bimoneda-FrancoGuerrero.xlsx" class="btn btn-primary shimmer-btn promo-card-cta" onclick="trackEvent('descarga-plantilla-excel')">Descargar plantilla Excel <span class="btn-arrow" aria-hidden="true">↓</span></a>
+                <a href="muestras/flujo-caja-cuenta10-bimoneda.xlsx" download="Plantilla-Flujo-de-Caja-FrancoGuerrero.xlsx" class="btn btn-primary shimmer-btn promo-card-cta" onclick="trackEvent('descarga-plantilla-excel')">Descargar plantilla Excel <span class="btn-arrow" aria-hidden="true">↓</span></a>
                 <a href="https://wa.me/51921689711?text=Hola%20Franco%2C%20vi%20tu%20portafolio%20y%20quiero%20consultar%20por%20un%20archivo%20en%20Excel%20o%20Google%20Sheets." target="_blank" rel="noopener noreferrer" class="btn btn-secondary promo-card-cta" onclick="trackEvent('consulta-whatsapp-click')">Consultar directo por WhatsApp</a>
               </div>
             </aside>
 
             <!-- Camino 2: Autodiagnóstico Interactivo en 2 Pasos (Formspree + WhatsApp) + 4 Canales Oficiales -->
-            <div class="contact-card border-beam-card">
+            <div class="contact-card border-beam-card" id="diagnostico-card">
             <div class="visual-header">
               <div class="visual-title-row">
                 <span class="live-dot" aria-hidden="true"></span>
-                <h3>Diagnóstico rápido</h3>
+                <h3>Calcula tu ahorro mensual</h3>
               </div>
-              <span class="mini-badge" id="diag-step-badge">Paso 1 de 2 · Calcula tu ahorro</span>
+              <span class="mini-badge" id="diag-step-badge">Paso 1 de 2 · Estimado al instante</span>
             </div>
 
             <form id="quick-quote-form" class="quick-quote-form" onsubmit="handleQuoteSubmit(); return false;" novalidate>
@@ -500,15 +496,15 @@
                   <input type="hidden" id="quote-service" name="service" value="Flujo de caja">
                   <div class="service-pills-group" role="radiogroup" aria-labelledby="service-pills-label">
                     <button type="button" class="service-pill-btn active" role="radio" aria-checked="true" data-service="Flujo de caja" onclick="selectServiceTier('Flujo de caja', this)">Flujo de caja</button>
-                    <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Limpieza de libros" onclick="selectServiceTier('Limpieza de libros', this)">Libros Excel</button>
-                    <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Conciliación digital" onclick="selectServiceTier('Conciliación digital', this)">Conciliación</button>
-                    <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Consulta general" onclick="selectServiceTier('Consulta general', this)">Otro tema</button>
+                    <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Unificar Excels" onclick="selectServiceTier('Unificar Excels', this)">Unificar Excels</button>
+                    <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Cobros y registros" onclick="selectServiceTier('Cobros y registros', this)">Cobros y registros</button>
+                    <button type="button" class="service-pill-btn" role="radio" aria-checked="false" data-service="Otro tema" onclick="selectServiceTier('Otro tema', this)">Otro tema</button>
                   </div>
                 </div>
 
                 <div class="diag-grid-2">
                   <div class="form-field">
-                    <label for="diag-volume">2. Archivos o empresas al mes</label>
+                    <label for="diag-volume">2. Cantidad de archivos al mes</label>
                     <select id="diag-volume" name="volume" onchange="updateDiagnosticEstimate()">
                       <option value="1 a 5 archivos">1 a 5 archivos</option>
                       <option value="6 a 20 archivos" selected>6 a 20 archivos</option>
@@ -529,10 +525,10 @@
                 <div class="form-field">
                   <label for="diag-source">4. ¿De dónde salen tus datos hoy?</label>
                   <select id="diag-source" name="source" onchange="updateDiagnosticEstimate()">
-                    <option value="Excel o archivo exportado" selected>Excel o archivo exportado de mi sistema</option>
-                    <option value="Yape, Plin o Culqi">Reportes de Yape, Plin o Culqi</option>
-                    <option value="Extractos bancarios y libro mayor">Extractos bancarios y libro mayor</option>
-                    <option value="Google Sheets o varios reportes">Google Sheets o varios reportes sueltos</option>
+                    <option value="Reportes exportados de mi sistema" selected>Reportes exportados de mi sistema</option>
+                    <option value="Reportes de Yape, Plin o Culqi">Reportes de Yape, Plin o Culqi</option>
+                    <option value="Extractos bancarios y hojas de Excel">Extractos bancarios y hojas de Excel</option>
+                    <option value="Google Sheets o varios archivos sueltos">Google Sheets o varios archivos sueltos</option>
                   </select>
                 </div>
 
@@ -576,7 +572,7 @@
 
                 <div class="form-field">
                   <label for="quote-goal">Detalle adicional (opcional)</label>
-                  <textarea id="quote-goal" name="goal" rows="2" placeholder="Ej. Flujo de caja en Soles y Dólares, cruce de Yape/Plin/Culqi o consolidar Excels mensuales."></textarea>
+                  <textarea id="quote-goal" name="goal" rows="2" placeholder="Ej. Flujo de caja en mi moneda, unificar Excels por carpeta o consolidar Yape/Plin/Culqi."></textarea>
                 </div>
 
                 <p class="form-reassurance">Llega directo a mi correo con tu diagnóstico. Te respondo en menos de 24 horas.</p>
@@ -694,7 +690,7 @@
           </details>
           <details class="faq-item">
             <summary>6. ¿Puedo ver una prueba o muestra antes de aprobar el trabajo?</summary>
-            <p>Sí. Puedes descargar gratis mi plantilla propia de Flujo de Caja en Soles y Dólares aquí mismo, y antes de cotizar reviso una muestra de tu archivo para confirmarte alcance, plazo y precio cerrado.</p>
+            <p>Sí. Puedes descargar gratis mi plantilla propia de flujo de caja aquí mismo, y antes de cotizar reviso una muestra de tu archivo para confirmarte alcance, plazo y precio cerrado.</p>
           </details>
           <details class="faq-item">
             <summary>7. ¿Quedo dependiendo de ti si necesito usar el archivo después?</summary>
@@ -704,12 +700,12 @@
       </div>
       <div class="sample-lightbox-footer">
         <p>¿Tienes otra duda puntual sobre tus archivos?</p>
-        <button type="button" class="btn btn-primary shimmer-btn" onclick="closeFaqModal(); goToSlide(4);">Ir al diagnóstico rápido <span class="btn-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="btn btn-primary shimmer-btn" onclick="closeFaqModal(); goToDiagnostic();">Calcular mi ahorro <span class="btn-arrow" aria-hidden="true">→</span></button>
       </div>
     </div>
   </div>
 
   <!-- Controlador de Navegación e Interactividad -->
-  <script src="app.js?v=29.0"></script>
+  <script src="app.js?v=30.0"></script>
 </body>
 </html>

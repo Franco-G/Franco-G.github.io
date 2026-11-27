@@ -229,16 +229,31 @@ function goToSlide(targetIndex) {
   }
 }
 
+function goToDiagnostic() {
+  const diagEl = document.getElementById('diagnostico-card');
+  if (!MOBILE_RAIL_MQ.matches || !diagEl) {
+    goToSlide(4);
+    return;
+  }
+  const headerOffset = syncHeaderHeightVar();
+  const targetTop = Math.max(0, Math.round(window.scrollY + diagEl.getBoundingClientRect().top - headerOffset - 10));
+  window.scrollTo({
+    top: targetTop,
+    behavior: REDUCED_MOTION_MQ.matches ? 'auto' : 'smooth'
+  });
+  syncHeaderMenuLinks(4);
+}
+
 /**
  * 3. Selección de Solución y Envío de Mensaje Directo (Formspree)
  */
 const CONTACT_EMAIL = 'guerrerofranco1429@gmail.com';
 const FORM_ENDPOINT = 'https://formspree.io/f/xgakqpok';
 const SERVICE_PLACEHOLDERS = {
-  'Flujo de caja': 'Ej. Ordenar flujo de caja en Soles y Dólares desde nuestro Libro Mayor CSV.',
-  'Limpieza de libros': 'Ej. Unificar Excels mensuales de compras o ventas y preparar archivo para carga masiva.',
-  'Conciliación digital': 'Ej. Cruzar extractos bancarios con reportes de Yape, Plin o Culqi y comisiones.',
-  'Consulta general': 'Ej. Cuéntame brevemente qué archivo o reporte quieres ordenar y lo revisamos.'
+  'Flujo de caja': 'Ej. Armar nuestro flujo de caja mensual y anual con Power Query y Power Pivot.',
+  'Unificar Excels': 'Ej. Conectar una carpeta con nuestros Excels para sacar un consolidado de golpe.',
+  'Cobros y registros': 'Ej. Ordenar cobros de Yape, Plin o Culqi y preparar su registro automatizado.',
+  'Otro tema': 'Ej. Cuéntame brevemente qué archivo o reporte quieres ordenar y lo revisamos.'
 };
 
 function clearNameValidation() {
@@ -328,9 +343,9 @@ function selectServiceTier(tierValue, triggerEl, shouldFocus = false) {
 
 const SERVICE_HINTS = {
   'Flujo de caja': 'Ref. desde S/ 250 · Entrega 3 a 5 días',
-  'Limpieza de libros': 'Ref. desde S/ 200 · Entrega 2 a 4 días',
-  'Conciliación digital': 'Ref. desde S/ 250 · Entrega 3 a 5 días',
-  'Consulta general': 'Cotización cerrada tras revisar muestra'
+  'Unificar Excels': 'Ref. desde S/ 200 · Entrega 2 a 4 días',
+  'Cobros y registros': 'Ref. desde S/ 250 · Entrega 3 a 5 días',
+  'Otro tema': 'Cotización cerrada tras revisar muestra'
 };
 
 function trackEvent(eventName) {
@@ -368,7 +383,7 @@ function getDiagnosticState() {
     hoursLabel,
     source,
     savedHours,
-    hint: SERVICE_HINTS[service] || SERVICE_HINTS['Consulta general']
+    hint: SERVICE_HINTS[service] || SERVICE_HINTS['Otro tema']
   };
 }
 
@@ -434,10 +449,7 @@ function openDiagnosticWhatsApp() {
 }
 
 function quoteSpecificService(tierValue) {
-  const contactIdx = sections.findIndex(sec => sec.id === 'contacto');
-  if (contactIdx !== -1) {
-    goToSlide(contactIdx);
-  }
+  goToDiagnostic();
   setTimeout(() => {
     selectServiceTier(tierValue, null, true);
   }, REDUCED_MOTION_MQ.matches ? 50 : 450);
@@ -828,123 +840,123 @@ function initAnchorIntercept() {
 
 const GALLERY_SAMPLES = [
   {
-    n1Title: 'Libro Mayor exportado',
-    n1Desc: 'Movimientos planos sin agrupar por caja ni moneda.',
-    n2Title: 'Filtro Cuenta 10',
-    n2Desc: 'Reglas automáticas de limpieza y clasificación por concepto.',
-    n3Title: 'Modelo y tipo de cambio',
-    n3Desc: 'Cruce dinámico en dos monedas con parámetro editable.',
-    n4Title: 'Flujo PEN y USD al día',
-    n4Desc: 'Liquidez real lista para decidir en gerencia al cierre.',
-    cat: 'Liquidez Bimoneda',
-    badge: 'Soles y Dólares',
-    kpi: '2 monedas al día',
-    beforeHtml: '<strong>Libro Mayor plano</strong> difícil de resumir para caja.',
-    afterHtml: '<strong>Flujo dinámico PEN y USD</strong> listo en minutos.',
+    n1Title: 'Movimientos conciliados',
+    n1Desc: 'Información real de cuentas contables ya cuadrada.',
+    n2Title: 'Limpieza en Power Query',
+    n2Desc: 'Separa entradas y salidas reales de efectivo por concepto.',
+    n3Title: 'Modelo en Power Pivot',
+    n3Desc: 'Calcula flujo mensual y anual consolidado por moneda o saldo neto.',
+    n4Title: 'Flujo de caja real',
+    n4Desc: 'Listo en la moneda que uses para decidir sin esperar cierre.',
+    cat: 'Flujo de caja',
+    badge: 'En tu moneda',
+    kpi: 'Mensual y anual',
+    beforeHtml: '<strong>Movimientos dispersos</strong> difíciles de resumir para ver el efectivo real.',
+    afterHtml: '<strong>Flujo automático en Excel</strong> consolidado por moneda y saldo neto.',
     afterScale: '0.08',
-    rawTitle: 'Exportación típica de Libro Mayor (crudo)',
-    rawIssues: ['Fechas mixtas', 'Cuentas mezcladas', 'Sin tipo de cambio'],
-    rawHeaders: ['Cuenta', 'Fecha', 'Glosa sistema', 'Mon', 'Importe'],
+    rawTitle: 'Reporte exportado sin clasificar para caja (crudo)',
+    rawIssues: ['Fechas mixtas', 'Entradas mezcladas', 'Sin resumen'],
+    rawHeaders: ['Tipo', 'Fecha', 'Descripción', 'Mon.', 'Monto'],
     rawRows: [
-      ['104101', '03-oct-26', 'TRF CLI-09 FACT 412', 'PEN', '4820.00', false],
-      ['104201', '2026/10/04', 'ABONO USD REXT-11', 'USD', '1250.00', true],
-      ['421200', '05/10/2026', 'PROV SERV LOGISTICO', 'PEN', '-1980.00', true],
-      ['104102', '06.10.26', 'LIQ CULQI LOTE 04', 'PEN', '8129.51', false]
+      ['Banco S/', '03-oct-26', 'ABONO CLIENTE FACT 412', 'PEN', '4820.00', false],
+      ['Banco US$', '2026/10/04', 'INGRESO EXTERIOR REXT-11', 'USD', '1250.00', true],
+      ['Egreso', '05/10/2026', 'PAGO PROV LOGISTICO', 'PEN', '-1980.00', true],
+      ['Pasarela', '06.10.26', 'DEPOSITO CULQI LOTE 04', 'PEN', '8129.51', false]
     ],
     src: 'muestras/muestra-flujo-cuenta10.png',
-    title: 'Flujo de Caja Cuenta 10 (Soles y Dólares)',
-    caption: 'Modelo propio creado desde cero con datos ficticios de ejemplo. Puedes descargarlo gratis y probarlo en tu Excel.',
+    title: 'Flujo de caja real (ejemplo editable)',
+    caption: 'Plantilla propia con datos de ejemplo. Puedes descargarla gratis y adaptarla a la moneda de tu empresa.',
     service: 'Flujo de caja',
     isCloud: false
   },
   {
-    n1Title: 'Boletas + Extracto',
-    n1Desc: 'Reportes sueltos de Yape, Plin, Culqi y bancos.',
-    n2Title: 'Cruce por lotes',
-    n2Desc: 'Empareja cientos de boletas contra abonos bancarios.',
-    n3Title: 'Comisiones y pendientes',
-    n3Desc: 'Separa descuentos de pasarela y abonos en tránsito.',
-    n4Title: '97.3% al día en 7 días',
-    n4Desc: 'Cuatro meses de atraso regularizados en una semana.',
-    cat: 'Tesorería Digital',
-    badge: 'En Soles (S/)',
-    kpi: '4 meses en 7 días',
-    beforeHtml: '<strong>4 meses rezagados</strong> revisando boleta por boleta.',
-    afterHtml: '<strong>250 a 500 boletas</strong> conciliadas por lote semanal.',
-    afterScale: '0.09',
-    rawTitle: 'Reportes sueltos de pasarela vs. banco (crudo)',
-    rawIssues: ['Comisión oculta', 'Sin cruzar abono', 'Lotes sin estado'],
-    rawHeaders: ['Fecha', 'Canal', 'Boleta', 'Bruto S/', 'Observación'],
-    rawRows: [
-      ['03/11/26', 'Culqi POS', 'B001-04169', '6940.00', 'Falta comisión', true],
-      ['04/11/26', 'Plin', 'B001-04216', '3510.00', 'Sin conciliar BCP', true],
-      ['05/11/26', 'Culqi Web', 'B001-04261', '8420.00', 'Abono parcial', true],
-      ['13/11/26', 'Culqi POS', 'B001-04585', '1240.00', 'Pendiente abono', true]
-    ],
-    src: 'muestras/muestra-conciliacion-pasarelas.png',
-    title: 'Conciliación de Yape, Plin y Culqi vs. Extracto Bancario',
-    caption: 'Muestra propia en Soles (datos ficticios) cruzando lotes de boletas, comisiones y abonos bancarios.',
-    service: 'Conciliación digital',
-    isCloud: false
-  },
-  {
-    n1Title: '24 Excels dispares',
-    n1Desc: 'Archivos mensuales de compras y ventas con distinto orden.',
-    n2Title: 'Limpieza automática',
-    n2Desc: 'Unifica encabezados, fechas y columnas en Power Query.',
-    n3Title: 'Validación de IGV',
-    n3Desc: 'Depura duplicados y cuadra totales por cada periodo.',
-    n4Title: 'Carga lista en < 6 h',
-    n4Desc: 'Archivo depurado listo para subir masivamente al sistema.',
-    cat: 'Consolidación Mensual',
-    badge: 'Menos de 6 horas',
-    kpi: '24 libros / 6 h',
-    beforeHtml: '<strong>24 Excels dispares</strong> copiados columna por columna.',
-    afterHtml: '<strong>Carga lista en 6 h</strong> sin digitación manual.',
-    afterScale: '0.12',
+    n1Title: 'Carpeta con reportes',
+    n1Desc: 'Cualquier cantidad de Excels guardados por mes o periodo.',
+    n2Title: 'Conexión Power Query',
+    n2Desc: 'Presionas Actualizar y lee todos los archivos nuevos solo.',
+    n3Title: 'Un solo consolidado',
+    n3Desc: 'Junta todos los registros sin duplicados ni copiado manual.',
+    n4Title: 'Carga masiva lista',
+    n4Desc: 'Sube todo de golpe sin crear archivo por archivo cada vez.',
+    cat: 'Carpetas automáticas',
+    badge: '+25 h/mes ahorradas',
+    kpi: 'Un solo consolidado',
+    beforeHtml: '<strong>Crear un archivo por cada Excel</strong> copiando columnas a mano cada periodo.',
+    afterHtml: '<strong>Actualizas una sola carpeta</strong> y sale todo consolidado (24 periodos o los que agregues).',
+    afterScale: '0.10',
     rawTitle: 'Excels mensuales con formatos distintos (crudo)',
-    rawIssues: ['Columnas movidas', 'Filas duplicadas', 'IGV sin validar'],
-    rawHeaders: ['Mes', 'Doc / RUC', 'Fecha', 'Importe', 'Alerta'],
+    rawIssues: ['Columnas movidas', 'Filas duplicadas', 'Armado 1 por 1'],
+    rawHeaders: ['Periodo', 'Comprobante', 'Fecha', 'Importe', 'Problema'],
     rawRows: [
-      ['Ene-26', '20541120911', '12/01/26', '84520.00', 'Encabezado fila 5', true],
-      ['2026-02', 'F001-00214', '14-feb', '1240.00', 'Fila duplicada', true],
-      ['Mar 26', '20601988210', '2026.03.19', '96400.00', 'Formato texto', true],
-      ['2026-04', 'B002-01822', '08/04/2026', '91250.00', 'IGV desfasado', true]
+      ['Ene-26', '20541120911', '12/01/26', '84520.00', 'Encabezado en fila 5', true],
+      ['2026-02', 'F001-00214', '14-feb', '1240.00', 'Fila repetida', true],
+      ['Mar 26', '20601988210', '2026.03.19', '96400.00', 'Fecha como texto', true],
+      ['2026-04', 'B002-01822', '08/04/2026', '91250.00', 'Orden distinto', true]
     ],
     src: 'muestras/muestra-consolidacion-libros.png',
-    title: 'Control de Unificación y Carga Masiva de Libros',
-    caption: 'Muestra propia en Soles (datos ficticios) estandarizando periodos mensuales listos para carga masiva.',
-    service: 'Limpieza de libros',
+    title: 'Consolidado automático de Excels por carpeta (Power Query)',
+    caption: 'Carpeta conectada en Power Query: agregas los archivos que necesites, actualizas y queda listo para subir al sistema.',
+    service: 'Unificar Excels',
     isCloud: false
   },
   {
-    n1Title: 'Saldos 00 a 12',
-    n1Desc: 'Balance base en Excel difícil de navegar por empresa.',
-    n2Title: 'Conexión por ID',
-    n2Desc: 'Separa los datos automáticamente para cada empresa.',
-    n3Title: 'Menú y entorno nube',
-    n3Desc: 'Accesos rápidos y permisos seguros en Google Sheets.',
-    n4Title: '+50 empresas al día',
-    n4Desc: 'Cada cliente consulta su estado financiero privado en línea.',
-    cat: 'Multiempresa en Nube',
-    badge: 'Google Sheets',
-    kpi: '+50 empresas',
-    beforeHtml: '<strong>Hojas lentas en Excel</strong> mezclando vistas por empresa.',
-    afterHtml: '<strong>Reporte privado en nube</strong> actualizado por empresa.',
-    afterScale: '0.07',
-    rawTitle: 'Tabla plana de saldos por periodo (crudo)',
-    rawIssues: ['Sin filtro de empresa', 'Navegación lenta', 'Riesgo de mezcla'],
-    rawHeaders: ['ID Emp', 'Cuenta', 'Per 00-12', 'Saldo S/', 'Control'],
+    n1Title: 'Reportes atrasados',
+    n1Desc: 'Cuatro meses sueltos de Yape, Plin, Culqi y extractos.',
+    n2Title: 'Consolidado de cobros',
+    n2Desc: 'Ordena lotes, comisiones y pendientes en una sola base.',
+    n3Title: 'Registro en el sistema',
+    n3Desc: 'Automatiza el ingreso al ERP sin digitar movimiento a movimiento.',
+    n4Title: 'Al día en 2 semanas',
+    n4Desc: 'Cuatro meses acumulados ordenados y cargados al sistema.',
+    cat: 'Yape, Plin y Culqi',
+    badge: 'Consolidado + ERP',
+    kpi: '4 meses en 2 semanas',
+    beforeHtml: '<strong>4 meses acumulados</strong> digitando boleta por boleta en el sistema.',
+    afterHtml: '<strong>Consolidado claro y carga automatizada</strong> en el ERP en ~2 semanas.',
+    afterScale: '0.14',
+    rawTitle: 'Reportes sueltos de pasarela sin ordenar (crudo)',
+    rawIssues: ['Comisión aparte', 'Lotes dispersos', 'Carga manual'],
+    rawHeaders: ['Fecha', 'Canal', 'Boleta', 'Bruto S/', 'Pendiente'],
     rawRows: [
-      ['E-014', '10410', '00..12', '148002.00', 'Sin menú directo', true],
-      ['E-027', '12120', '00..12', '92450.00', 'Todo en 1 archivo', true],
-      ['E-043', '42120', '00..12', '-34120.00', 'Falta permiso ID', true],
-      ['E-052', '10410', '00..12', '64120.00', 'Sin filtro nube', true]
+      ['03/11/26', 'Culqi POS', 'B001-04169', '6940.00', 'Falta comisión', true],
+      ['04/11/26', 'Plin', 'B001-04216', '3510.00', 'Sin cruzar banco', true],
+      ['05/11/26', 'Culqi Web', 'B001-04261', '8420.00', 'Abono parcial', true],
+      ['13/11/26', 'Culqi POS', 'B001-04585', '1240.00', 'Sin registrar', true]
+    ],
+    src: 'muestras/muestra-conciliacion-pasarelas.png',
+    title: 'Consolidado de Yape, Plin y Culqi para registro en sistema',
+    caption: 'Base ordenada con abonos, comisiones y pendientes lista para acelerar el registro automatizado.',
+    service: 'Cobros y registros',
+    isCloud: false
+  },
+  {
+    n1Title: 'Datos del sistema',
+    n1Desc: 'Información mensual que antes demoraba 32 horas armar a mano.',
+    n2Title: 'Conexión automática',
+    n2Desc: 'Actualiza los resultados financieros directo hacia la nube.',
+    n3Title: 'Vistas en Google Sheets',
+    n3Desc: 'Cada área o empresa consulta su reporte con permiso privado.',
+    n4Title: 'Cierre en 4 horas',
+    n4Desc: '87% menos tiempo y reportes siempre al día sin archivos pesados.',
+    cat: 'Reportes en línea',
+    badge: 'Google Sheets',
+    kpi: 'De 32 h a 4 h',
+    beforeHtml: '<strong>32 horas cada cierre</strong> enviando Excels pesados que quedaban desactualizados.',
+    afterHtml: '<strong>4 horas en Google Sheets</strong> con actualización automática y acceso ordenado.',
+    afterScale: '0.12',
+    rawTitle: 'Tabla plana pesada difícil de consultar (crudo)',
+    rawIssues: ['Sin filtro rápido', 'Archivo pesado', 'Envío por correo'],
+    rawHeaders: ['Código', 'Área / Empresa', 'Periodo', 'Saldo S/', 'Problema'],
+    rawRows: [
+      ['E-01', 'Empresa Demo A', 'Ene - Dic', '148002.00', 'Archivo lento', true],
+      ['E-02', 'Empresa Demo B', 'Ene - Dic', '92450.00', 'Versión repetida', true],
+      ['E-03', 'Empresa Demo C', 'Ene - Dic', '215890.00', 'Copia manual', true],
+      ['E-04', 'Empresa Demo D', 'Ene - Dic', '64120.00', 'Sin enlace nube', true]
     ],
     src: 'muestras/muestra-flujo-cuenta10.png',
-    title: 'Reporte Financiero Multiempresa en Google Sheets',
-    caption: 'Arquitectura corporativa con acceso privado por ID de empresa para más de 50 entidades.',
-    service: 'Consulta general',
+    title: 'Reportes financieros en línea en Google Sheets',
+    caption: 'Conexión automática para consultar resultados mensuales y anuales en línea sin archivos pesados.',
+    service: 'Otro tema',
     isCloud: true
   }
 ];
@@ -1033,7 +1045,7 @@ function setWorkflowCase(index) {
   const slides = showcase.querySelectorAll('.hero-showcase-slide');
   const tabs = document.querySelectorAll('.flow-tabs .flow-tab-btn');
   const cloudPreview = document.getElementById('kitchen-cloud-preview');
-  const zoomPill = document.getElementById('kitchen-zoom-pill');
+  const zoomBtn = document.getElementById('kitchen-zoom-btn');
 
   excelSlideIndex = ((index % GALLERY_SAMPLES.length) + GALLERY_SAMPLES.length) % GALLERY_SAMPLES.length;
   const info = GALLERY_SAMPLES[excelSlideIndex];
@@ -1051,7 +1063,7 @@ function setWorkflowCase(index) {
   });
 
   if (cloudPreview) cloudPreview.hidden = !info.isCloud;
-  if (zoomPill) zoomPill.textContent = info.isCloud ? 'Cotizar similar' : 'Ampliar';
+  if (zoomBtn) zoomBtn.textContent = info.isCloud ? 'Cotizar similar' : 'Ampliar';
 
   const nodeIds = [
     ['flow-n1-title', info.n1Title], ['flow-n1-desc', info.n1Desc],
@@ -1101,7 +1113,7 @@ function initExcelShowcase() {
 function openCurrentExcelSample() {
   const sample = GALLERY_SAMPLES[excelSlideIndex] || GALLERY_SAMPLES[0];
   if (sample.isCloud) {
-    quoteSpecificService(sample.service || 'Consulta general');
+    quoteSpecificService(sample.service || 'Otro tema');
     return;
   }
   openSampleModal(sample.src, sample.title, sample.caption, sample.service);
@@ -1135,7 +1147,7 @@ function renderModalSample(sample) {
     ctaBtn.textContent = 'Consultar por esto →';
     ctaBtn.onclick = () => {
       closeSampleModal();
-      quoteSpecificService(sample.service || 'Consulta general');
+      quoteSpecificService(sample.service || 'Otro tema');
     };
   }
 }
@@ -1271,6 +1283,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 window.goToSlide = goToSlide;
+window.goToDiagnostic = goToDiagnostic;
 window.selectServiceTier = selectServiceTier;
 window.quoteSpecificService = quoteSpecificService;
 window.handleQuoteSubmit = handleQuoteSubmit;
