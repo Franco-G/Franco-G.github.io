@@ -670,7 +670,6 @@ h3 {
 
 .excel-stage-btn[hidden],
 .kitchen-raw-panel[hidden],
-.kitchen-cloud-preview[hidden],
 .hero-showcase-slide[hidden] {
   display: none;
 }
@@ -723,52 +722,6 @@ h3 {
   flex-direction: column;
   gap: 7px;
   overflow: auto;
-}
-
-.kitchen-cloud-preview {
-  width: 100%;
-  height: 100%;
-  background: #ffffff;
-  padding: 10px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  text-align: left;
-  overflow: auto;
-}
-
-.cloud-sheet-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.cloud-sheet-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 11px;
-}
-
-.cloud-sheet-table th,
-.cloud-sheet-table td {
-  padding: 5px 7px;
-  border: 1px solid var(--hairline);
-  text-align: left;
-  color: var(--ink);
-}
-
-.cloud-sheet-table th {
-  background: var(--primary-btn);
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.cloud-sheet-table td.cloud-ok {
-  background: var(--success-light);
-  color: var(--success-text);
-  font-weight: 700;
 }
 
 .raw-sheet-head {

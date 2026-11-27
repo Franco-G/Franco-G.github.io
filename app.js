@@ -953,11 +953,11 @@ const GALLERY_SAMPLES = [
       ['E-03', 'Empresa Demo C', 'Ene - Dic', '215890.00', 'Copia manual', true],
       ['E-04', 'Empresa Demo D', 'Ene - Dic', '64120.00', 'Sin enlace nube', true]
     ],
-    src: 'muestras/muestra-flujo-cuenta10.png',
-    title: 'Reportes financieros en línea en Google Sheets',
-    caption: 'Conexión automática para consultar resultados mensuales y anuales en línea sin archivos pesados.',
+    src: 'muestras/muestra-reporte-en-linea.png',
+    title: 'Reporte financiero en línea (Estados Financieros y ratios)',
+    caption: 'Estados Financieros, evolución comparativa y ratios de liquidez y rentabilidad actualizados en línea en Google Sheets.',
     service: 'Otro tema',
-    isCloud: true
+    isCloud: false
   }
 ];
 
