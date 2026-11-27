@@ -252,7 +252,7 @@ const FORM_ENDPOINT = 'https://formspree.io/f/xgakqpok';
 const SERVICE_PLACEHOLDERS = {
   'Flujo de caja': 'Ej. Armar nuestro flujo de caja mensual y anual con Power Query y Power Pivot.',
   'Unificar Excels': 'Ej. Conectar una carpeta con nuestros Excels para sacar un consolidado de golpe.',
-  'Cobros y registros': 'Ej. Ordenar cobros de Yape, Plin o Culqi y preparar su registro automatizado.',
+  'Cobros y registros': 'Ej. Ordenar extractos bancarios y pasarelas de pago para acelerar el registro en sistema.',
   'Otro tema': 'Ej. Cuéntame brevemente qué archivo o reporte quieres ordenar y lo revisamos.'
 };
 
@@ -861,7 +861,7 @@ const GALLERY_SAMPLES = [
       ['Banco S/', '03-oct-26', 'ABONO CLIENTE FACT 412', 'PEN', '4820.00', false],
       ['Banco US$', '2026/10/04', 'INGRESO EXTERIOR REXT-11', 'USD', '1250.00', true],
       ['Egreso', '05/10/2026', 'PAGO PROV LOGISTICO', 'PEN', '-1980.00', true],
-      ['Pasarela', '06.10.26', 'DEPOSITO CULQI LOTE 04', 'PEN', '8129.51', false]
+      ['Pasarela', '06.10.26', 'DEPOSITO PASARELA LOTE 04', 'PEN', '8129.51', false]
     ],
     src: 'muestras/muestra-flujo-cuenta10.png',
     title: 'Flujo de caja real (ejemplo editable)',
@@ -878,7 +878,7 @@ const GALLERY_SAMPLES = [
     n3Desc: 'Junta todos los registros sin duplicados ni copiado manual.',
     n4Title: 'Carga masiva lista',
     n4Desc: 'Sube todo de golpe sin crear archivo por archivo cada vez.',
-    cat: 'Carpetas automáticas',
+    cat: 'Consolidado automático',
     badge: '+25 h/mes ahorradas',
     kpi: 'Un solo consolidado',
     beforeHtml: '<strong>Crear un archivo por cada Excel</strong> copiando columnas a mano cada periodo.',
@@ -900,31 +900,31 @@ const GALLERY_SAMPLES = [
     isCloud: false
   },
   {
-    n1Title: 'Reportes atrasados',
-    n1Desc: 'Cuatro meses sueltos de Yape, Plin, Culqi y extractos.',
-    n2Title: 'Consolidado de cobros',
-    n2Desc: 'Ordena lotes, comisiones y pendientes en una sola base.',
+    n1Title: 'Extractos atrasados',
+    n1Desc: 'Cuatro meses sueltos de bancos, tarjetas y pasarelas de pago.',
+    n2Title: 'Consolidado bancario',
+    n2Desc: 'Ordena abonos, comisiones y pendientes en una sola base.',
     n3Title: 'Registro en el sistema',
     n3Desc: 'Automatiza el ingreso al ERP sin digitar movimiento a movimiento.',
     n4Title: 'Al día en 2 semanas',
     n4Desc: 'Cuatro meses acumulados ordenados y cargados al sistema.',
-    cat: 'Yape, Plin y Culqi',
+    cat: 'Conciliación bancaria',
     badge: 'Consolidado + ERP',
     kpi: '4 meses en 2 semanas',
-    beforeHtml: '<strong>4 meses acumulados</strong> digitando boleta por boleta en el sistema.',
+    beforeHtml: '<strong>4 meses acumulados</strong> digitando movimiento por movimiento en el sistema.',
     afterHtml: '<strong>Consolidado claro y carga automatizada</strong> en el ERP en ~2 semanas.',
     afterScale: '0.14',
-    rawTitle: 'Reportes sueltos de pasarela sin ordenar (crudo)',
+    rawTitle: 'Extractos bancarios y pasarelas sin ordenar (crudo)',
     rawIssues: ['Comisión aparte', 'Lotes dispersos', 'Carga manual'],
-    rawHeaders: ['Fecha', 'Canal', 'Boleta', 'Bruto S/', 'Pendiente'],
+    rawHeaders: ['Fecha', 'Canal', 'Comprobante', 'Bruto', 'Pendiente'],
     rawRows: [
-      ['03/11/26', 'Culqi POS', 'B001-04169', '6940.00', 'Falta comisión', true],
-      ['04/11/26', 'Plin', 'B001-04216', '3510.00', 'Sin cruzar banco', true],
-      ['05/11/26', 'Culqi Web', 'B001-04261', '8420.00', 'Abono parcial', true],
-      ['13/11/26', 'Culqi POS', 'B001-04585', '1240.00', 'Sin registrar', true]
+      ['03/11/26', 'Tarjeta POS', 'B001-04169', '6940.00', 'Falta comisión', true],
+      ['04/11/26', 'Billetera', 'B001-04216', '3510.00', 'Sin cruzar banco', true],
+      ['05/11/26', 'Pasarela Web', 'B001-04261', '8420.00', 'Abono parcial', true],
+      ['13/11/26', 'Transferencia', 'B001-04585', '1240.00', 'Sin registrar', true]
     ],
     src: 'muestras/muestra-conciliacion-pasarelas.png',
-    title: 'Consolidado de Yape, Plin y Culqi para registro en sistema',
+    title: 'Conciliación bancaria y cobros digitales para registro en sistema',
     caption: 'Base ordenada con abonos, comisiones y pendientes lista para acelerar el registro automatizado.',
     service: 'Cobros y registros',
     isCloud: false
