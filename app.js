@@ -35,6 +35,7 @@ function initApp() {
   mobileProgressEl = document.getElementById('header-scroll-progress');
 
   initTouchGuard();
+  initThemeToggle();
   initContactForm();
   initExcelShowcase();
   syncHeaderHeightVar();
@@ -1391,6 +1392,39 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+function syncThemeToggleUi(theme) {
+  const isDark = theme === 'dark';
+  const btn = document.getElementById('theme-toggle-btn');
+  if (btn) {
+    const label = isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro';
+    btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+    btn.setAttribute('aria-label', label);
+    btn.setAttribute('title', label);
+  }
+}
+
+function initThemeToggle() {
+  const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  syncThemeToggleUi(current);
+}
+
+function toggleTheme() {
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  if (next === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+  try {
+    if (window.localStorage) localStorage.setItem('franco_theme', next);
+  } catch (err) {
+    document.documentElement.dataset.themeStorage = err.name || 'blocked';
+  }
+  syncThemeToggleUi(next);
+  trackEvent(`tema-${next}`);
+}
+
+window.toggleTheme = toggleTheme;
 window.goToSlide = goToSlide;
 window.goToDiagnostic = goToDiagnostic;
 window.selectServiceTier = selectServiceTier;
